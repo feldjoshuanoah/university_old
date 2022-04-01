@@ -1,0 +1,17 @@
+{
+    "ignored_packages":
+    [
+        "Vintage",
+    ],
+    "color_scheme": "One Dark Gravity.sublime-color-scheme",
+    "theme": "Gravity One.sublime-theme",
+    "gravity_highlight_color_blue": false,
+    "gravity_sidebar_header": true,
+    "gravity_tab_font_small": false,
+    "gravity_tab_height_short": true,
+    "gravity_title_bar": true,
+    "font_face": "Roboto Mono Nerd Font Complete",
+    "font_size": 13.0,
+    "tab_size": 4,
+    "translate_tabs_to_spaces": true,
+}

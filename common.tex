@@ -1,0 +1,91 @@
+\newcommand{\professor}[1]{\newcommand{\prfssr}{#1}}
+\newcommand{\course}[1]{\newcommand{\crs}{#1}}
+\newcommand{\institute}[1]{\newcommand{\nsttt}{#1}}
+\newcommand{\semester}[1]{\newcommand{\smstr}{#1}}
+\newcommand{\program}[1]{\newcommand{\prgrm}{#1}}
+
+\PassOptionsToClass{a4paper}{article}
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
+\ProcessOptions\relax
+
+\LoadClass{article}
+
+\RequirePackage{geometry}
+\geometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm}
+
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[ngerman]{babel}
+\RequirePackage[T1]{fontenc}
+
+\RequirePackage[parfill]{parskip}
+
+\RequirePackage{mathpazo}
+\RequirePackage[scaled=0.9]{helvet}
+\linespread{1.025}
+
+\RequirePackage{enumitem}
+
+\RequirePackage[euler-digits,small]{eulervm}
+\AtBeginDocument{\renewcommand{\hbar}{\hslash}}
+
+\RequirePackage{amsmath}
+\RequirePackage{mathtools}
+\RequirePackage{amssymb}
+\RequirePackage{icomma}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\renewcommand*{\d}{\mathop{\mathrm{d}\!}}
+
+\DeclarePairedDelimiter{\absolute}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\angles}{\langle}{\rangle}
+\DeclarePairedDelimiter{\braces}{\{}{\}}
+\DeclarePairedDelimiter{\brackets}{[}{]}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\parentheses}{(}{)}
+
+\RequirePackage{fancyhdr}
+
+\fancyhead{}
+\fancyfoot{}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{.4pt}
+\renewcommand{\footrulewidth}{.4pt}
+\fancyhead[RO]{\footnotesize\thepage}
+\fancyhead[LO]{\footnotesize{\itshape\crs -- \@title}}
+\fancyfoot[RO]{\footnotesize\itshape\@author}
+
+\renewcommand{\maketitle}{
+    \thispagestyle{plain}
+    \begin{center}
+        {\scshape RWTH Aachen University\\
+        \scshape\nsttt}\\[10pt]
+        \hrule
+        \vspace{10pt}
+        {\LARGE\sffamily\bfseries\@title}\\[5pt]
+        Student: {\itshape\@author}
+        \vspace{8pt}
+        \hrule
+        \vspace{10pt}
+        Kurs: {\itshape\crs} -- Professor: {\itshape\prfssr}\\
+        Semester: {\itshape\smstr} -- Studiengang: {\itshape\prgrm}
+        \vspace{20pt}
+    \end{center}
+}
+
+\RequirePackage{graphicx}
+\graphicspath{{./graphics/}}
+
+\RequirePackage{booktabs}
+
+\RequirePackage{tikz}
+
+\RequirePackage{mdframed}
+
+\RequirePackage{titlesec}
+\titleformat{\section}{\Large\sffamily\bfseries}{}{1em}{}

@@ -1,0 +1,6 @@
+name: Statistik
+professor: Cramer
+institute: Institut für Statistik und Wirtschaftsmathematik
+prefixes: [lec, hw]
+lec: [lecture, Vorlesung]
+hw: [exercise, Hausaufgabenübung]

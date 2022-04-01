@@ -1,0 +1,6 @@
+name: Strömungsmechanik I
+professor: Schröder
+institute: Lehrstuhl für Strömungslehrer und Aerodynamisches Institut
+prefixes: [lec, hw]
+lec: [lecture, Vorlesung]
+hw: [exercise, Hausaufgabenübung]

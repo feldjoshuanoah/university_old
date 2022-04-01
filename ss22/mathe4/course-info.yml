@@ -1,0 +1,7 @@
+name: Mathematische Grundlagen IV
+professor: Torrilhon
+institute: Applied and Computational Mathematics
+prefixes: [lec, hw, self]
+lec: [lecture, Vorlesung]
+hw: [exercise, Hausaufgabenübung]
+self: [exercise, Selbstrechenübung]

@@ -1,0 +1,6 @@
+name: Softwareentwicklungspraktikum
+professor: Naumann
+institute: Software and Tools for Computational Engineering
+prefixes: [lec, hw]
+lec: [lecture, Vorlesung]
+hw: [exercise, Hausaufgabenübung]

@@ -1,0 +1,6 @@
+name: Mechanik verformbarer Körper
+professor: Itskov
+institute: Lehr- und Forschungsgebiet Kontinuumsmechanik
+prefixes: [lec, hw]
+lec: [lecture, Vorlesung]
+hw: [exercise, Hausaufgabenübung]
