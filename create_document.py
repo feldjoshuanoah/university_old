@@ -4,19 +4,20 @@ import sys
 import yaml
 
 basedir = os.getcwd()
+sources = basedir + '/src'
 arguments = sys.argv[1:]
 
 if len(arguments) < 3:
-    semesters = [d for d in os.listdir(os.getcwd()) if os.path.isdir(d) and (d.startswith('ss') or d.startswith('ws'))]
+    semesters = [d for d in os.listdir(sources) if os.path.isdir(d) and (d.startswith('ss') or d.startswith('ws'))]
     semester = input('Select a semester (' + '/'.join(semesters) + '): ')
-    courses = [d for d in os.listdir(os.getcwd() + '/' + semester) if os.path.isdir(semester + '/' + d)]
+    courses = [d for d in os.listdir(sources + '/' + semester) if os.path.isdir('src/' + semester + '/' + d)]
     course = input('Select a course (' + '/'.join(courses) + '): ')
 else:
     semester = arguments[0]
     course = arguments[1]
     prefix = arguments[2]
 
-os.chdir(os.getcwd() + '/' + semester + '/' + course)
+os.chdir(sources + '/' + semester + '/' + course)
 
 with open('course-info.yml') as course_info:
     infos = yaml.full_load(course_info)
