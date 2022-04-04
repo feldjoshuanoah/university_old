@@ -140,6 +140,7 @@
         "\\newcommand{\\R}{\\mathbb{R}}",
         "\\newcommand{\\C}{\\mathbb{C}}",
         "\\renewcommand*{\\d}{\\mathop{\\mathrm{d}\\!}}",
+        "\\DeclareMathOperator{\\setspan}{span}",
         "\\DeclarePairedDelimiter{\\absolute}{\\lvert}{\\rvert}",
         "\\DeclarePairedDelimiter{\\angles}{\\langle}{\\rangle}",
         "\\DeclarePairedDelimiter{\\braces}{\\{}{\\}}",

@@ -1,0 +1,226 @@
+\documentclass{lecture}
+
+\institute{Applied and Computational Mathematics}
+\title{Vorlesung 1}
+\author{Joshua Feld, 406718}
+\course{Mathematische Grundlagen IV}
+\professor{Torrilhon \& Berkels}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \section*{Diskrete Fourier-Transformation}
+
+    Die Fourier-Transformation ist ein wichtiges Werkzeug sowohl in der Analysis als auch in der Numerik.
+    Grob gesprochen zerlegt die Fourier-Transformation ein Signal (z.B. einen Ton) in seine ``Frequenzen''.
+    Beispiele für Anwendungen sind:
+    \begin{itemize}
+        \item Lösung von partiellen Differentialgleichungen durch Reihenansatz bzw. durch die Fourier-Transformation
+        \item Approximation von Funktionen durch Orthonormalsysteme (siehe Mathe 1 und 2)
+        \item Schnelle Berechnung von Produkten großer Zahlen und Faltungen
+        \item Schnelle Interpolation
+        \item Datenkompression (z.B. nutzen MP3 und JPEG Varianten der Fourier-Transformation)
+    \end{itemize}
+    Der praktische Erfolg beruht auf einer speziellen Einsicht, die den Aufwand der Berechnung der Fourier-Transformierten von \(O\parentheses*{n^2}\) auf \(O\parentheses*{n\log n}\) (wobei \(n\) die Anzahl der Datenpunkte ist) reduziert.
+    Die sogenannte Fast Fourier Transformation (FFT) gilt als einer der wichtigsten Algorithmen überhaupt.
+    Zugeschrieben wird die Idee Cooley und Tukey (1965); allerdings gab es die Idee auch schon 1805 von Gauss, um die Bahnen von Asteroiden bestimmen zu können.
+    Im Folgenden leiten wir zunächst die diskrete Fourier Transformation als Lösung einer Interpolationsaufgabe her und dann den Algorithmus für die FFT in seinen Grundzügen.
+
+
+    \section*{Trigonometrsiche Interpolation}
+
+    Wir beginnen direkt in komplexer Notation und beschränken uns auf periodische Funktionen, d.h. Funktionen \(f: \R \to \C\), so dass es ein \(P > 0\) gibt mit \(f\parentheses*{x} = f\parentheses*{x + P}\) für alle \(x \in \R\).
+    \(P\) nennt man Periode.
+    Ohne Beschränkung der Allgemeinheit sei \(P = 2\pi\).
+    In diesem Abschnitt seien daher (wenn nicht anders angegeben) alle Funktionen der Art \(f: \brackets*{0, 2\pi} \to \C\).
+    Wir benutzen die Notation \(\overline{f\parentheses*{x}}\) für die zu \(f\parentheses*{x}\) komplex konjugierte Zahl.
+
+    Wir erinnern uns, dass
+    \[\angles*{f, g} := \frac{1}{2\pi}\int_0^{2\pi}f\parentheses*{x}\overline{g\parentheses*{x}}\d x\]
+    ein inneres Produkt zweier Funktionen \(f\) und \(g\) in \(L^2\parentheses*{\brackets*{0, 2\pi}; \C}\) definiert.
+    \begin{definition}
+        Für \(j \in \Z\) sei
+        \[
+            e_j: \brackets*{0, 2\pi} \to \C, x \mapsto e^{ijx},
+        \]
+        wobei \(i \in \C\) die imaginäre Einheit bezeichnet.
+        Die Funktionen \(e_j, j \in \Z\), heißen \emph{Grundschwingungen}.
+    \end{definition}
+    \begin{lemma}\label{lemma:1}
+        Für \(j, k \in \Z\) gilt
+        \[
+            \angles*{e_j, e_k} = \frac{1}{2\pi}\int_0^{2\pi}e^{ijx}e^{-ikx}\d x = \delta_{j, k}.
+        \]
+    \end{lemma}
+    \begin{proof}
+        Mit Hilfe der Identität \(e^{ix} = \cos x + i \sin x\) lässt sich die Aussage leicht nachrechnen (Übung).
+    \end{proof}
+    \begin{remark}
+        Lemma \ref{lemma:1} zeigt, dass die Grundschwingungen \(\parentheses*{e_j}_{j \in \Z}\) ein Orthonormalsystem bzgl. \(\angles*{\cdot, \cdot}\) sind.
+        Wir können nun auf den von einer Menge von Grundschwingungen aufgespannten Raum projizieren.
+        Für \(n \in \N\) seien
+        \[
+            S_n\parentheses*{f; x} := \sum_{\absolute*{k} \le n}\angles*{f, e_k}e^{ikx}
+        \]
+        und
+        \[
+            U_{2n + 1} := \setspan\braces*{e_k : \absolute*{k} \le n}.
+        \]
+        Damit ist \(S_n\parentheses*{f; \cdot} = \sum_{\absolute*{k} \le n}\angles*{f, e_k}e_k \in U_{2n + 1}\) die Orthogonalprojektion von \(f \in L^2\parentheses*{\brackets*{0, 2\pi}; \C}\) auf den Unterraum \(U_{2n + 1}\) und stellt somit eine Approximation von \(f\).
+        Es gilt
+        \[
+            \angles*{f, e_k} = \frac{1}{2\pi}\int_0^{2\pi}f\parentheses*{x}e^{-ikx}\d x.
+        \]
+        In diesem Sinne geben die Koeffizienten an, wie viel von der \(k\)-ten ``Frequenz'' \(e_k\) im Signal \(f\) enthalten ist.
+        Die Koeffizienten \(\angles*{f, e_k}\) heißen \emph{Fourier-Koeffizienten}.
+        Die Projektion \(S_n\parentheses*{f; \cdot}\) nennt man \emph{Fourier-Teilsumme}.
+    \end{remark}
+    \begin{remark}
+        Man kann zeigen, dass das Orthonormalsystem der Grundschwingungen \(\parentheses*{e_j}_{j \in \Z}\) auch vollständig ist, d.h. eine Art Basis von \(L^2\parentheses*{\brackets*{0, 2\pi}; \C}\) bildet.
+        Genauer gilt
+        \[
+            S_n\parentheses*{f, \cdot} \xrightarrow{n \to \infty} f \quad \text{für alle }f \in L^2\parentheses*{\brackets*{0, 2\pi}; \C}.
+        \]
+        Man beachte, dass die Konvergenz nicht punktweise gilt, sondern in \(L^2\) (mehr dazu im Theorieteil).
+        Die dabei entstehende Reihe
+        \[
+            \sum_{k \in \Z}\angles*{f, e_k}e^{ikx}
+        \]
+        nennt man \emph{Fourier-Reihe}.
+    \end{remark}
+    \begin{remark}
+        Um die Fourier-Teilsummen numerisch zu berechnen, könnte man prinzipiell die Integrale in den Fourier-Koeffizienten durch Quadraturformeln approximieren.
+        Dies ist aber sehr aufwendig.
+        Wir betrachten im Folgenden den Weg über Interpolation, der aber auch im Nachgang als Quadratur interpretiert werden kann.
+        Wir betrachten äquidistante Stützstellen
+        \[
+            x_j = \frac{2\pi j}{n}, \quad j = 0, \ldots, n - 1
+        \]
+        im Intervall \(\brackets*{0, 2\pi}\).
+        Die komplexe Zahl
+        \[
+            \varepsilon_n := e^{-\frac{2\pi i}{n}}
+        \]
+        heißt \emph{\(n\)-te Einheitswurzel}, denn es gilt
+        \[
+            \parentheses*{\varepsilon_n^j}^n = \varepsilon_n^{jn} = e^{-2\pi ij} = 1, \quad j = 0, \ldots, n - 1,
+        \]
+        d.h. die Zahlen \(\varepsilon_n^j, j = 0, \ldots, n - 1\) teilen den Einheitskreis in gleich große Stücke.
+    \end{remark}
+
+    Zur Interpolation verwenden wir die folgenden Funktionenräume.
+    \begin{definition}
+        Für \(m \in \N\) sei
+        \[
+            \mathcal{T}_m := \setspan\braces*{e_j : 0 \le j < m}.
+        \]
+        Die Elemente von \(\mathcal{T}_m\) heißen \emph{(komplexe) trigonometrische Polynome vom Grad (kleiner-gleich) \(m - 1\)}.
+    \end{definition}
+    \begin{remark}
+        Da die Grundschwingungen \(\parentheses*{e_j}_{j \in \Z}\) ein Orthonormalsystem bilden, sind sie insbesondere linear unabhängig und es folgt \(\dim\mathcal{T}_m = m\).
+        Ferner gilt
+        \[
+            \mathcal{T}_m = \braces*{\brackets*{0, 2\pi} \to \C, x \mapsto \sum_{j = 0}^{m - 1}c_j e^{ijx} : c_0, \ldots, c_{m - 1} \in \C}.
+        \]
+        Setzt man \(z = e^{ix}\), so hat jedes Element von \(\mathcal{T}_m\) die Form
+        \[
+            \sum_{j = 0}^{m - 1}c_j z^j,
+        \]
+        d.h. die Elemente von \(\mathcal{T}_m\) sind komplexe Polynome, die wegen \(\absolute*{e^{ix}} = 1\) nur auf dem Einheitskreis in der komplexen Ebene ausgewertet werden.
+        Zusammen mit der Identität \(e^{ix} = \cos x + i\sin x\) ist dies der Grund, dass man hier von komplexen trigonometrischen Polynomen spricht.
+    \end{remark}
+    \begin{theorem}
+        \begin{enumerate}
+            \item Seien \(p_1 \in \mathcal{T}_m\) und \(p_2 \in \mathcal{T}_n\).
+            Dann gilt \(p_1 p_2 \in \mathcal{T}_{m + n - 1}\).
+            \item Sei \(0 \ne p \in \mathcal{T}_m\).
+            Dann hat \(p\) höchstens \(m -1\) verschiedene Nullstellen in \(\left[0, 2\pi\right)\).
+        \end{enumerate}
+    \end{theorem}
+    \begin{proof}
+        \begin{enumerate}
+            \item Wegen \(p_1 \in \mathcal{T}_m\) und \(p_2 \in \mathcal{T}_n\) gibt es Koeffizienten \(c_j\) und \(d_k\) mit
+            \[
+                p_1\parentheses*{x} = \sum_{j = 0}^{m - 1}c_j e^{ijx} \quad \text{und} \quad p_2\parentheses*{x} = \sum_{k = 0}^{n - 1}d_k e^{ikx}.
+            \]
+            Daraus folgt
+            \[
+                p_1\parentheses*{x}p_2\parentheses*{x} = \sum_{j = 0}^{m - 1}\sum_{k = 0}^{n - 1}c_j d_k e^{i\parentheses*{j + k}x} \in \mathcal{T}_{m + n - 1}.
+            \]
+            \item Angenommen \(p = \sum_{j = 0}^{m - 1}c_j e^{ijx} \not\equiv 0\) hat \(m\) verschiedene Nullstellen \(x_1, \ldots, x_m \in \left[0, 2\pi\right)\).
+            Wir betrachten das komplexe Polynom
+            \[
+                q: \C \to \C, z \mapsto \sum_{j = 0}^{m - 1}c_j z^j.
+            \]
+            Dann gilt
+            \[
+                q\parentheses*{e^{ix_k}} = p\parentheses*{x_k} = 0 \quad \text{für alle }k \in \braces*{1, \ldots, m}.
+            \]
+            Ferner sind wegen \(x_k \in \left[0, 2\pi\right)\) die \(e^{ix_k}\) verschieden, damit hat das komplexe Polynom \(q\) \(m\) verschiedene Nullstellen, ist aber vom Grad \(m - 1\).
+            Somit muss \(q = 0\) gelten.
+            Damit folgt aber auch, dass die Koeffizenten \(c_j\) alle Null sein müssen und somit folgt auch \(p = 0\).
+            Ein Widerspruch zu unserer Annahme \(p \not\equiv 0\).
+        \end{enumerate}
+    \end{proof}
+
+    Wir betrachten nun die folgende Interpolationsaufgabe bzgl. der trigonometrischen Polynome.
+    \begin{problem}
+        Gegeben seien Werte \(y_k \in \C, k = 0, \ldots, n - 1\), sowie Punkte \(x_k = \frac{2\pi k}{n} \in \left[0, 2\pi\right), k = 0, \ldots, n - 1\).
+        Finde \(T_n \in \mathcal{T}_n\), so dass
+        \[
+            T_n\parentheses*{x_k} = y_k, \quad k = 0, \ldots, n - 1.
+        \]
+    \end{problem}
+    \begin{remark}
+        Sei \(f: \brackets*{0, 2\pi} \to \C\) eine Funktion.
+        Durch die Wahl \(y_k = f\parentheses*{x_k}\) bedeutet die Interpolationsaufgabe in diesem Fall ein \(T_n \in \mathcal{T}_n\) zu finden, das an den Stellen \(x_k\) mit \(f\) übereinstimmt.
+        Die Punkte \(x_k\) nennt man auch Stützstellen.
+    \end{remark}
+    \begin{remark}
+        Da es sich letztlich nach Substitution um Polynome handelt, kann man die Lösbarkeit dieser Aufgabe (also Existenz und Eindeutigkeit des trigonometrischen Interpolationspolynoms) genauso beweisen wie im Fall des Standard-Interpolationspolynoms (also mithilfe des Lagrange-Polynoms, sowie des Fundamentalsatzes der Algebra; siehe Mathe 1).
+    \end{remark}
+
+    Es gibt jedoch eine einfachere Möglichkeit die Existenz zu zeigen.
+    Als Vorbereitung darauf zeigen wir zunächst eine Hilfsaussage.
+    \begin{lemma}
+        Für \(m \in \braces*{-n + 1, \ldots, n - 1}\), gilt
+        \[
+            \frac{1}{n}\sum_{j = 0}^{n - 1}e^{-i\frac{2\pi mj}{n}} = \delta_{m, 0}.
+        \]
+    \end{lemma}
+    \begin{proof}
+        Für \(m = 0\) ergibt sich sofort
+        \[
+            \frac{1}{n}\sum_{j = 0}^{n - 1}e^{-i\frac{2\pi \cdot 0 \cdot j}{n}} = \frac{1}{n}\sum_{j = 0}^{n - 1}1 = 1.
+        \]
+        Für den Fall \(m \ne 0\) erinnern wir uns an die Summenformel der geometrischen Reihe:
+        Es gilt
+        \[
+            \sum_{j = 0}^{n - 1}q^j = \frac{1 - q^n}{1 - q} \quad \text{für }q \ne 1.
+        \]
+        Da \(\absolute*{m} \le n - 1\), gilt \(e^{-i\frac{2\pi m}{n}} \ne 1\) und es folgt, dass
+        \[
+            \frac{1}{n}\sum_{j = 0}^{n - 1}e^{-i\frac{2\pi mj}{n}} = \frac{1}{n}\sum_{j = 0}^{n - 1}\parentheses*{e^{-i\frac{2\pi m}{n}}}^j = \frac{1}{n}\frac{1 - e^{-i \cdot 2\pi m}}{1 - e^{-i\frac{2\pi m}{n}}} = \frac{1}{n}\frac{1 - 1}{1 - e^{-i\frac{2\pi m}{n}}} = 0.
+        \]
+    \end{proof}
+    \begin{theorem}
+        Seien \(y = \parentheses*{y_k}_{k = 0}^{n - 1} \equiv \parentheses*{y_0, \ldots, y_{n - 1}}^T \in \C^n\) und \(x_k = \frac{2\pi k}{n}\) für \(k = 0, \ldots, n - 1\).
+        Ferner sei
+        \[
+            d_j\parentheses*{y} := \frac{1}{n}\sum_{l = 0}^{n - 1}y_l e^{-ijx_l} = \frac{1}{n}\sum_{l = 0}^{n - 1}y_l \varepsilon_n^{jl}, \quad j = 0, \ldots, n - 1.
+        \]
+        Dann erfüllt das trigonometrische Polynom
+        \[
+            T_n\parentheses*{y; x} := \sum_{j = 0}^{n - 1}d_j\parentheses*{y}e^{ijx}
+        \]
+        die Interpolationsbedingungen \(T_n\parentheses*{y; x_k} = y_k\) für alle \(k = 0, \ldots, n - 1\).
+        Ferner ist \(T_n\parentheses*{y; \cdot}\) das einzige Element aus \(\mathcal{T}_n\), das diese Interpolationsbedingungen erfüllt.
+    \end{theorem}
+    \begin{remark}
+        Für den Fall \(y_k = f\parentheses*{x_k}\) beachte man die formale Ähnlichkeit zur Fourier-Teilsumme.
+        Die Fourier-Koeffizienten werden hier durch eine Rechteckregel approximiert.
+    \end{remark}
+\end{document}
