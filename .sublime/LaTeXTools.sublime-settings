@@ -125,6 +125,7 @@
     "preview_math_template_packages": [
         "\\usepackage{amsmath}",
         "\\usepackage{amssymb}",
+        "\\usepackage{siunitx}",
         "\\IfFileExists{latexsym.sty}{\\usepackage{latexsym}}{}",
         "\\IfFileExists{mathtools.sty}{\\usepackage{mathtools}}{}"
     ],
@@ -149,6 +150,8 @@
         "\\DeclarePairedDelimiter{\\floor}{\\lfloor}{\\rfloor}",
         "\\DeclarePairedDelimiter{\\norm}{\\lVert}{\\rVert}",
         "\\DeclarePairedDelimiter{\\parentheses}{(}{)}",
+        "\\newcommand{\\sis}[1]{\\,\\si{#1}}",
+        "\\DeclareSIUnit{\\degreeFahrenheit}{{}^\\circ F}"
     ],
 
     // The preview functionality by default appends a star (*) to each
