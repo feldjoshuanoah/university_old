@@ -1,0 +1,76 @@
+\documentclass{exercise}
+
+\institute{Applied and Computational Mathematics}
+\title{Selbstrechenübung 1}
+\author{Joshua Feld, 406718}
+\course{Mathematische Grundlagen IV}
+\professor{Torrilhon}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \section*{Aufgabe 1}
+
+    \begin{problem}
+        Man berechne für
+        \[
+            u: \R \times \parentheses*{-\frac{\pi}{2}, \frac{\pi}{2}} \times \R \to \R, u\parentheses*{x, y, z} = y\sin\parentheses*{x} + z\tan\parentheses*{y}
+        \]
+        sämtliche partielle Ableitungen \(D^\alpha u\) für \(\absolute*{\alpha} \le 2\).
+    \end{problem}
+
+    \subsection*{Lösung}
+
+
+    \section*{Aufgabe 2}
+
+    \begin{problem}
+        Bestimmen Sie zu den Daten
+        \begin{center}
+            \begin{tabular}{rcccc}
+                \toprule
+                \(x_k\) & \(0\) & \(\frac{\pi}{2}\) & \(\pi\) & \(\frac{3\pi}{2}\)\\
+                \midrule
+                \(y_k\) & \(4\) & \(2\) & \(1\) & \(2\)\\
+                \bottomrule
+            \end{tabular}
+        \end{center}
+        ein reelles trigonometrisches Polynom der Form
+        \[
+            T_4\parentheses*{y; x} = \sum_{k = 0}^3 \hat{d}_k\parentheses*{y}\cos\parentheses*{kx},
+        \]
+        das die Daten interpoliert, also die Bedingung
+        \[
+            T_4\parentheses*{y; x_k} = y_k \quad \text{für} \quad k = 0, \ldots, 3
+        \]
+        erfüllt.
+    \end{problem}
+
+    \subsection*{Lösung}
+
+
+    \section*{Aufgabe 3}
+
+    \begin{problem}
+        Es sei \(P\parentheses*{x} = \sum_{k = 0}^n a_k \cos\parentheses*{kx} + b_k \sin\parentheses*{kx}, a_k, b_k \in \R\) ein trigonometrisches Polynom vom Grad \(n\) und \(Q\parentheses*{x} = \sum_{k = 0}^m c_k \cos\parentheses*{kx} + d_k \sin\parentheses*{kx}, c_k, d_k \in \R\) eines vom Grad \(m\).
+        Wir wollen beweisen, dass dann \(R\parentheses*{x} := P\parentheses*{x}Q\parentheses*{x}\) ein trigonometrisches Polynom vom Grad \(m + n\) ist.
+        Gehen Sie dazu wie folgt vor:
+        \begin{enumerate}
+            \item Zeigen Sie
+            \[
+                \sin^2\parentheses*{x} = \frac{1 - \cos\parentheses*{2x}}{2}, \quad \cos^2\parentheses*{x} = \frac{1 + \cos\parentheses*{2x}}{2}, \quad \sin\parentheses*{x}\cos\parentheses*{x} = \frac{1}{2}\sin\parentheses*{2x}.
+            \]
+            \item Zeigen Sie
+            \begin{align*}
+                \cos\parentheses*{x}\cos\parentheses*{kx} &= \frac{1}{2}\parentheses*{\cos\parentheses*{\parentheses*{k + 1}x} + \cos\parentheses*{\parentheses*{k - 1}x}},\\
+                \sin\parentheses*{x}\cos\parentheses*{kx} &= \frac{1}{2}\parentheses*{\sin\parentheses*{\parentheses*{k + 1}x} - \sin\parentheses*{\parentheses*{k - 1}x}},\\
+                \cos\parentheses*{x}\sin\parentheses*{kx} &= \frac{1}{2}\parentheses*{\sin\parentheses*{\parentheses*{k + 1}x} + \sin\parentheses*{\parentheses*{k - 1}x}},\\
+                \sin\parentheses*{x}\sin\parentheses*{kx} &= -\frac{1}{2}\parentheses*{\cos\parentheses*{\parentheses*{k + 1}x} - \cos\parentheses*{\parentheses*{k - 1}x}}.
+            \end{align*}
+            \item Beweisen Sie die Aussage für beliebige Paare \(n, m \in \N_0\) mittels vollständiger Induktion über \(m\).
+        \end{enumerate}
+    \end{problem}
+\end{document}
