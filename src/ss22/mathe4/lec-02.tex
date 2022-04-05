@@ -1,0 +1,108 @@
+\documentclass{lecture}
+
+\institute{Applied and Computational Mathematics}
+\title{Vorlesung 2}
+\author{Joshua Feld, 406718}
+\course{Mathematische Grundlagen IV}
+\professor{Torrilhon}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \section*{Partielle Differentialgleichungen}
+
+    Wenn Mathematik die Sprache der Natur ist, dann sind PDEs die am meisten genutzen Vokabeln.
+    Fast alle technischen Prozesse, die Felder in Ort und Zeit enthalten (z.B. die Temperatur bei \(\parentheses*{\mathbf{x}, t}\)), können durch PDEs beschrieben werden.
+    \begin{definition}
+        Eine Differentialgleichung, deren Unbekannte nach mehreren Variablen abgeleitet wird, heißt \emph{partielle Differentialgleichung}.
+        Die allgemeine Form ist
+        \[
+            F\parentheses*{x, u, Du, \ldots, D^p u} = 0.
+        \]
+        mit \(u: G \to \R^m\) und dem Grundgebiet \(G\), wobei \(x = \parentheses*{x_1, \ldots, x_n}^T \in G \subset \R^n\).
+    \end{definition}
+    \begin{remark}
+        \begin{enumerate}
+            \item \(Du\) ist die Jacobi-Matrix \(\parentheses*{\frac{\partial u_i}{\partial x_j}}_{i = 1, \ldots, m; j = 1, \ldots, n}\).
+            \item \(D^p u\) ist eine \(p\)-te Ableitung von \(u\), wobei \(p = \parentheses*{p_1, \ldots, p_n}\) ein Multi-Index ist, mit
+            \[
+                D^p = \parentheses*{\frac{\partial}{\partial x_1}}^{p_1}\parentheses*{\frac{\partial}{\partial x_2}}^{p_2}\cdots\parentheses*{\frac{\partial}{\partial x_n}}^{p_n}.
+            \]
+            \item Ähnlich zu ODEs unterscheiden wir skalare PDEs \(u: G \to \R\) und Systeme von PDEs mit \(m\) Gleichungen für \(m\) Unbekannte.
+            Ebenso ist die Ordnung der PDE die höchste Ableitung \(\absolute*{p} = p_1 + \ldots + p_n\).
+            \item In Anwendungen ist das Grundgebiet typischerweise im dreidimensionalen Raum \(G = \Omega \subset \R^d, d = 1, 2, 3\) oder es besteht aus Raum und Zeit \(G = \Omega \times \brackets*{0, T}\) mit Variablen \(\parentheses*{x, t} \in \Omega \times \R^+\).
+            Für die Ableitungen nach dem Ort wird dann ``\(\nabla\)'' und \(\Delta = \sum_{k = 1}^n \frac{\partial^2}{\partial x_k^2}\) (``Laplace-Operator'') benutzt.
+        \end{enumerate}
+    \end{remark}
+    \begin{example}
+        \begin{enumerate}
+            \item Die \emph{Transportgleichung} hat im eindimensionalen Raum die Form
+            \[
+                \partial_t u\parentheses*{x, t} + a\partial_x u\parentheses*{x, t} = 0,
+            \]
+            mit der Transportgeschwindigkeit \(a \in \R\) und \(u: G \to \R, \parentheses*{x, t} \mapsto u\parentheses*{x, t}\), wobei \(G = \R \times \brackets*{0, T}\).
+            Im Allgemeinen Fall ändert sich die Form zu
+            \[
+                \partial_t u\parentheses*{\mathbf{x}, t} + \mathbf{a} \cdot \nabla u\parentheses*{\mathbf{x}, t} = 0,
+            \]
+            mit den Transportvektor \(\mathbf{a} = \parentheses*{a_1, \ldots, a_n}^T \in \R^n\) und \(u: G \to \R, \parentheses*{\mathbf{x}, t} \mapsto u\parentheses*{\mathbf{x}, t}\), wobei \(G = \R^n \times \brackets*{0, T}\).
+            \item Die \emph{Poisson-Gleichung} lautet allgemein
+            \[
+                \Delta u\parentheses*{\mathbf{x}} = f\parentheses*{\mathbf{x}}
+            \]
+            mit der ``Quelle'' \(f: G \to \R\) und \(u: G \to \R, \mathbf{x} \mapsto u\parentheses*{\mathbf{x}}\), wobei \(G \subset \R^n\) (d.h. die Zeit spielt keine Rolle).
+            Ist \(f \equiv 0\), so wird die Gleichung zur \emph{Laplace-Gleichung}.
+            \item Die \emph{Diffusonsgleichung} im eindimensionalen Raum ist
+            \[
+                \partial_t u\parentheses*{x, t} - \kappa\partial_{xx}u\parentheses*{x, t} = f\parentheses*{x, t},
+            \]
+            mit dem Diffusionskoeffizienten \(\kappa \in \R\) und \(u: G \to \R, \parentheses*{x, t} \mapsto u\parentheses*{x, t}\), wobei \(G = \R \times \brackets*{0, T}\).
+            In \(n\) Diensionen verändert sich die Gleichung zu
+            \[
+                \partial_t u\parentheses*{\mathbf{x}, t} - \kappa\Delta u\parentheses*{\mathbf{x}, t} = f\parentheses*{\mathbf{x}, t}
+            \]
+            mit \(u: G \to \R, \parentheses*{\mathbf{x}, t} \mapsto u\parentheses*{\mathbf{x}, t}\), wobei \(G = \R^n \times \brackets*{0, T}\).
+            \item Die \emph{Wellengleichung} ist definiert als
+            \[\partial_{tt}u\parentheses*{\mathbf{x}, t} - c^2 \Delta u\parentheses*{\mathbf{x}, t} = f\parentheses*{\mathbf{x}, t},\]
+            mit der Wellengeschwindigkeit \(c \in \R\) und \(u: G \to \R, \parentheses*{\mathbf{x}, t} \mapsto u\parentheses*{\mathbf{x}, t}\), wobei \(G = \R^n \times \brackets*{0, T}\).
+            \item Die \emph{Navir-Stokes-Gleichungen} aus der Fluiddynamik sind
+            \begin{align*}
+                \partial_t \mathbf{u} + \mathbf{u} \cdot \nabla\mathbf{u} + \nabla p &= \nu\Delta\mathbf{u} + \mathbf{f},\\
+                \nabla\mathbf{u} &= 0,
+            \end{align*}
+            mit der Viskosität \(\nu \in \R\) und dem Kraftfeld \(\mathbf{f}\).
+            Die Strömungsgeschwindigkeit \(\mathbf{u}: G \to \R^d\) und der Druck \(p: G \to \R\) sind unbekannt.
+            Das Grundgebiet ist hier \(G = \Omega \times \brackets*{0, T}\) mit \(\Omega \subset \R^d\).
+            \item Die \emph{Maxwell-Gleichungen} aus der Elektrodynamik sind
+            \begin{align*}
+                \partial_t \mathbf{B} + \nabla\mathbf{E} &= 0, & \nabla\mathbf{B} = 0,\\
+                \partial_t \mathbf{E} + \nabla\mathbf{B} &= -\mathbf{j}, & \nabla\mathbf{E} = \rho,
+            \end{align*}
+            mit der Ladungsdichte \(\rho \in \R\) und der Stromdichte \(\mathbf{j}\).
+            Das elektrische Feld \(\mathbf{E}: G \to \R^d\) und das magnetische Feld \(\mathbf{B}: G \to \R^d\) sind unbekannt, wobei \(G = \Omega \times \brackets*{0, T}\) mit \(\Omega \subset \R^d\).
+        \end{enumerate}
+    \end{example}
+
+
+    \section*{Anfangs- und Randwertprobleme}
+
+    Ähnlich zu ODEs bestimmen die PDEs die unbekannte Funktion nicht vollständig.
+    Bei PDEs ist die allgemeine Lösung \(\infty\)-dimensional.
+    \begin{example}
+        Für ODEs ist der einfachste Fall \(u''\parentheses*{x} = 0\).
+        Wenn wir diese Gleichung zwei Mal integrieren, so erhalten wir \(u'\parentheses*{x} = c_1\) und \(u\parentheses*{x} = c_1 x + c_2\) mit \(c_1, c_2 \in \R\).
+        Für PDEs wollen wir nun den Fall \(\partial_{xy}u\parentheses*{x, y} = 0\) betrachten.
+        Es ergibt sich \(\partial_y u\parentheses*{x, y} = \tilde{c}_1\parentheses*{y}\) und folglich \(u\parentheses*{x, y} = \int \tilde{c}_1\parentheses*{y}\d y + \tilde{c}_2\parentheses*{x}\), wobei \(\tilde{c}_1, \tilde{c}_2\) zwei beliebige \(\infty\)-dimensionale Funktionen \(\R \to \R\) sind.
+    \end{example}
+    Lösungen partieller Differentialgleichungen werden also nicht durch einzelne Werte sondern durch Vorgabe von Funktionen festgelegt.
+    \begin{definition}
+        \begin{enumerate}
+            \item Enthält die PDE die Zeit, z.B. \(u: \Omega \times \brackets*{0, T} \to \R^n\), werden die \emph{Anfangswerte} \(u\parentheses*{\mathbf{x}, 0} = u_0\parentheses*{\mathbf{x}}\) vorgegeben.
+            \item Ist das Grundgebiet berandet, z.B. \(\Omega \subset \R^n\), so werden \emph{Randbedingungen} \(\left.u\parentheses*{\mathbf{x}}\right|_{x \in \partial\Omega} = g\parentheses*{\mathbf{x}}\) vorgegeben.
+        \end{enumerate}
+        Dies führt zu \emph{Anfangs-} und \emph{Randwertproblemen}.
+    \end{definition}
+\end{document}
