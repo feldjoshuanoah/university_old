@@ -1,0 +1,178 @@
+\documentclass{exercise}
+
+\institute{Applied and Computational Mathematics}
+\title{Hausaufgabenübung 1}
+\author{Joshua Feld, 406718}
+\course{Mathematische Grundlagen IV}
+\professor{Torrilhon}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \section*{Aufgabe 1}
+
+    \begin{problem}
+        Man berechne in Abhängigkeit von den Werten \(\alpha \in \R\) und \(\beta \in \R\) alle Lösungen des Randwertproblems
+        \[
+            -u''\parentheses*{x} = 1, \quad \forall x \in \parentheses*{0, 1}
+        \]
+        zusammen mit den Randbedingungen
+        \begin{enumerate}
+            \item \(u\parentheses*{0} = \alpha\), \(u\parentheses*{1} = \beta\),
+            \item \(u\parentheses*{0} = \alpha\), \(\frac{\partial u}{\partial n}\parentheses*{1} = \beta\),
+            \item \(\frac{\partial u}{\partial n}\parentheses*{0} = \alpha\), \(u\parentheses*{1} = \beta\),
+            \item \(\frac{\partial u}{\partial n}\parentheses*{0} = \alpha\), \(\frac{\partial u}{\partial n}\parentheses*{1} = \beta\).
+        \end{enumerate}
+    \end{problem}
+
+    \subsection*{Lösung}
+    Integration ergibt \(u'\parentheses*{x} = c_1 - x\) und \(u\parentheses*{x} = -\frac{1}{2}x^2 + c_1 x + c_2\).
+    Folglich sind
+    \begin{align*}
+        u\parentheses*{0} &= c_2, & \frac{\partial u}{\partial n}\parentheses*{0} = -u'\parentheses*{0} = -c_1,\\
+        u\parentheses*{1} &= c_1 + c_2 - \frac{1}{2}, & \frac{\partial u}{\partial n}\parentheses*{1} = u'\parentheses*{1} = c_1 - 1.
+    \end{align*}
+    \begin{enumerate}
+        \item
+        \begin{align*}
+            \alpha &\stackrel{!}{=} u\parentheses*{0} = c_2,\\
+            \beta &\stackrel{!}{=} u\parentheses*{1} = c_1 + c_2 - \frac{1}{2}.
+        \end{align*}
+        Es gibt genau eine Lösung
+        \[
+            c_2 = \alpha, \quad c_1 = \beta + \frac{1}{2} - c_2 = \beta - \alpha + \frac{1}{2},
+        \]
+        also
+        \[
+            u\parentheses*{x} = -\frac{1}{2}x^2 + \parentheses*{\beta - \alpha + \frac{1}{2}}x + \alpha
+        \]
+        \item
+        \begin{align*}
+            \alpha &\stackrel{!}{=} u\parentheses*{0} = c_2,\\
+            \beta &\stackrel{!}{=} \frac{\partial u}{\partial n}\parentheses*{1} = c_1 - 1.
+        \end{align*}
+        Es gibt genau eine Lösung
+        \[
+            c_2 = \alpha, \quad c_1 = \beta + 1,
+        \]
+        also
+        \[
+            u\parentheses*{x} = -\frac{1}{2}x^2 + \parentheses*{\beta + 1}x + \alpha.
+        \]
+        \item
+        \begin{align*}
+            \alpha &\stackrel{!}{=} \frac{\partial u}{\partial n}\parentheses*{0} = -c_1,\\
+            \beta &\stackrel{!}{=} u\parentheses*{1} = c_1 + c_2 - \frac{1}{2}.
+        \end{align*}
+        Es gibt genau eine Lösung
+        \[
+            c_1 = -\alpha, \quad c_2 = \alpha + \beta + \frac{1}{2},
+        \]
+        also
+        \[
+            u\parentheses*{x} = -\frac{1}{2}x^2 - \alpha x + \alpha + \beta + \frac{1}{2}.
+        \]
+        \item
+        \begin{align*}
+            \alpha &\stackrel{!}{=} \frac{\partial u}{\partial n}\parentheses*{0} = -c_1,\\
+            \beta &\stackrel{!}{=} \frac{\partial u}{\partial n}\parentheses*{1} = c_1 - 1.
+        \end{align*}
+        Aus den Gleichungen folgt
+        \[
+            c_1 = -\alpha \quad \text{und} \quad c_1 = \beta + 1.
+        \]
+        Falls \(-\alpha = \beta + 1\) gibt es unendlich viele Lösungen mit
+        \[
+            u\parentheses*{x} = -\frac{1}{2}x^2 - \alpha x + c_2, \quad c_2 \in \R,
+        \]
+        ansonsten gibt es keine Lösung.
+    \end{enumerate}
+
+
+    \section*{Aufgabe 2}
+
+    \begin{problem}
+        Bestimmen Sie zu den Daten
+        \begin{center}
+            \begin{tabular}{rcccc}
+                \toprule
+                \(x_k\) & \(0\) & \(\frac{\pi}{2}\) & \(\pi\) & \(\frac{3\pi}{2}\)\\
+                \midrule
+                \(y_k\) & \(3\) & \(2\) & \(3\) & \(4\)\\
+                \bottomrule
+            \end{tabular}
+        \end{center}
+        ein komplexes trigonometrisches Polynom der Form
+        \[
+            T_4\parentheses*{y; x} = \sum_{k = 0}^3 c_k e^{ikx},
+        \]
+        das die Daten iterpoliert, also \(T_4\parentheses*{y; x_k} = y_k\), für \(k = 0, \ldots, 3\).
+        Stellen Sie dazu das zugehörige lineare Gleichungssystem auf und lösen Sie es direkt.
+    \end{problem}
+
+    \subsection*{Lösung}
+    Das lineare Gleichungssystem, das dem Interpolationsproblem entspricht, lautet:
+    \[
+        \begin{pmatrix}
+            1 & 1 & 1 & 1\\
+            1 & i & -1 & -i\\
+            1 & -1 & 1 & -1\\
+            1 & -i & -1 & i
+        \end{pmatrix}\begin{pmatrix}
+            c_0\\c_1\\c_2\\c_3
+        \end{pmatrix} = \begin{pmatrix}
+            3\\2\\3\\4
+        \end{pmatrix}.
+    \]
+    Dieses lässt sich mit dem Gaußschen Eliminationsverfahren lösen, wobei sich im letzten Schritt die Matrix
+    \[
+        \parentheses*{\begin{array}{cccc|c}
+            1 & 1 & 1 & 1 & 3\\
+            0 & -2 & 0 & -2 & 0\\
+            0 & 0 & -2 & -2i & -1\\
+            0 & 0 & 0 & 4i & 2
+        \end{array}}.
+    \]
+    ergibt.
+    Nun erhalten wir durch Rückwärtseinsetzen
+    \begin{align*}
+        4ic_3 = 2 &\iff c_3 = -\frac{i}{2},\\
+        -2c_2 - 2ic_3 = -1 &\iff 2c_2 + 1 = 1 \iff c_2 = 0,\\
+        -2c_1 - 2c_3 = 0 &\iff c_1 = -c_3 = \frac{i}{2},\\
+        c_0 + c_1 + c_2 + c_3 = 3 &\iff c_0 = 3.
+    \end{align*}
+    Das komplexe trigonometrische Polynom, welches die gegebenen Daten interpoliert ist also
+    \[
+        T_4\parentheses*{y; x} = 3 + \frac{i}{2}\parentheses*{e^{ix} - e^{3ix}}. 
+    \]
+
+
+    \section*{Aufgabe 3}
+
+    \begin{problem}
+        Beweisen Sie das folgende Lemma aus der Vorlesung:
+        \begin{quote}
+            \textbf{\sffamily Lemma.} Für \(j, k \in \Z\) gilt
+            \[
+                \angles*{e_j, e_k} = \frac{1}{2\pi}\int_0^{2\pi}e^{ijx}e^{-ikx}\d x = \delta_{jk}.
+            \]
+        \end{quote}
+    \end{problem}
+
+    \subsection*{Lösung}
+    Mithilfe der Identität \(e^{ix} = \cos x + i\sin x\) lässt sich die Aussage leicht nachrechnen:
+    \begin{align*}
+        \angles*{e_j, e_k} &= \frac{1}{2\pi}\int_0^{2\pi}e^{ijx}e^{-ikx}\d x\\
+        &= \frac{1}{2\pi}\int_0^{2\pi}e^{i\parentheses*{j - k}x}\d x\\
+        &= \frac{1}{2\pi}\int_0^{2\pi}\cos\parentheses*{\parentheses*{j - k}x}\d x + \frac{i}{2\pi}\underbrace{\int_0^{2\pi}\sin\parentheses*{\parentheses*{j - k}x}\d x}_{= 0\ \forall j, k \in \Z}\\
+        &= \frac{1}{2\pi}\int_0^{2\pi}\cos\parentheses*{\parentheses*{j - k}x}\d x\\
+        &= \frac{1}{2\pi}\begin{cases}
+            2\pi, & \text{falls }j = k,\\
+            0, & \text{sonst}
+        \end{cases}\\
+        &= \delta_{jk}.
+    \end{align*}
+\end{document}
