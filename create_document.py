@@ -22,7 +22,7 @@ with open('course-info.yml') as course_info:
     if len(arguments) < 3:
         prefix = input('Select a prefix (' + '/'.join(infos['prefixes']) + '): ')
 
-    index = str(len([f for f in os.listdir(os.getcwd()) if os.path.isfile(f) and f.startswith(prefix)]) + 1)
+    index = str(len([f for f in os.listdir(os.getcwd()) if os.path.isfile(f) and f.startswith(prefix) and f.endswith('.tex')]) + 1)
 
     file_name = prefix + '-' + index.zfill(2) + '.tex'
     shutil.copyfile(basedir + '/template.tex', file_name)
