@@ -1,0 +1,69 @@
+\documentclass{lecture}
+
+\institute{Lehrstuhl für Strömungslehre und Aerodynamisches Institut}
+\title{Vorlesung 1}
+\author{Joshua Feld, 406718}
+\course{Strömungsmechanik I}
+\professor{Schröder}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \section*{Einleitung}
+
+    Die Fluidmechanik befasst sich mit dem Verhalten von Flüssigkeiten oder Gasen, die entweder in Ruhe oder in Bewegung sind.
+    Sie erstreckt sich demnach auf einem extrem breiten Problembereich, der auf der einen Seite die Analyse der Blutströmung in den Kapillaren deren Durchmesser in Mikrometer (\(10^{-6}\sis{\meter}\)) angegeben werden, beinhaltet, auf der anderen Seite die Untersuchung der Strömung durch eine kilometerlange Ölpipeline mit einem Durchmesser im Meterbereich umfasst.
+    Kenntnisse der Fluidmechanik sind u.a. erforderlich, um zu erklären, warum stromlinienförmig gebaute Flugzeuge die günstigsten wirtschaftlichsten Flugeigenschaften aufweisen und Golfbälle zur Steigerung ihres aerodynamischen Verhaltens eine rauhe Oberfläche besitzen.
+
+    Zahlreiche alltägliche Fragestellungen können mithilfe verhältnismäßig einfacher Grundgesetze der Fluidmechanik beantwortet werden.
+    Wie stark kann der Benzinverbrauch bzw. Dieselverbrauch von PKW bzw. LKW aufgrund eines verbesserten aerodynamischen Designs reduziert werden?
+    Wie ist es möglich, Ergebnisse, die für Modellflugzeuge bestimmt worden sind, auf Realausführungen zu übertragen?
+    Warum kann die Strömung eines Flusses eine deutliche Geschwindigkeit aufweisen, obwohl die Oberflächenneigung so gering ist, dass sie mit einer gewöhnlichen Wasserwage kaum festgestellt werden kann?
+    Warum kann ein Beobachter ein mit Überschallgeschwindigkeit fliegendes Flugzeug erst hören, wenn es ihn bereits überflogen hat?
+    Wie wird der Schub einer Rakete erzeugt?
+    Inwieweit müssen Windströmungen bei der Konstruktion von Gebäuden, Brücken, Schornsteinen, etc. berücksichtigt werden?
+    Diese wenigen Fragen, die beliebig erweitert werden können, zeigen bereits, dass Ingenieure unabhängig von ihrer Fachrichtung mit großer Wahrscheinlichkeit mit der Analyse und dem Design von Systemen konfrontiert werden, die ein gewisses fluidmechanisches Verständnis voraussetzen.
+    Das Interesse an der Untersuchung derartiger Probleme soll in dieser Vorlesung vermittelt werden.
+
+
+    \section*{Festkörper, Flüssigkeiten, Gase}
+
+    Zunächst wird auf die Frage eingegangen: Was ist ein Fluid?
+    Oder gegenüberstellend formuliert: Was ist der Unterschied zwischen einem Festkörper und einem Fluid?
+    Oberflächlich betrachtet lautet die Antwort auf diese Frage, ein Festkörper ist ``hart'' und schwer verformbar, während ein Fluid ``weich'' und leichter deformierbar ist.
+    Bei genauerer Untersuchung kommt man zu der Feststellung, dass die Moleküle eines Festkörpers, wie Stahl oder Beton, extrem dicht gepackt sind, mit großen intermolekularen Kräften, so dass der Festkörper unter Krafteinwirkung seine ursprüngliche Form behält oder nach Aufhebung der Kraft diese wieder einnimmt.
+    Im Falle von Flüssigkeiten, wie Öl oder Wasser, sind die Moleküle weiter voneinander entfernt angeordnet, die intermolekularen Kräfte sind geringer und die Moleküle weisen eine größere Bewegungsfreiheit auf.
+    Sie können leicht verformt, jedoch nicht komprimiert werden.
+    Bei Gasen liegen die Moleküle noch weiter auseinander und besitzen eine größere Bewegungsfreiheit.
+    Dadurch sind gasförmige Medien leicht verformbar und komprimierbar.
+    Bei normalen Drücken und Temperaturen liegt die Anzahl der Moleküle pro Kubikmillimeter für Flüssigkeiten in der Ordnung \(10^{21}\), für Gase in der Ordnung von \(10^{18}\).
+
+    Ein spezieller Unterschied zwischen Festkörpern und Fluiden wird deutlich, wenn man ihre Verformbarkeit unter Einwirkung einer äußeren Kraft betrachtet.
+    Ein Fluid ist als ein Stoff definiert, der sich kontinuierlich verformt, sofern eine Schubkraft von beliebig kleiner Größe auf ihn ausgeübt wird.
+    Wirkt eine derartige Schubkraft auf einen Festkörper wie Stahl, wird sich zunächst eine geringe Verformung einstellen, jedoch wird er sich nicht kontinuierlich deformieren.
+    Im Gegensatz zum Fluid wird er nicht fließen.
+
+    Einige Materialien können nicht leicht klassifiziert werden.
+    Substanzen wie Teer, Zahnpasta, polymere Lösungen, etc. weisen Charakteristika sowohl der Festkörper als auch der Fluide auf.
+    Sofern die Schubkräfte sehr klein sind, verhalten sich diese Stoffe als Festkörper, wird ein kritischer Wert überschritten, treten Fließerscheinungen auf.
+    Das Gebiet das sich mit dem Studium derartiger Materialien auseinandersetzt, wird Rheologie genannt.
+    Es ist nicht Teil der klassischen Fluidmechanik.
+    Somit werden die Strömungseigenschaften solcher Stoffe in dieser Vorlesung nicht behandelt.
+
+    Fluide, die auch unter sehr hohem Druck nahezu keine Volumenänderung aufweisen, werden als dichtebeständig bezeichnet.
+    Im Gegensatz dazu stehen die dichteveränderlichen Fluide, deren Volumenänderung vom Druck und von der Temperatur abhängig ist.
+    Strömungen dichtebeständiger bzw. dichteveränderlicher Fluide werden auch als inkompressible bzw. kompressible Strömungen bezeichnet.
+
+    Prinzipiell ist es möglich, die Mechanik der Fluide anhand der Analyse dr Bewegung der Moleküle zu studieren.
+    Jedoch sind wir i.A. lediglich am durchschnittlichen Verhalten bzw. am makroskopischen Wert der Variablen, die zur Beschreibung des Strömungsfeldes herangezogen wird, interessiert.
+    Dabei wird der Durchschnitt über ein im Vergleich zu den physikalischen Dimensionen des Problems kleines Volumen gebildet.
+    Bezogen auf den Abstand zwischen den Molekülen ist das Volumen jedoch groß.
+    Das bedeutet, wenn wir einem gewissen Punkt im Strömungsfeld z.B. eine Geschwindigkeit zuordnen, sprechen wir in Wirklichkeit von einer durchschnittlichen Geschwindigkeit der Moleküle in einem kleinen, den Punkt umgebenden Volumen.
+    Da der Anstand der Moleküle jedoch typischerweise sehr klein ist, sind extrem viele Moleküle auch in sehr kleinen Volumina vorhanden, so dass der Ansatz, volumengemittelte Größen zur Beschreibung strömungsphysikalischer Zusammenhänge zu verwenden, sicherlich geeignet ist.
+    Wir gehen somit von der Annahme aus, dass sämtliche interessierenden Charakteristika des Fluids kontinuierlich in der gesamten Strömung verteilt sind.
+    Das heißt wir betrachten das Fluid als ein Kontinuum.
+    Sofern die Abstände zwischen den Molekülen sehr groß werden, dies ist z.B. bei verdünnten Gasen der Fall, verliert das Konzept der Kontinuumsmechanik seine Gültigkeit.
+\end{document}
