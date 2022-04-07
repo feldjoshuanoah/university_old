@@ -16,6 +16,7 @@
 \newmdtheoremenv{lemma}{Lemma}
 \newmdtheoremenv{problem}{Problem}
 \newmdtheoremenv{remark}{Bemerkung}
+\newmdtheoremenv{calcrule}{Regel}
 
 \RequirePackage{etoolbox}
 \AtBeginEnvironment{corollary}{\setlist[enumerate]{label={(\roman*)}}}
@@ -25,4 +26,5 @@
 \AtBeginEnvironment{lemma}{\setlist[enumerate]{label={(\roman*)}}}
 \AtBeginEnvironment{problem}{\setlist[enumerate]{label={\alph*)}}}
 \AtBeginEnvironment{remark}{\setlist[enumerate]{label={\alph*)}}}
+\AtBeginEnvironment{calcrule}{\setlist[enumerate]{label={(\roman*)}}}
 \AtBeginEnvironment{proof}{\setlist[enumerate]{label={(\roman*)}}}
