@@ -23,6 +23,12 @@
     \end{problem}
 
     \subsection*{Lösung}
+    Es ist
+    \begin{align*}
+        D^{\parentheses*{1, 0, 0}}u &= y\cos x, & D^{\parentheses*{0, 1, 0}}u &= \sin x + \frac{z}{\cos^2 y}, & D^{\parentheses*{0, 0, 1}}u &= \tan y,\\
+        D^{\parentheses*{2, 0, 0}}u &= -y\sin x, & D^{\parentheses*{0, 2, 0}}u &= \frac{2z\sin y}{\cos^3 y}, & D^{\parentheses*{0, 0, 2}}u &= 0,\\
+        D^{\parentheses*{1, 1, 0}}u &= \cos x, & D^{\parentheses*{1, 0, 1}}u &= 0, & D^{\parentheses*{0, 1, 1}}u &= \frac{1}{\cos^2 y}.
+    \end{align*}
 
 
     \section*{Aufgabe 2}
@@ -50,6 +56,38 @@
     \end{problem}
 
     \subsection*{Lösung}
+    Ein komplexes trigonometrisches Polynom ist gegeben durch
+    \[
+        \tilde{T}_4\parentheses*{y; x} = \sum_{j = 0}^3 d_j\parentheses*{y}e^{ijx}
+    \]
+    mit
+    \[
+        d_j\parentheses*{y} = \frac{1}{4}\sum_{k = 0}^3 y_k e^{-ijx_k}
+    \]
+    und
+    \[
+        e^{-\frac{h\pi i}{2}} = \parentheses*{-i}^n.
+    \]
+    Es gilt
+    \begin{align*}
+        d_0 &= \frac{1}{4}\sum_{k = 0}^3 y_k = \frac{1}{4}\parentheses*{4 + 2 + 1 + 2} = \frac{9}{4},\\
+        d_1 &= \frac{1}{4}\sum_{k = 0}^3 y_k e^{-ix_k} = \frac{1}{4}\parentheses*{4 - 2i + 1 + 2i} = \frac{3}{4},\\
+        d_2 &= \frac{1}{4}\sum_{k = 0}^3 y_k e^{-2ix_k} = \frac{1}{4}\parentheses*{4 - 2 + 1 - 2} = \frac{1}{4},\\
+        d_3 &= \frac{1}{4}\sum_{k = 0}^3 y_k e^{-3ix_k} = \frac{1}{4}\parentheses*{4 + 2i - 1 - 2i} = \frac{3}{4}.
+    \end{align*}
+    Damit gilt
+    \begin{align*}
+        \tilde{T}_4\parentheses*{y; x} &= \frac{1}{4}\parentheses*{9 + 3e^{ix} + e^{2ix} + 3e^{3ix}}\\
+        &= \frac{1}{4}\parentheses*{9 + 3\parentheses*{\cos\parentheses*{x} + i\sin\parentheses*{x}} + \cos\parentheses*{2x} + i\sin\parentheses*{2x} + 3\parentheses*{\cos\parentheses*{3x} + i\sin\parentheses*{3x}}}\\
+        &= \frac{1}{4}\parentheses*{9 + 3\cos\parentheses*{x} + \cos\parentheses*{2x} + 3\cos\parentheses*{3x}} + \frac{i}{4}\parentheses*{3\sin\parentheses*{x} + \sin\parentheses*{2x} + 3\sin\parentheses*{3x}},
+    \end{align*}
+    da nach dem Moivre'schen Satz \(e^{ix} = \cos\parentheses*{x} + i\sin\parentheses*{x}\) gilt.
+    Nun gilt also \(\tilde{T}_4\parentheses*{y; x_k} = y_k\) und somit gilt dies auch für den Realteil \(\Re\parentheses*{\tilde{T}_4\parentheses*{y; x_k}} = \Re\parentheses*{y_k} = y_k\).
+    Damit ist
+    \[
+        T_4\parentheses*{y; x} := \Re\parentheses*{\tilde{T}_4\parentheses*{y; x}} = \frac{1}{4}\parentheses*{9 + 3\cos\parentheses*{x} + \cos\parentheses*{2x} + 3\cos\parentheses*{3x}}
+    \]
+    ein reelles trigonometrisches Polynom, das die Daten interpoliert.
 
 
     \section*{Aufgabe 3}
@@ -73,4 +111,53 @@
             \item Beweisen Sie die Aussage für beliebige Paare \(n, m \in \N_0\) mittels vollständiger Induktion über \(m\).
         \end{enumerate}
     \end{problem}
+
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item Mit dem Additionstheorem für Kosinus und dem Satz von Poythagoras \(1 = \sin^2\parentheses*{x} + \cos^2\parentheses*{x}\) erhalten wir
+        \[
+            \sin^2\parentheses*{x} = \sin\parentheses*{x}\sin\parentheses*{x} = \cos^2\parentheses*{x} - \cos\parentheses*{2x} = 1 - \sin^2\parentheses*{x} - \cos\parentheses*{2x}
+        \] 
+        und somit die erste Aussage:
+        \[
+            \sin^2\parentheses*{x} = 1 - \sin^2\parentheses*{x} - \cos\parentheses*{2x} \iff 2\sin^2\parentheses*{x} = 1 - \cos\parentheses*{2x}.
+        \]
+        Ersetzen wir nun \(\sin^2\parentheses*{x} = 1 - \cos^2\parentheses*{x}\) erhalten wir die zweite Aussage:
+        \[
+            2\parentheses*{1 - \cos^2\parentheses*{x}} = 1 - \cos\parentheses*{2x} \iff 2\cos^2\parentheses*{x} = 1 + \cos\parentheses*{2x}.
+        \]
+        Zuletzt erhalten wir mit dem Additionstheorem für Sinus
+        \[
+            \sin\parentheses*{2x} = \sin\parentheses*{x + x} = 2\sin\parentheses*{x}\cos\parentheses*{x}.
+        \]
+        \item Wir zeigen den Beweis beispielhaft für den ersten Fall, die anderen Fälle laufen analog.
+        Mit dem Additionstheorem für \(\cos\) und den Ergebnissen aus Aufgabenteil a) erhalten wir
+        \begin{align*}
+            \cos\parentheses*{x}\cos\parentheses*{kx} &= \cos\parentheses*{x}\cos\parentheses*{\parentheses*{k - 1}x + x}\\
+            &= \underbrace{\cos^2\parentheses*{x}}_{\frac{1}{2}\parentheses*{1 + \cos\parentheses*{2x}}}\cos\parentheses*{\parentheses*{k - 1}x} - \underbrace{\cos\parentheses*{x}\sin\parentheses*{x}}_{\frac{1}{2}\sin\parentheses*{2x}}\sin\parentheses*{\parentheses*{k - 1}x}\\
+            &= \frac{1}{2}\cos\parentheses*{\parentheses*{k - 1}x} + \frac{1}{2}\underbrace{\parentheses*{\cos\parentheses*{\parentheses*{k - 1}x}\cos\parentheses*{2x} - \sin\parentheses*{\parentheses*{k - 1}x}\sin\parentheses*{2x}}}_{\cos\parentheses*{\parentheses*{k - 1}x + 2x}}\\
+            &= \frac{1}{2}\parentheses*{\cos\parentheses*{\parentheses*{k - 1}x} + \cos\parentheses*{\parentheses*{k + 1}x}}.
+        \end{align*}
+        \item
+        \begin{itemize}
+            \item \(m = 1\).
+            Induktionsbeginn: Sei \(P\) ein trigonometrisches Polynom vom Grad \(n\) und \(Q\) eins vom Grad \(1\).
+            Dann enthält man das Produkt \(P\parentheses*{x}Q\parentheses*{x}\) ausschließlich Terme der Form aus Aufgabenteil b).
+            Somit ist das Produkt offensichtlich ein trigonometrisches Polynom vom Grad \(n + 1\).
+            \item \(m \to m + 1\).
+            Induktionsvoraussetzung: Für beliebige trigonometrische Polynome \(P\) und \(Q\) vom Grad \(n\) und \(m\) sei \(P\parentheses*{x}Q\parentheses*{x}\) ein trigonometrisches Polynom vom Grad \(n + m\).
+
+            Sei \(\tilde{Q}\) ein beliebiges Polynom vom Grad \(m + 1\).
+            Dann reicht es für das Produkt \(P\tilde{Q}\) die Terme höchster Ordnung zu betrachten, da gemäß Induktionsvoraussetzung die Terme \(\cos\parentheses*{kx}\cos\parentheses*{lx}\), \(\cos\parentheses*{kx}\sin\parentheses*{lx}\), \(\sin\parentheses*{kx}\cos\parentheses*{lx}\) und \(\sin\parentheses*{kx}\sin\parentheses*{lx}\) für \(1 \le k \le n\) und \(1 \le l \le m\) trigonometrische Polynome vom Grad höchstens \(n + m\) sind.
+
+            Wir erhalten beispielsweise für \(\cos\parentheses*{nx}\cos\parentheses*{\parentheses*{m + 1}x}\):
+            \begin{align*}
+                \cos\parentheses*{nx}\cos\parentheses*{\parentheses*{m + 1}x} &= \cos\parentheses*{nx}\cos\parentheses*{mx + x}\\
+                &= \cos\parentheses*{nx}\parentheses*{\cos\parentheses*{mx}\cos\parentheses*{x} - \sin\parentheses*{mx}\sin\parentheses*{x}}\\
+                &= \cos\parentheses*{x}\underbrace{\cos\parentheses*{nx}\cos\parentheses*{mx}} - \sin\parentheses*{x}\underbrace{\cos\parentheses*{nx}\sin\parentheses*{mx}}.
+            \end{align*}
+            Die beiden unterklammerten Terme sind gemäß Induktionsvoraussetzung trigonometrische Polynome vom Grad \(n + m\).
+            Multiplikation mit \(\cos\parentheses*{x}\) bzw. \(\sin\parentheses*{x}\) ergibt gemäß Aufgabenteil b) somit ein trigonometrisches Polynom vom Grad \(n + m + 1\).
+        \end{itemize}
+    \end{enumerate}
 \end{document}
