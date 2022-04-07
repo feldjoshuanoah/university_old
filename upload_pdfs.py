@@ -45,4 +45,4 @@ for root, directories, files in os.walk('src', topdown=True):
             pdf.Upload()
 
 # Clean up the src directory after the compilation of all the TeX files
-os.system('find src \( -name "*.log" -o -name "*.pdf" -o -name "*.aux" \) -type f -delete')
+os.system('find src \\( -name "*.log" -o -name "*.pdf" -o -name "*.aux" -o -name "*.thm" \\) -type f -delete')
