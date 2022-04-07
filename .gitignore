@@ -1,3 +1,4 @@
 *.aux
 *.log
 *.pdf
+client_secrets.json
