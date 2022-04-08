@@ -1,0 +1,107 @@
+\documentclass[english]{lecture}
+
+\institute{Software and Tools for Computational Engineering}
+\title{Lecture 1}
+\author{Joshua Feld, 406718}
+\course{Softwareentwicklungspraktikum}
+\professor{Naumann}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \section*{cppNum v1}
+
+    All problems are scalar, parameterized and sufficiently often differentiable with respect to \(x\) and \(p\).
+    The corresponding functions
+    \[
+        f: \R \times \R \to R: y = f\parentheses*{x, p}
+    \]
+    are implemented as differentiable C++ programs.
+    Derivatives are denoted as
+    \[
+        f_{x^k} = y_{x^k} \equiv \frac{\d^k f}{\d x^k}\parentheses*{x, p}, \quad f_{p^k} = y_{p^k} \equiv \frac{\d^k f}{\d p^k}\parentheses*{x, p}.
+    \]
+    We also write \(f_{xx} = f_{x^2}\), \(f_{xxx} = f_{x^3}\) and so forth.
+
+
+    \section*{Algebraic equations by Newton method}
+
+    We look for roots
+    \[
+        x = x\parentheses*{p}: f\parentheses*{x, p} = 0
+    \]
+    of user-defined differentiable programs
+    \[
+        y = f\parentheses*{x, p}.
+    \]
+
+    Users of the software want to solve algebraic equations \(f\parentheses*{x, p} = 0\) including the ability to implement the residual \(f\parentheses*{x, p}\), apply the Newton method for computing \(x\) such that \(\absolute*{f\parentheses*{x, p}} < a\) for a given accuracy \(a > 0\), while ensuring extensibility for adding further methods, and, optionally, allowing visualization of the individual steps performed during the iterative approximation of the solution \(x\) with gnuplot and parameter sensitivity analysis, i.e. computation of \(x_p\) using algorithmic differentiation by overloading with \texttt{ad::}.
+
+    The Newton method \(x^k = x^k\parentheses*{f, x^0, p, a}\) performs \(k\) iterations
+    \[
+        x^{i + 1} = x^i - \Delta x^{i + 1} = x^i - \frac{f\parentheses*{x^i, p}}{f_x\parentheses*{x^i, p}}, \quad i = 0, \ldots, k - 1
+    \]
+    to approximate a root \(x = x\parentheses*{p}: f\parentheses*{x, p} = 0\) for a given initial estimate \(x^0\) for the solution and \(p\).
+    The number of iterations \(k = k\parentheses*{a}\) is determined by the desired accuracy \(a > 0\) ensuring \(\absolute*{f\parentheses*{x^k, p}} < a\).
+    Conditions for convergence apply.
+
+    Many numerical methods for nonlinear problems are based on linearization.
+    The Newton method is a prominent example.
+    The nonlinear function \(f\parentheses*{x}\) is replaced locally (at the current \(x\)) with a linear (affine; in \(\Delta x\)) approximation derived from the truncated Taylor series expansion of \(f\) and ``hoping'' that
+    \[
+        f\parentheses*{x + \Delta x} \approx f\parentheses*{x} + f_x\parentheses*{x} \cdot \Delta x,
+    \]
+    i.e., hoping for a reasonably small remainder.
+    For \(y = f\parentheses*{x, p}\) the Newton iteration follows immediately from
+    \[
+        f\parentheses*{x^i, p} + f_x\parentheses*{x^i, p} \cdot \Delta x^{i + 1} = f\parentheses*{x^i, p} + f_x\parentheses*{x^i, p} \cdot \parentheses*{x^{i + 1} - x^i} = 0.
+    \]
+    The solution of a sequence of linear problems is then expected to yield an iterative approximation of the solution to the nonlinear problem.
+
+    Newton's method can be regarded as a fixed point iteration
+    \[
+        x = g\parentheses*{x} = x - \frac{f\parentheses*{x}}{f_x\parentheses*{x}}.
+    \]
+    If at the solution
+    \[
+        \absolute*{g_x\parentheses*{x}} < 1,
+    \]
+    then there exists a neighborhood containing values of \(x\) for which the fixed-point iteration converges to this solution.
+    The convergence rate of a fixed-point iteration grows linearly with decreasing values of \(\absolute*{g_x\parentheses*{x}}\).
+    For \(\absolute*{g_x\parentheses*{x}} = 0\) we get at least quadratic convergence; cubic for \(\absolute*{g_x\parentheses*{x}} = \absolute*{g_{xx}\parentheses*{x}} = 0\) and so forth.
+    Newton's method becomes
+    \[
+        x = g\parentheses*{x} = x - \frac{f\parentheses*{x}}{f_x\parentheses*{x}}
+    \]
+    yielding
+    \[
+        g_x\parentheses*{x} = f\parentheses*{x} \cdot \frac{f_{xx}\parentheses*{x}}{\parentheses*{f_x\parentheses*{x}}^2}.
+    \]
+    At the solution \(f\parentheses*{x} = 0\) implies \(g_x\parentheses*{x} = 0\).
+    Assuming a simple root (\(f\parentheses*{x} = 0, f_x\parentheses*{x} \ne 0\)) the second derivative of \(g\) becomes equal to
+    \[
+        g_{xx}\parentheses*{x} = f_x\parentheses*{x} \cdot \frac{f_{xx}\parentheses*{x}}{\parentheses*{f_x\parentheses*{x}}^2} + \underbrace{f\parentheses*{x}}_{= 0} \cdot \parentheses*{\cdots}
+    \]
+    implying quadratic convergence within the corresponding neighborhood of the solution if \(f_{xx}\parentheses*{x} \ne 0\) as well as convergence after a single iteration for linear \(f\).
+
+    For a differentiable program
+    \[
+        y = f\parentheses*{x}
+    \]
+    with first derivative \(f_x = f_x\parentheses*{x}\) and given \(x, \dot{x}\) the tangent (also: forward) mode of algorithmic differentiation computes the directional derivative
+    \[
+        \dot{y} = f_x \cdot \dot{x}.
+    \]
+    Seeding \(\dot{x} = 1\) enables harvesting of \(\dot{y} = f_x\).
+
+    \begin{example}
+        \[
+            y = f\parentheses*{x} = \sin\parentheses*{x} \implies \dot{y} = f_x \cdot \dot{x} = \cos\parentheses*{x} \cdot \dot{x}
+        \]
+    \end{example}
+
+    The \texttt{ad::} library implements algorithmic differentiation for arbitrary differentiable C++ programs.
+\end{document}
