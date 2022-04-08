@@ -9,14 +9,14 @@
 \RequirePackage{amsthm}
 \newtheoremstyle{custom}{0}{}{\upshape}{}{\bfseries\sffamily}{.}{ }{}
 \theoremstyle{custom}
-\newmdtheoremenv{corollary}{Korollar}
+\newmdtheoremenv{corollary}{\ifenglish{Corollary}\else{Korollar}\fi}
 \newmdtheoremenv{definition}{Definition}
-\newtheorem{example}{Beispiel}
+\newtheorem{example}{\ifenglish{Example}\else{Beispiel}\fi}
 \newmdtheoremenv{theorem}{Theorem}
 \newmdtheoremenv{lemma}{Lemma}
 \newmdtheoremenv{problem}{Problem}
-\newmdtheoremenv{remark}{Bemerkung}
-\newmdtheoremenv{calcrule}{Regel}
+\newmdtheoremenv{remark}{\ifenglish{Remark}\else{Bemerkung}\fi}
+\newmdtheoremenv{calcrule}{\ifenglish{Rule}\else{Regel}\fi}
 
 \RequirePackage{etoolbox}
 \AtBeginEnvironment{corollary}{\setlist[enumerate]{label={(\roman*)}}}

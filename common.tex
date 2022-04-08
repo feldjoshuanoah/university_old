@@ -4,18 +4,28 @@
 \newcommand{\semester}[1]{\newcommand{\smstr}{#1}}
 \newcommand{\program}[1]{\newcommand{\prgrm}{#1}}
 
+\newif\ifenglish
+\englishfalse
+\DeclareOption{english}{\englishtrue}
+
 \PassOptionsToClass{a4paper}{article}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions\relax
 
 \LoadClass{article}
 
+\ifenglish
+    \RequirePackage[english]{babel}
+\else
+    \RequirePackage[ngerman]{babel}
+    \RequirePackage{icomma}
+\fi
+
 \RequirePackage{geometry}
 \geometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm}
 \setlength{\parindent}{0pt}
 
 \RequirePackage[utf8]{inputenc}
-\RequirePackage[ngerman]{babel}
 \RequirePackage[T1]{fontenc}
 
 \RequirePackage{mathpazo}
@@ -30,7 +40,6 @@
 \RequirePackage{amsmath}
 \RequirePackage{mathtools}
 \RequirePackage{amssymb}
-\RequirePackage{icomma}
 \RequirePackage{bm}
 
 \newcommand{\N}{\mathbb{N}}
@@ -78,8 +87,8 @@
         \vspace{8pt}
         \hrule
         \vspace{10pt}
-        Kurs: {\itshape\crs} -- Professor: {\itshape\prfssr}\\
-        Semester: {\itshape\smstr} -- Studiengang: {\itshape\prgrm}
+        \ifenglish{Course}\else{Kurs}\fi: {\itshape\crs} -- Professor: {\itshape\prfssr}\\
+        Semester: {\itshape\smstr} -- \ifenglish{Program}\else{Studiengang}\fi: {\itshape\prgrm}
         \vspace{20pt}
     \end{center}
 }
