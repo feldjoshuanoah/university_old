@@ -26,11 +26,11 @@
     \end{itemize}
     Der praktische Erfolg beruht auf einer speziellen Einsicht, die den Aufwand der Berechnung der Fourier-Transformierten von \(O\parentheses*{n^2}\) auf \(O\parentheses*{n\log n}\) (wobei \(n\) die Anzahl der Datenpunkte ist) reduziert.
     Die sogenannte Fast Fourier Transformation (FFT) gilt als einer der wichtigsten Algorithmen überhaupt.
-    Zugeschrieben wird die Idee Cooley und Tukey (1965); allerdings gab es die Idee auch schon 1805 von Gauss, um die Bahnen von Asteroiden bestimmen zu können.
+    Zugeschrieben wird die Idee Cooley und Tukey (1965); allerdings gab es die Idee auch schon 1805 von Gauß, um die Bahnen von Asteroiden bestimmen zu können.
     Im Folgenden leiten wir zunächst die diskrete Fourier Transformation als Lösung einer Interpolationsaufgabe her und dann den Algorithmus für die FFT in seinen Grundzügen.
 
 
-    \section*{Trigonometrsiche Interpolation}
+    \section*{Trigonometrische Interpolation}
 
     Wir beginnen direkt in komplexer Notation und beschränken uns auf periodische Funktionen, d.h. Funktionen \(f: \R \to \C\), so dass es ein \(P > 0\) gibt mit \(f\parentheses*{x} = f\parentheses*{x + P}\) für alle \(x \in \R\).
     \(P\) nennt man Periode.
@@ -163,7 +163,7 @@
             \]
             Ferner sind wegen \(x_k \in \left[0, 2\pi\right)\) die \(e^{ix_k}\) verschieden, damit hat das komplexe Polynom \(q\) \(m\) verschiedene Nullstellen, ist aber vom Grad \(m - 1\).
             Somit muss \(q = 0\) gelten.
-            Damit folgt aber auch, dass die Koeffizenten \(c_j\) alle Null sein müssen und somit folgt auch \(p = 0\).
+            Damit folgt aber auch, dass die Koeffizienten \(c_j\) alle Null sein müssen und somit folgt auch \(p = 0\).
             Ein Widerspruch zu unserer Annahme \(p \not\equiv 0\).
         \end{enumerate}
     \end{proof}
