@@ -16,6 +16,7 @@
 
     Wenn Mathematik die Sprache der Natur ist, dann sind PDEs die am meisten genutzten Vokabeln.
     Fast alle technischen Prozesse, die Felder in Ort und Zeit enthalten (z.B. die Temperatur bei \(\parentheses*{\bm{x}, t}\)), können durch PDEs beschrieben werden.
+
     \begin{definition}
         Eine Differentialgleichung, deren Unbekannte nach mehreren Variablen abgeleitet wird, heißt \emph{partielle Differentialgleichung}.
         Die allgemeine Form ist
@@ -24,6 +25,7 @@
         \]
         mit \(u: G \to \R^m\) und dem Grundgebiet \(G\), wobei \(x = \parentheses*{x_1, \ldots, x_n}^T \in G \subset \R^n\).
     \end{definition}
+
     \begin{remark}
         \begin{enumerate}
             \item \(Du\) ist die Jacobi-Matrix \(\parentheses*{\frac{\partial u_i}{\partial x_j}}_{i = 1, \ldots, m; j = 1, \ldots, n}\).
@@ -37,6 +39,7 @@
             Für die Ableitungen nach dem Ort wird dann ``\(\nabla\)'' und \(\Delta = \sum_{k = 1}^n \frac{\partial^2}{\partial x_k^2}\) (``Laplace-Operator'') benutzt.
         \end{enumerate}
     \end{remark}
+
     \begin{example}
         \begin{enumerate}
             \item Die \emph{Transportgleichung} hat im eindimensionalen Raum die Form
@@ -91,13 +94,16 @@
 
     Ähnlich zu ODEs bestimmen die PDEs die unbekannte Funktion nicht vollständig.
     Bei PDEs ist die allgemeine Lösung \(\infty\)-dimensional.
+
     \begin{example}
         Für ODEs ist der einfachste Fall \(u''\parentheses*{x} = 0\).
         Wenn wir diese Gleichung zwei Mal integrieren, so erhalten wir \(u'\parentheses*{x} = c_1\) und \(u\parentheses*{x} = c_1 x + c_2\) mit \(c_1, c_2 \in \R\).
         Für PDEs wollen wir nun den Fall \(\partial_{xy}u\parentheses*{x, y} = 0\) betrachten.
         Es ergibt sich \(\partial_y u\parentheses*{x, y} = \tilde{c}_1\parentheses*{y}\) und folglich \(u\parentheses*{x, y} = \int \tilde{c}_1\parentheses*{y}\d y + \tilde{c}_2\parentheses*{x}\), wobei \(\tilde{c}_1, \tilde{c}_2\) zwei beliebige \(\infty\)-dimensionale Funktionen \(\R \to \R\) sind.
     \end{example}
+
     Lösungen partieller Differentialgleichungen werden also nicht durch einzelne Werte sondern durch Vorgabe von Funktionen festgelegt.
+    
     \begin{definition}
         \begin{enumerate}
             \item Enthält die PDE die Zeit, z.B. \(u: \Omega \times \brackets*{0, T} \to \R^n\), werden die \emph{Anfangswerte} \(u\parentheses*{\bm{x}, 0} = u_0\parentheses*{\bm{x}}\) vorgegeben.
