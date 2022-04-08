@@ -1,0 +1,131 @@
+\documentclass{exercise}
+
+\institute{Lehr- und Forschungsgebiet Kontinuumsmechanik}
+\title{Übung 1}
+\author{Joshua Feld, 406718}
+\course{Mechanik verformbarer Körper}
+\professor{Itskov}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \section*{Aufgabe 1}
+
+    \begin{problem}
+        Einige Studenten nutzen das schöne Wetter und beschließen zu grillen.
+        Die einen bringen Würstchen mit und für die Vegetarier gibt es Tofu-Bällchen.
+        Leider bleibt das Grillgut zu lange auf dem Grill und sowohl Würstchen als auch Tofu patzen, da sich durch die Hitze ein zu hoher Innendruck entwickelt.
+        Vergleichen Sie die Spannungen der beiden Grillgutarten und ermitteln Sie, an welcher Stelle ein Würstchen platzt.
+    \end{problem}
+
+    \subsection*{Lösung}
+    Das Würstchen entspricht einem Zylinder mit zwei kugelförmigen Enden.
+    Das Tofu-Bällchen ist eine Kugel.
+    Beide werden als dünnwandige Behälter angesehen.
+
+    Für das Würstchen müssen drei Spannungen verglichen werden:
+    \begin{itemize}
+        \item Tangentialspannung im Zylinder \(\sigma_{TZ}\),
+        \item Radialspannung im Zylinder \(\sigma_R\) und
+        \item Tangentialspannung in der Kugel \(\sigma_{TK}\).
+    \end{itemize}
+    Für \(\sigma_{TZ}\) folgt mit der Schnittfläche des Zylinders \(A_W\) und der Fläche an der der Druck angreifen kann \(A_i\)
+    \[
+        \sigma_{TZ} = \frac{F}{A_W} = \frac{pA_i}{A_W} = \frac{p \cdot 2rl}{2lt} = \frac{pr}{t}.
+    \]
+    Für \(\sigma_R\) folgt mit der Schnittfläche des Zylinders \(A_W\) und der Fläche \(A_i\) auf die der Druck wirkt
+    \[
+        \sigma_R = \frac{F}{A_W} = \frac{pA_i}{A_W} = \frac{p\pi r^2}{2\pi rt} = \frac{pr}{2t}.
+    \]
+    Die Fläche auf die der Druck wirkt wird vereinfachend als Multiplikation des Umfangs mit der Dicke angenommen.
+    Diese Vereinfachung gilt nur für dünnwandige Zylinder.
+    Somit ist im zweiten Fall \(A_W = 2\pi rt\).
+
+    Die Tangentialspannung in einer Kugel entspricht der Radialspannung des Zylinders, da sowohl die Schnittfläche als auch die Fläche der Krafteinwirkung gleich sind.
+    Es gilt daher
+    \[
+        \sigma_{TK} = \sigma_R = \frac{pr}{2t}.
+    \]
+    Hieraus folgt, dass \(\sigma_{TZ}\) doppelt so groß ist wie \(\sigma_R\) und \(\sigma_{TK}\).
+    Damit wird das Würstchen in Längsrichtung und nicht in zwei Teile platzen.
+    Die kugelförmigen Enden sind ebenfalls unkritisch.
+
+    Die Tofu-Bällchen haben keine Vorzugsrichtung, da sie als dünnwandige Kugeln angenommen sind, die Spannung beträgt in jeder Richtung \(\sigma_{TK}\).
+    Sie hält einem doppelt so hohen Innendruck wie das Würstchen stand.
+
+
+    \clearpage
+    \section*{Aufgabe 2}
+
+    \begin{problem}
+        Ein dünnwandiger Zylinderkessel aus Stahl wird durch den Innendruck \(p\) belastet.
+        Wie groß darf \(p\) höchstens sein, damit die Spannung in der Kesselwand die zulässige Spannung \(\sigma_{\text{zul}}\) nicht übersteigt?
+
+        Gegeben: \(r = 1\sis{\meter}\), \(t = 1\sis{\centi\meter}\), \(\sigma_{\text{zul}} = 150\sis{\newton\per\milli\meter\squared}\)
+    \end{problem}
+
+    \subsection*{Lösung}
+    Dünnwandig ist ein Synonym für den ebenen Spannungszustand.
+    Das heißt, dass keine Schub- oder Normalspannungen in Richtung der Flächennormalen existieren und dass die Tangentialspannungen über die Dicke konstant sind.
+    Es wird die Spannung in Längsrichtung des Zylinders berechnet, da diese betragsmäßig am größten ist (siehe Grillgutaufgabe).
+    Diese Spannung ergibt sich als Kraft pro Fläche
+    \[
+        \sigma = \frac{F}{A_W} = \frac{pA_i}{A_W}
+    \]
+    mit der Schnittfläche des Zylinders \(A_W = 2lt\) und der Fläche an der der Druck angreifen kann \(A_i = 2lr\).
+    Es gilt aufgrund der zulässigen Höchstspannung \(\sigma_{\text{zul}}\)
+    \[
+        \sigma_{\text{zul}} \ge \frac{pA_i}{A_W} = \frac{pr}{t}.
+    \]
+    Für den Grenzfall des maximal zulässigen Drucks \(p_{\text{max}}\) ergibt sich somit
+    \[
+        p_{\text{max}} = \frac{t}{r}\sigma_{\text{zul}} = 1,5\sis{\mega\pascal}.
+    \]
+
+
+    \section*{Aufgabe 3}
+
+    \begin{problem}
+        Eine dünnwandige Tauchkugel (Radius \(r\), Wandstärke \(t\)) befindet sich in einer Wassertiefe \(r\) (\(r \ll h\)).
+        Im Inneren der Kugel herrscht Normaldruck.
+        Die Dichte des Wassers wird mit \(\rho\) und die Erdbeschleunigung mit \(g\) angenommen.
+        \begin{enumerate}
+            \item Wie groß sind die auftretenden Spannungen in der Hülle der Tauchkugel?
+            \item Wie groß müsste die Wandstärke sein, wenn die Tauchkugel in einer Wassertiefe \(1000\sis{\meter}\) tauchen soll und die zulässige Normalspannung in der Hülle das \(1,5\)-fache der in einer Wassertiefe von \(500\sis{\meter}\) auftretenden Spannung ist?
+        \end{enumerate}
+        Gegeben: \(r = 0,5\sis{\meter}\), \(t = 12,5\sis{\milli\meter}\), \(h = 500\sis{\meter}\), \(\rho = 1000\sis{\kilo\gram\per\meter\cubed}\), \(g = 9,81\sis{\meter\per\second\squared}\)
+    \end{problem}
+    
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item Der hydrostatische Druck auf die Kugel wird vereinfachend als konstant über die Höhe der Kugel angenommen und berechnet sich zu
+        \[
+            p = \rho gh.
+        \]
+        Die Gleichgewichtsbedingung für einen beliebigen Schnitt in Äquatorialebene lautet
+        \[
+            \sum F = \sigma_t \cdot 2\pi rt + p\pi r^2 = 0.
+        \]
+        Damit ergibt sich die Tangentialspannung zu
+        \[
+            \sigma_t = -\frac{pr}{2t} = -98,1\sis{\mega\pascal}.
+        \]
+        Die Tangentialspannungen sind in alle Richtungen gleich \(\sigma_\phi = \sigma_\theta\), da der Schnitt durch die Kugel beliebig war.
+        \item Der hydrostatische Druck \(p'\) auf \(1000\sis{\meter}\) berechnet sich zu
+        \[
+            p' = \rho gh.
+        \]
+        Die zulässige Spannung \(\sigma_{\text{zul}}\) ist
+        \[
+            \sigma_{\text{zul}} = \frac{3}{2}\sigma_t = -147,15\sis{\mega\pascal}.
+        \]
+        Die Wandstärke \(t\) berechnet sich folglich zu
+        \[
+            t = -\frac{p'r}{2\sigma_{\text{zul}}} \approx 16,67\sis{\milli\meter}.
+        \]
+    \end{enumerate}
+    
+\end{document}

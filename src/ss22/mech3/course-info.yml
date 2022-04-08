@@ -1,5 +1,6 @@
 name: Mechanik verformbarer Körper
 professor: Itskov
 institute: Lehr- und Forschungsgebiet Kontinuumsmechanik
-prefixes: [lec]
+prefixes: [lec, ex]
 lec: [lecture, Vorlesung]
+ex: [exercise, Übung]
