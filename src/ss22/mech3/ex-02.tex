@@ -1,0 +1,208 @@
+\documentclass{exercise}
+
+\institute{Lehr- und Forschungsgebiet Kontinuumsmechanik}
+\title{Übung 2}
+\author{Joshua Feld, 406718}
+\course{Mechanik verformbarer Körper}
+\professor{Itskov}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \section*{Aufgabe 1}
+
+    \begin{problem}
+        Bei Röntgenaufnahmen am Oberschenkelknochen eines Studenten wurde ein Anriss festgestellt, der unter einem Winkel \(\varphi\) gegenüber der Horizontalen geneigt ist.
+        Um den Heilungsprozess nicht zu gefährden, darf im Anriss eine Normalspannung \(\sigma_{R, \text{zul}}\) nicht überschritten werden.
+        Vereinfacht wird angenommen, dass der Knochen einen vollkreisförmigen Querschnitt hat, der Durchmesser in genügend großer Entfernung von den Enden konstant und der Spannungszustand einachsig ist.
+        \begin{enumerate}
+            \item Wie groß darf die Kraft \(F\) maximal werden, damit die zulässige Normalspannung in der Rissebene nicht überschritten wird?
+            \item Wie groß ist die Schubspannung in der Rissebene für den Fall, dass der Knochen mit der maximal zulässigen Kraft belastet wird?
+        \end{enumerate}
+        Gegeben: \(d = 60\sis{\milli\meter}\), \(\sigma_{R, \text{zul}} = 0,1\sis{\newton\per\milli\meter\squared}\), \(\varphi = 25^\circ\)
+    \end{problem}
+
+    \subsection*{Lösung}
+    In der Abbildung ist ein dreieckiges Element mit angreifenden Spannungen dargestellt.
+    Das Element befindet sich im Kräftegleichgewicht, das heißt, dass die Summe aller Kräfte null ergibt.
+    Mit der infinitesimalen Schnittfläche \(\d A\) und unter der Annahme einer konstanten Dicke des Elements folgt für das Kräftegleichgewicht im \(\xi\)- beziehungsweise \(\eta\)-Richtung
+    \begin{align*}
+        \sum F_\xi = \sigma_\xi\d A - \sigma_x\cos\phi\d A\cos\phi - \tau_{xy}\sin\phi\d A\cos\phi - \sigma_y\sin\phi\d A\sin\phi - \tau_{yx}\cos\phi\d A\sin\phi &= 0,\\
+        \sum F_\eta = \tau_{\xi\eta}\d A - \sigma_x\sin\phi\d A\cos\phi - \tau_{xy}\cos\phi\d A\cos\phi - \sigma_y\cos\phi\d A\sin\phi - \tau_{yx}\sin\phi\d A\sin\phi &= 0.
+    \end{align*}
+    Unter Verwendung der Gleichgewichtsbedingung \(\tau_{xy} = \tau_{yx}\) erhält man
+    \[
+        \sigma_\xi = \sigma_x\cos^2\phi + \sigma_y\sin^2\phi + 2\tau_{xy}\sin\phi\cos\phi
+    \]
+    und
+    \[
+        \tau_{\xi\eta} = -\parentheses*{\sigma_x - \sigma_y}\sin\phi\cos\phi + \tau_{xy}\parentheses*{\cos^2\phi - \sin^2\phi}.
+    \]
+    Mithilfe der Identitäten
+    \begin{align*}
+        \cos^2\phi &= \frac{1}{2}\parentheses*{1 + \cos\parentheses*{2\phi}}, & 2\sin\phi\cos\phi &= \sin\parentheses*{2\phi},\\
+        \sin^2\phi &= \frac{1}{2}\parentheses*{1 - \cos\parentheses*{2\phi}}, & \cos^2\phi - \sin^2\phi &= \cos\parentheses*{2\phi}
+    \end{align*}
+    erhält man schließlich
+    \begin{align*}
+        \sigma_\xi &= \frac{1}{2}\parentheses*{\sigma_x + \sigma_y} + \frac{1}{2}\parentheses*{\sigma_x - \sigma_y}\cos\parentheses*{2\phi} + \tau_{xy}\sin\parentheses*{2\phi},\\
+        \sigma_\eta &= \frac{1}{2}\parentheses*{\sigma_x + \sigma_y} - \frac{1}{2}\parentheses*{\sigma_x - \sigma_y}\cos\parentheses*{2\phi} - \tau_{xy}\sin\parentheses*{2\phi},\\
+        \tau_{\xi\eta} &= -\frac{1}{2}\parentheses*{\sigma_x - \sigma_y}\sin\parentheses*{2\phi} + \tau_{xy}\cos\parentheses*{2\phi}.
+    \end{align*}
+    \begin{enumerate}
+        \item Aufgrund des einachsigen Spannungszustand gilt \(\tau_{xy} = \sigma_x = 0\) und somit ergibt sich mit
+        \[
+            \sigma_\eta = \frac{\sigma_y}{2}\parentheses*{1 + \cos\parentheses*{2\phi}}, \quad \sigma_y = \frac{F}{A}, \quad A = \frac{\pi d^2}{4}
+        \]
+        die Beziehung zwischen \(\sigma_\eta\) und \(F\) als
+        \[
+            \sigma_\eta = \frac{F}{2A}\parentheses*{1 + \cos\parentheses*{2\phi}} = \frac{2F}{\pi d^2}\parentheses*{1 + \cos\parentheses*{2\phi}}.
+        \]
+        Für den Grenzfall ergibt sich mit der Beziehung \(\sigma_\eta \le \sigma_{R, \text{zul}}\) für die maximale Kraft
+        \[
+            F_{\text{max}} = \frac{\pi d^2\sigma_{R, \text{zul}}}{2\parentheses*{1 + \cos\parentheses*{2\phi}}} = 344,2\sis{\newton}.
+        \]
+        \item Die Schubspannung \(\tau_{\xi\eta}\) ergibt sich zu
+        \[
+            \tau_{\xi\eta} = \frac{\sigma_y}{2}\sin\parentheses*{2\phi} = \frac{F_{\text{max}}}{2A}\sin\parentheses*{2\phi} = \frac{2F_{\text{max}}}{\pi d^2}\sin\parentheses*{2\phi} = \frac{\sin\parentheses*{2\phi}}{1 + \cos\parentheses*{2\phi}}\sigma_{R, \text{zul}} = 0,0466\sis{\newton\per\milli\meter\squared}.
+        \]
+    \end{enumerate}
+
+    
+    \section*{Aufgabe 2}
+
+    \begin{problem}
+        Ein Blechstreifen mit schrägliegender Schweißnaht ist auf Zug beansprucht.
+        \begin{enumerate}
+            \item Berechnen Sie die zum Festigkeitsnachweis benötigten Normal- und Schubspannungen.
+            \item Bei welchem Winkel nimmt die Schubspannung in der Schweißnaht einen Maximalwert an?
+            Wie groß ist dann die Normalspannung?
+        \end{enumerate}
+    \end{problem}
+
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item Aus der Aufgabenstellung ergibt sich \(\sigma_y = \sigma_0\), \(\sigma_x = 0\) und \(\tau_{xy} = 0\).
+        Eine Koordinatentransformation wird durchgeführt.
+        Es gelten die Formeln
+        \[
+            \sigma_\eta = \frac{\sigma_0}{2}\parentheses*{1 + \cos\parentheses*{2\phi}}, \quad \tau_{\xi\eta} = \frac{\sigma_0}{2}\sin\parentheses*{2\phi},
+        \]
+        mit \(\phi = -30^\circ\) folgt dann
+        \[
+            \sigma_\xi = \frac{1}{4}\sigma_0, \quad \sigma_\eta = \frac{3}{4}\sigma_0, \quad \tau_{\xi\eta} = -\frac{\sqrt{3}}{4}\sigma_0.
+        \]
+        \item Es gilt für die Abhängigkeit zwischen \(\tau_{\xi\eta}\) und \(\phi\) die Beziehung
+        \[
+            \tau_{\xi\eta}\parentheses*{\phi} = -\frac{\sigma_0}{2}\sin\parentheses*{2\phi}.
+        \]
+        Für die maximale \(\tau_{\xi\eta}\) lauten die Bedingungen
+        \[
+            \frac{\partial\tau_{\xi\eta}}{\partial\phi} = -\sigma_0\cos\parentheses*{2\phi} = 0, \quad \frac{\partial^2\tau_{\xi\eta}}{\partial\phi^2} = 2\sigma_0\sin\parentheses*{2\phi} < 0.
+        \]
+        Für \(\phi = -45^\circ\) wird die erste Bedingung erfüllt und somit die maximale Schubspannung erreicht.
+        Da der Blechstreifen auf Zug belastet wurd ist \(\sigma_0 > 0\) und somit die zweite Bedingung erfüllt.
+        Für die Normalspannung ergibt sich
+        \[
+            \sigma_\eta\parentheses*{-45^\circ} = \frac{1}{2}\sigma_0.
+        \]
+    \end{enumerate}
+
+
+    \clearpage
+    \section*{Aufgabe 3}
+
+    \begin{problem}
+        Für einen ebenen Spannungszustand an einem quadratischen Element sind die Spannungen gegeben.
+        Das \(\xi\)-\(\eta\)-Koordinatensystem ist gegenüber dem \(x\)-\(y\)-Koordinatensystem um den Winkel \(\alpha\) geneigt.
+        Berechnen Sie
+        \begin{enumerate}
+            \item den Spannungszustand im \(x\)-\(y\)-System,
+            \item die Hauptspannungen sowie eine Hauptspannungsrichtung,
+            \item die Hauptschubspannungen sowie eine Hauptschubspannungsrichtung.
+        \end{enumerate}
+        Gegeben: \(\sigma_\xi = 76\sis{\newton\per\milli\meter\squared}\), \(\sigma_\eta = 64\sis{\newton\per\milli\meter\squared}\), \(\alpha = 30^\circ\), \(\tau_{\xi\eta} = -49,6\sis{\newton\per\milli\meter\squared}\)
+    \end{problem}
+
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item
+        \begin{align*}
+            \sigma_\xi &= \frac{1}{2}\parentheses*{\sigma_x + \sigma_y} + \frac{1}{2}\parentheses*{\sigma_x - \sigma_y}\cos\parentheses*{2\phi} + \tau_{xy}\sin\parentheses*{2\phi},\\
+            \sigma_\eta &= \frac{1}{2}\parentheses*{\sigma_x + \sigma_y} - \frac{1}{2}\parentheses*{\sigma_x - \sigma_y}\cos\parentheses*{2\phi} - \tau_{xy}\sin\parentheses*{2\phi},\\
+            \tau_{\xi\eta} &= -\frac{1}{2}\parentheses*{\sigma_x - \sigma_y}\sin\parentheses*{2\phi} - \tau_{xy}\cos\parentheses*{2\phi}.
+        \end{align*}
+        Setzen wir nun die gegebenen Werte für \(\sigma_\xi\), \(\sigma_\eta\) und \(\tau_{\xi\eta}\) in diese Gleichungen ein und formen um, so ergibt sich ein Gleichungssystem mit drei Unbekannten und drei Gleichungen.
+        Es folgen die Werte
+        \[
+            \sigma_x = 115,95\sis{\newton\per\milli\meter\squared}, \quad \sigma_y = 24,05\sis{\newton\per\milli\meter\squared}, \quad \tau_{xy} = -19,6\sis{\newton\per\milli\meter\squared}.
+        \]
+        \item Die Hauptspannungen \(\sigma_{1, 2}\) berechnen sich mithilfe der Formel
+        \[
+            \sigma_{1, 2} = \frac{\sigma_x + \sigma_y}{2} \pm \sqrt{\parentheses*{\frac{\sigma_x - \sigma_y}{2}}^2 + \tau_{xy}^2}.
+        \]
+        Die Ergebnisse werden so sortiert, dass \(\sigma_1 \ge \sigma_2\) gilt, sodass sich \(\sigma_1 = 119,96\sis{\newton\per\milli\meter\squared}\) und \(\sigma_2 = 20,04\sis{\newton\per\milli\meter\squared}\) ergeben.
+        Die Hauptspannungsrichtungen sind die Richtungen, in der die Normalspannungen maximal sind.
+        Die Bedingung für ein Maximum ist
+        \[
+            \frac{\partial\sigma}{\partial\phi} = \parentheses*{\sigma_x - \sigma_y}\sin\parentheses*{2\phi} - 2\tau_{xy}\cos\parentheses*{2\phi} = 0
+        \]
+        und folglich gilt für eine Hauptspannungsrichtung \(\phi^*\)
+        \[
+            \tan\parentheses*{2\phi^*} = \frac{2\tau_{xy}}{\sigma_x - \sigma_y} \implies \phi^* = \frac{1}{2}\arctan\frac{2\tau_{xy}}{\sigma_x - \sigma_y} = -11,55^\circ.
+        \]
+        \item Die Hauptschubspannungen berechnen sich als
+        \[
+            \tau_{\text{max}} = \pm\sqrt{\parentheses*{\frac{\sigma_x - \sigma_y}{2}}^2 + \tau_{xy}^2} = \pm 49,96\sis{\newton\per\milli\meter\squared}.
+        \]
+        Die Richtung der Hauptschubspannungen \(\phi^{**}\) berechnet sich zu (Bedingung: \(\frac{\partial\tau}{\partial\phi} = 0\))
+        \[
+            \tan\parentheses*{2\phi^{**}} = -\frac{\sigma_x - \sigma_y}{2\tau_{xy}} \implies \phi^{**} = \frac{1}{2}\arctan\parentheses*{-\frac{\sigma_x - \sigma_y}{2\tau_{xy}}} = 33,45^\circ.
+        \]
+        Es wurde jeweils nur die Richtung einer Achse der Haupt(schub)spannungen angegeben, die jeweils andere ist um \(90^\circ\) im mathematisch positiven Sinn (gegen den Uhrzeigersinn) gedreht.
+        Durch Einsetzen in die Transformationsgleichungen ist es zudem möglich Hauptspannungen ihren entsprechenden Richtungen zuzuordnen.
+    \end{enumerate}
+
+    
+    \section*{Aufgabe 4}
+
+    \begin{problem}
+        In einem ebenen Bauteil herrschen die Hauptnormalspannungen \(\sigma_1\) und \(\sigma_2\).
+        \begin{enumerate}
+            \item Wie groß sind die Spannungen in Schnitten, die um \(60^\circ\) gegenüber den Hauptachsen geneigt sind?
+            \item In welchem Schnitt \(\bar{\varphi}\) wird die Normalspannung zu null?
+            Wie groß sind dann die Schubspannungen und die Normalspannung in einer zu \(\bar{\varphi}\) senkrechten Richtung?
+            \item In welchen Schnitten treten die maximalen Schubspannungen auf und wie groß sind die zugehörigen Normalspannungen?
+        \end{enumerate}
+        Gegeben: \(\sigma_1 = \sigma_y = 90\sis{\mega\pascal}\), \(\sigma_2 = \sigma_x = -52\sis{\mega\pascal}\)
+    \end{problem}
+
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item Die Spannungen bei Schnitten, die um \(\varphi = 60^\circ\) gedreht sind, folgen direkt aus den Transformationsgleichungen, wobei \(\tau_{xy} = 0\) gilt, da es sich um einen Hauptspannungszustand handelt:
+        \[
+            \sigma_\xi = 54,5\sis{\mega\pascal}, \quad \sigma_\eta = -16,5\sis{\mega\pascal}, \quad \tau_{\xi\eta} = 61,49\sis{\mega\pascal}.
+        \]
+        \item Der gesuchte Zustand lässt sich mit \(\sigma_\xi = 0\), \(\sigma_\eta \ne 0\) und \(\tau_{\xi\eta} \ne 0\) zusammenfassen, wobei der dazugehörige Winkel \(\bar{\varphi}\) gesucht ist.
+        Durch Umformen der Transformationsgleichung ergibt sich
+        \[
+            \bar{\varphi} = 37,24^\circ.
+        \]
+        Das Einsetzen dieses Winkels in die Transformationsgleichungen liefert den kompletten Spannungszustand:
+        \[
+            \sigma_\xi = 0\sis{\mega\pascal}, \quad \sigma_\eta = 38\sis{\mega\pascal}, \quad \tau_{\xi\eta} = 68,41\sis{\mega\pascal}.
+        \]
+        \item Die maximale Schubspannung tritt unter \(\pm 45^\circ\) zu den Hauptachsen auf.
+        Für die Beziehung der Hauptspannungen und der maximalen Schubspannung ist folgendes bekannt:
+        \[
+            \tau_{\text{max}} = \pm\frac{1}{2}\parentheses*{\sigma_1 - \sigma_2} = \pm 71\sis{\mega\pascal}.
+        \]
+        Aus der Invariationsbeziehung folgt demnach für die Normalspannungen:
+        \[
+            \sigma_M = \frac{1}{2}\parentheses*{\sigma_x + \sigma_y} = \frac{1}{2}\parentheses*{\sigma_1 + \sigma_2} = 19\sis{\mega\pascal}.
+        \]
+    \end{enumerate}
+\end{document}
