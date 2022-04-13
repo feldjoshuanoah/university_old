@@ -26,6 +26,26 @@
     \end{problem}
 
     \subsection*{Lösung}
+    \begin{center}
+        \begin{tikzpicture}
+            \draw (0,0) coordinate (o) -- (5,0) coordinate (x);
+            \draw (o) -- (0,3) coordinate (y);
+            \draw (x) -- (y);
+            \draw[dotted] (0,0) -- (45/34,75/34) coordinate (xi);
+            \pic[draw,->,"$\varphi$",angle eccentricity=1.5] {angle=x--o--xi};
+            \pic[draw,->,"$\varphi$",angle eccentricity=1.5] {angle=o--y--x};
+            \draw[->] (5.1,0) -- (5.6,0) node[above] {\(x\)};
+            \draw[->] (0,3.1) -- (0,3.6) node[right] {\(y\)};
+            \draw[->] (-.1,.06) -- (-.6,.46) node[below] {\(\eta\)};
+            \draw[->] (-.1,2.25) -- (-.1,.75) node[left] {\(\tau_{yy}\)};
+            \draw[->] (-.2,1.5) -- (-.7,1.5) node[below] {\(\sigma_x\)};
+            \draw[->] (3.25,-.1) -- (1.75,-.1) node[below] {\(\tau_{xy}\)};
+            \draw[->] (2.5,-.2) -- (2.5,-.7) node[right] {\(\sigma_y\)};
+            \draw[->] (3.25,1.15) -- (1.75,2.05) node[above] {\(\tau_{\xi\eta}\)};
+            \draw[->] (1.5,2.5) -- (1.8,3) node[above right] {\(\xi\)};
+            \draw[->] (2.5,1.7) -- (2.8,2.2) node[left] {\(\sigma_\xi\)};
+        \end{tikzpicture}
+    \end{center}
     In der Abbildung ist ein dreieckiges Element mit angreifenden Spannungen dargestellt.
     Das Element befindet sich im Kräftegleichgewicht, das heißt, dass die Summe aller Kräfte null ergibt.
     Mit der infinitesimalen Schnittfläche \(\d A\) und unter der Annahme einer konstanten Dicke des Elements folgt für das Kräftegleichgewicht im \(\xi\)- beziehungsweise \(\eta\)-Richtung
@@ -112,7 +132,6 @@
     \end{enumerate}
 
 
-    \clearpage
     \section*{Aufgabe 3}
 
     \begin{problem}
