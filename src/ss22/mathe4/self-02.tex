@@ -1,0 +1,145 @@
+\documentclass{exercise}
+
+\institute{Applied and Computational Mathematics}
+\title{Selbstrechenübung 2}
+\author{Joshua Feld, 406718}
+\course{Mathematische Grundlagen IV}
+\professor{Torrilhon \& Berkels}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \section*{Aufgabe 1}
+
+    \begin{problem}
+        Gegeben sei die folgende partielle Differentialgleichung 2. Ordnung:
+        \[
+            \partial_{tt} + b \cdot \partial_{tx} + \partial_{xx}, \quad b \in \R.
+        \]
+        Entscheiden Sie für welches \(b\) die Gleichung elliptisch, hyperbolisch oder parabolisch ist.
+        Begründen Sie Ihre Antwort.
+    \end{problem}
+
+    \subsection*{Lösung}
+    Wir stellen zunächst die Matrix
+    \[
+        A = \begin{pmatrix}
+            1 & \frac{b}{2}\\
+            \frac{b}{2} & 1
+        \end{pmatrix}
+    \]
+    auf.
+    Die Eigenwerte dieser Matrix sind offensichtlich \(\lambda_{1, 2} = \pm\frac{1}{2}b + 1\).
+    Die partielle Differentialgleichung ist also
+    \begin{itemize}
+        \item elliptisch für \(b \in \parentheses*{-2, 2}\),
+        \item hyperbolisch für \(\absolute*{b} > 2\),
+        \item parabolisch für \(\absolute*{b} = 2\).
+    \end{itemize}
+
+    \section*{Aufgabe 2}
+
+    \begin{problem}
+        Lösen Sie die folgenden PDEs mittels Trennung der Variablen:
+        \begin{enumerate}
+            \item \(u_{xx} + u_{tt} + u_x + u = 0\),
+            \item \(\parentheses*{u_x}^2 + \parentheses*{u_y}^2 = 1\). 
+        \end{enumerate}
+    \end{problem}
+
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item Unser Ansatz ist
+        \[
+            u\parentheses*{x, t} = X\parentheses*{x} \cdot T\parentheses*{t}.
+        \]
+        Einsetzen liefert
+        \[
+            X''\parentheses*{x}T\parentheses*{t} + X\parentheses*{x}T''\parentheses*{t} + X'\parentheses*{x}T\parentheses*{t} + X\parentheses*{x}T\parentheses*{t} = 0.
+        \]
+        Separation der Variablen ergibt
+        \[
+            \frac{T''\parentheses*{t}}{T\parentheses*{t}} = -\frac{X''\parentheses*{x} + X'\parentheses*{x} + X\parentheses*{x}}{X\parentheses*{x}} \stackrel{!}{=} c^2.
+        \]
+        Damit folgt
+        \[
+            T''\parentheses*{t} = c^2 T \implies T\parentheses*{t} = Ce^{ct} + De^{-ct}
+        \]
+        und
+        \begin{align*}
+            X''\parentheses*{x} + X'\parentheses*{x} + X\parentheses*{x} = -c^2 X\parentheses*{x} &\implies X''\parentheses*{x} + X'\parentheses*{x} + \parentheses*{1 + c^2}X\parentheses*{x} = 0\\
+            &\implies X\parentheses*{x} = Ae^{-\frac{1}{2} - \frac{1}{2}\sqrt{1 - 4\parentheses*{1 + c^2}}x} + Be^{-\frac{1}{2} - \frac{1}{2}\sqrt{1 - 4\parentheses*{1 + c^2}}x}
+        \end{align*}
+        Damit folgt
+        \[
+            u\parentheses*{x, t} = \parentheses*{Ae^{-\frac{1}{2} - \frac{1}{2}\sqrt{1 - 4\parentheses*{1 + c^2}}x} + Be^{-\frac{1}{2} - \frac{1}{2}\sqrt{1 - 4\parentheses*{1 + c^2}}x}}\parentheses*{Ce^{ct} + De^{-ct}}
+        \]
+        für beliebiges \(c\).
+        \item Eine mögliche Trennung der Variablen ist
+        \[
+            X'\parentheses*{x}^2 = 1 - Y'\parentheses*{y}^2 \stackrel{!}{=} c.
+        \]
+        Damit erhalten wir 
+        \begin{align*}
+            X'\parentheses*{x} &= \sqrt{c}, & Y'\parentheses*{y} &= \sqrt{1 - c},\\
+            X\parentheses*{x} &= \sqrt{c}x + A, & Y\parentheses*{y} &= \sqrt{1 - c}y + B.
+        \end{align*}
+        Somit erhalten wir als zusammengesetzte Lösung
+        \[
+            u\parentheses*{x, y} = \sqrt{c}x + \sqrt{1 - c}y + C
+        \]
+        für beliebiges \(c\).
+    \end{enumerate}
+
+
+    \section*{Aufgabe 3}
+
+    \begin{problem}
+        Gegeben ist die diskrete Fourier-Transformierte
+        \[
+            \hat{y} = \parentheses*{\frac{9}{4}, \frac{3}{4}, \frac{1}{4}, \frac{3}{4}}^T.
+        \]
+        Bestimmen Sie den zugehörigen Datenvektor \(y\), indem Sie zuerst die Matrixdarstellung der diskreten Fourier-Transformation \(\mathcal{F}: \C^4 \to \C^4\) mit \(y \mapsto \mathcal{F}\parentheses*{y} = \hat{y}\) bestimmen und anschließend die inverse Matrix verwenden um \(y\) zu berechnen.
+    \end{problem}
+
+    \subsection*{Lösung}
+    Aus der Vorlesung wissen wir, dass die Matrixdarstellung zu \(\mathcal{F}\) mithilfe der Spaltenvektoren
+    \[
+        b_j = \parentheses*{e^{-\frac{2\pi ijk}{n}}}_{k = 0}^{n - 1} \in \C^n
+    \]
+    aufgestellt wird, wobei die Matrixdarstellung durch \(\frac{1}{n}B\) mit \(B = \parentheses*{b_0, \ldots, b_{n - 1}}\) gegeben ist.
+    Hier ergibt sich somit die Darstellungsmatrix
+    \[
+        D := \frac{1}{4}\underbrace{\begin{pmatrix}
+            1 & 1 & 1 & 1\\
+            1 & -i & -1 & i\\
+            1 & -1 & 1 & -1\\
+            1 & i & -1 & -i
+        \end{pmatrix}}_{= B}, \quad \hat{y} = Dy = \mathcal{F}\parentheses*{y}.
+    \]
+    Aus der Vorlesung wissen wir, dass für die Inverse \(D^{-1} = \overline{B}^T\) gilt, also
+    \[
+        D^{-1} = \overline{B}^T = \begin{pmatrix}
+            1 & 1 & 1 & 1\\
+            1 & i & -1 & -i\\
+            1 & -1 & 1 & -1\\
+            1 & -i & -1 & i
+        \end{pmatrix}.
+    \]
+    Wir berechnen nun den gesuchten Datenvektor
+    \[
+        y = D^{-1}\hat{y} = \begin{pmatrix}
+            1 & 1 & 1 & 1\\
+            1 & i & -1 & -i\\
+            1 & -1 & 1 & -1\\
+            1 & -i & -1 & i
+        \end{pmatrix}\parentheses*{\frac{1}{4}\begin{pmatrix}
+            9\\3\\1\\3
+        \end{pmatrix}} = \begin{pmatrix}
+            4\\2\\1\\2
+        \end{pmatrix}.
+    \]
+\end{document}

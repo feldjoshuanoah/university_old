@@ -1,0 +1,190 @@
+\documentclass{exercise}
+
+\institute{Applied and Computational Mathematics}
+\title{Hausaufgabenübung 2}
+\author{Joshua Feld, 406718}
+\course{Mathematische Grundlagen IV}
+\professor{Torrilhon \& Berkels}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \section*{Aufgabe 1}
+
+    \begin{problem}
+        Man entscheide, ob die folgenden partiellen Differentialgleichungen \emph{linear}, \emph{semi-linear}, \emph{quasi-linear} oder \emph{nichtlinear} sind, und bestimme die Ordnung der Differentialgleichung.
+        \begin{enumerate}
+            \item \(u_t - \Delta u = 0\),
+            \item \(u_t - u_t u_x = 0\),
+            \item \(u_t - \Delta\parentheses*{u^\gamma} = 0, \gamma \ge 1\),
+            \item \(\Delta\Delta u = 0\),
+            \item \(u_t - \phi\parentheses*{u}^T \nabla u - \Delta u = 0\), wobei \(\phi: \R \to \R^d\) eine beliebige Funktion ist. 
+        \end{enumerate}
+    \end{problem}
+
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item Hier \(u = u\parentheses*{t, x}, t \in \R, x \in \R^n\)
+        \[
+            u_t - \Delta u = \frac{\partial}{\partial t}u\parentheses*{t, x} - \sum_{k = 1}^n\frac{\partial^2}{\partial x_k^2}u\parentheses*{t, x} = 0
+        \]
+        Die Gleichung ist linear in \(\frac{\partial}{\partial t}\) und \(\frac{\partial^2}{\partial x_k^2}\) und somit liegt eine lineare partielle Differentialgleichung zweiter Ordnung vor.
+        \item Hier \(u = u\parentheses*{t, x}, t \in \R, x \in \R\)
+        \[
+            u_t - u_tu_x = 0.
+        \]
+        Der Koeffizient \(u_t\) vor \(u_x\) hängt von Ableitungen der höchsten Ordnung ab.
+        Folglich ist hier eine nichtlineare PDE erster Ordnung gegeben.
+        \item Hier \(u = u\parentheses*{t, x}, t \in \R, x \in \R^n\)
+        Falls \(\gamma = 1\), so ist diese Gleichung äquivalent zu der aus Teilaufgabe a).
+        Sei also nun \(\gamma > 1\), dann gilt
+        \begin{align*}
+            \frac{\partial}{\partial x_k}\parentheses*{u^\gamma} &= \gamma u^{\gamma - 1}\frac{\partial}{\partial x_k}u\\
+            \frac{\partial^2}{\partial x_k^2}\parentheses*{u^\gamma} &= \gamma\parentheses*{\gamma - 1}u^{\gamma - 2}\parentheses*{\frac{\partial}{\partial x_k}u}^2 + \gamma u^{\gamma - 1}\frac{\partial^2}{\partial x_k^2}u,
+        \end{align*}
+        also
+        \[
+            u_t - \Delta\parentheses*{u^\gamma} = \frac{\partial}{\partial t}u - \gamma\parentheses*{\gamma - 1}^{\gamma - 2}\sum_{k = 1}^n\parentheses*{\frac{\partial}{\partial x_k}u}^2 - \gamma u^{\gamma - 1}\sum_{k = 1}^{n}\frac{\partial^2}{\partial x_k^2}u = 0
+        \]
+        Die Gleichung ist somit eine quasi-lineare PDE zweiter Ordnung.
+        \item Hier \(u\parentheses*{x}, x \in \R^n\)
+        \[
+            \Delta\Delta u = \sum_{l = 1}^n\sum_{k = 1}^n\frac{\partial^2}{\partial x_l^2}\frac{\partial^2}{\partial x_k^2}u = 0.
+        \]
+        Folglich handelt es sich hier um eine lineare PDE vierter Ordnung.
+        \item Hier \(u\parentheses*{t, x}, t \in \R, x \in \R^n\)
+        \[
+            u_t - \phi\parentheses*{u}^T\nabla u - \Delta u = \frac{\partial}{\partial t}u - \sum_{k = 1}^n \phi_k\parentheses*{u}\frac{\partial}{\partial x_k}u - \frac{\partial^2}{\partial x_k^2}u = 0.
+        \]
+        Hier liegt eine semi-lineare PDE zweiter Ordnung vor.
+    \end{enumerate}
+
+
+    \section*{Aufgabe 2}
+
+    \begin{problem}
+        Gegeben sei die dreidimensionale partielle Differentialgleichung
+        \[
+            u_{xx} + u_{yy} + u_{zz} + 2xu_{xy} + 2yu_{yz} = f\parentheses*{x, y, z, u, u_x, u_y, u_z}.
+        \]
+        Man bestimme die Bereiche, in denen die Differentialgleichung elliptisch, hyperbolisch bzw. parabolisch ist.
+    \end{problem}
+
+    \subsection*{Lösung}
+    Die Matrix der Koeffizienten vor den zweiten Ableitungen lautet
+    \[
+        B = \begin{pmatrix}
+            1 & x & 0\\
+            x & 1 & y\\
+            0 & y & 1
+        \end{pmatrix}
+    \]
+    Die Eigenwerte sind die Nullstellen des charakteristischen Polynoms
+    \[
+        \chi_B\parentheses*{x} = \begin{vmatrix}
+            1 - \lambda & x & 0\\
+            x & 1 - \lambda & y\\
+            0 & y & 1 - \lambda
+        \end{vmatrix} = \parentheses*{1 - \lambda}^3 - \parentheses*{1 - \lambda}\parentheses*{x^2 + y^2}.
+    \]
+    Es gilt also \(\lambda_1 = 1\) und \(\lambda_{2, 3} = 1 \pm \sqrt{x^2 + y^2}\).
+    Die partielle Differentialgleichung ist also
+    \begin{itemize}
+        \item elliptisch für \(\sqrt{x^2 + y^2} < 1 \iff x^2 + y^2 < 1\),
+        \item hyperbolisch für \(\sqrt{x^2 + y^2} > 1 \iff x^2 + y^2 > 1\),
+        \item parabolisch für \(\sqrt{x^2 + y^2} = 1 \iff x^2 + y^2 = 1\).
+    \end{itemize}
+
+
+    \section*{Aufgabe 3}
+
+    \begin{problem}
+        Ausgangspunkt: Bestimmt man die diskrete Fouriertransformation einer Funktion \(f\) auf dem Intervall \(\brackets*{-\pi, \pi}\) kann man auch (anders als in der Vorlesung) die \(n\) Stützstellen \(x_j\) als
+        \[
+            x_j = -\pi + 2\pi\frac{j + \frac{1}{2}}{n}, \quad j = 0, \ldots, n - 1
+        \]
+        wählen.
+        Die diskrete Fouriertransformation erhält man dann ebenfalls über
+        \[
+            T_n\parentheses*{f; x} = \sum_{j = 0}^{n - 1}d_j e^{ijx} \quad \text{mit} \quad d_j = \frac{1}{n}\sum_{l = 0}^{n - 1}f\parentheses*{x_l}e^{-ijx_l}.
+        \]
+        Ist nun die Anzahl \(n\) der Punkte gerade, also \(n = 2N\), so lässt sich die diskrete Fouriertransformation (mithilfe der Moivre'schen Formeln) als reelle diskrete Fouriertransformation schreiben, mit
+        \begin{equation}\label{eq:1}
+            T_n\parentheses*{f; x} = \frac{a_0}{2} + \sum_{j = 1}^{N - 1}\parentheses*{a_j\cos\parentheses*{jx} + b_j\sin\parentheses*{jx}} + \frac{a_N}{2}\cos\parentheses*{Nx},
+        \end{equation}
+        wobei
+        \begin{align*}
+            a_0 &= 2d_0 = \frac{1}{N}\sum_{j = 0}^{2N - 1}f\parentheses*{x_j},\\
+            a_N &= 2d_N = \frac{1}{N}\sum_{j = 0}^{2N - 1}f\parentheses*{x_j}\cos\parentheses*{Nx_j},\\
+            a_k &= d_k + d_{2N - k} = \frac{1}{N}\sum_{j = 0}^{2N - 1}f\parentheses*{x_j}\cos\parentheses*{kx_j}, k = 1, \ldots, N - 1,\\
+            b_k &= i\parentheses*{d_k - d_{2N - k}} = \frac{1}{N}\sum_{j = 0}^{2N - 1}f\parentheses*{x_j}\sin\parentheses*{kx_j}, k = 1, \ldots, N - 1.
+        \end{align*}
+        In der Bildbearbeitung spielt die diskrete Kosinustransformation eine wichtige Rolle, z.B. als integraler Bestandteil der JPEG Kompression.
+        In dieser Aufgabe soll für eine (der Einfachheit halber) auf \(\brackets*{0, \pi}\) gegebene Funktion \(g\) mithilfe der \(N\) Stützstellen
+        \[
+            \tilde{x}_j = \pi\frac{j + \frac{1}{2}}{N}, \quad j = 0, \ldots, N - 1,
+        \]
+        die diskrete Kosinustransformation bestimmt werden.
+        Dabei geht man wie folgt vor: Man erhält eine Funktion \(\tilde{g}\) auf dem Intervall \(\brackets*{-\pi, \pi}\), indem man \(g\) über das Intervall \(\brackets*{0, \pi}\) hinaus gerade fortsetzt, d.h.
+        \[
+            \tilde{g}\parentheses*{x} = \begin{cases}
+                g\parentheses*{x}, & \text{falls }x \ge 0,\\
+                g\parentheses*{-x}, & \text{falls }x < 0.
+            \end{cases}
+        \]
+        Für diese Funktion \(\tilde{g}\) bestimmt man nun die reelle diskrete Fouriertransformation \(T_{2N}\parentheses*{\tilde{g}; x}\) für \(2N\) Stützstellen.
+        \begin{enumerate}
+            \item Zeigen Sie, dass die Koeffizienten \(b_j, j = 1, \ldots, N - 1\) sowie der Koeffizient \(a_N\) aus \eqref{eq:1} für \(T_{2N}\parentheses*{\tilde{g}; x}\) null ist.
+            \item Zeigen Sie, dass sich die restlichen \(N\) Koeffizienten \(a_j, j = 0, \ldots, N - 1\) von \(T_{2N}\parentheses*{\tilde{g}; x}\) mithilfe der \(N\) Stützstellen \(\tilde{x}_k\) der Funktion \(g\) über
+            \[
+                a_k = \frac{2}{N}\sum_{j = 0}^{N - 1}g\parentheses*{\tilde{x}_j}\cos\parentheses*{k\tilde{x}_j}, \quad k = 0, \ldots, N - 1
+            \]
+            bestimmen lassen.
+        \end{enumerate}
+        Die reelle diskrete Fouriertransformation \(T_{2N}\parentheses*{\tilde{g}; x}\) wird dann als diskrete Kosinustransformation der Funktion \(g\) bezeichnet,
+        \[
+            C_N\parentheses*{g; x} := T_{2N}\parentheses*{\tilde{g}; x} = \frac{a_0}{2} + \sum_{j = 1}^{N - 1}a_j\cos\parentheses*{jx}.
+        \]
+    \end{problem}
+
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item Da \(\tilde{g}\) gerade ist, und die Stützstellen symmetrisch um den Nullpunkt liegen, d.h.
+        \[
+            -x_{N + j} = x_{N - 1 - y}, \quad j = 0, \ldots, N - 1,
+        \]
+        folgt
+        \begin{align*}
+            b_k &= \frac{1}{N}\sum_{j = 0}^{2N - 1}\tilde{g}\parentheses*{x_j}\sin\parentheses*{kx_j}\\
+            &= \frac{1}{N}\parentheses*{\sum_{j = 0}^{N - 1}\tilde{g}\parentheses*{x_{N - 1 - j}}\sin\parentheses*{kx_{N - 1 - j}} + \sum_{j = 0}^{N - 1}\tilde{g}\parentheses*{x_{N + j}}\sin\parentheses*{kx_{N + j}}}\\
+            &= \frac{1}{N}\parentheses*{\sum_{j = 0}^{N - 1}\tilde{g}\parentheses*{x_{N + j}}\parentheses*{-\sin\parentheses*{kx_{N + j}}} + \sum_{j = 0}^{N - 1}\tilde{g}\parentheses*{x_{N + j}}\sin\parentheses*{kx_{N + j}}}\\
+            &= 0.
+        \end{align*}
+        Die Nullstellen der Funktion \(x \mapsto \cos\parentheses*{Nx}\) sind \(\frac{\pi}{2N} + m \cdot \frac{\pi}{N}, m \in \Z\).
+        Da \(x_k = -\pi + \pi \cdot \frac{k + \frac{1}{2}}{N} = -N \cdot \frac{\pi}{N} + k \cdot \frac{\pi}{N} + \frac{\pi}{2N}\) Nullstellen von \(x \mapsto \cos\parentheses*{Nx}\) sind, folgt direkt
+        \[
+            a_N = \frac{1}{N}\sum_{k = 0}^{2N - 1}\tilde{g}\parentheses*{x_k}\cos\parentheses*{Nx_k} = 0.
+        \]
+        \item Für die restlichen Koeffizienten gilt
+        \begin{align*}
+            a_j &= \frac{1}{N}\sum_{k = 0}^{2N - 1}\tilde{g}\parentheses*{x_k}\cos\parentheses*{jx_k}\\
+            &= \frac{1}{N}\parentheses*{\sum_{k = 0}^{N - 1}\tilde{g}\parentheses*{x_{N - 1 - k}}\cos\parentheses*{jx_{N - 1 - k}} + \sum_{k = 0}^{N - 1}\tilde{g}\parentheses*{x_{N + k}}\cos\parentheses*{jx_{N + k}}}\\
+            &= \frac{2}{N}\sum_{k = 0}^{N - 1}\tilde{g}\parentheses*{x_{N + k}}\cos\parentheses*{jx_{N + k}}.
+        \end{align*}
+        Es gilt
+        \[
+            x_{N + k} = -\pi + \pi \cdot \frac{N + k + \frac{1}{2}}{N} = \pi \cdot \frac{k + \frac{1}{2}}{N} = \tilde{x}_k
+        \]
+        und
+        \[
+            \tilde{g}\parentheses*{x_{N + k}} = \tilde{g}\parentheses*{\tilde{x}_k} = g\parentheses*{\tilde{x}_k}.
+        \]
+        Damit folgt
+        \[
+            a_j = \frac{2}{N}\sum_{j = 0}^{N - 1}g\parentheses*{\tilde{x}_k}\cos\parentheses*{j\tilde{x}_k}.
+        \]
+    \end{enumerate}
+\end{document}
