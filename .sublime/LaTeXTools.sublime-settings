@@ -125,6 +125,7 @@
     "preview_math_template_packages": [
         "\\usepackage{amsmath}",
         "\\usepackage{amssymb}",
+        "\\usepackage{bm}",
         "\\usepackage{siunitx}",
         "\\IfFileExists{latexsym.sty}{\\usepackage{latexsym}}{}",
         "\\IfFileExists{mathtools.sty}{\\usepackage{mathtools}}{}"
