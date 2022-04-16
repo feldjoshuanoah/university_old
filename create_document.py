@@ -3,15 +3,25 @@ import shutil
 import sys
 import yaml
 
+def select_from_options(name, options):
+    selection = input('Select a ' + name + ' (' + '/'.join(options) + '): ')
+    filtered_options = list(filter(lambda x: x.startswith(selection), options))
+    if len(filtered_options) > 1:
+        print('There is more than one ' + name + ' starting with "' + selection + '"')
+        print('Select a ' + name + ' from the following options: ')
+        for index, item in enumerate(filtered_options):
+            print(str(index + 1) + ': ' + item)
+        return filtered_options[int(input('Enter a number (1-' + str(len(filtered_options)) + '): ')) - 1]
+    else:
+        return filtered_options[0]
+
 basedir = os.getcwd()
 arguments = sys.argv[1:]
 
 os.chdir('src')
 if len(arguments) < 3:
-    semesters = [d for d in os.listdir(os.getcwd()) if os.path.isdir(d) and (d.startswith('ss') or d.startswith('ws'))]
-    semester = input('Select a semester (' + '/'.join(semesters) + '): ')
-    courses = [d for d in os.listdir(semester) if os.path.isdir(semester + '/' + d)]
-    course = input('Select a course (' + '/'.join(courses) + '): ')
+    semester = select_from_options('semester', [d for d in os.listdir(os.getcwd()) if os.path.isdir(d) and (d.startswith('ss') or d.startswith('ws'))])
+    course = select_from_options('course', [d for d in os.listdir(semester) if os.path.isdir(semester + '/' + d)])
 else:
     [semester, course, prefix] = arguments
 
@@ -20,7 +30,7 @@ os.chdir(semester + '/' + course)
 with open('course-info.yml') as course_info:
     infos = yaml.full_load(course_info)
     if len(arguments) < 3:
-        prefix = input('Select a prefix (' + '/'.join(infos['prefixes']) + '): ')
+        prefix = select_from_options('prefix', infos['prefixes'])
 
     index = str(len([f for f in os.listdir(os.getcwd()) if os.path.isfile(f) and f.startswith(prefix) and f.endswith('.tex')]) + 1)
 
