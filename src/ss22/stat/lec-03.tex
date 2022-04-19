@@ -1,0 +1,449 @@
+\documentclass{lecture}
+
+\institute{Institut für Statistik und Wirtschaftsmathematik}
+\title{Vorlesung 3}
+\author{Joshua Feld, 406718}
+\course{Statistik}
+\professor{Cramer}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \section*{Lage- und Streuungsmaße}
+
+    Graphische Darstellungen eines Datensatzes wie z.B. Säulendiagramme oder Kreisdiagramme nehmen nur eine geringe bzw. keine relevante Reduktion der in den Daten enthaltenen Information vor.
+    Häufig soll jedoch ein Datensatz mit nur wenigen Kenngrößen beschrieben werden.
+    Eine solche Komprimierung der Information erlaubt u.a. einen einfacheren Vergleich zweier Datensätze.
+    Statistische Kenngrößen wie Lagemaße und Streuungsmaße sind für diese Zwecke geeignete Hilfsmittel.
+
+    Lagemaße dienen der Beschreibung des Zentrums oder allgemeiner einer Position der beobachteten Daten mittels eines aus den Daten berechneten Werts.
+    Beispiele sind u.a. das arithmetische Mittel, der Median und der Modus.
+    Ob ein bestimmtes Lagemaß auf einen konkreten Datensatz angewendet werden kann, hängt entscheidend von den Eigenschaften der Beobachtungen und damit vom Merkmalstyp des betrachteten Merkmals ab.
+    Im Folgenden wird daher zwischen Lagemaßen für qualitative (nominale und ordinale) Merkmale und quantitative (diskrete und stetige) Merkmale unterschieden.
+
+
+    \section*{Lagemaße für nominale und ordinale Daten}
+
+    Der Modus (Modalwert) ist ein Lagemaß zur Beschreibung nominaler Datensätze.
+    Als Modus wird diejenige Merkmalsausprägung eines Merkmals bezeichnet, die am häufigsten im Datensatz vorkommt, also die größte absolute (bzw. relative) Häufigkeit aufweist.
+    In der folgenden Definition wird mit dem Symbol \(\max\braces*{\cdots}\) der größte Wert in der Menge \(\braces*{\cdots}\) bezeichnet.
+
+    \begin{definition}
+        In einem Datensatz seien die verschiedenen Merkmalsausprägungen \(u_1, \ldots, u_m\) aufgetreten, wobei die Merkmalsausprägung \(u_j\) die absolute Häufigkeit \(n_j\) bzw. die relative Häufigkeit \(f_j\) habe, \(j \in \braces*{1, \ldots, m}\).
+        Jede Ausprägung \(u_{j^*}\), deren absolute Häufigkeit die Eigenschaft
+        \[
+            n_{j^*} = \max\braces*{n_1, \ldots, n_m}
+        \]
+        bzw. deren relative Häufigkeit die Eigenschaft
+        \[
+            f_{j^*} = \max\braces*{f_1, \ldots, f_m}
+        \]
+        erfüllt, wird als \emph{Modus} bezeichnet.
+    \end{definition}
+
+    Der Modus ist das einzige Lagemaß, das die Informationen eines nominalen Datensatzes adäquat wiedergibt.
+    Zur Bestimmung des Modus wird lediglich die Häufigkeitsverteilung der Daten benutzt, der Datensatz selbst wird nicht benötigt.
+    Daher lässt sich der Modus direkt aus Diagrammen ablesen, in denen die entsprechenden Häufigkeiten graphisch visualisiert werden.
+    In einem Säulendiagramm entspricht beispielsweise der Modus einem Beobachtungswert mit der höchsten Säule.
+    Wird der Modus für einen speziellen Datensatz ausgewertet, so heißt die resultierende Merkmalsausprägung Modalwert.
+    Für den Modus und den Modalwert wird die Schreibweise \(x_{\text{mod}}\) verwendet.
+    Es können Fälle auftreten, in denen mehreren Beobachtungswerte die größte Häufigkeit besitzen, so dass der Modalwert eines Datensatzes i.A. nicht eindeutig bestimmt ist.
+
+    Bei ordinalen Merkmalen liegt zusätzlich eine Ordnungsstruktur auf der Menge der Merkmalsausprägungen vor, d.h. es ist möglich, eine Urliste von Beobachtungen des Merkmals von der kleinsten zur größten zu sortieren.
+    In diesem Sinne kann der Begriff der Rangwertreihe von metrischskalierten auf ordinalskalierte Merkmale erweitert werden.
+    In der Rangwertreihe liegen die ursprünglichen Beobachtungswerte in geordneter Weise vor.
+    Für die Position eines Beobachtungswerts der Urliste in der Rangwertreihe wird der Begriff des Rangs eingeführt.
+
+    \begin{definition}
+        \(x_{\parentheses*{1}} \le \cdots \le x_{\parentheses*{n}}\) bezeichne die Rangwertreihe eines ordinalskalierten Datensatzes \(x_1, \ldots, x_n\).
+        \begin{enumerate}
+            \item Kommt ein Beobachtungswert \(x_j\) genau einmal in der Urliste vor, so heißt dessen Position in der Rangwertreihe \emph{Rang} von \(x_j\).
+            Diese wird mit mit \(R\parentheses*{x_j}\) bezeichnet.
+            \item Tritt ein Beobachtungswert \(x_j\) mehrfach (\(s\)-mal) in der Urliste auf, d.h. für die Werte der Rangwertreihe gilt
+            \[
+                x_{\parentheses*{r - 1}} < \underbrace{x_{\parentheses*{r}} = x_{\parentheses*{r + 1}} = \cdots = x_{\parentheses*{r + s - 1}}}_{= x_j\text{ \(s\)-mal}} < x_{\parentheses*{r + s}},
+            \]
+            so wird mit dem Begriff \emph{Rang} von \(x_j\) das arithmetische Mittel aller Positionen in der Rangwertreihe mit Wert \(x_j\) bezeichnet, d.h.
+            \[
+                R\parentheses*{x_j} = \frac{r + \parentheses*{r + 1} + \cdots + \parentheses*{r + s - 1}}{s} = r + \frac{s - 1}{2}.
+            \]
+        \end{enumerate}
+        Das mehrfache Auftreten eines Wertes in der Urliste wird als \emph{Bindung} bezeichnet.
+        In diesem Zusammenhang wird auch von ``verbundenen'' Rängen gesprochen.
+    \end{definition}
+
+    Lagemaße für ordinale Merkmale werden auf der Basis der Rangwertreihe eines Datensatzes eingeführt.
+    Aufgrund der Ordnungseigenschaft ordinaler Daten kann insbesondere von einem ``Zentrum'' in der Urliste gesprochen werden, so dass es sinnvoll ist, Kenngrößen zu konstruieren, die dieses Zentrum beschreiben.
+    Derartige Lagemaße (z.B. der Median) werden auch ``Maße der zentralen Tendenz'' genannt.
+    Ein Beobachtungswert wird als Median \(\tilde{x}\) bezeichnet, wenn er die folgende Eigenschaft besitzt:
+    \begin{quote}
+        Mindestens \(50\%\) aller Beobachtungswerte sind kleiner oder gleich \(\tilde{x}\) und mindestens \(50\%\) aller Beobachtungswerte sind größer oder gleich \(\tilde{x}\).
+    \end{quote}
+    Aus dieser Vorschrift wird deutlich, dass der Median nur für mindestens ordinalskalierte Daten sinnvoll ist.
+    Er liegt immer ``in der Mitte'' (im Zentrum) der Daten und teilt den Datensatz in ``zwei Hälften'', da einerseits die Beobachtungswerte in einer Hälfte der Daten größer bzw. gleich und andererseits die Beobachtungswerte in einer Hälfte der Daten kleiner bzw. gleich dem Median sind.
+    Ist die Stichprobengröße ungerade, so ist der Median immer eindeutig bestimmt, d.h. nur ein einziger Beobachtungswert kommt für den Median in Frage.
+    Ist die Anzahl der Beobachtungen jedoch gerade, können zwei (eventuell verschiedene) Beobachtungswerte die Bedingung an den Median erfüllen.
+    In diesem Fall kann einer dieser Werte als Median ausgewählt werden.
+    Der Median lässt sich mit Hilfe der Rangwertreihe leicht bestimmen.
+
+    \begin{definition}
+        \(x_{\parentheses*{1}} \le \cdots \le x_{\parentheses*{n}}\) sei die Rangwertreihe eines ordinalskalierten Datensatzes \(x_1, \ldots, x_n\).
+        Ein \emph{Median} \(\tilde{x}\) ist ein Beobachtungswert mit der Eigenschaft
+        \[
+            \begin{cases}
+                \tilde{x} = x_{\parentheses*{\frac{n + 1}{2}}}, & \text{falls }n\text{ ungerade},\\
+                \tilde{x} \in \braces*{x_{\parentheses*{\frac{n}{2}}}, x_{\parentheses*{\frac{n}{2} + 1}}}, & \text{falls }n\text{ gerade}.
+            \end{cases}
+        \]
+    \end{definition}
+
+    Der Median ist ein Spezialfall so genannter Quantile.
+    Teilt der Median eine Rangwertreihe in die \(50\%\) kleinsten bzw. \(50\%\) größten Werte, so beschreibt ein Quantil eine (unsymmetrische) Einteilung in die \(P\%\) kleinsten bzw. \(\parentheses*{100 - P}\%\) größten Werte.
+    Der Anteil \(P\) der kleinsten Beobachtungen bezeichnet dabei eine Zahl zwischen Null und Hundert.
+    Es ist üblich an Stelle von Prozentzahlen Anteile mit Werten aus dem offenen Intervall \(\parentheses*{0, 1}\) zu wählen.
+    Der gewünschte Anteil der kleinsten Werte sei daher im Folgenden mit \(p \in \parentheses*{0, 1}\) bezeichnet.
+    
+    Jeder Beobachtungswert einer ordinalskalierten Stichprobe, der die folgende Bedingung erfüllt, wird als \(p\)-Quantil \(\tilde{x}_p\) bezeichnet:
+    \begin{quote}
+        Mindestens \(p \cdot 100\%\) aller Beobachtungswerte sind kleiner oder gleich \(\tilde{x}_p\) und mindestens \(\parentheses*{1 - p} \cdot 100\%\) aller Beobachtungswerte sind größer oder gleich \(\tilde{x}_p\).
+    \end{quote}
+    Analog zum Median können Fälle auftreten, in denen diese Bedingungen nicht nur von einem, sondern von zwei Werten erfüllt werden.
+    Das \(p\)-Quantil ist in dieser Situation nicht eindeutig bestimmt.
+    In einem solchen Fall wird einer der möglichen Werte als \(p\)-Quantil ausgewählt.
+
+    \begin{definition}
+        \(x_{\parentheses*{1}} \le \cdots \le x_{\parentheses*{n}}\) sei die Rangwertreihe eines ordinalskalierten Datensatzes \(x_1, \ldots, x_n\).
+        Für \(p \in \parentheses*{0, 1}\) ist ein \emph{\(p\)-Quantil} \(\tilde{x}_p\) ein Beobachtungswert mit der Eigenschaft
+        \[
+            \begin{cases}
+                \tilde{x}_p = x_{\parentheses*{k}}, & \text{falls }np < k < np + 1, np \not\in \N,\\
+                \tilde{x}_p \in \braces*{x_{\parentheses*{k}}, x_{\parentheses*{k + 1}}}, & \text{falls }k = np, np \in \N.
+            \end{cases}
+        \]
+    \end{definition}
+
+    Aus der Definition ist ersichtlich, dass für die Festlegung des \(0,5\)-Quantils mit dem Median übereinstimmt.
+    Die Forderung \(\frac{n}{2} \in \N\) (\(p = \frac{1}{2}\)) ist nämlich äquivalent dazu, dass \(n\) eine gerade Zahl ist.
+    Aus diesem Grund wird für den Median \(\tilde{x}\) auch die Notation \(\tilde{x}_{0,5}\) verwendet.
+    Für spezielle Werte von \(p\) sind eigene Bezeichnungen des zugehörigen Quantils gebräuchlich.
+
+    \begin{remark}\label{rem:1}
+        \[
+            \text{Ein }p\text{-Quantil heißt für }\begin{cases}
+                p = 0,5 & \text{Median},\\
+                p = 0,25 & \text{unteres Quantil},\\
+                p = 0,75 & \text{oberes Quantil},\\
+                p = \frac{k}{10} & k\text{-tes Dezentil }\parentheses*{k = 1, \ldots, 9},\\
+                p = \frac{k}{100} & k\text{-tes Perzentil }\parentheses*{k = 1, \ldots, 99}.
+            \end{cases}
+        \]
+    \end{remark}
+
+
+    \section*{Lagemaße für metrische Daten}
+
+    Der Median für quantitative Daten wird -- mit einer leichten Modifikation bei geradem Stichprobenumfang -- analog zum ordinalen Fall definiert.
+    Für eine Stichprobe metrischer Daten wird er nach folgendem Verfahren berechnet.
+
+    Zunächst werden wie bei ordinalen Daten mittels der Rangwertreihe Kandidaten für den Median ermittelt.
+    Bei ungeradem Stichprobenumfang erfüllt nur ein Wert diese Bedingung, der deshalb auch in dieser Situation als Median \(\tilde{x}\) bezeichnet wird.
+    Ist der Stichprobenumfang gerade, so besteht die Menge der in Frage kommenden Werte in der Regel aus zwei Beobachtungswerten.
+    Der Median \(\tilde{x}\) wird dann als arithmetisches Mittel dieser beiden Beobachtungswerte definiert, um einen eindeutig bestimmten Wert für den Median zu erhalten.
+    Wie bei ordinalen Daten liegt dieser Median ``in der Mitte'' der Daten, in dem Sinne, dass mindestens die Hälfte aller Daten größer oder gleich und dass mindestens die Hälfte aller Daten kleiner oder gleich dem Median ist.
+    Bei geradem Stichprobenumfang sind auch andere Festlegungen des Medians möglich.
+    Alternativ kann jeder andere Wert aus dem Intervall \(\brackets*{x_{\parentheses*{\frac{n}{2}}}, x_{\parentheses*{\frac{n}{2}} + 1}}\) als Median definiert werden, da die oben genannte Bedingung jeweils erfüllt ist.
+
+    \begin{definition}\label{def:5}
+        \(x_{\parentheses*{1}} \le \cdots \le x_{\parentheses*{n}}\) sei die Rangwertreihe eines metrischskalierten Datensatzes \(x_1, \ldots, x_n\).
+        Der \emph{Median} \(\tilde{x}_j\) ist definiert durch
+        \[
+            \tilde{x} = \begin{cases}
+                x_{\parentheses*{\frac{n + 1}{2}}}, & \text{falls }n\text{ ungerade},\\
+                \frac{1}{2}\parentheses*{x_{\parentheses*{\frac{n}{2}}} + x_{\parentheses*{\frac{n}{2} + 1}}}, & \text{falls }n\text{ gerade}.
+            \end{cases}
+        \]
+    \end{definition}
+
+    Liegen die Daten nicht in Form einer Urliste vor, sondern nur als Häufigkeitsverteilung der verschiedenen Ausprägungen des betrachteten Merkmals, so kann der Median (wie allgemein auch das \(p\)-Quantil) mittels der empirischen Verteilungsfunktion bestimmt werden.
+
+    \begin{example}
+        Eine Firma gibt in \(n = 6\) Jahren die folgenden, als Rangwertreihe vorliegenden Beträge für Werbung aus (in \euro):
+        \[
+            10000 \quad 18000 \quad 20000 \quad 30000 \quad 41000 \quad 46000
+        \]
+        Da die Anzahl der Beobachtungen gerade ist, berechnet sich der zugehörige Median als arithmetisches Mittel der beiden mittleren Werte der Rangwertreihe.
+        Damit ist der Median durch \(\tilde{x} = \frac{1}{2}\parentheses*{20000 + 30000} = 25000\) gegeben.
+        Einerseits wurde als in mindestens \(50\%\) mindestens \(25000\text{\euro}\) für Werbezwecke ausgegeben, andererseits traten aber auch in mindestens \(50\%\) aller Fälle Kosten von höchstens \(25000\text{\euro}\) auf.
+    \end{example}
+
+    Der Median besitzt eine Minimalitätseigenschaft: Er minimiert die Summe der absoluten Abstände zu allen beobachteten Werten.
+
+    \begin{calcrule}
+        Für eine reelle Zahl \(t\) beschreibt
+        \[
+            f\parentheses*{t} = \sum_{i = 1}^n \absolute*{x_i - t}
+        \]
+        die Summe der Abweichungen aller Beobachtungswerte \(x_1, \ldots, x_n\) von \(t\).
+        Der Median von \(x_1, \ldots, x_n\) liefert das Minimum von \(f\), d.h. es gilt
+        \[
+            f\parentheses*{t} = \sum_{i = 1}^n \absolute*{x_i - t} \ge \sum_{i = 1}^n \absolute*{x_i - \tilde{x}} = f\parentheses*{\tilde{x}} \quad \forall t \in \R.
+        \]
+        Für ungeraden Stichprobenumfang \(n\) ist der Median \(\tilde{x}\) das eindeutig bestimmte Minimum.
+        Ist \(n\) gerade so ist jedes \(t \in \braces*{x_{\parentheses*{\frac{n}{2}}}, x_{\parentheses*{\frac{n}{2} + 1}}}\) ein Minimum der Abbildung \(f\).
+        Die Minimalitätseigenschaft gilt also für die in Definition \ref{def:5} eingeführten Mediane.
+    \end{calcrule}
+
+    Wie bei ordinalskalierten Daten werden \(p\)-Quantile (mit \(p \in \parentheses*{0, 1}\)) als Verallgemeinerung des Medians definiert.
+    Sie berechnen sich analog zum Median bei metrischen Daten.
+    Die Bezeichnungen für spezielle Quantile (Quartil, Dezentil, Perenztil) aus Bemerkung \ref{rem:1} werden ebenfalls übernommen.
+
+    \begin{definition}
+        \(x_{\parentheses*{1}} \le \cdots \le x_{\parentheses*{n}}\) sei die Rangwertreihe eines metrischen Datensatzes \(x_1, \ldots, x_n\).
+        Für \(p \in \parentheses*{0, 1}\) ist das \emph{\(p\)-Quantil} \(\tilde{x}_p\) gegeben durch
+        \[
+            \tilde{x}_p = \begin{cases}
+                x_{\parentheses*{k}}, & \text{falls }np < k < np + 1, np \not\in \N,\\
+                \frac{1}{2}\parentheses*{x_{\parentheses*{k}} + x_{\parentheses*{k + 1}}}, & \text{falls }k = np, np \in \N.
+            \end{cases}
+        \]
+    \end{definition}
+
+    Quantile können Aufschluss über die Form der den Daten zu Grunde liegenden Häufigkeitsverteilung geben.
+    Bei einer ``symmetrischen'' Verteilung der Daten ist der jeweilige Abstand des unteren Quartils und des oberen Quartils zum Median annähernd gleich.
+    Ist jedoch z.B. der Abstand zwischen dem unteren Quartil und dem Median deutlich größer als der zwischen oberem Quartil und Median, so ist von einer linksschiefen Häufigkeitsverteilung auszugehen.
+    Im umgekehrten Fall liegt ein Hinweis auf eine rechtsschiefe Verteilung vor.
+
+    Das bekannteste Lagemaß für metrische Daten ist das arithmetische Mittel, für das auch die Bezeichnungen Mittelwert, Mittel oder Durchschnitt verwendet werden.
+
+    \begin{definition}
+        Sei \(x_1, \ldots, x_n\) ein Datensatz aus Beobachtungswerten eines metrischen Merkmals.
+        Das \emph{arithmetische Mittel} \(\bar{x}_n\) ist definiert durch
+        \[
+            \bar{x}_n = \frac{1}{n}\parentheses*{x_1 + x_2 + \cdots + x_n} = \frac{1}{n}\sum_{i = 1}^n x_i.
+        \]
+        Ist die Anzahl \(n\) der Beobachtungswerte aus dem Kontext klar, so wird auch auf die Angabe des Index verzichtet, d.h. es wird die Notation \(\bar{x}\) verwendet.
+    \end{definition}
+
+    \begin{calcrule}
+        Bezeichnet \(f_1, \ldots, f_m\) die Häufigkeitsverteilung eines Datensatzes mit (verschiedenen) Merkmalsausprägungen \(u_1, \ldots, u_m\), so kann das arithmetische Mittel berechnet werden gemäß
+        \[
+            \bar{x} = f_1 u_1 + \cdots + f_m u_m = \sum_{j = 1}^m f_j u_j.
+        \]
+    \end{calcrule}
+
+    Zur Bestimmung des gemeinsamen Mittelwerts zweier Datensätze ist es nicht notwendig, dass alle Ausgangsdaten bekannt sind.
+    Die Kenntnis der Stichprobenumfänge beider Datensätze und der jeweiligen arithmetischen Mittel reicht aus.
+    Aus der folgenden Rechenregel folgt insbesondere, dass das arithmetische Mittel zweier Datensätze, die den gleichen Umfang haben, gleich dem Mittelwert der zu den beiden Datensätzen gehörigen arithmetischen Mittel ist.
+
+    \begin{calcrule}
+        \(\bar{x}\) und \(\bar{y}\) seien die arithmetischen Mittel der metrischen Datensätze \(x_1, \ldots, x_{n_1} \in \R\) und \(y_1, \ldots, y_{n_2} \in \R\) mit den Umfängen \(n_1\) bzw. \(n_2\).
+        Das arithmetische Mittel \(\bar{z}\) aller \(n_1 + n_2\) Beobachtungswerte (des sogenannten zusammengesetzten oder gepoolten Datensatzes)
+        \[
+            z_1 = x_1, \ldots, z_{n_1} = x_{n_1}, z_{n_1 + 1} = y_1, \ldots, z_{n_1 + n_2} = y_{n_2}
+        \]
+        lässt sich bestimmen als (gewichtetes arithmetisches Mittel)
+        \[
+            \bar{z} = \frac{n_1}{n_1 + n_2}\bar{x} + \frac{n_2}{n_1 + n_2}\bar{y}.
+        \]
+        Besteht der zweite Datensatz aus einer Beobachtung \(x_{n + 1}\parentheses*{ = y_1}\), d.h. \(n_2 = 1\) und wird die Bezeichnung \(n = n_1\) verwendet, so ist das arithmetische Mittel \(\bar{x}_{n + 1}\) aller \(n + 1\) Beobachtungswerte gegeben durch
+        \[
+            \bar{x}_{n + 1} = \frac{n}{n + 1}\bar{x}_n + \frac{1}{n + 1}x_{n + 1}.
+        \]
+    \end{calcrule}
+
+    \begin{calcrule}
+        Das arithmetische Mittel des Datensatzes \(x_1, \ldots, x_n \in \R\) ist das eindeutig bestimmte Minimum der Abbildung \(f: \R \to \left[0, \infty\right)\) mit
+        \[
+            f\parentheses*{t} = \sum_{i = 1}^n \parentheses*{x_i - t}^2, \quad t \in \R,
+        \]
+        d.h. es gilt \(f\parentheses*{t} \ge f\parentheses*{\bar{x}}\) für alle \(t \in \R\).
+    \end{calcrule}
+
+    \begin{proof}
+        Zum Nachweis der Minimalitätseigenschaft wird lediglich eine binomische Formel verwendet:
+        \begin{align*}
+            f\parentheses*{t} &= \sum_{i = 1}^n \parentheses*{\parentheses*{x_i - \bar{x}} + \parentheses*{\bar{x} - t}}^2\\
+            &= \underbrace{\sum_{i = 1}^n \parentheses*{x_i - \bar{x}}^2}_{= f\parentheses*{\bar{x}}} + 2\parentheses*{\bar{x} - t}\underbrace{\sum_{i = 1}^n\parentheses*{x_i - \bar{x}}}_{= 0} + \underbrace{\sum_{i = 1}^n \parentheses*{\bar{x} - t}^2}_{= n\parentheses*{\bar{x} - t}^2}\\
+            &= f\parentheses*{\bar{x}} + \underbrace{n\parentheses*{\bar{x} - t}^2}_{\ge 0} \ge f\parentheses*{\bar{x}},
+        \end{align*}
+        wobei Gleichheit genau dann gilt, wenn \(n\parentheses*{\bar{x} - t}^2 = 0\), d.h. wenn \(t = \bar{x}\) ist.
+    \end{proof}
+
+
+    \section*{Streuungsmaße}
+
+    Die Beschreibung eines Datensatzes durch die alleinige Angabe von Lagemaßen ist in der Regel unzureichend.
+
+    Beobachtungen in Datensätzen mit dem selben arithmetischen Mittel können von diesem also unterschiedlich stark abweichen.
+    Diese Abweichung kann durch Streuungsmaße (empirische Varianz, empirische Standardabweichung) quantifiziert werden.
+
+    Streuungsmaße dienen der Messung des Abweichungsverhaltens von Merkmalsausprägungen in einem Datensatz.
+    Die Streuung in den Daten resultiert daraus, dass bei Messungen eines Merkmals i.A. verschiedene Werte beobachtet werden (z.B. Körpergrößen in einer Gruppe von Menschen oder erreichte Punktzahlen in einem Examen).
+    Lagemaße ermöglichen zwar die Beschreibung eines zentralen Wertes der Daten, jedoch können zwei Datensätze mit gleichem oder nahezu gleichem Lagemaß sehr unterschiedliche Streuungen um den Wert des betrachteten Lagemaßes aufweisen.
+    Streuungsmaße ergänzen daher die im Lagemaß enthaltene Information und geben Aufschluss über ein solches Abweichungsverhalten.
+    Sie werden unterschieden in diejenigen,
+    \begin{itemize}
+        \item die auf der Differenz zwischen zwei Lagemaßen beruhen (wie z.B. die Spannweite als Differenz von Maximum und Minimum der Daten),
+        \item die Abweichungen zwischen den beobachteten Werten und einem Lagemaß nutzen (wie z.B. die empirische Varianz, die aus den quadrierten Abständen zwischen den Beobachtungen und deren arithmetischem Mittel gebildet wird) und solchen,
+        \item die ein Streuungsmaß in Relation zu einem Lagemaß setzen.
+    \end{itemize}
+    Zur Interpretation von Streuungsmaßen lässt sich festhalten: Je größer der Wert eines Streuungsmaßes ist, desto mehr streuen die Beobachtungen.
+    Ist der Wert klein, sind die Beobachtungen eher um einen Punkt konzentriert.
+    Die konkreten Werte eines Streuungsmaßes sind allerdings schwierig zu interpretieren, da in Abhängigkeit vom betrachteten Maß und Datensatz völlig unterschiedliche Größenordnungen auftreten können.
+    Streuungsmaße sollten daher eher als vergleichende Maßzahlen für thematisch gleichartige Datensätze verwendet werden.
+    Da alle Streuungsmaße grundsätzlich einen Abstandsbegriff voraussetzen, muss zu deren Verwendung ein quantitatives (metrisches) Merkmal vorliegen.
+
+
+    \section*{Spannweite und Quartilsabstand}
+
+    Die Spannweite (englisch ``range'') \(R\) einer Stichprobe ist die Differenz zwischen dem größten und dem kleinsten Beobachtungswert.
+
+    \begin{definition}
+        Für einen metrischen Datensatz \(x_1, \ldots, x_n\) ist die \emph{Spannweite} \(R\) definiert als Differenz von Maximum \(x_{\parentheses*{n}}\) und Minimum \(x_{\parentheses*{1}}\):
+        \[
+            R = x_{\parentheses*{n}} - x_{\parentheses*{1}}.
+        \]
+    \end{definition}
+
+    \begin{calcrule}
+        Liegen die Daten in Form einer Häufigkeitsverteilung \(f_1, \ldots, f_m\) mit verschiedenen Merkmalsausprägungen \(u_1, \ldots, u_m\) des betrachteten Merkmals vor, so kann die Spannweite mittels
+        \[
+            R = \max\braces*{u_j : j \in J} - \min\braces*{u_j : j \in J}
+        \]
+        berechnet werden, wobei \(J = \braces*{i \in \braces*{1, \ldots, m} : f_i > 0}\) die Menge aller Indizes ist, deren zugehörige relative Häufigkeit positiv ist.
+    \end{calcrule}
+
+    Definitionsgemäß basiert die Spannweite auf beiden extremen Werten, also dem größten und dem kleinsten Wert, in der Stichprobe.
+    Daher reagiert sie empfindlich auf Änderungen in diesen Werten.
+    Insbesondere haben Ausreißer einen direkten Einfluss auf dieses Streuungsmaß und können möglicherweise zu einem erheblich verfälschten Eindruck von der Streuung in den Daten führen.
+    Andere Streuungsmaße wie z.B. der im Folgenden vorgestellte Quartilsabstand, der ähnlich wie die Spannweite auf der Differenz zweier Lagemaße basiert, sind weniger empfindlich gegenüber Ausreißern an den ``Rändern'' eines Datensatzes.
+    Der Quartilsabstand \(Q\) berechnet sich als Differenz von oberem Quartil (\(0,75\)-Quantil) und unterem Quartil (\(0,25\)-Quantil) der Daten.
+    Aus der Definition der Quartile folgt, dass im Bereich \(\brackets*{\tilde{x}_{0,25}, \tilde{x}_{0,75}}\), dessen Länge durch den Quartilsabstand beschrieben wird, mindestens \(50\%\) aller ``zentralen'' Beobachtungswerte liegen.
+    Damit ist der Quartilsabstand offenbar ein Maß für die Streuung der Daten.
+
+    \begin{definition}
+        Für einen metrischen Datensatz \(x_1, \ldots, x_n\) ist der \emph{Quartilsabstand} definiert als Differenz
+        \[
+            Q = \tilde{x}_{0,75} - \tilde{x}_{0,25},
+        \]
+        wobei \(\tilde{x}_{0,75}\) das obere und \(\tilde{x}_{0,25}\) das untere Quartil der Daten bezeichnen.
+    \end{definition}
+
+    Der Quartilsabstand verändert sich bei einer Änderung der größten oder kleinsten Werte (im Gegensatz zur Spannweite) des Datensatzes in der Regel nicht, da diese Werte zur Berechnung nicht herangezogen werden.
+    Dies ist aus der Definition des Quartilsabstands, in die die Daten nur in Form der beiden Quartile eingehen, unmittelbar ersichtlich.
+    Aufgrund dieser Eigenschaft wird der Quartilsabstand auch als robust gegenüber extremen Werten in der Stichprobe bezeichnet.
+
+    Erwartungsgemäß ist der Quartilsabstand höchstens so groß wie die Spannweite.
+
+    \begin{calcrule}
+        Für den Quartilsabstand \(Q\) und die Spannweite \(R\) eines Datensatzes gilt \(Q \le R\).
+    \end{calcrule}
+
+
+    \section*{Konstruktion von Streuungsmaßen mittels Residuen}
+
+    Nun werden Maße betrachtet, die die Streuung im Datensatz auf der Basis der Abstände der beobachteten Werte zu einem Lagemaß beschreiben.
+    Eine wesentliche Voraussetzung zur Definition derartiger Streuungsmaße ist ein geeigneter Abstandsbegriff.
+    Es ist naheliegend zur Bewertung der Streuung in einem Datensatz \(x_1, \ldots, x_n\) die Residuen
+    \[
+        x_i - \bar{x}, \quad i \in \braces*{1, \ldots, n}
+    \]
+    zu nutzen, die die Abweichungen des arithmetischen Mittels von den einzelnen Messwerten darstellen.
+    Für die Gesamtabweichung von \(\bar{x}\) gilt allerdings
+    \[
+        \sum_{i = 1}^n \parentheses*{x_i - \bar{x}} = \sum_{i = 1}^n x_i - \sum_{i = 1}^n \bar{x} = n\bar{x} - n\bar{x} = 0,
+    \]
+    d.h. positive und negative Abweichungen gleichen sich aus.
+    Um diesem entgegenzuwirken werden die Vorzeichen der Residuen üblicherweise eliminiert.
+    Verbreitet sich der Absolutbetrag der Residuen und das Quadrat der Residuen (Abweichungsquadrate)
+    \[
+        \absolute*{x_i - \bar{x}} \quad \text{bzw.} \quad \parentheses*{x_i - \bar{x}}^2.
+    \]
+    Daraus ergeben sich durch Summation die (Gesamt-)Streuungsmaße
+    \[
+        \sum_{i = 1}^n \absolute*{x_i - \bar{x}} \quad \text{bzw.} \quad \sum_{i = 1}^n \parentheses*{x_i - \bar{x}}^2.
+    \]
+    Meist wird die Variante mit quadratischen Abständen verwendet, da sie in vielen Situationen einfacher zu Hand haben ist und in der Wahrscheinlichkeitsrechnung ein gebräuchliches Pendant besitzt, die Varianz.
+
+
+    \section*{Empirische Varianz und empirische Standardabweichung}
+
+    Zunächst wird die Summe der Abweichungsquadrate betrachtet.
+    Das Quadrieren der Abweichungen hat zur Folge, dass sehr kleine Abweichungen vom arithmetischen Mittel kaum, große Abweichungen jedoch sehr stark ins Gewicht fallen.
+
+    \begin{definition}
+        Für einen metrischen Datensatz \(x_1, \ldots, x_n\) mit zugehörigem arithmetischem Mittel \(\bar{x}_n\) heißt
+        \[
+            s_n^2 = \frac{1}{n}\parentheses*{\parentheses*{x_1 - \bar{x}_n}^2 + \cdots + \parentheses*{x_n - \bar{x}_n}^2} = \frac{1}{n}\sum_{i = 1}^n \parentheses*{x_i - \bar{x}_n}^2
+        \]
+        \emph{empirische Varianz} \(s_n^2\) von \(x_1, \ldots, x_n\).
+
+        Ist die Anzahl \(n\) der Beobachtungswerte aus dem Kontext klar, so wird auf die Angabe des Index verzichtet, d.h. es wird die Notation \(s^2\) verwendet.
+    \end{definition}
+
+    Die empirische Varianz wird gelegentlich auch als
+    \[
+        \tilde{s}^2 = \frac{1}{n - 1}\sum_{i = 1}^n \parentheses*{x_i - \bar{x}}^2
+    \]
+    eingeführt.
+    In der entsprechenden Literatur muss in Formeln unter Verwendung der empirischen Varianz jeweils auf den veränderten Faktor geachtet werden!
+
+    \begin{calcrule}
+        Liegen die Daten in Form einer Häufigkeitsverteilung \(f_1, \ldots, f_m\) mit verschiedenen Merkmalsausprägungen \(u_1, \ldots, u_m\) des betrachteten Merkmals vor, so kann die empirische Varianz berechnet werden durch
+        \[
+            s^2 = f_1\parentheses*{u_1 - \bar{x}}^2 + f_2\parentheses*{u_2 - \bar{x}}^2 + \cdots + f_m\parentheses*{u_m - \bar{x}}^2 = \sum_{j = 1}^m f_j\parentheses*{u_j - \bar{x}}^2.
+        \]
+    \end{calcrule}
+
+    Für die empirische Varianz gilt der so genannte Verschiebungssatz (auch bekannt als Steiner-Regel), mit dessen Hilfe sich u.a. auch eine alternative Berechnungsmöglichkeit herleiten lässt.
+
+    \begin{calcrule}
+        Für ein beliebiges \(a \in \R\) erfüllt die empirische Varianz \(s^2\) der Beobachtungswerte \(x_1, \ldots, x_n\) die Gleichung
+        \[
+            s^2 = \parentheses*{\frac{1}{n}\sum_{i = 1}^n \parentheses*{x_i - a}^2} - \parentheses*{\bar{x} - a}^2.
+        \]
+    \end{calcrule}
+
+    Durch die spezielle Wahl \(a = 0\) im Verschiebungssatz lässt sich die empirische Varianz in einer Form darstellen, die deren Berechnung in vielen Situationen erleichtert.
+
+    \begin{calcrule}
+        Die empirische Varianz von Beobachtungswerten \(x_1, \ldots, x_n\) lässt sich mittels der Formel
+        \[
+            s^2 = \parentheses*{\frac{1}{n}\sum_{i = 1}^n x_i^2} - \bar{x}^2 = \overline{x^2} - \bar{x}^2
+        \]
+        berechnen.
+        Dabei bezeichnet \(\overline{x^2}\) das arithmetische Mittel der quadrierten Daten \(x_1^2, \ldots, x_n^2\).
+    \end{calcrule}
+
+    Die gemeinsame empirische Varianz zweier Datensätze kann ähnlich wie beim arithmetischen Mittel unter Verwendung der empirischen Varianzen der einzelnen Datensätze ohne Rückgriff auf die Ausgangsdaten bestimmt werden.
+    Hierbei müssen aber zusätzlich noch die arithmetischen Mittel in beiden Urlisten bekannt sein.
+
+    \begin{calcrule}
+        Seien \(\bar{x}\) bzw. \(\bar{y}\) die arithmetischen Mittel und \(s_x^2\) bzw. \(s_y^2\) die empirischen Varianzen der Datensätze \(x_1, \ldots, x_{n_1}\) und \(y_1, \ldots, y_{n_2}\).
+        Die empirische Varianz \(s_z^2\) aller \(n_1 + n_2\) Beobachtungswerte
+        \[
+            z_1 = x_1, \ldots, z_{n_1} = x_{n_1}, z_{n_1 + 1} = y_1, \ldots, z_{n_1 + n_2} = y_{n_2}
+        \]
+        lässt sich bestimmen mittels
+        \[
+            s_z^2 = \frac{n_1}{n_1 + n_2}s_x^2 + \frac{n_2}{n_1 + n_2}s_y^2 + \frac{n_1}{n_1 + n_2}\parentheses*{\bar{x} - \bar{z}}^2 + \frac{n_2}{n_1 + n_2}\parentheses*{\bar{y} - \bar{z}}^2,
+        \]
+        wobei \(\bar{z}\) das arithmetische Mittel des (gepoolten) Datensatzes \(z_1, \ldots, z_{n_1 + n_2}\) ist.
+    \end{calcrule}
+
+    Von der empirischen Varianz ausgehend wird ein weiteres Streuungsmaß gebildet, die empirische Standardabweichung.
+    Da die empirische Varianz sich als Summe von quadrierten, also nicht-negativen Werten berechnet und daher selbst eine nicht-negative Größe ist, kann die empirische Standardabweichung als (nicht-negative) Wurzel aus der empirischen Varianz definiert werden.
+
+    \begin{definition}
+        Für Beobachtungswerte \(x_1, \ldots, x_n\) mit zugehöriger empirischer Varianz \(s_n^2\) wird die empirische Standardabweichung \(s_n\) definiert durch
+        \[
+            s_n = \sqrt{s_n^2}.
+        \]
+        Ist der Stichprobenumfang \(n\) aus dem Kontext klar, so wird auch die Notation \(s\) verwendet.
+    \end{definition}
+
+    Die empirische Standardabweichung besitzt dieselbe Maßeinheit wie die Beobachtungswerte und eignet sich daher besser zum direkten Vergleich mit den Daten der Stichprobe als die empirische Varianz.
+\end{document}
