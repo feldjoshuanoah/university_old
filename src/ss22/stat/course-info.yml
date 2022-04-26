@@ -1,5 +1,7 @@
 name: Statistik
 professor: Cramer
 institute: Institut für Statistik und Wirtschaftsmathematik
-prefixes: [lec]
+prefixes: [lec, glob, pres]
 lec: [lecture, Vorlesung]
+glob: [exercise, Golbalübung]
+pres: [exercise, Präsenzübung]
