@@ -1,0 +1,50 @@
+\documentclass{exercise}
+
+\institute{Applied and Computational Mathematics}
+\title{Selbstrechenübung 3}
+\author{Joshua Feld, 406718}
+\course{Mathematische Grundlagen IV}
+\professor{Torrilhon \& Berkels}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \section*{Aufgabe 1}
+
+    \begin{problem}
+        Eine wichtige Voraussetzung um die FFT z.B. in der Bildbearbeitung zu verwenden ist, die FFT auf mehrere Dimensionen zu erweitern.
+        Hier zeigen wir exemplarisch wie die bekannte eindimensionale FFT in die zweite Dimension erweitert werden kann.
+
+        In Analogie zum eindimensionalen Fall wird auf \(\brackets*{0, 2\pi}^2\) das trigonometrische Polynom \(T_{n_1 n_2}\parentheses*{f; x, y}\) einer Funktion \(f: \brackets*{0, 2\pi}^2 \to \C\) definiert durch
+        \[
+            T_{n_1 n_2}\parentheses*{f; x, y} := \sum_{j_1 = 0}^{n_1 - 1}\sum_{j_2 = 0}^{n_2 - 1}d_{j_1, j_2}\parentheses*{f}e^{i\parentheses*{j_1 x + j_2 y}}.
+        \]
+        Die entsprechenden Fourierkoeffizienten von \(f\) ergeben sich zu
+        \begin{align*}
+            d_{j_1, j_2}\parentheses*{f} &:= \frac{1}{n_1 n_2}\sum_{l_1 = 0}^{n_1 - 1}\sum_{l_2 = 0}^{n_2 - 1}f\parentheses*{x_{l_1}, x_{l_2}}e^{-i\parentheses*{j_1 x_{l_1} + j_2 y_{l_2}}},\\
+            x_{l_1} &:= \parentheses*{\frac{2\pi l_1}{n_1}}, \quad y_{l_2} := \parentheses*{\frac{2\pi l_2}{n_2}},
+        \end{align*}
+        für \(0 \le j_1 \le n_1 - 1\) und \(0 \le j_2 \le n_2 - 1\).
+        \begin{enumerate}
+            \item Sei \(\varepsilon_p^q := e^{-\frac{2\pi iq}{p}}\).
+            Zeigen Sie:
+            \begin{align*}
+                \varepsilon_{2m}^{2kl} &= \varepsilon_m^{kl}, \quad k, l, m \in \Z,\\
+                \varepsilon_m^{k\parentheses*{m + l}} &= \varepsilon_m^{kl}, \quad k, l, m \in \Z,\\
+                \varepsilon_{2m}^{\parentheses*{2k + 1}\parentheses*{m + l}} &= \parentheses*{-1}\varepsilon_m^{kl}\varepsilon_{2m}^l, \quad k, l, m \in \Z.
+            \end{align*}
+            \item Nehmen wir an, dass die Seitenlängen \(n_1 = 2m_1\) und \(n_2 = 2m_2\) gerade sind.
+            Verwenden Sie das Ergebnis aus Teilaufgabe a), um die 2D Fourier-Transformation der Längen \(n_1\) und \(n_2\) auf vier Fourier-Transformationen der in beiden Koordinatenrichtungen halbierten Längen mit den Koeffizienten
+            \[
+                d_{2k_1, 2k_2}, d_{2k_1 + 1, 2k_2}, d_{2k_1, 2k_2 + 1}\text{ und }d_{2k_1 + 1, 2k_2 + 1},
+            \]
+            für \(0 \le k_1 \le m_1 - 1\) bzw. \(0 \le k_2 \le m_2 - 1\) zurückzuführen.
+        \end{enumerate}
+    \end{problem}
+
+    \subsection*{Lösung}
+
+\end{document}
