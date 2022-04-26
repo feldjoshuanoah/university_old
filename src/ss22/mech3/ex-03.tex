@@ -1,0 +1,181 @@
+\documentclass{exercise}
+
+\institute{Lehr- und Forschungsgebiet Kontinuumsmechanik}
+\title{Übung 3}
+\author{Joshua Feld, 406718}
+\course{Mechanik verformbarer Körper}
+\professor{Itskov}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \section*{Aufgabe 1}
+
+    \begin{problem}
+        Bei einem ebenen Spannungszustand sind in einem Punkt die Normal- und Schubspannungswerte \(\sigma_a, \tau_a\) und \(\sigma_b, \tau_b\) bekannt.
+        \begin{enumerate}
+            \item Bestimmen Sie hieraus die Hauptspannungen \(\sigma_1\) und \(\sigma_2\) in diesem Punkt.
+            \item Berechnen Sie die Winkel \(\alpha\) und \(\beta\), die die Schnitte \(a-a\) und \(b-b\) mit der ersten Hauptspannungsrichtung bilden.
+        \end{enumerate}
+        Gegeben: \(\sigma_a = 10\sis{\newton\per\milli\meter\squared}\), \(\sigma_b = 50\sis{\newton\per\milli\meter\squared}\), \(\tau_a = 50\sis{\newton\per\milli\meter\squared}\), \(\tau_b = 30\sis{\newton\per\milli\meter\squared}\)
+    \end{problem}
+
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item Beide Punkte liegen auf einem Kreis mit dem Mittelpunkt \(\sigma_m\)
+        \[
+            r^2 = \parentheses*{\sigma_a - \sigma_m}^2 + \tau_a^2 = \parentheses*{\sigma_b - \sigma_m}^2 + \tau_b^2 \implies \sigma_m = \frac{\sigma_a^2 + \tau_a^2 - \parentheses*{\sigma_b^2 + \tau_b^2}}{2\parentheses*{\sigma_b - \sigma_a}} = 10\sis{\newton\per\milli\meter\squared}.
+        \]
+        Die maximale Schubspannung entspricht dem Radius
+        \[
+            \tau_{\text{max}}^2 = \parentheses*{\sigma_a - \sigma_m}^2 + \tau_a^2 \implies \tau_{\text{max}} = 50\sis{\newton\per\milli\meter\squared}.
+        \]
+        Mit der Beziehung
+        \[
+            \parentheses*{\sigma - \sigma_m}^2 = \tau_{\text{max}}^2
+        \]
+        folgt
+        \[
+            \sigma_1 = \sigma_m + \tau_{\text{max}} = 60\sis{\newton\per\milli\meter\squared}, \quad \sigma_2 0 \sigma_m - \tau_{\text{max}} = -40\sis{\newton\per\milli\meter\squared}.
+        \]
+        \item Für das lokale \(ax-ay\) Koordinatensystem des Schnittes \(a-a\) gilt mit der Invariantenbeziehung
+        \[
+            \sigma_{ax} = \sigma_a = 10\sis{\newton\per\milli\meter\squared}, \quad \sigma_{ay} = \sigma_1 + \sigma_2 - \sigma_{ax} = 10\sis{\newton\per\milli\meter\squared}.
+        \]
+        Aus
+        \[
+            \tan\parentheses*{2\alpha} = \tan\parentheses*{2\varphi_a^*} = \frac{2\tau_a}{\sigma_{ax} - \sigma_{ay}}
+        \]
+        folgt, dass der Nenner gegen \(0\) geht, sodass \(\tan\parentheses*{2\alpha} \to \infty\) gilt, was zu \(\alpha = 45^\circ\) führt.
+        Analog folgt für das lokale \(bx-by\) Koordinatensystem des Schnittes \(b-b\):
+        \[
+            \sigma_{bx} = \sigma_b = 50\sis{\newton\per\milli\meter\squared}, \quad \sigma_{by} = \sigma_1 + \sigma_2 - \sigma_{bx} = -30\sis{\newton\per\milli\meter\squared}, \quad \beta = 18,43^\circ.
+        \]
+    \end{enumerate}
+
+
+    \clearpage
+    \section*{Aufgabe 2}
+
+    \begin{problem}
+        In einer Scheib herrscht ein bekannter Spannungszustand.
+        Bestimmen Sie die Hauptnormal- und Hauptschubspannungen, sowie deren Richtungen.
+        \begin{enumerate}
+            \item Lösen Sie diese Aufgabe zeichnerisch.
+            \item Überprüfen Sie Ihre Lösung rechnerisch.
+        \end{enumerate}
+        Gegeben: \(\sigma_x = 20\sis{\mega\pascal}\), \(\sigma_y = 60\sis{\mega\pascal}\), \(\tau_{xy} = -40\sis{\mega\pascal}\)
+    \end{problem}
+
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item\,
+        \begin{center}
+            \begin{tikzpicture}
+                \draw[->] (-1,0) -- (9,0) node[above] {\(\sigma\)};
+                \draw[->] (0,-5) -- (0,5) node[left] {\(\tau\)};
+                \draw[white!60!black,dashed] (2,-4) -- (6,4);
+                \fill (4,0) coordinate (M) circle (.75mm) node[above left] {\(M\)};
+                \draw[white!60!black] (4,0) circle (4.472cm);
+                \fill (2,-4) coordinate (P) circle (.75mm) node[below] {\(P\)};
+                \fill (6,4) circle (.75mm) node[above] {\(P'\)};
+                \coordinate (S1) at (8.472,0);
+                \coordinate (S2) at (-.472,0);
+                \draw (8.472,.1) -- (8.472,-.1) node[below right] {\(\sigma_1\)};
+                \draw (-.472,.1) -- (-.472,-.1) node[below left] {\(\sigma_2\)};
+                \draw (.1,4.472) -- (-.1,4.472) node[left] {\(\tau_{\text{max}}\)};
+                \draw (.1,-4.472) -- (-.1,-4.472) node[left] {\(\tau_{\text{max}}\)};
+                \pic[draw,<-,"$2\phi_1^*$",angle radius=2cm,angle eccentricity=1.2] {angle=S1--M--P};
+                \pic[draw,<-,"$2\phi_2^*$",angle radius=3cm,angle eccentricity=1.15] {angle=S2--M--P};
+                \coordinate (A) at (4,-1);
+                \coordinate (B) at (4,1);
+                \pic[draw,<-,"$2\phi_1^{**}$",angle radius=1.5cm,angle eccentricity=1.25] {angle=P--M--A};
+                \pic[draw,<-,"$2\phi_2^{**}$",angle radius=2.5cm,angle eccentricity=1.2] {angle=P--M--B};
+            \end{tikzpicture}
+        \end{center}
+        \item Unter Verwendung von
+        \[
+            \sigma_{1, 2} = \frac{\sigma_x + \sigma_y}{2} \pm \sqrt{\parentheses*{\frac{\sigma_x - \sigma_y}{2}}^2 + \tau_{xy}^2}
+        \]
+        berechnen sich die Hauptspannungen zu \(\sigma_1 = 84,72\sis{\newton\per\milli\meter\squared}\) und \(\sigma_2 = -4,72\sis{\newton\per\milli\meter\squared}\).
+        Für eine Hauptspannungsrichtung folgt
+        \[
+            \phi^* = \frac{1}{2}\arctan\parentheses*{\frac{2\tau_{xy}}{\sigma_x - \sigma_y}} = 31,72^\circ.
+        \]
+        Für die andere Hauptspannungsrichtung ergibt sich \(31,72^\circ + 90^\circ = 121,72^\circ\).
+        Durch Einsetzen in die Transformationsgleichung lassen sich die Winkel wie folgt den entsprechenden Spannungen zuordnen:
+        \[
+            \phi_1^* = 121,72^\circ, \quad \phi_2^* = 31,72^\circ.
+        \]
+        Die Hauptschubspannungen berechnen sich als
+        \[
+            \tau_{\text{max}} = \pm\sqrt{\parentheses*{\frac{\sigma_x - \sigma_y}{2}}^2 + \tau_{xy}^2} = \pm 44,72\sis{\newton\per\milli\meter\squared}.
+        \]
+        Eine Richtung der Hauptschubspannungen berechnet sich zu
+        \[
+            \phi^{**} = \frac{1}{2}\arctan\parentheses*{-\frac{\sigma_x - \sigma_y}{2\tau_{xy}}} = -13,28^\circ.
+        \]
+        Die andere Richtung der Hauptschubspannungen folgt mit \(-13,28^\circ + 90^\circ = 76,72^\circ\).
+    \end{enumerate}
+
+
+    \section*{Aufgabe 3}
+
+    \begin{problem}
+        Ein dünnwandiges Rohr (\(h \ll d\)) wird durch Aufwickeln und Schweißen (Stumpfnaht) eines Stahlbandes der Breite \(b\) hergestellt.
+        Es soll durch die Längsspannung \(\sigma_l\) und die Torsionsschubspannung \(\tau_t\) beansprucht werden.
+        \begin{enumerate}
+            \item Welchen Wert muss die Torsionsschubspannung \(\tau_t\) annehmen, damit in der Schweißnaht kein Schub auftritt?
+            \item Wie groß sind in diesem Fall die Hauptspannungen?
+        \end{enumerate}
+        Gegeben: \(d = 240\sis{\milli\meter}\), \(b = 360\sis{\milli\meter}\), \(\sigma_l = 400\sis{\mega\pascal}\)
+    \end{problem}
+
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item\,
+        \begin{center}
+            \begin{tikzpicture}
+                \draw (0,0) rectangle (3,1.5);
+                \draw[->] (-.2,-.2) -- (.8,-.2) node[below] {\(x\)};
+                \draw[->] (-.2,-.2) -- (-.2,.8) node[left] {\(y\)};
+                \draw[->] (1,1.6) -- (2,1.6) node[above] {\(\tau_t\)};
+                \draw[->] (1.5,1.7) -- (1.5,2.7) node[right] {\(\sigma_y = \sigma_l\)};
+                \draw[->] (3.1,.25) -- (3.1,1.25) node[right] {\(\tau_t\)};
+                \draw[->] (3.2,.75) -- (4.2,.75) node[below] {\(\sigma_x = 0\)};
+            \end{tikzpicture}
+            \quad
+            \begin{tikzpicture}
+                \draw (0,0) -- (4,3) coordinate (A) -- (5,3) coordinate (B) -- (1,0) coordinate (C) -- cycle;
+                \node[anchor=north] at (.5,0) {\(\pi d\)};
+                \node[anchor=south] at (4.5,3) {\(\pi d\)};
+                \draw[<->] (4,3) -- (4,2.25) node[midway,left] {\(b\)};
+                \pic[draw,<-,"$\varphi$",angle eccentricity=1.5] {angle=A--B--C};
+                \node at (1,2.5) {Abwicklung};
+            \end{tikzpicture}
+        \end{center}
+        Aufgrund der Geometrie folgt
+        \[
+            \tan\varphi = \frac{b}{\pi d} \implies \varphi = \tan^{-1}\parentheses*{\frac{b}{\pi d}} = 25,52^\circ.
+        \]
+        Mit der Transformationsgleichung
+        \[
+            \tau_{\xi\eta} = -\frac{\sigma_x - \sigma_y}{2}\sin\parentheses*{2\varphi} + \tau_{xy}\cos\parentheses*{2\varphi}
+        \]
+        und der Bedingung \(\tau_{\xi\eta} = 0\) folgt
+        \[
+            \tau_t = \frac{\sigma_l}{2}\tan\parentheses*{2\varphi} = 247,3\sis{\mega\pascal}.
+        \]
+        \item Unter Berücksichtigung von \(\sigma_x = 0\) folgt für die Hauptspannungen
+        \[
+            \sigma_{1, 2} = \frac{\sigma_l}{2} \pm \sqrt{\parentheses*{-\frac{\sigma_l}{2}}^2 + \tau_t^2},
+        \]
+        also
+        \[
+            \sigma_1 = 518,05\sis{\mega\pascal}, \quad \sigma_2 = -118,05\sis{\mega\pascal}.
+        \]
+    \end{enumerate}
+\end{document}
