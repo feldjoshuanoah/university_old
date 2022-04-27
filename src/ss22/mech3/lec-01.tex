@@ -59,17 +59,15 @@
     In einem Punkt \(P\) dieses Körpers soll der komplette Spannungszustand erfasst werden.
     Damit sollen die Spannungen in allen Ebenen durch diesen Punkt bestimmt werden.
 
-    % TODO: Bestimmung des Spannungsvektors
-
     Wir fangen mit einer beliebigen Ebene an.
-    Diese Ebene schneidet einen Teil (links) des Körpers frei.
-    Durch die Schnittfläche übt der andere Teil (rechts) bestimmte Kräfte aus, die im Allgemeinen ungleichmäßig über diese Fläche verteilt sind.
+    Diese Ebene schneidet einen Teil des Körpers frei.
+    Durch die Schnittfläche übt der andere Teil bestimmte Kräfte aus, die im Allgemeinen ungleichmäßig über diese Fläche verteilt sind.
     Um die Spannung im Punkt \(P\) zu bestimmen, definieren wir zunächst eine kleine Teilfläche \(\Delta A\) um \(P\).
-    Sei \(\Delta\mathbf{F}\) die Resultierende aller Kräfte, die auf dieser Teilfläche wirken.
-    Durch den Quotienten \(\frac{\Delta\mathbf{F}}{\Delta A}\) bestimmt man die mittlere Spannung für das Flächenelement \(\Delta A\).
+    Sei \(\Delta\bm{F}\) die Resultierende aller Kräfte, die auf dieser Teilfläche wirken.
+    Durch den Quotienten \(\frac{\Delta\bm{F}}{\Delta A}\) bestimmt man die mittlere Spannung für das Flächenelement \(\Delta A\).
     Durch den Grenzübergang \(\Delta A \to 0\) wird der so genannte Cauchy'sche Spannungsvektor
     \begin{equation}\label{eq:2}
-        \mathbf{t} = \lim_{\Delta A \to 0}\frac{\Delta\mathbf{F}}{\Delta A} = \frac{\d\mathbf{F}}{\d A}
+        \bm{t} = \lim_{\Delta A \to 0}\frac{\Delta\bm{F}}{\Delta A} = \frac{\d\bm{F}}{\d A}
     \end{equation}
     definiert.
     Die Voraussetzung, dass dieser Grenzvektor existiert und endlich ist, stellt eine fundamentale Annahme (Cauchy-Annahme) der Mechanik dar.
@@ -77,10 +75,10 @@
     Durch vektorielle Zerlegung lässt sich dieser Vektor in eine Komponente normal und in eine Komponente tangential zur Schnittfläche zerlegen.
     Dabei wird die normale Komponente als Normalspannung (\(\sigma\)) und die tangentiale als Schubspannung (\(\tau\)) bezeichnet.
 
-    Der Spannungsvektor \(\mathbf{t}\) in einem Punkt hängt von der Richtung der Schnittfläche ab, die durch die äußere Normale \(\mathbf{n}\) festgelegt ist.
+    Der Spannungsvektor \(\bm{t}\) in einem Punkt hängt von der Richtung der Schnittfläche ab, die durch die äußere Normale \(\bm{n}\) festgelegt ist.
     Die Art dieser Abhängigkeit werden wir später untersuchen und feststellen.
 
-    Durch den Spannungsvektor \(\mathbf{t}\) auf einer einzigen Schnittfläche wird der Spannungszustand im Punkt \(P\) allerdings nicht ausreichend beschrieben.
+    Durch den Spannungsvektor \(\bm{t}\) auf einer einzigen Schnittfläche wird der Spannungszustand im Punkt \(P\) allerdings nicht ausreichend beschrieben.
     Man kann allerdings zeigen, dass hierzu die Spannungsvektoren in drei senkrecht aufeinander stehenden Schnittflächen im Allgemeinen notwendig sind.
     Zur Bestimmung des Spannungszustandes schneiden wir daher gedanklich einen infinitesimalen Quader mit den Kantenlängen \(\d x\), \(\d y\) und \(\d z\) aus einem Körper, in direkter Umgebung zum Punkt \(P\).
     \begin{center}
@@ -112,7 +110,6 @@
             \node[anchor=west] at (3.25,-.75) {\(\d x\)};
         \end{tikzpicture}
     \end{center}
-
     Auf jeder dieser drei orthogonalen Ebenen definieren wir mithilfe von \eqref{eq:2} analog zur Schnittfläche in der vorherigen Abbildung wiederum einen Spannungsvektor, welcher sich in die Komponenten der Normal- und Schubspannung zerlegen lässt.
     Die Schubspannung wird zusätzlich in zwei weiteren Komponenten entlang der zur Schnittfläche parallelen Koordinatenachsen zerlegt.
     Die so definierten Normal- und Schubspannungskomponenten bezeichnet man beispielsweise als \(\sigma_{yy}\) bzw. \(\tau_{xy}\).
@@ -147,13 +144,29 @@
             \end{scope} 
         \end{tikzpicture}
     \end{center}
-
     Insgesamt haben wir drei Komponenten der Normalspannung (\(\sigma_x\), \(\sigma_y\) und \(\sigma_z\)) und sechs Komponenten der Schubspannung (\(\tau_{xy}\), \(\tau_{yx}\), \(\tau_{xz}\), \(\tau_{zx}\), \(\tau_{yz}\) und \(\tau_{zy}\)) definiert.
     Man kann allerdings zeigen, dass die Schubspannungskomponenten voneinander nicht unabhängig, sondern paarweise gleich sind.
     Hierzu betrachten wir das Momentengleichgewicht um eine zur \(x\)-Richtung parallele Achse durch den Mittelpunkt des Quaders.
-
-    % TODO: Ebener Spannungszustand
-
+    \begin{center}
+        \begin{tikzpicture}
+            \draw[->] (0,0) -- (4,0) node[below] {\(y\)};
+            \draw[->] (0,0) -- (0,3) node[right] {\(z\)};
+            \draw[|<->|] (0,-1) -- (1.5,-1) node[midway,fill=white] {\(\frac{\d y}{2}\)};
+            \draw[<->|] (1.5,-1) -- (3,-1) node[midway,fill=white] {\(\frac{\d y}{2}\)};
+            \draw[|<->|] (4.5,0) -- (4.5,1) node[midway,fill=white] {\(\frac{\d z}{2}\)};
+            \draw[<->|] (4.5,1) -- (4.5,2) node[midway,fill=white] {\(\frac{\d z}{2}\)};
+            \draw (0,0) rectangle (3,2);
+            \draw (1.5,1) circle (.5mm) node[right] {\(M\)};
+            \draw[->] (1.25,2.1) -- (1.75,2.1) node[above right] {\(\tau_{yz}\)};
+            \draw[->] (1.5,2.2) -- (1.5,2.7) node[right] {\(\sigma_z\)};
+            \draw[->] (3.1,.75) -- (3.1,1.25) node[above right] {\(\tau_{zy}\)};
+            \draw[->] (3.2,1) -- (3.7,1) node[below] {\(\sigma_y\)};
+            \draw[->] (1.75,-.1) -- (1.25,-.1) node[below left] {\(\tau_{yz}\)};
+            \draw[->] (1.5,-.2) -- (1.5,-.7) node[right] {\(\sigma_z\)};
+            \draw[->] (-.1,1.25) -- (-.1,.75) node[below left] {\(\tau_{zy}\)};
+            \draw[->] (-.2,1) -- (-.7,1) node[above] {\(\sigma_y\)};
+        \end{tikzpicture}
+    \end{center}
     Zur Berechnung der Kräfte müssen dabei die Spannungskomponenten mit den jeweiligen Flächeninhalten multipliziert werden.
     Die Momente ergeben sich weiterhin als Produkt der Kräfte und der entsprechenden Hebelarme.
     Somit gilt:
@@ -206,7 +219,6 @@
             \pic[draw,->,"$\varphi$",angle eccentricity=1.5] {angle=x--o--xi};
         \end{tikzpicture}
     \end{center}
-
     Um die Spannungen auf dem schrägen Schnitt zu definieren, führen wir ein \(\xi, \eta\)-Koordinatensystem ein, welches gegenüber dem ursprünglichen \(x, y\)-Koordinatensystem um den Winkel \(\varphi\) gegen den Uhrzeigersinn gedreht ist.
     Dementsprechend bezeichnen wir die Spannungskomponenten in der schrägen Schnittfläche mit \(\sigma_\xi\) und \(\tau_{\eta\xi}\).
     Der Flächeninhalt dieses Schnitts ergibt sich zu \(\d A = t\d\eta\).
@@ -229,9 +241,39 @@
     \[
         \sigma_\eta = \sigma_x \sin^2 \varphi + \sigma_y \cos^2 \varphi - 2\tau_{xy}\cos\varphi\sin\varphi.
     \]
-
-    % TODO: Spannungskomponenten um gedrehten Koordinatensystem
-
+    \begin{center}
+        \begin{tikzpicture}
+            \draw[->] (0,0) -- (3,0) node[right] {\(x\)};
+            \draw[->] (0,0) -- (0,3) node[right] {\(y\)};
+            \draw (0,0) rectangle (2,2);
+            \draw[->] (-.1,1.25) -- (-.1,.75);
+            \draw[->] (-.2,1) -- (-.7,1);
+            \draw[->] (1.25,-.1) -- (.75,-.1);
+            \draw[->] (1,-.2) -- (1,-.7);
+            \draw[->] (2.1,.75) -- (2.1,1.25) node[right] {\(\tau_{xy}\)};
+            \draw[->] (2.2,1) -- (2.7,1) node[right] {\(\sigma_x\)};
+            \draw[->] (.75,2.1) -- (1.25,2.1) node[above right] {\(\tau_{xy}\)};
+            \draw[->] (1,2.2) -- (1,2.7) node[right] {\(\sigma_y\)};
+        \end{tikzpicture}
+        \hspace{2cm}
+        \begin{tikzpicture}
+            \begin{scope}[rotate=20]
+                \draw[->] (0,0) -- (3,0) coordinate (B) node[right] {\(\xi\)};
+                \draw[->] (0,0) -- (0,3) node[right] {\(\eta\)};
+                \draw (0,0) rectangle (2,2);
+                \draw[->] (-.1,1.25) -- (-.1,.75);
+                \draw[->] (-.2,1) -- (-.7,1);
+                \draw[->] (1.25,-.1) -- (.75,-.1);
+                \draw[->] (1,-.2) -- (1,-.7);
+                \draw[->] (2.1,.75) -- (2.1,1.25) node[above right] {\(\tau_{\eta\xi}\)};
+                \draw[->] (2.2,1) -- (2.7,1) node[right] {\(\sigma_\xi\)};
+                \draw[->] (.75,2.1) -- (1.25,2.1) node[above] {\(\tau_{\xi\eta}\)};
+                \draw[->] (1,2.2) -- (1,2.7) node[above] {\(\sigma_\eta\)};
+            \end{scope}
+            \draw[dashed] (0,0) coordinate (O) -- (2.5,0) coordinate (A);
+            \pic[draw,->,"$\varphi$",angle radius=2.3cm,angle eccentricity=1.15] {angle=A--O--B};
+        \end{tikzpicture}
+    \end{center}
     Mithilfe der weiteren trigonometrischen Formeln
     \begin{align*}
         \cos^2 \varphi &= \frac{1}{2}\parentheses*{1 + \cos 2\varphi}, & 2\sin\varphi\cos\varphi &= \sin 2\varphi,\\
