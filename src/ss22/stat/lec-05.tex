@@ -1,0 +1,314 @@
+\documentclass{lecture}
+
+\institute{Institut für Statistik und Wirtschaftsmathematik}
+\title{Vorlesung 5}
+\author{Joshua Feld, 406718}
+\course{Statistik}
+\professor{Cramer}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \section*{Urnenmodelle}
+
+    Zur Veranschaulichung einfacher Stichprobenverfahren und damit der Bestimmung der Mächtigkeit endlicher Mengen werden Urnenmodelle verwendet.
+    Eine Urne enthalte dazu \(n\) nummerierte Kugeln (mit den Nummern \(1, \ldots, n\)), die die Grundgesamtheit oder den Grundraum bilden.
+    
+    Das Ziehen einer Kugel aus der Urne entspricht der (zufälligen) Auswahl eines Objektes aus der Grundgesamtheit.
+    Die Erhebung einer Stichprobe vom Umfang \(k\) aus einer Grundgesamtheit von \(n\) Objekten entspricht daher dem Ziehen von \(k\) Kugeln aus einer Urne mit \(n\) Kugeln.
+    Die Urne wird im Folgenden als die Menge der Zahlen \(1, \ldots, n\) verstanden: \(\mathcal{U}_n = \braces*{1, \ldots, n}\), wobei die Zahl \(i\) der \(i\)-ten Kugel entspricht.
+    Resultat einer Ziehung von k Kugeln ist ein geordnetes Tupel \(\parentheses*{\omega_1, \ldots, \omega_k}\), wobei \(\omega_i\) die im \(i\)-ten Zug entnommene Kugel repräsentiert (z.B. durch deren Nummer).
+    Jede Kugel werde jeweils mit derselben Wahrscheinlichkeit gezogen, d.h. als Ausgangspunkt wird ein Laplace-Modell gewählt.
+
+    Im Folgenden werden insgesamt vier Urnenmodelle nach dem Ziehungsablauf und der Notation der Ziehung unterschieden:
+    \begin{enumerate}[label=(\roman*)]
+        \item Ziehungsablauf
+        \begin{enumerate}[label=\alph*)]
+            \item Die gezogene Kugel wird nach Feststellung ihrer Nummer in die Urne zurückgelegt.
+            \item Die gezogene Kugel wird nach Feststellung ihrer Nummer nicht in die Urne zurückgelegt.
+        \end{enumerate}
+        \item Notation der Ziehung
+        \begin{enumerate}[label=\alph*)]
+            \item Die Reihenfolge der Ziehungen wird berücksichtigt.
+            \item Die Reihenfolge der Ziehungen wird nicht berücksichtigt.
+        \end{enumerate}
+    \end{enumerate}
+    Für die Urnenmodelle werden folgende Bezeichnungen verwendet.
+    \begin{center}
+        \begin{tabular}{l|cc}
+            \toprule
+            \makecell[l]{Ziehen von \(k\) Kugeln\\aus \(n\) Kugeln} & mit Zurücklegen & ohne Zurücklegen\\
+            \midrule
+            \makecell[l]{mit Berücksichtigung\\der Reihenfolge} & \makecell{\(\parentheses*{n, k}\)-Permutationen\\mit Wiederholung} & \makecell{\(\parentheses*{n, k}\)-Permutationen\\ohne Wiederholung}\\
+            \makecell[l]{ohne Berücksichtigung\\der Reihenfolge} & \makecell{\(\parentheses*{n, k}\)-Kombinationen\\mit Wiederholung} & \makecell{\(\parentheses*{n, k}\)-Kombinationen\\ohne Wiederholung}\\
+            \bottomrule
+        \end{tabular}
+    \end{center}
+
+    \begin{definition}
+        Die Menge aller \(\parentheses*{n, k}\)-Permutationen mit Wiederholung ist die Menge aller Ergebnisse, die im Urnenmodell mit Zurücklegen und mit Berücksichtigung der Reihenfolge auftreten können (\(n\) Kugeln in der Urne, \(k\) Ziehungen).
+        Ist \(\mathcal{U}_n = \braces*{1, \ldots, n}\) die Menge der in der Urne enthaltenen Kugeln, so beschreibt
+        \[
+            \Omega_{\text{PmW}} = \braces*{\parentheses*{\omega_1, \ldots, \omega_k} : \omega_i \in \mathcal{U}_n, 1 \le i \le k}
+        \]
+        die Menge aller \(\parentheses*{n, k}\)-Permutationen mit Wiederholung über \(\mathcal{U}_n\).
+        Ein Element \(\parentheses*{\omega_1, \ldots, \omega_k}\) von \(\Omega_{\text{PmW}}\) heißt \emph{\(\parentheses*{n, k}\)-Permutation mit Wiederholung} über \(\mathcal{U}_n\).
+    \end{definition}
+
+    Durch \(\parentheses*{\Omega_{\text{PmW}}, P}\) mit
+    \[
+        P\parentheses*{A} = \frac{\absolute*{A}}{\absolute*{\Omega_{\text{PmW}}}} = \frac{\absolute*{A}}{n^k}, \quad A \subseteq \Omega_{\text{PmW}},
+    \]
+    wird ein Laplace-Raum auf \(\Omega_{\text{PmW}}\) definiert.
+    Die Mächtigkeit von \(\Omega_{\text{PmW}}\) ist durch die Zahl
+    \[
+        \Per_{\text{mW}}\parentheses*{n, k} = \absolute*{\Omega_{\text{PmW}}} = \underbrace{n \cdot n \cdot \ldots \cdot n}_{k\text{-mal}} = n^k
+    \]
+    gegeben, d.h. es gibt \(n^k\) Möglichkeiten, \(k\) Kugeln aus einer Urne mit \(n\) Kugeln mit Zurücklegen und mit Beachtung der Zugreihenfolge zu entnehmen.
+
+    \begin{example}
+        Eine Urne enthält vier Kugeln, die mit \(1\), \(2\), \(3\) und \(4\) nummeriert sind.
+        Drei Mal hintereinander wird aus dieser Urne eine Kugel entnommen, ihre Zahl notiert und danach wieder zurückgelegt.
+        Gesucht ist die Anzahl der \(\parentheses*{4, 3}\)-Permutationen mit Wiederholung.
+
+        Dazu wird zunächst die Menge \(\Omega_{\text{PmW}}\) aller \(\parentheses*{4, 3}\)-Permutationen mit Wiederholung explizit angegeben:
+        \begin{align*}
+            \Omega_{\text{PmW}} = \{&\parentheses*{1, 1, 1}, \parentheses*{1, 1, 2}, \parentheses*{1, 1, 3}, \parentheses*{1, 1, 4}, \parentheses*{1, 2, 1}, \parentheses*{1, 2, 2}, \parentheses*{1, 2, 3}, \parentheses*{1, 2, 4},\\
+            &\parentheses*{1, 3, 1}, \parentheses*{1, 3, 2}, \parentheses*{1, 3, 3}, \parentheses*{1, 3, 4}, \parentheses*{1, 4, 1}, \parentheses*{1, 4, 2}, \parentheses*{1, 4, 3}, \parentheses*{1, 4, 4},\\
+            &\parentheses*{2, 1, 1}, \parentheses*{2, 1, 2}, \parentheses*{2, 1, 3}, \parentheses*{2, 1, 4}, \parentheses*{2, 2, 1}, \parentheses*{2, 2, 2}, \parentheses*{2, 2, 3}, \parentheses*{2, 2, 4},\\
+            &\parentheses*{2, 3, 1}, \parentheses*{2, 3, 2}, \parentheses*{2, 3, 3}, \parentheses*{2, 3, 4}, \parentheses*{2, 4, 1}, \parentheses*{2, 4, 2}, \parentheses*{2, 4, 3}, \parentheses*{2, 4, 4},\\
+            &\parentheses*{3, 1, 1}, \parentheses*{3, 1, 2}, \parentheses*{3, 1, 3}, \parentheses*{3, 1, 4}, \parentheses*{3, 2, 1}, \parentheses*{3, 2, 2}, \parentheses*{3, 2, 3}, \parentheses*{3, 2, 4},\\
+            &\parentheses*{3, 3, 1}, \parentheses*{3, 3, 2}, \parentheses*{3, 3, 3}, \parentheses*{3, 3, 4}, \parentheses*{3, 4, 1}, \parentheses*{3, 4, 2}, \parentheses*{3, 4, 3}, \parentheses*{3, 4, 4},\\
+            &\parentheses*{4, 1, 1}, \parentheses*{4, 1, 2}, \parentheses*{4, 1, 3}, \parentheses*{4, 1, 4}, \parentheses*{4, 2, 1}, \parentheses*{4, 2, 2}, \parentheses*{4, 2, 3}, \parentheses*{4, 2, 4},\\
+            &\parentheses*{4, 3, 1}, \parentheses*{4, 3, 2}, \parentheses*{4, 3, 3}, \parentheses*{4, 3, 4}, \parentheses*{4, 4, 1}, \parentheses*{4, 4, 2}, \parentheses*{4, 4, 3}, \parentheses*{4, 4, 4}\}.
+        \end{align*}
+        Abzählen ergibt \(64\) verschiedene \(\parentheses*{4, 3}\)-Permutationen mit Wiederholung.
+        Mit Anwendung der allgemeinen Formel berechnet sich die Anzahl der \(\parentheses*{4, 3}\)-Permutationen mit Wiederholung gemäß
+        \[
+            \absolute*{\Omega_{\text{PmW}}} = 4^3 = 64.
+        \]
+    \end{example}
+
+    \begin{definition}
+        Die Menge aller \(\parentheses*{n, k}\)-Permutationen ohne Wiederholung ist die Menge aller Ergebnisse, die im Urnenmodell ohne Zurücklegen und mit Berücksichtigung der Reihenfolge auftreten können (\(n\) Kugeln in der Urne, \(k\) Ziehungen).
+        Ist \(\mathcal{U}_n = \braces*{1, \ldots, n}\) die Menge der in der Urne enthaltenen Kugeln, so beschreibt
+        \[
+            \Omega_{\text{PoW}} = \braces*{\parentheses*{\omega_1, \ldots, \omega_k} : \omega_i \in \mathcal{U}_n, 1 \le i \le k\text{ und }\omega_i \ne \omega_j\text{ für }1 \le i \ne j \le k}
+        \]
+        die Menge aller \(\parentheses*{n, k}\)-Permutationen ohne Wiederholung über \(\mathcal{U}_n\).
+        Bei diesem Urnenmodell ist die Anzahl der Ziehungen \(k\) notwendig kleiner oder gleich der Anzahl \(n\) von Kugeln in der Urne, d.h. \(1 \le k \le n\).
+        Ein Element von \(\Omega_{\text{PoW}}\) heißt \emph{\(\parentheses*{n, k}\)-Permutation mit Wiederholung} über \(\mathcal{U}_n\).
+    \end{definition}
+
+    Durch \(\parentheses*{\Omega_{\text{PoW}}, P}\) mit
+    \[
+        P\parentheses*{A} = \frac{\absolute*{A}}{\absolute*{\Omega_{\text{PoW}}}} = \frac{\absolute*{A}}{\frac{n!}{\parentheses*{n - k}!}} = \frac{\parentheses*{n - k}!}{n!}\absolute*{A}, \quad A \subseteq \Omega_{\text{PoW}},
+    \]
+    wird ein Laplace-Raum auf \(\Omega_{\text{PoW}}\) definiert.
+    Die Mächtigkeit von \(\Omega_{\text{PoW}}\) ist durch die Zahl
+    \[
+        \Per_{\text{oW}}\parentheses*{n, k} = \absolute*{\Omega_{\text{PoW}}} = n \cdot \parentheses*{n - 1} \cdot \ldots \cdot \parentheses*{n - k + 1} = \frac{n!}{\parentheses*{n - k}!}
+    \]
+    gegeben, d.h. es gibt \(\frac{n!}{\parentheses*{n - k}!}\) Möglichkeiten, \(k\) Kugeln aus einer Urne mit \(n\) Kugeln ohne Zurücklegen und mit Beachtung der Zugreihenfolge zu entnehmen.
+    Speziell für \(n = k\) gilt \(\absolute*{\Omega_{\text{PoW}}} = n!\) und \(\Omega_{\text{PoW}}\) ist die Menge aller Permutationen der Zahlen von \(1\) bis \(n\).
+
+    \begin{example}
+        Eine Urne enthält vier Kugeln, die mit \(1\), \(2\), \(3\) und \(4\) nummeriert sind.
+        Drei Mal hintereinander wird aus dieser Urne eine Kugel entnommen, ihre Zahl notiert und danach zur Seite gelegt.
+        Es werden also \(3\)-Tupel mit den Zahlen \(1\), \(2\), \(3\) und \(4\) notiert, wobei jede Zahl höchstens ein Mal vorkommen darf und die Zugreihenfolge berücksichtigt wird.
+        Gesucht ist die Anzahl der \(\parentheses*{4, 3}\)-Permutationen ohne Wiederholung.
+
+        Dazu wird zunächst die Menge \(\Omega_{\text{PoW}}\) aller \(\parentheses*{4, 3}\)-Permutationen ohne Wiederholung explizit angegeben:
+        \begin{align*}
+            \Omega_{\text{PoW}} = \{&\parentheses*{1, 2, 3}, \parentheses*{1, 2, 4}, \parentheses*{1, 3, 2}, \parentheses*{1, 3, 4}, \parentheses*{1, 4, 2}, \parentheses*{1, 4, 3},\\
+            &\parentheses*{2, 1, 3}, \parentheses*{2, 1, 4}, \parentheses*{2, 3, 1}, \parentheses*{2, 3, 4}, \parentheses*{2, 4, 1}, \parentheses*{2, 4, 3},\\
+            &\parentheses*{3, 1, 2}, \parentheses*{3, 1, 4}, \parentheses*{3, 2, 1}, \parentheses*{3, 2, 4}, \parentheses*{3, 4, 1}, \parentheses*{3, 4, 2},\\
+            &\parentheses*{4, 1, 2}, \parentheses*{4, 1, 3}, \parentheses*{4, 2, 1}, \parentheses*{4, 2, 3}, \parentheses*{4, 3, 1}, \parentheses*{4, 3, 2}\}.
+        \end{align*}
+        Durch Abzählen erhält man, dass es \(24\) verschiedene \(\parentheses*{4, 3}\)-Permutationen ohne Wiederholung gibt.
+        Mit Anwendung der allgemeinen Formel berechnet sich die Anzahl der \(\parentheses*{4, 3}\)-Permutationen ohne Wiederholung gemäß
+        \[
+            \absolute*{\Omega_{\text{PoW}}} = \frac{4!}{\parentheses*{4 - 3}!} = 24.
+        \]
+    \end{example}
+
+    \begin{definition}
+        Die Menge aller \(\parentheses*{n, k}\)-Kombinationen ohne Wiederholung ist die Menge aller Ergebnisse, die im Urnenmodell ohne Zurücklegen und ohne Berücksichtigung der Reihenfolge auftreten können (\(n\) Kugeln in der Urne, \(k\) Ziehungen).
+        Ist die Menge der in der Urne enthaltenen Kugeln gegeben durch \(\mathcal{U}_n = \braces*{1, \ldots, n}\), so beschreiben
+        \[
+            \Omega_{\text{KoW}} = \braces*{\parentheses*{\omega_1, \ldots, \omega_k} : \omega_i \in \mathcal{U}_n, \omega_1 < \cdots < \omega_k}
+        \]
+        oder alternativ
+        \[
+            \Omega_{\text{KoW}}' = \braces*{A \subseteq \mathcal{U}_n : \absolute*{A} = k}
+        \]
+        die Menge aller \(\parentheses*{n, k}\)-Kombinationen ohne Wiederholung über \(\mathcal{U}_n\).
+        Ein Element von \(\Omega_{\text{KoW}}\) heißt \emph{\(\parentheses*{n, k}\)-Kombination ohne Wiederholung} über \(\mathcal{U}_n = \braces*{1, \ldots, n}\).
+    \end{definition}
+
+    Da die Reihenfolge bei \(\parentheses*{n, k}\)-Kombinationen ohne Bedeutung ist, werden die Einträge \(\omega_i\) des \(k\)-Tupels aufsteigend geordnet.
+    Durch \(\parentheses*{\Omega_{\text{KoW}}, P}\) mit
+    \[
+        P\parentheses*{A} = \frac{\absolute*{A}}{\absolute*{\Omega_{\text{KoW}}}} = \frac{\absolute*{A}}{\binom{n}{k}}, \quad A \subseteq \Omega_{\text{KoW}},
+    \]
+    wird ein Laplace-Raum auf \(\Omega_{\text{KoW}}\) definiert.
+    Die Mächtigkeit von \(\Omega_{\text{KoW}}\) ist durch die Zahl
+    \[
+        \Kom_{\text{oW}}\parentheses*{n, k} = \absolute*{\Omega_{\text{KoW}}} = \frac{n!}{\parentheses*{n - k}! \cdot k!} = \binom{n}{k}
+    \]
+    gegeben, d.h. es gibt \(\binom{n}{k}\) Möglichkeiten, \(k\) Kugeln aus einer Urne mit \(n\) Kugeln ohne Zurücklegen und ohne Beachtung der Zugreihenfolge zu entnehmen.
+
+    \begin{example}
+        Eine Urne enthält vier Kugeln, die mit \(1\), \(2\), \(3\) und \(4\) nummeriert sind.
+        Drei Kugeln werden nacheinander der Urne entnommen, ohne dass eine zurückgelegt wird.
+        Anschließend werden die Kugeln gemäß ihrer Nummer aufsteigend sortiert.
+        Alternativ kann die Ziehung auch so durchgeführt werden, dass die drei Kugeln auf einmal aus dieser Urne entnommen werden und die Zahlen aufsteigend notiert werden.
+        Es werden also \(3\)-Tupel mit den Zahlen \(1\), \(2\), \(3\) und \(4\) notiert, wobei jede Zahl höchstens ein Mal vorkommen darf und die Zugreihenfolge nicht berücksichtigt wird.
+        Gesucht ist die Anzahl der \(\parentheses*{4, 3}\)-Kombinationen ohne Wiederholung.
+
+        Dazu wird zunächst die Menge \(\Omega_{\text{KoW}}\) aller \(\parentheses*{4, 3}\)-Kombinationen ohne Wiederholung explizit angegeben:
+        \begin{align*}
+            \Omega_{\text{KoW}} = \{&\parentheses*{1, 2, 3}, \parentheses*{1, 2, 4}, \parentheses*{1, 3, 2}, \parentheses*{1, 3, 4}, \parentheses*{1, 4, 2}, \parentheses*{1, 4, 3},\\
+            &\parentheses*{2, 1, 3}, \parentheses*{2, 1, 4}, \parentheses*{2, 3, 1}, \parentheses*{2, 3, 4}, \parentheses*{2, 4, 1}, \parentheses*{2, 4, 3},\\
+            &\parentheses*{3, 1, 2}, \parentheses*{3, 1, 4}, \parentheses*{3, 2, 1}, \parentheses*{3, 2, 4}, \parentheses*{3, 4, 1}, \parentheses*{3, 4, 2},\\
+            &\parentheses*{4, 1, 2}, \parentheses*{4, 1, 3}, \parentheses*{4, 2, 1}, \parentheses*{4, 2, 3}, \parentheses*{4, 3, 1}, \parentheses*{4, 3, 2}\}.
+        \end{align*}
+        Durch Abzählen erhält man, dass es \(24\) verschiedene \(\parentheses*{4, 3}\)-Permutationen ohne Wiederholung gibt.
+        Mit Anwendung der allgemeinen Formel berechnet sich die Anzahl der \(\parentheses*{4, 3}\)-Permutationen ohne Wiederholung gemäß
+        \[
+            \absolute*{\Omega_{\text{KoW}}} = \binom{4}{3} = \frac{4!}{3! \cdot \parentheses*{4 - 3}!} = \frac{24}{6} = 4.
+        \]
+    \end{example}
+
+    Das folgende, vierte Grundmodell der Kombinatorik führt nicht auf einen Laplace-Raum.
+
+    \begin{definition}
+        Die Menge aller \(\parentheses*{n, k}\)-Kombinationen mit Wiederholung ist die Menge aller Ergebnisse, die im Urnenmodell mit Zurücklegen und ohne Berücksichtigung der Reihenfolge auftreten können (\(n\) Kugeln in der Urne, \(k\) Ziehungen).
+        Ist die Menge der in der Urne enthaltenen Kugeln gegeben durch \(\mathcal{U}_n = \braces*{1, \ldots, n}\), so beschreiben
+        \[
+            \Omega_{\text{KmW}} = \braces*{\parentheses*{\omega_1, \ldots, \omega_k} : \omega_i \in \mathcal{U}_n, \omega_1 \le \cdots \le \omega_k}
+        \]
+        oder alternativ
+        \[
+            \Omega_{\text{KoW}}' = \braces*{A \subseteq \mathcal{U}_n : \absolute*{A} = k}
+        \]
+        die Menge aller \(\parentheses*{n, k}\)-Kombinationen mit Wiederholung über \(\mathcal{U}_n\).
+        Ein Element von \(\Omega_{\text{KoW}}\) heißt \emph{\(\parentheses*{n, k}\)-Kombination mit Wiederholung} über \(\mathcal{U}_n = \braces*{1, \ldots, n}\).
+    \end{definition}
+
+    Da die Reihenfolge bei \(\parentheses*{n, k}\)-Kombinationen ohne Bedeutung ist, werden die Einträge \(\omega_i\) des \(n\)-Tupels aufsteigend geordnet.
+    Hierbei ist zu beachten, dass Einträge mehrfach auftreten können.
+
+    Die Mächtigkeit von \(\Omega_{\text{KmW}}\) ist durch die Zahl
+    \[
+        \Kom_{\text{mW}}\parentheses*{n, k} = \binom{n + k - 1}{k} = \frac{\parentheses*{n + k - 1}!}{\parentheses*{n - 1}! \cdot k!}
+    \]
+    gegeben, d.h. es gibt \(\binom{n + k - 1}{k}\) Möglichkeiten, \(k\) Kugeln aus einer Urne mit \(n\) Kugeln mit Zurücklegen und ohne Beachtung der Zugreihenfolge zu entnehmen.
+
+    Dieses Urnenmodell kann nicht zur Definition eines Laplace-Raums verwendet werden, da die Konsistenz zur Modellierung des Experiments als Laplace-Modell mit Beachtung der Zugreihenfolge nicht gegeben wäre.
+    Dies wird im folgenden Beispiel illustriert.
+
+    \begin{example}
+        Aus einer Urne mit \(n = 4\) mit den Ziffern \(1, 2, 3, 4\) nummerierten Kugeln wird \(k = 4\) mal gezogen.
+        Im Folgenden werden die Wahrscheinlichkeiten der Ereignisse
+        \begin{enumerate}
+            \item es wird viermal eine Eins gezogen,
+            \item es werden nur verschiedene Ziffern gezogen,
+        \end{enumerate}
+        betrachtet, wobei die Zugreihenfolge keine Rolle spielt.
+        Dazu werden die Grundräume \(\Omega_{\text{PmW}}\) und \(\Omega_{\text{KmW}}\) herangezogen.
+
+        Zunächst wird ein Laplace-Modell \(\parentheses*{\Omega_{\text{PmW}}, P_{\text{PmW}}}\) zur Modellierung verwendet, d.h. die Zugreihenfolge wird im Modell berücksichtigt.
+        Dann resultieren mit \(A = \braces*{\parentheses*{1, 1, 1, 1}}\) und
+        \[
+            B = \braces*{\parentheses*{1, 2, 3, 4}, \parentheses*{1, 2, 4, 3}, \parentheses*{1, 3, 2, 4}, \ldots, \parentheses*{4, 3, 2, 1}}
+        \]
+        die Wahrscheinlichkeiten
+        \[
+            P_{\text{PmW}}\parentheses*{A} = \frac{1}{4^4}, \quad P_{\text{PmW}}\parentheses*{B} = \frac{4!}{4^4}.
+        \]
+        Im Grundraum \(\Omega_{\text{KmW}}\) entsprechen den Ereignissen \(A\) und \(B\) die Ereignisse \(A^* = \braces*{\parentheses*{1, 1, 1, 1}}\) und \(B^* = \braces*{\parentheses*{1, 2, 3, 4}}\).
+        Eine Laplace-Annahme auf der Grundmenge \(\Omega_{\text{KmW}}\) würde den Ereignissen \(A^*\) und \(B^*\) jedoch dieselbe Wahrscheinlichkeit \(\frac{1}{\binom{7}{4}}\) zuordnen, so dass diese Festlegung den Wahrscheinlichkeiten \(P_{\text{PmW}}\parentheses*{A}\) und \(P_{\text{PmW}}\parentheses*{B}\) im Modell \(\parentheses*{\Omega_{\text{PmW}}, P_{\text{PmW}}}\) widersprechen würde.
+        Daher eignet sich der Raum \(\Omega_{\text{KmW}}\) nicht zur Definition eines Laplace-Raums.
+    \end{example}
+
+    \begin{example}
+        Eine Urne enthält vier Kugeln, die mit \(1\), \(2\), \(3\) und \(4\) nummeriert sind.
+        Drei Mal wird aus dieser Urne eine Kugel entnommen, ihre Zahl notiert und danach wieder zurückgelegt.
+        Da die Reihenfolge der gezogenen Zahlen keine Rolle spielen soll, werden sie aufsteigend geordnet.
+        Es werden also aufsteigend geordnete \(3\)-Tupel mit den Zahlen \(1\), \(2\), \(3\) und \(4\) notiert, wobei jede Zahl auch mehrmals auftreten kann.
+        Gesucht ist die Anzahl der \(\parentheses*{4, 3}\)-Kombinationen mit Wiederholung.
+
+        Dazu wird zunächst die Menge \(\Omega_{\text{KmW}}\) aller \(\parentheses*{4, 3}\)-Kombinationen mit Wiederholung explizit angegeben:
+        \begin{align*}
+            \Omega_{\text{KmW}} = \{&\parentheses*{1, 1, 1}, \parentheses*{1, 1, 2}, \parentheses*{1, 1, 3}, \parentheses*{1, 1, 4}, \parentheses*{1, 2, 2},\\
+            &\parentheses*{1, 2, 3}, \parentheses*{1, 2, 4}, \parentheses*{1, 3, 3}, \parentheses*{1, 3, 4}, \parentheses*{1, 4, 4},\\
+            &\parentheses*{2, 2, 2}, \parentheses*{2, 2, 3}, \parentheses*{2, 2, 4}, \parentheses*{2, 3, 3}, \parentheses*{2, 3, 4},\\
+            &\parentheses*{2, 4, 4}, \parentheses*{3, 3, 3}, \parentheses*{3, 3, 4}, \parentheses*{3, 4, 4}, \parentheses*{4, 4, 4}\}.
+        \end{align*}
+        Durch Abzählen erhält man, dass es \(20\) verschiedene \(\parentheses*{4, 3}\)-Kombinationen mit Wiederholung gibt.
+        Durch Anwendung der allgemeinen Formel berechnet sich die Anzahl der \(\parentheses*{4, 3}\)-Kombinationen mit Wiederholung gemäß
+        \[
+            \absolute*{\Omega_{\text{KmW}}} = \binom{4 + 3 - 1}{3} = \binom{6}{3} = \frac{6!}{3! \cdot \parentheses*{6 - 3}!} = \frac{720}{36} = 20.
+        \]
+    \end{example}
+
+    \begin{remark}
+        Alternativ zu den Urnenmodellen können zur Veranschaulichung der Grundmodelle der Kombinatorik auch ``Murmelmodelle'' verwendet werden.
+        Anstelle von \(n\) Kugeln und \(k\) Ziehungen werden dabei \(n\) Zellen betrachtet, auf die \(k\) Murmeln verteilt werden.
+
+        Wie in den Urnenmodellen werden vier Situationen unterschieden:
+        \begin{enumerate}[label=(\roman*)]
+            \item Belegungsmodus
+            \begin{enumerate}[label=\alph*)]
+                \item Es ist möglich, eine Zelle mit mehreren Murmeln zu belegen.
+                \item Jede Zelle darf nur mit einer Murmel belegt werden.
+            \end{enumerate}
+            \item Notation der Murmeln
+            \begin{enumerate}[label=\alph*)]
+                \item Die Murmeln sind nummeriert und unterscheidbar.
+                \item Die Murmeln sind nicht unterscheidbar.
+            \end{enumerate}
+        \end{enumerate}
+    \end{remark}
+
+
+    \section*{Diskrete Wahrscheinlichkeitsverteilungen}
+
+    Eine Vielzahl diskreter Wahrscheinlichkeitsverteilungen wird in Anwendungen eingesetzt.
+    Zur Festlegung der Verteilung wird jedem Element einer Menge von Trägerpunkten \(T = \braces*{x_1, x_2, \ldots}\) eine Wahrscheinlichkeit \(p_k = P\parentheses*{\braces*{x_k}} \in \left(0, 1\right], k = 1, 2, \ldots\) zugeordnet, wobei die Zahlen \(p_k\) die Summationsbedingung \(\sum_k p_k = 1\) erfüllen müssen.
+    Für \(x \in \Omega \setminus T\) gilt stets \(p\parentheses*{x} = 0\).
+
+    \begin{definition}
+        Die \emph{Einpunktverteilung} \(\delta_x\) in einem Punkt \(x \in \R\) ist definiert durch die Zähldichte
+        \[
+            p\parentheses*{x} = 1,
+        \]
+        d.h. die Einpunktverteilung (oder Dirac-Verteilung oder Punktmaß) hat den Träger \(T = \braces*{x}\).
+    \end{definition}
+
+    \begin{definition}
+        Die \emph{diskrete Gleichverteilung} auf den Punkten \(x_1 < \cdots < x_n\) ist definiert durch die Zähldichte
+        \[
+            p\parentheses*{x_k} = p_k = \frac{1}{n}, \quad k \in \braces*{1, \ldots, n},\text{ für ein }n \in \N,
+        \]
+        d.h. jedem der \(n\) Trägerpunkte wird dieselbe Wahrscheinlichkeit zugeordnet.
+    \end{definition}
+
+    \begin{definition}
+        Die \emph{hypergeometrische Verteilung} \(\hyp\parentheses*{n, r, s}\) ist definiert durch die Zähldichte
+        \[
+            p_k = \frac{\binom{r}{k}\binom{s}{n - k}}{\binom{r + s}{n}}, \quad n - s \le k \le \min\parentheses*{r, n}, k \in \N_0,
+        \]
+        für \(n, r, s \in \N\) mit \(n \le r + s\).
+    \end{definition}
+
+    In einem Urnenmodell wird \(p_k\) erzeugt als die Wahrscheinlichkeit, bei \(n\)-maligen Ziehen ohne Zurücklegen aus einer Urne mit insgesamt \(r\) roten und \(s\) schwarzen Kugeln genau \(k\) rote und \(n - k\) schwarze Kugeln zu erhalten.
+
+    Anwendung findet die hypergeometrische Verteilung z.B. bei der sogenannten Gut-Schlecht-Prüfung im Rahmen der Qualitätskontrolle durch ein Warenstichprobe.
+    Einer Lieferung von \(r + s\) Teilen, die \(r\) defekte und \(s\) intakte Teile enthält, wird eine Stichprobe vom Umfang \(n\) (ohne Zurücklegen) entnommen; \(p_k\) ist dann die Wahrscheinlichkeit, dass genau \(k\) defekte Teile in der Stichprobe enthalten sind.
+    Mit einer analogen Argumentation ist die Wahrscheinlichkeit für ``\(4\) Richtige'' beim Zahlenlotto ``\(6\) aus \(49\)'' durch \(p_4 = \frac{\binom{6}{4}\binom{43}{2}}{\binom{49}{6}}\) gegeben.
+\end{document}

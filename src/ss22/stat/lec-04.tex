@@ -1,0 +1,280 @@
+\documentclass{lecture}
+
+\institute{Institut für Statistik und Wirtschaftsmathematik}
+\title{Vorlesung 4}
+\author{Joshua Feld, 406718}
+\course{Statistik}
+\professor{Cramer}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \section*{Mittlere absolute Abweichung}
+
+    Die bisher vorgestellten Streuungsmaße messen die Streuung in Relation zum arithmetischen Mittel der zu Grunde liegenden Daten.
+    Die mittlere absolute Abweichung ist eine Kenngröße, die die Abweichungen der Beobachtungsdaten von deren Median zur Messung der Streuung innerhalb eines Datensatzes verwendet.
+    Hierzu werden zunächst die Differenzen zwischen jedem Beobachtungswert und dem Median berechnet.
+    Danach werden die Beträge dieser Differenzen, die absoluten Abweichungen, gebildet.
+
+    \begin{definition}
+        Für einen metrischen Datensatz \(x_1, \ldots, x_n\) mit zugehörigem Median \(\tilde{x}\) heißt
+        \[
+            d = \frac{1}{n}\sum_{i = 1}^n \absolute*{x_i - \tilde{x}}
+        \]
+        \emph{mittlere absolute Abweichung} \(d\) vom Median (der Daten \(x_1, \ldots, x_n\)).
+    \end{definition}
+
+    \begin{calcrule}
+        Liegen die Daten in Form einer Häufigkeitsverteilung \(f_1, \ldots, f_m\) mit verschiedenen Merkmalsausprägungen \(u_1, \ldots, u_m\) des betrachteten Merkmals vor, so kann die mittlere absolute Abweichung berechnet werden als
+        \[
+            d = \sum_{j = 1}^m f_j\absolute*{u_j - \tilde{x}}.
+        \]
+    \end{calcrule}
+
+    Werden die mittlere absolute Abweichung und die empirische Standardabweichung für den selben Datensatz ausgewertet, so liefern beide Streuungsmaße Werte in der selben Einheit.
+    Die Streuungsmaße können daher direkt miteinander verglichen werden.
+    In diesem Zusammenhang ist die folgende Ordnungsbeziehung gültig.
+
+    \begin{calcrule}
+        Für die mittlere absolute Abweichung \(d\) und die empirische Standardabweichung \(s\) eines Datensatzes gilt \(d \le s\).
+    \end{calcrule}
+
+
+    \section*{Lage- und Streuungsmaße bei linearer Transformation}
+
+    Eine wichtige Transformation von Daten ist die lineare Transformation.
+
+    \begin{definition}
+        Für Zahlen \(a, b \in \R\) heißt die Vorschrift
+        \[
+            y = a + bx, \quad x \in \R,
+        \]
+        \emph{lineare Transformation}.
+        Die Anwendung einer linearen Transformation \(y = a + bx\) auf den metrischskalierten Datensatz \(x_1, \ldots, x_n\) liefert den \emph{linear transformierten Datensatz} \(y_1, \ldots, y_n\) mit
+        \[
+            y_i = a + bx_i, \quad i \in \braces*{1, \ldots, n}.
+        \]
+    \end{definition}
+
+    Einige der in den vorhergehenden Abschnitten vorgestellten Lage- und Streuungsmaße zeigen bzgl. linearer Transformation ein nützliches Verhalten, das in der folgenden Regel zusammengefasst wird.
+
+    \begin{calcrule}
+        Seien \(a, b \in \R\) und \(y_1, \ldots, y_n\) ein linear transformierter Datensatz von \(x_1, \ldots, x_n\):
+        \[
+            y_i = a + bx_i, \quad i \in \braces*{1, \ldots, n}.
+        \]
+        Dann gilt
+        \begin{enumerate}
+            \item \(\tilde{y} = a + b\tilde{x}\),
+            \item \(\bar{y} = a + b\bar{x}\),
+            \item \(s_y^2 = b^2 s_x^2\),
+            \item \(s_y = \absolute*{b}s_x\),
+            \item \(d_y = \absolute*{b}d_x\),
+        \end{enumerate}
+        wobei \(s_x^2, s_y^2, s_x, s_y, d_x, d_y\) die zum jeweiligen Datensatz gehörigen Streuungsmaße bezeichnen.
+    \end{calcrule}
+
+    Eine einfache Methode, Abweichungen der Beobachtungswerte zu beschreiben, ist die Zentrierung der Daten am arithmetischen Mittel.
+
+    \begin{definition}
+        Für Beobachtungswerte \(x_1, \ldots, x_n\) eines metrischen Merkmals heißt die lineare Transformation
+        \[
+            y_i = x_i - \bar{x}, \quad i \in \braces*{1, \ldots, n},
+        \]
+        \emph{Zentrierung}.
+        Die transformierten Daten \(y_1, \ldots, y_n\) werden als \emph{zentriert} (oder als \emph{Residuen}) bezeichnet.
+    \end{definition}
+
+    \begin{calcrule}
+        Ist \(y_1, \ldots, y_n\) der zum Datensatz \(x_1, \ldots, x_n\) gehörende zentrierte Datensatz, so gilt für das zugehörige arithmetische Mittel \(\bar{y} = 0\).
+    \end{calcrule}
+
+    Sollen Beobachtungswerte aus verschiedenen Messreihen direkt miteinander verglichen werden, so ist es sinnvoll, zusätzliche Informationen über Lage und Streuung der jeweiligen Daten zu berücksichtigen.
+    Die Verwendung standardisierter Daten bietet sich an.
+
+    \begin{definition}
+        Seien \(x_1, \ldots, x_n\) Beobachtungswerte mit positiver empirischer Standardabweichung \(s_x > 0\) und arithmetischem Mittel \(\bar{x}\).
+        Die lineare Transformation
+        \[
+            z_i = \frac{x_i - \bar{x}}{s_x}, \quad i \in \braces*{1, \ldots, n},
+        \]
+        der Daten heißt \emph{Standardisierung}.
+        Die transformierten Daten \(z_1, \ldots, z_n\) werden als \emph{standardisiert} bezeichnet.
+    \end{definition}
+
+    Durch eine Standardisierung können unterschiedliche Datensätze so transformiert werden, dass die arithmetischen Mittelwerte und die Standardabweichungen in allen Datensätzen gleich sind.
+
+    \begin{calcrule}
+        Für standardisierte Beobachtungswerte \(z_1, \ldots, z_n\) gilt \(\bar{z} = 0\) und \(s_z = 1\).
+    \end{calcrule}
+
+
+    \section*{Grundlagen der Wahrscheinlichkeitsrechnung}
+
+    In diesem Abschnitt werden grundlegende Begriffe und Bezeichnungen eingeführt.
+
+    \begin{definition}
+        Die Menge aller möglichen Ergebnisse eines Zufallsvorgangs (Zufallsexperiments) wird \emph{Grundraum} (\emph{Grundmenge}, \emph{Ergebnisraum}) genannt und meistens mit dem griechischen Buchstaben \(\Omega\) bezeichnet:
+        \[
+            \Omega = \braces*{\omega : \omega\text{ ist mögliches Ergebnis eines zufallsabhängigen Vorgangs}}.
+        \]
+        Ein Element \(\omega\) von \(\Omega\) heißt \emph{Ergebnis}.
+        Eine Menge von Ergebnissen heißt \emph{Ereignis}.
+        Ereignisse werden meist mit großen lateinischen Buchstaben \(A, B, C, \ldots\) bezeichnet.
+        Ein Ereignis, das genau ein Element besitzt, heißt \emph{Elementarereignis}.
+    \end{definition}
+
+    \begin{example}
+        Das Zufallsexperiment eines einfachen Würfelwurfs wird betrachtet.
+        Die möglichen Ergebnisse sind die Ziffern \(1\), \(2\), \(3\), \(4\), \(5\) und \(6\), d.h. der Grundraum \(\Omega = \braces*{1, 2, 3, 4, 5, 6}\).
+        Die Elementarereignisse sind \(\braces*{1}, \braces*{2}, \braces*{3}, \braces*{4}, \braces*{5}, \braces*{6}\).
+        Andere Ereignisse sind etwa:
+        \begin{itemize}
+            \item ``Es fällt eine gerade Ziffer'': \(A = \braces*{2, 4, 6}\)
+            \item ``Es fällt eine Ziffer kleiner als \(3\)'': \(B = \braces*{1, 2}\)
+        \end{itemize}
+        Kombinationen von Ereignissen sind von besonderem Interesse.
+        Dazu werden folgende Bezeichnungen vereinbart.
+    \end{example}
+
+    \begin{remark}
+        Seien \(I\) eine Indexmenge sowie \(A\), \(B\) und \(A_i, i \in I\) Ereignisse in einem Grundraum \(\Omega\).
+        \begin{itemize}
+            \item \(A \cap B = \braces*{\omega \in \Omega : \omega \in A\text{ und }\omega \in B}\) heißt Schnittereignis der Ereignisse \(A\) und \(B\).
+            \item \(\bigcap_{i \in I}A_i = \braces*{\omega \in \Omega : \omega \in A_i\text{ für jedes }i \in I}\) heißt Schnittereignis der Ereignisse \(A_i, i \in I\).
+            \item Die Ereignisse \(A\) und \(B\) heißen disjunkt, falls \(A \cap B = \emptyset\).
+            \item Die Ereignisse \(A_i, i \in I\) heißen paarweise disjunkt, falls für jede Auswahl zweier verschiedener Indizes \(i, j \in I\) gilt: \(A_i \cap A_j = \emptyset\).
+            \item \(A \cup B = \braces*{\omega \in \Omega : \omega \in A\text{ oder }\omega \in B}\) heißt Vereinigungsereignis der Ereignisse \(A\) und \(B\).
+            \item \(\bigcup_{i \in I}A_i = \braces*{\omega \in \Omega : \text{es gibt ein }i \in I\text{ mit }\omega \in A_i}\) heißt Vereinigungsereignis der Ereignisse \(A_i, i \in I\).
+            \item Gilt \(A \subseteq B\), d.h. für jedes \(\omega \in A\) gilt \(\omega \in B\), so heißt \(A\) Teilereignis von \(B\).
+            \item Die Menge \(A^c = \Omega \setminus A = \braces*{\omega \in \Omega : \omega \not\in A}\) ist das Komplementärereignis von \(A\); \(A^c\) heißt Komplement von \(A\) (in \(\Omega\)).
+            \item Die Menge \(B \setminus A = \braces*{\omega \in \Omega : \omega \in B\text{ und }\omega \not\in A} = B \cap A^c\) ist das Differenzereignis von \(B\) und \(A\); \(B \setminus A\) heißt Komplement von \(A\) in \(B\).
+        \end{itemize}
+    \end{remark}
+
+    \begin{definition}
+        Seien \(\Omega = \braces*{\omega_1, \omega_2, \omega_3, \ldots}\) ein endlicher oder abzählbar unendlicher Grundraum und \(\mathfrak{U} = \Pot\parentheses*{\Omega}\) die Potenzmenge von \(\Omega\) (also die Menge aller Ereignisse über \(\Omega\)).
+        Ferner sei \(p: \Omega \to \brackets*{0, 1}\) eine Abbildung mit \(\sum_{\omega \in \Omega}p\parentheses*{\omega} = 1\).
+        Die durch
+        \[
+            P\parentheses*{A} = \sum_{\omega \in A}p\parentheses*{\omega}, \quad A \in \mathfrak{U},
+        \]
+        definierte Abbildung \(P: \mathfrak{U} \to \brackets*{0, 1}, A \mapsto P\parentheses*{A}\), die jedem Ereignis \(A\) eine Wahrscheinlichkeit \(P\parentheses*{A}\) zuordnet, heißt \emph{diskretes Wahrscheinlichkeitsmaß} oder \emph{diskrete Wahrscheinlichkeitsverteilung} auf \(\mathfrak{U}\) (oder über \(\Omega\)).
+        Die Abbildung \(p\) heißt \emph{Zähldichte}.
+
+        Für \(\omega \in \Omega\) heißt \(p\parentheses*{\omega} = P\parentheses*{\braces*{\omega}}\) \emph{Elementarwahrscheinlichkeit} des Elementarereignisses \(\braces*{\omega}\); als Kurzschreibweise wird \(P\parentheses*{\omega} = P\parentheses*{\braces*{\omega}}\) verwendet.
+    \end{definition}
+
+    \begin{remark}
+        Eine diskrete Wahrscheinlichkeitsverteilung \(P\) besitzt folgende Eigenschaften:
+        \begin{enumerate}
+            \item \(0 \le P\parentheses*{A} \le 1\) für jedes Ereignis \(A \in \mathfrak{U}\),
+            \item \(P\parentheses*{\Omega} = 1\),
+            \item \(P\) ist \(\sigma\)-additiv, d.h. für alle paarweise disjunkten Ereignisse \(A_i, i \in \N\) gilt
+            \[
+                P\parentheses*{\bigcup_{i = 1}^\infty A_i} = \sum_{i = 1}^\infty P\parentheses*{A_i}.
+            \]
+            Insbesondere ist \(P\parentheses*{\bigcup_{i = 1}^n A_i} = \sum_{i = 1}^n P\parentheses*{A_i}\) für alle \(n \in \N\).
+        \end{enumerate}
+    \end{remark}
+
+    Diese Eigenschaften heißen auch Kolmogorov-Axiome.
+
+    \begin{definition}
+        Seien \(\Omega = \braces*{\omega_1, \omega_2, \ldots}\) ein endlicher oder abzählbar unendlicher Grundraum, \(\mathfrak{U} = \Pot\parentheses*{\Omega}\) und \(P\) ein diskretes Wahrscheinlichkeitsmaß auf \(\mathfrak{U}\).
+        Das Paar \(\parentheses*{\Omega, P}\) wird \emph{diskreter Wahrscheinlichkeitsraum} genannt.
+        Ist der Grundraum endlich, d.h. \(\Omega = \braces*{\omega_1, \ldots, \omega_n}\), so wird \(\parentheses*{\Omega, P}\) als \emph{endlicher diskreter Wahrscheinlichkeitsraum} bezeichnet.
+    \end{definition}
+
+    \begin{example}
+        Ist \(\Omega = \braces*{\omega_1, \ldots, \omega_n}, n \in \N\) eine endliche Menge bestehend aus \(n\) Elementen, dann wird durch die Vorschrift
+        \[
+            P\parentheses*{A} = \frac{\absolute*{A}}{\absolute*{\Omega}} = \frac{\absolute*{A}}{n}, \quad A \subseteq \Omega,
+        \]
+        ein Wahrscheinlichkeitsmaß über \(\Pot\parentheses*{\Omega}\) definiert.
+        Dabei bezeichnet \(\absolute*{A}\) die Anzahl der Elemente des Ereignisses \(A\).
+        Das auf diese Weise definierte Wahrscheinlichkeitsmaß \(P\) wird als Laplace-Verteilung oder auch als diskrete Gleichverteilung auf \(\Omega\) bezeichnet.
+        \(\parentheses*{\Omega, P}\) heißt Laplace-Raum über \(\Omega\).
+    \end{example}
+
+    \begin{example}
+        Der einfache Würfelwurf wird modelliert durch die Grundmenge \(\Omega = \braces*{1, \ldots, 6}\) und die Laplace-Verteilung auf \(\Omega\).
+        Die Wahrscheinlichkeit eines beliebigen Ereignisses \(A \in \text{Pot}\parentheses*{\Omega}\) wird berechnet gemäß \(P\parentheses*{A} = \frac{\absolute*{A}}{6}\).
+        Beispielsweise wird das Ereignis \(A\) ``Augenzahl ungerade'' beschrieben durch \(A = \braces*{1, 3, 5}\), so dass seine Wahrscheinlichkeit im Laplace-Modell durch
+        \[
+            P\parentheses*{A} = P\parentheses*{\braces*{1, 3, 5}} = \frac{\absolute*{\braces*{1, 3, 5}}}{6} = \frac{3}{6} = \frac{1}{2}
+        \]
+        gegeben ist.
+    \end{example}
+
+    In einem Laplace-Raum \(\parentheses*{\Omega, P}\) über einer Menge \(\Omega = \braces*{\omega_1, \ldots, \omega_n}, n \in \N\) ist die Berechnung von Wahrscheinlichkeiten besonders einfach.
+    Für jedes Elementarereignis gilt
+    \[
+        P\parentheses*{\braces*{\omega_i}} = \frac{1}{\absolute*{\Omega}} = \frac{1}{n}, \quad \omega_i \in \Omega,
+    \]
+    d.h. die Wahrscheinlichkeit eines jeden Elementarereignisses ist gleich \(\frac{1}{n}\).
+    Damit ist die Zähldichte gegeben durch \(p\parentheses*{\omega} = \frac{1}{n}, \omega \in \Omega\).
+    Die Wahrscheinlichkeit eines beliebigen Ereignisses berechnet sich aus der Anzahl der Elemente des Ereignisses.
+    Bezeichnet man diese Ereignisse als günstige Fälle, so erhält man die folgende Merkregel:
+    \[
+        P\parentheses*{A} = \frac{\absolute*{A}}{\absolute*{\Omega}} = \frac{\text{Anzahl günstiger Fälle}}{\text{Anzahl möglicher Fälle}}.
+    \]
+
+    \begin{example}
+        Ein Problem des Chevalier de Méré aus dem 17. Jahrhundert lautet: Was ist bei drei Würfelwürfen wahrscheinlicher: Augensumme gleich \(11\) oder Augensumme gleich \(12\)?
+
+        Die Situation wird modelliert durch den Grundraum aller Tripel mit einer der Ziffern \(1, \ldots, 6\) in den Komponenten: \(\Omega = \braces*{\omega = \parentheses*{\omega_1, \omega_2, \omega_3} : \omega_i \in \braces*{1, \ldots, 6}, i \in \braces*{1, 2, 3}}\) sowie der Zähldichte \(p\parentheses*{\omega} = \frac{1}{\absolute*{\Omega}} = \frac{1}{6^3}\) für alle \(\omega \in \Omega\) (aus Symmetriegründen).
+
+        Von Interesse sind die Ereignisse \(A = \braces*{\omega \in \Omega : \omega_1 + \omega_2 + \omega_3 = 11}\) und \(B = \braces*{\omega \in \Omega : \omega_1 + \omega_2 + \omega_3 = 12}\) im Laplace-Raum \(\parentheses*{\Omega, P}\).
+        Informell lassen sich diese Mengen tabellarisch darstellen:
+        \begin{center}
+            \begin{tabular}{cccc}
+                \toprule
+                & \(A\) & & \\
+                \midrule
+                \(6\) & \(4\) & \(1\) & \(\parentheses*{6}\)\\
+                \(6\) & \(3\) & \(2\) & \(\parentheses*{6}\)\\
+                \(5\) & \(5\) & \(1\) & \(\parentheses*{3}\)\\
+                \(5\) & \(4\) & \(2\) & \(\parentheses*{6}\)\\
+                \(5\) & \(3\) & \(3\) & \(\parentheses*{3}\)\\
+                \(4\) & \(4\) & \(3\) & \(\parentheses*{3}\)\\
+                \midrule
+                \(\sum\) & \(11\) & & \(\parentheses*{27}\)\\
+                \bottomrule
+            \end{tabular}
+            \quad
+            \begin{tabular}{cccc}
+                \toprule
+                & \(B\) & & \\
+                \midrule
+                \(6\) & \(5\) & \(1\) & \(\parentheses*{6}\)\\
+                \(6\) & \(4\) & \(2\) & \(\parentheses*{6}\)\\
+                \(6\) & \(3\) & \(3\) & \(\parentheses*{3}\)\\
+                \(5\) & \(5\) & \(2\) & \(\parentheses*{3}\)\\
+                \(5\) & \(4\) & \(3\) & \(\parentheses*{6}\)\\
+                \(4\) & \(4\) & \(4\) & \(\parentheses*{1}\)\\
+                \midrule
+                \(\sum\) & \(12\) & & \(\parentheses*{25}\)\\
+                \bottomrule
+            \end{tabular}
+        \end{center}
+        Es gibt zwar jeweils sechs Fälle von ``Zahlenkombinationen'', aber \(\Omega\) ist eine Menge von Tripeln, d.h. die Würfel werden als unterscheidbar modelliert.
+        Beispielsweise gilt \(\parentheses*{6, 4, 1} \ne \parentheses*{6, 1, 4} \ne \parentheses*{1, 6, 4}\), usw.
+        Abzählen der Fälle liefert \(\absolute*{A} = 27\) und \(\absolute*{B} = 25\), und somit ergibt sich
+        \[
+            P\parentheses*{A} = \frac{27}{216} \ge \frac{25}{216} = P\parentheses*{B}.
+        \]
+    \end{example}
+
+    Liegt ein Laplace-Raum vor, so reduziert sich die Berechnung von Wahrscheinlichkeiten also auf das Abzählen von Elementen eines Ereignisses.
+    Mit solchen Fragestellungen beschäftigt sich die Kombinatorik.
+    Ehe die Grundmodelle der Kombinatorik eingeführt werden, wird noch der relevante Bereich einer Wahrscheinlichkeitsverteilung, der Träger, eingeführt.
+
+    \begin{definition}
+        Sei \(\parentheses*{\Omega, P}\) ein diskreter Wahrscheinlichkeitsraum.
+        Die Menge \(T = \braces*{\omega \in \Omega : P\parentheses*{\omega} > 0}\) heißt \emph{Träger} von \(P\).
+    \end{definition}
+\end{document}

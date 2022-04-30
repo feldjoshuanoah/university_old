@@ -1,0 +1,119 @@
+\documentclass{lecture}
+
+\institute{Institut für Statistik und Wirtschaftsmathematik}
+\title{Vorlesung 8}
+\author{Joshua Feld, 406718}
+\course{Statistik}
+\professor{Cramer}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \begin{definition}
+        Sei \(f\) eine Riemann-Dichtefunktion.
+        Die Menge \(\braces*{x \in \R : f\parentheses*{x} > 0}\) heißt \emph{Träger} der zugehörigen Wahrscheinlichkeitsverteilung \(P\) (oder von \(f\) bzw. der zugehörigen Verteilungsfunktion \(F\)).
+        Sie wird auch mit \(\supp\parentheses*{P}\), \(\supp\parentheses*{f}\) oder \(\supp\parentheses*{F}\) bezeichnet.
+        Ist der Träger ein Intervall, so spricht man von einem \emph{Trägerintervall}.
+    \end{definition}
+
+    Grundsätzlich können Verteilungen durch eine Lage-/Skalentransformation modifiziert und möglicherweise um neue Parameter ergänzt werden, um bessere Modellanpassungen zu erreichen.
+    Dazu betrachtet man zu einer Verteilungsfunktion \(F\) die Verteilungsfunktion
+    \[
+        F_{a, b}\parentheses*{x} = F\parentheses*{\frac{x - a}{b}}
+    \]
+    mit Parametern \(a \in \R\) und \(b > 0\).
+    \(a\) wird als Lageparameter, \(b\) als Skalenparameter bezeichnet.
+    Ist \(\parentheses*{\alpha, \omega}\) das Trägerintervall von \(F\), so ist \(\parentheses*{a + b\alpha, a + b\omega}\) das Trägerintervall von \(F_{a, b}\).
+    Für die zugehörigen Riemann-Dichten gilt:
+    \[
+        f_{a, b}\parentheses*{x} = \frac{1}{b}f\parentheses*{\frac{x - a}{b}}, \quad x \in \R.
+    \]
+    Die resultierende Familie von Verteilungen
+    \[
+        \mathcal{P} = \braces*{P_{a, b} : P_{a, b}\text{ hat die Riemann-Dichte }f_{a, b}, a \in \R, b > 0}
+    \]
+    heißt Lokations-Skalenfamilie mit Standardvertreter \(f = f_{0, 1}\) (bzw. \(P_{0, 1}\)).
+
+    \begin{example}
+        \begin{enumerate}
+            \item Die obige Transformation führt bei einer Betaverteilung \(\betadist\parentheses*{\alpha, \beta}\) zum Trägerintervall \(\parentheses*{a, a + b}\), so dass beliebige endliche Intervalle als Träger gewählt werden können.
+            Die Dichtefunktion \(f_{a, b}\) entsteht mit \(f\) durch
+            \begin{align*}
+                f_{a, b}\parentheses*{x} &= \frac{1}{b}f\parentheses*{\frac{x - a}{b}}\\
+                &= \begin{cases}
+                    \frac{\Gamma\parentheses*{\alpha + \beta}}{b^{\alpha + \beta - 1}\Gamma\parentheses*{\alpha}\Gamma\parentheses*{\beta}}\parentheses*{x - a}^{\alpha - 1}\parentheses*{a + b - x}^{\beta - 1}, & \text{falls }x \in \parentheses*{a, a + b},\\
+                    0, & \text{falls }x \not\in \parentheses*{a, a + b}.
+                \end{cases}
+            \end{align*}
+            \item Bei einer Standardexponentialverteilung \(\Exp\parentheses*{1}\) resultiert mit Lokationsparameter \(\mu\) und Skalenparameter \(\theta\) das Trägerintervall \(\parentheses*{\mu, \infty}\) und die Dichtefunktion \(f_{\mu, \theta}\) gegeben durch
+            \[
+                f_{\mu, \theta}\parentheses*{x} = \frac{1}{\theta}f\parentheses*{\frac{x - \mu}{\theta}} = \begin{cases}
+                    \frac{1}{\theta}e^{-\frac{x - \mu}{\theta}}, & \text{falls }x > \mu,\\
+                    0, & \text{falls }x \le \mu.
+                \end{cases}
+            \]
+            Die durch diese Dichte festgelegte Verteilung heißt zweiparametrige Exponentialverteilung mit Lageparameter \(\mu\) und Skalenparameter \(\theta\).
+            \item Eine Lage-/Skalentransformation führt nicht immer zu einer Verteilungsfamilie mit (zwei) neuen Parametern.
+            Wird beispielsweise eine Exponentialverteilung \(\Exp\parentheses*{\lambda}\) mit einem Parameter \(\lambda > 0\) und der Dichtefunktion \(f\) mit \(f\parentheses*{x} = \lambda e^{-\lambda x}\mathbb{I}_{\parentheses*{0, \infty}}\parentheses*{x}, x \in \R\), als Ausgangspunkt gewählt, so ist die transformierte Dichtefunktion \(f_{a, b}\) gegeben durch
+            \[
+                f_{a, b}\parentheses*{x} = \frac{1}{b}f\parentheses*{\frac{x - a}{b}} = \frac{\lambda}{b}\exp\parentheses*{-\frac{\lambda}{b}\parentheses*{x - a}}\mathbb{I}_{\parentheses*{a, \infty}}\parentheses*{x}, \quad x \in \R.
+            \]
+            Mit der Setzung \(\mu = a\) und \(\theta = \frac{b}{\lambda} (> 0)\) resultiert eine zweiparametrige Exponentialverteilung mit Lageparameter \(\mu\) und Skalenparameter \(\theta\).
+            Der Skalenparameter \(\lambda\) bildet zusammen mit dem eingeführten Skalenparameter \(b\) den neuen Skalenparameter \(\theta = \frac{b}{\lambda}\).
+            \item Die Familie der Normalverteilungen
+            \[
+                \mathcal{P} = \braces*{N\parentheses*{\mu, \sigma^2} : \mu \in \R, \sigma^2 > 0}
+            \]
+            bildet eine Lokations-Skalenfamilie mit dem Lokationsparameter \(\mu \in \R\) und dem Skalenparameter \(\sigma > 0\) sowie dem Standardvertreter \(\varphi_{0, 1} = \varphi\) (bzw. \(N\parentheses*{0, 1}\)).
+        \end{enumerate}
+    \end{example}
+
+
+    \section*{Eigenschaften von Wahrscheinlichkeitsmaßen}
+
+    Aus der Definition eines Wahrscheinlichkeitsmaßes folgen wichtige Eigenschaften für das Rechnen mit Wahrscheinlichkeiten.
+    Diese Regeln basieren nur auf den Kolmogorov-Axiomen und gelten damit in allgemeinen Wahrscheinlichkeitsräumen, insbesondere also für diskrete und stetige Wahrscheinlichkeitsverteilungen, die über Zähldichten bzw. Riemann-Dichten eingeführt werden.
+
+    \begin{lemma}
+        Sei \(\parentheses*{\Omega, \mathfrak{U}, P}\) ein Wahrscheinlichkeitsraum.
+        Für \(A, B \in \mathfrak{U}\) gilt:
+        \begin{enumerate}
+            \item \(P\parentheses*{A \cup B} = P\parentheses*{A} + P\parentheses*{B}\), falls \(A \cap B = \emptyset\),
+            \item \(P\parentheses*{A \setminus B} = P\parentheses*{A} - P\parentheses*{B}\), falls \(A \subseteq B\) (Subtraktivität von \(P\)),
+            \item \(P\parentheses*{A^c} = 1 - P\parentheses*{A}\),
+            \item \(A \subseteq B \implies P\parentheses*{A} \le P\parentheses*{B}\) (Monotonie von \(P\)),
+            \item \(P\parentheses*{A \cup B} = P\parentheses*{A} + P\parentheses*{B} - P\parentheses*{A \cap B}\).
+        \end{enumerate}
+    \end{lemma}
+
+    \begin{proof}
+        \begin{enumerate}
+            \item Folgt aus der \(\sigma\)-Additivität mit der Setzung \(A_1 = A\), \(A_2 = B\) und \(A_j = \emptyset, j \ge 3\).
+            \item Für \(A \subseteq B\) ist \(A \cap B = A\).
+            Weiter ist \(B \setminus A = B \cap A^c\).
+            Aus der Disjunktheitvon \(A = A \cap B\) und \(B \cap A^c\) folgt:
+            \begin{align*}
+                P\parentheses*{B} &= P\parentheses*{B \cap \Omega}\\
+                &= P\parentheses*{B \cap \parentheses*{A \cup A^c}}\\
+                &= P\parentheses*{\parentheses*{B \cap A} \cup \parentheses*{B \cap A^c}}\\
+                &= P\parentheses*{A} + P\parentheses*{B \cap A^c}\\
+                &= P\parentheses*{A} + P\parentheses*{B \setminus A}.
+            \end{align*}
+            \item Ergibt sich aus (ii) mit \(B = \Omega\).
+            \item Mit \(A \subseteq B\) gilt wegen (ii): \(P\parentheses*{A} = P\parentheses*{B} - P\parentheses*{B \setminus A} \le P\parentheses*{B}\).
+            \item Wegen (i) gilt (vgl. auch Beweis von (ii)):
+            \[
+                P\parentheses*{A^c \cap B} + P\parentheses*{A \cap B} = P\parentheses*{B}\text{ und }P\parentheses*{B^c \cap A} + P\parentheses*{A \cap B} = P\parentheses*{A}.
+            \]
+            Da \(A \cup B = \parentheses*{A \cap B^c} \cup \parentheses*{A \cap B} \cup \parentheses*{A^c \cap B}\) Vereinigung paarweise disjunkter Mengen ist, folgt
+            \begin{align*}
+                P\parentheses*{A \cup B} &= P\parentheses*{A \cap B^c} + P\parentheses*{A \cap B} + P\parentheses*{A^c \cap B}\\
+                &= P\parentheses*{A} - P\parentheses*{A \cap B} + P\parentheses*{A \cap B} + P\parentheses*{B} - P\parentheses*{A \cap B}\\
+                &= P\parentheses*{A} + P\parentheses*{B} - P\parentheses*{A \cap B}.
+            \end{align*}
+        \end{enumerate}
+    \end{proof}
+\end{document}

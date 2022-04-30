@@ -1,0 +1,44 @@
+\documentclass{lecture}
+
+\institute{Institut für Statistik und Wirtschaftsmathematik}
+\title{Vorlesung 6}
+\author{Joshua Feld, 406718}
+\course{Statistik}
+\professor{Cramer}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \begin{definition}
+        Die \emph{Binomialverteilung} \(\bin\parentheses*{n, p}\) ist definiert durch die Zähldichte
+        \[
+            p_k = \binom{n}{k}p^k \parentheses*{1 - p}^{n - k}, \quad 0 \le k \le n, k \in \N_0,
+        \]
+        für \(n \in \N\) und den Parameter \(p \in \parentheses*{0, 1}\).
+    \end{definition}
+
+    Eine zur hypergeometrische Verteilung analoge Interpretation der obigen Wahrscheinlichkeiten ist über ein Urnenmodell möglich, wenn die Stichprobe mit Zurücklegen (statt ohne Zurücklegen) gewonnen wird und \(p = \frac{r}{r + s}\) den Anteil defekter Teile in der Lieferung bezeichnet.
+    Enthält also eine Produktion den Anteil \(p\) defekter Teile, so ist \(p_k\) die Wahrscheinlichkeit für genau \(k\) defekte Teile in einer Stichprobe vom Umfang \(n\).
+
+    \begin{definition}
+        Die \emph{Poisson-Verteilung} \(\po\parentheses*{\lambda}\) ist definiert durch die Zähldichte
+        \[
+            p_k = \frac{\lambda^k}{k!}e^{-\lambda}, \quad k \in \N_0,
+        \]
+        für einen Parameter \(\lambda > 0\).
+    \end{definition}
+
+    \begin{definition}
+        Die \emph{Polynomialverteilung} (oder Multinomialverteilung) \(\pol\parentheses*{n, p_1, \ldots, p_m}\) ist definiert durch die Zähldichte
+        \[
+            p\parentheses*{k_1, \ldots, k_m} = \binom{n}{k_1, \ldots, k_m}\prod_{j = 1}^m p_j^{k_j}, \quad \parentheses*{k_1, \ldots, k_m} \in \braces*{\parentheses*{i_1, \ldots, i_m} \in \N_0^m : \sum_{j = 1}^m i_j = n},
+        \]
+        für ein \(n \in \N\) und die Parameter \(p_j \in \parentheses*{0, 1}. 1 \le j \le m\), mit \(\sum_{j = 1}^m p_j = 1\).
+        Dabei ist \(\binom{n}{k_1, \ldots, k_m} = \frac{n!}{k_1! \cdot \ldots \cdot k_m!}\) der sogenannte \emph{Polynomialkoeffizient}.
+    \end{definition}
+
+    Für \(m = 2\) und mit den Setzungen \(p_1 = p\), \(p_2 = 1 - p\), \(k_1 = k\) und \(k_2 = n - k\) führt die Polynomialverteilung auf die Binomialverteilung.
+\end{document}
