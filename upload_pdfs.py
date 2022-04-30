@@ -38,7 +38,7 @@ for root, directories, files in os.walk('src', topdown=True):
                 'parents': [{'kind': 'drive#parentReference', 'id': parent}],
                 'mimeType': 'application/pdf'
             })
-            compile_command = 'pdflatex -output-directory ' + root + ' ' + os.path.join(root, file)
+            compile_command = 'pdflatex -interaction nonstopmode -output-directory ' + root + ' ' + os.path.join(root, file)
             os.system(compile_command)
             os.system(compile_command)
             pdf.SetContentFile(os.path.join(root, file.split('.')[0] + '.pdf'))
