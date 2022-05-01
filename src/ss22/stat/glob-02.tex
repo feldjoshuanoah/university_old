@@ -33,16 +33,123 @@
 
     \subsection*{Lösung}
     \begin{enumerate}
-        \item
-        \item
-        \item
+        \item Zur Bestimmung der empirischen Verteilungsfunktion \(F_{15}\) erweitern wir die Häufigkeitstabelle aus Aufgabe A b) um die zugehörigen kumulierten relativen Häufigkeiten:
+        \begin{center}
+            \begin{tabular}{lcccccccc}
+                \toprule
+                & \(j\) & \(1\) & \(2\) & \(3\) & \(4\) & \(5\) & \(6\) & \(7\)\\
+                \midrule
+                Beobachtungswert & \(u_{\parentheses*{j}}\) & \(2\) & \(3\) & \(4\) & \(5\) & \(6\) & \(7\) & \(8\)\\
+                Absolute Häufigkeit & \(n_{\parentheses*{j}}\) & \(2\) & \(1\) & \(4\) & \(2\) & \(3\) & \(2\) & \(1\)\\
+                Relative Häufigkeit & \(f_{\parentheses*{j}}\) & \(\frac{2}{15}\) & \(\frac{1}{15}\) & \(\frac{4}{15}\) & \(\frac{2}{15}\) & \(\frac{1}{5}\) & \(\frac{2}{15}\) & \(\frac{1}{15}\)\\
+                \makecell[l]{Kumulierte relative\\Häufigkeit} & \(f_{\parentheses*{1}} + \cdots + f_{\parentheses*{j}}\) & \(\frac{2}{15}\) & \(\frac{1}{5}\) & \(\frac{7}{15}\) & \(\frac{3}{5}\) & \(\frac{4}{5}\) & \(\frac{14}{15}\) & \(1\)\\
+                \bottomrule
+            \end{tabular}
+        \end{center}
+        Dann kann man die Funktionswerte von \(F_{15}\) in der letzten Zeile dieser Tabelle ablesen (gemäß der Definition aus der Vorlesung).
+        Wir erhalten dann
+        \begin{equation}\label{eq:1}
+            F_{15}\parentheses*{x} = \begin{cases}
+                0, & \text{falls }x < 2,\\
+                \frac{2}{15}, & \text{falls }2 \le x < 3,\\
+                \frac{1}{5}, & \text{falls }3 \le x < 4,\\
+                \frac{7}{15}, & \text{falls }4 \le x < 5,\\
+                \frac{3}{5}, & \text{falls }5 \le x < 6,\\
+                \frac{4}{5}, & \text{falls }6 \le x < 7,\\
+                \frac{14}{15}, & \text{falls }7 \le x < 8,\\
+                1, & \text{falls }8 \le x.\\
+            \end{cases}
+        \end{equation}
+        \begin{center}
+            \begin{tikzpicture}
+                \draw[->] (0,0) -- (9.5,0) node[below right] {\(x\)};
+                \draw[->] (0,0) -- (0,8) node[above left] {\(F_{15}\parentheses*{x}\)};
+                \draw (0,0) -- (2,0);
+                \draw (2,1) -- (3,1);
+                \draw (3,1.5) -- (4,1.5);
+                \draw (4,3.5) -- (5,3.5);
+                \draw (5,4.5) -- (6,4.5);
+                \draw (6,6) -- (7,6);
+                \draw (7,7) -- (8,7);
+                \draw (8,7.5) -- (9.5,7.5);
+                \foreach \i in {0,...,9}
+                {
+                    \draw (\i,.1) -- (\i,-.1) node[below] {\(\i\)};
+                }
+                \foreach \i in {0,.5,...,7.5}
+                {
+                    \draw (.1,\i) -- (-.1,\i);
+                }
+                \node[anchor=east] at (-.1,0) {\(0\)};
+                \node[anchor=east] at (-.1,1.5) {\(0,2\)};
+                \node[anchor=east] at (-.1,3) {\(0,4\)};
+                \node[anchor=east] at (-.1,4.5) {\(0,6\)};
+                \node[anchor=east] at (-.1,6) {\(0,8\)};
+                \node[anchor=east] at (-.1,7.5) {\(1\)};
+                \draw[fill=black] (2,1) circle (.5mm);
+                \draw[fill=black] (3,1.5) circle (.5mm);
+                \draw[fill=black] (4,3.5) circle (.5mm);
+                \draw[fill=black] (5,4.5) circle (.5mm);
+                \draw[fill=black] (6,6) circle (.5mm);
+                \draw[fill=black] (7,7) circle (.5mm);
+                \draw[fill=black] (8,7.5) circle (.5mm);
+                \draw[<->,dashed] (4,1.5) -- (4,3.5) node[midway,right,align=left] {Maximale Sprunghöhe:\\\(F_{15}\parentheses*{4} - F_{15}\parentheses*{3} = \frac{4}{15}\)};
+            \end{tikzpicture}
+        \end{center}
+        \item Man kann Modalwerte direkt aus dem Graphen einer empirischen Verteilungsfunktion ablesen, denn gemäß Vorlesung gilt
+        \begin{align*}
+            \text{Modalwert} &\stackrel{\text{Def.}}{=} \text{Auspräung mit maximaler relativer Häufigkeit}\\
+            &\stackrel{\text{Def.}}{=} \text{Ausprägung mit maximaler Sprunghöhe in }F_n\parentheses*{x}.
+        \end{align*}
+        Hier erhält man (vgl. Aufgabe 4 b)):
+        \begin{align*}
+            \max\braces*{f_{\parentheses*{1}}, \ldots, f_{\parentheses*{7}}} &\stackrel{\text{Def.}}{=} \max\braces*{F_{15}\parentheses*{u_{\parentheses*{1}}}, F_{15}\parentheses*{u_{\parentheses*{2}}} - F_{15}\parentheses*{u_{\parentheses*{1}}}, \ldots, F_{15}\parentheses*{u_{\parentheses*{7}}} - F_{15}\parentheses*{u_{\parentheses*{6}}}}\\
+            &\stackrel{\text{Graph}}{=} \underbrace{F_{15}\parentheses*{4} - F_{15}\parentheses*{3}}_{= F_{15}\parentheses*{u_{\parentheses*{3}}} - F_{15}\parentheses*{u_{\parentheses*{2}}} = f_{\parentheses*{3}}}\\
+            &\stackrel{\eqref{eq:1}}{=} \frac{7}{15} - \frac{1}{5} = \frac{4}{15}.
+        \end{align*}
+        Damit ist hier \(x_{\text{mod}} = u_{\parentheses*{3}} = 4\) der einzige Modalwert (wie bereits in Aufgabe 4 b) festgestellt).
+        \item Gemäß Definition gibt \(F_{15}\parentheses*{x}\) für \(x \in \R\) den Anteil der Quiz-Teilnehmer(innen) an, die höchstens \(x\) Fragen (genauer \(\floor*{x}\) Fragen) richtig beantwortet haben.
+        Damit beträgt der Anteil der Quiz-Teinehmer(innen), die
         \begin{enumerate}
-            \item
-            \item 
-            \item
+            \item höchstens vier Fragen richtig beantwortet haben
+            \[
+                F_{15}\parentheses*{4} = \frac{7}{15}
+            \]
+            \item mehr als zwei Fragen richtig beantwortet haben
+            \[
+                1 - F_{15}\parentheses*{2} = 1 - \frac{2}{15} = \frac{13}{15}
+            \]
+            \item mindestens drei aber höchstens fünf Fragen richtig beantwortet haben
+            \[
+                F_{15}\parentheses*{5} - F_{15}\parentheses*{2} = \frac{3}{5} - \frac{2}{15} = \frac{7}{15}
+            \]
+            (da ``mindestens drei'' hier gleichbedeutend mit ``mehr als zwei'' ist).
         \end{enumerate}
-        \item
-        \item 
+    \end{enumerate}
+    Zur Bestimmung des Medians und der Quantile wird (nochmals) die Rangwertreihe zu \(x_1, \ldots x_{15}\) benötigt, die bereits in Aufgabe 4 a) erstellt wurde.
+    \[
+        x_{\parentheses*{1}} = 2, x_{\parentheses*{2}} = 2, x_{\parentheses*{3}} = 3, x_{\parentheses*{4}} = 4, x_{\parentheses*{5}} = 4, x_{\parentheses*{6}} = 4, x_{\parentheses*{7}} = 4, x_{\parentheses*{8}} = 5,
+    \]
+    \[
+        x_{\parentheses*{9}} = 5, x_{\parentheses*{10}} = 6, x_{\parentheses*{11}} = 6, x_{\parentheses*{12}} = 6, x_{\parentheses*{13}} = 7, x_{\parentheses*{14}} = 7, x_{\parentheses*{15}} = 8.
+    \]
+    \begin{enumerate}
+        \item[d)]
+        \[
+            \tilde{x} = \tilde{x}_{0,5} = x_{\parentheses*{\frac{n + 1}{2}}} = x_{\parentheses*{8}} = 5 > 4 = x_{\text{mod}}.
+        \]
+        \item[e)] Unteres Quartil: \(\frac{n}{4} = \frac{15}{4} = 3,75 \not\in \N\), \(\frac{n}{4} = 3,75 < 4 < \frac{n}{4} + 1\), also
+        \[
+            \tilde{x}_{0,25} = x_{\parentheses*{4}} = 4.
+        \]
+        Oberes Quartil: \(\frac{3n}{4} = \frac{45}{4} = 11,25 \not\in \N\), \(\frac{3n}{4} = 11,25 < 12 < \frac{3n}{4} + 1\), also
+        \[
+            \tilde{x}_{0,75} = x_{\parentheses*{12}} = 6.
+        \]
+        Zweites Dezentil: \(\frac{2n}{10} = \frac{30}{10} = 3 \in \N\), also
+        \[
+            \tilde{x}_{0,2} = \frac{1}{2}\parentheses*{x_{\parentheses*{\frac{2n}{10}}} + x_{\parentheses*{\frac{2n}{10} + 1}}} = \frac{1}{2}\parentheses*{x_{\parentheses*{3}} + x_{\parentheses*{4}}} = \frac{1}{2}\parentheses*{3 + 4} = 3,5.
+        \]
     \end{enumerate}
 
 
@@ -64,9 +171,18 @@
 
     \subsection*{Lösung}
     \begin{enumerate}
-        \item
-        \item
-        \item
+        \item Es gilt
+        \[
+            \bar{y} = \frac{1}{n}\sum_{i = 1}^n y_i = \frac{1}{n}\sum_{i = 1}^n \parentheses*{a + bx_i} = \frac{1}{n}\sum_{i = 1}^n a + b\underbrace{\frac{1}{n}\sum_{i = 1}^n x_i}_{= \bar{x}} = a + b\bar{x}.
+        \]
+        \item Mit der in a) hergeleiteten Darstellung für \(\bar{y}\) folgt
+        \begin{align*}
+            s_y^2 &= \frac{1}{n}\sum_{i = 1}^n \parentheses*{y_i - \bar{y}}^2 = \frac{1}{n}\sum_{i = 1}^n\parentheses*{a + bx_i - \parentheses*{a + b\bar{x}}}^2 = \frac{1}{n}\sum_{i = 1}^n\parentheses*{bx_i - b\bar{x}}^2 = b^2\frac{1}{n}\sum_{i = 1}^n\parentheses*{x_i - \bar{x}}^2 = b^2 s_x^2.
+        \end{align*}
+        \item Aus b) erhält man
+        \[
+            s_y = \sqrt{s_y^2} = \sqrt{b^2 s_x^2} = \sqrt{b^2}\sqrt{s_x^2} = \absolute*{b}s_x.
+        \]
     \end{enumerate}
 
 
@@ -95,8 +211,101 @@
 
     \subsection*{Lösung}
     \begin{enumerate}
-        \item
-        \item
+        \item Zunächst erstellen wir die zugehörige Rangwertreihe (benötigt zur Bestimmung von Minimum, Maximum und empirischen Quantilen):
+        \begin{align*}
+            x_{\parentheses*{1}} &= 2,8, & x_{\parentheses*{2}} &= 2,9, & x_{\parentheses*{3}} &= 3, & x_{\parentheses*{4}} &= 3,9, & x_{\parentheses*{5}} &= 4,1, & x_{\parentheses*{6}} &= 4,1,\\
+            x_{\parentheses*{7}} &= 4,6, & x_{\parentheses*{8}} &= 4,7, & x_{\parentheses*{9}} &= 4,8, & x_{\parentheses*{10}} &= 4,8, & x_{\parentheses*{11}} &= 5, & x_{\parentheses*{12}} &= 5,1,\\
+            x_{\parentheses*{13}} &= 5,2, & x_{\parentheses*{14}} &= 5,2, & x_{\parentheses*{15}} &= 5,3, & x_{\parentheses*{16}} &= 5,4, & x_{\parentheses*{17}} &= 5,6, & x_{\parentheses*{18}} &= 5,9,\\
+            x_{\parentheses*{19}} &= 6,1, & x_{\parentheses*{20}} &= 6,6, & x_{\parentheses*{21}} &= 6,7, & x_{\parentheses*{22}} &= 6,7, & x_{\parentheses*{23}} &= 6,8, & x_{\parentheses*{24}} &= 7,\\
+            x_{\parentheses*{25}} &= 7,2, & x_{\parentheses*{26}} &= 7,7, & x_{\parentheses*{27}} &= 8, & x_{\parentheses*{28}} &= 8,1, & x_{\parentheses*{29}} &= 8,8, & x_{\parentheses*{30}} &= 8,9,\\
+            x_{\parentheses*{31}} &= 8,9, & x_{\parentheses*{32}} &= 9,1.
+        \end{align*}
+        Nun berechnen wir die einzelnen Kenngrößen.
+        Hierbei beachte man, dass die gemessenen Zeiten Ausprägungen eines stetigen Merkmals sind.
+
+        Modalwerte: An der Rangwertreihe liest man ab, dass folgende Werte jeweils doppelt vorkommen:
+        \[
+            4,1, \quad 4,8, \quad 5,2, \quad 6,7, \quad 8,9.
+        \]
+        Dies sind die Modalwerte, da die übrigen gemessenen Zeiten jeweils nur einmal vorkommen.
+        (Insbesondere ist der Modalwert damit \emph{nicht} eindeutig bestimmt.)
+
+        \(5\%\)-Quantil:
+        \(\frac{5n}{100} = \frac{160}{100} = 1,6 \not\in \N\), \(\frac{5n}{100} = 1,6 < 2 < \frac{5n}{100} + 1\), also
+        \[
+            \tilde{x}_{0,05} = x_{\parentheses*{2}} = 2,9.
+        \]
+
+        \(90\%\)-Quantil:
+        \(\frac{9n}{10} = \frac{288}{10} = 28,8 \not\in \N\), \(\frac{9n}{10} = 28,8 < 29 < \frac{9n}{10} + 1\), also
+        \[
+            \tilde{x}_{0,9} = x_{\parentheses*{29}} = 8,8.
+        \]
+
+        Arithmetischer Mittelwert:
+        \[
+            \bar{x} = \frac{1}{32}\sum_{i = 1}^{32}x_i = \frac{1}{32}\sum_{i = 1}^{32}x_{\parentheses*{i}} = \frac{189}{32} \approx 5,906
+        \]
+
+        Spannweite:
+        \[
+            R = x_{\parentheses*{32}} - x_{\parentheses*{1}} = 9,1 - 2,8 = 6,3.
+        \]
+
+        Quartilsabstand: \(\frac{n}{4} = \frac{32}{4} = 8 \in \N\), \(\frac{3n}{4} = \frac{96}{4} = 24 \in \N\), also
+        \begin{align*}
+            \tilde{x}_{0,25} &= \frac{1}{2}\parentheses*{x_{\parentheses*{\frac{n}{4}}} + x_{\parentheses*{\frac{n}{4} + 1}}} = \frac{1}{2}\parentheses*{x_{\parentheses*{8}} + x_{\parentheses*{9}}} = \frac{1}{2} \cdot \parentheses*{4,7 + 4,8} = 4,75,\\
+            \tilde{x}_{0,75} &= \frac{1}{2}\parentheses*{x_{\parentheses*{\frac{3n}{4}}} + x_{\parentheses*{\frac{3n}{4} + 1}}} = \frac{1}{2}\parentheses*{x_{\parentheses*{24}} + x_{\parentheses*{25}}} = \frac{1}{2} \cdot \parentheses*{7 + 7,2} = 7,1
+        \end{align*}
+        und somit
+        \[
+            Q = \tilde{x}_{0,75} - \tilde{x}_{0,25} = 7,1 - 4,75 = 2,35.
+        \]
+        Mittlere absolute Abweichung: Hierzu müssen wir zunächst den Median berechnen:
+        \[
+            \tilde{x} = \frac{1}{2}\parentheses*{x_{\parentheses*{\frac{n}{2}}} + x_{\parentheses*{\frac{n}{2}} + 1}} = \frac{1}{2}\parentheses*{x_{\parentheses*{16}} + x_{\parentheses*{17}}} = \frac{1}{2} \cdot \parentheses*{5,4 + 5,6} = 5,5.
+        \]
+        Nun können wir die absoluten Abweichungen
+        \[
+            \absolute*{x_{\parentheses*{i}} - \tilde{x}}, \quad i \in \braces*{1, \ldots, 32}
+        \]
+        berechnen:
+        \begin{center}
+            \begin{tabular}{lcccccccccccccccc}
+                \toprule
+                \(i\) & \(1\) & \(2\) & \(3\) & \(4\) & \(5\) & \(6\) & \(7\) & \(8\) & \(9\) & \(10\) & \(11\) & \(12\) & \(13\) & \(14\) & \(15\) & \(16\)\\
+                \midrule
+                \(\absolute*{x_{\parentheses*{i}} - \tilde{x}}\) & \(2,7\) & \(2,6\) & \(2,5\) & \(1,6\) & \(1,4\) & \(1,4\) & \(0,9\) & \(0,8\) & \(0,7\) & \(0,7\) & \(0,5\) & \(0,4\) & \(0,3\) & \(0,3\) & \(0,2\) & \(0,1\)\\
+                \bottomrule
+            \end{tabular}
+            \begin{tabular}{lcccccccccccccccc}
+                \toprule
+                \(i\) & \(17\) & \(18\) & \(19\) & \(20\) & \(21\) & \(22\) & \(23\) & \(24\) & \(25\) & \(26\) & \(27\) & \(28\) & \(29\) & \(30\) & \(31\) & \(32\)\\
+                \midrule
+                \(\absolute*{x_{\parentheses*{i}} - \tilde{x}}\) & \(0,1\) & \(0,4\) & \(0,6\) & \(1,1\) & \(1,2\) & \(1,2\) & \(1,3\) & \(1,5\) & \(1,7\) & \(2,2\) & \(2,5\) & \(2,6\) & \(3,3\) & \(3,4\) & \(3,4\) & \(3,6\)\\
+                \bottomrule
+            \end{tabular}
+        \end{center}
+        Damit erhält man
+        \[
+            d = \frac{1}{32}\sum_{i = 1}^{32}\absolute*{x_i - \tilde{x}} = \frac{1}{32}\sum_{i = 1}^{32}\absolute*{x_{\parentheses*{i}} - \tilde{x}} = \frac{47,2}{32} = 1,475.
+        \]
+
+        Empirische Varianz:
+        \[
+            s^2 = \frac{1}{32}\sum_{i = 1}^{32}\parentheses*{x_i - \bar{x}}^2 = \frac{1}{32}\sum_{i = 1}^{32}x_i^2 - \bar{x}^2 = \frac{1}{32}\sum_{i = 1}^{32}x_{\parentheses*{i}}^2 - \bar{x}^2 = \frac{1217,12}{32} - \parentheses*{\frac{189}{32}}^2 \approx 3,151.
+        \]
+
+        Empirische Standardabweichung:
+        \[
+            s = \sqrt{s^2} = \sqrt{3,151} \approx 1,775.
+        \]
+
+        Variationskoeffizient:
+        \[
+            V = \frac{s}{\bar{x}} = \frac{1,775 \cdot 32}{189} \approx 0,301.
+        \]
+        \item 
         \item 
     \end{enumerate}
 \end{document}
