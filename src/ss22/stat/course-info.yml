@@ -3,5 +3,5 @@ professor: Cramer
 institute: Institut für Statistik und Wirtschaftsmathematik
 prefixes: [lec, glob, pres]
 lec: [lecture, Vorlesung]
-glob: [exercise, Golbalübung]
+glob: [exercise, Globalübung]
 pres: [exercise, Präsenzübung]

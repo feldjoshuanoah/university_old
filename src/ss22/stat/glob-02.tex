@@ -1,7 +1,7 @@
 \documentclass{exercise}
 
 \institute{Institut für Statistik und Wirtschaftsmathematik}
-\title{Golbalübung 2}
+\title{Globalübung 2}
 \author{Joshua Feld, 406718}
 \course{Statistik}
 \professor{Cramer}
@@ -305,7 +305,88 @@
         \[
             V = \frac{s}{\bar{x}} = \frac{1,775 \cdot 32}{189} \approx 0,301.
         \]
-        \item 
-        \item 
+        \item \,
+        \begin{center}
+            \begin{tikzpicture}
+                \draw (0,2) -- (5,2);
+                \draw (0,2) -- (0,10);
+                \foreach \i in {2,2.1,...,10}
+                {
+                    \draw (.05,\i) -- (-.05,\i);
+                }
+                \foreach \i in {2,...,10}
+                {
+                    \draw (.1,\i) -- (-.1,\i) node[left] {\(\i\)};
+                }
+                \draw (1,2.8) -- (3,2.8);
+                \draw (1,9.1) -- (3,9.1);
+                \draw (.5,4.75) rectangle (3.5,7.1);
+                \draw[thick] (.5,5.5) -- (3.5,5.5);
+                \draw[dashed] (2,2.8) -- (2,4.75);
+                \draw[dashed] (2,9.1) -- (2,7.1);
+                \node[anchor=west] at (3.6,2.8) {\(x_{\parentheses*{1}}\)};
+                \node[anchor=west] at (3.6,4.75) {\(\tilde{x}_{0,25}\)};
+                \node[anchor=west] at (3.6,5.5) {\(\tilde{x}\)};
+                \node[anchor=west] at (3.6,7.1) {\(\tilde{x}_{0,75}\)};
+                \node[anchor=west] at (3.6,9.1) {\(x_{\parentheses*{32}}\)};
+            \end{tikzpicture}
+        \end{center}
+        \item Wir führen die folgenden Schritte durch:
+        \begin{enumerate}
+            \item Auszählen der absoluten Klassenhäufigkeiten \(n\parentheses*{K_j}, j \in \braces*{1, \ldots, 9}\).
+            \item Berechnung der relativen Klassenhäufigkeiten \(f\parentheses*{K_j} = \frac{n\parentheses*{K_j}}{n}, j \in \braces*{1, \ldots, 9}\) mit \(n = 32\).
+            \item Berechnung der Rechteckhöhen des Histogramms gemäß
+            \[
+                h_j \cdot b_h = f\parentheses*{K_j} \iff h_j = \frac{f\parentheses*{K_j}}{b_j}, \quad j \in \braces*{1, \ldots, 9}.
+            \]
+        \end{enumerate}
+        In der folgenden Tabelle sind die entsprechenden Werte dargestellt:
+        \begin{center}
+            \begin{tabular}{cccccc}
+                \toprule
+                Klassen-Nr. & Klasse & \makecell{Absolute\\Klassenhäufigkeit} & \makecell{Relative\\Häufigkeit} & Klassenbreite & Rechteckhöhe\\
+                \(j\) & \(K_j\) & \(n\parentheses*{K_j}\) & \(f\parentheses*{K_j}\) & \(b_j\) & \(h_j\)\\
+                \midrule
+                \(1\) & \(\brackets*{1,5, 2,5}\) & \(0\) & \(0\) & \(1\) & \(0\)\\
+                \(2\) & \(\left(2,5, 3,5\right]\) & \(3\) & \(\frac{3}{32}\) & \(1\) & \(\frac{3}{32}\)\\
+                \(3\) & \(\left(3,5, 4,5\right]\) & \(3\) & \(\frac{3}{32}\) & \(1\) & \(\frac{3}{32}\)\\
+                \(4\) & \(\left(4,5, 5,5\right]\) & \(10\) & \(\frac{5}{16}\) & \(1\) & \(\frac{5}{16}\)\\
+                \(5\) & \(\left(5,5, 6,5\right]\) & \(3\) & \(\frac{3}{32}\) & \(1\) & \(\frac{3}{32}\)\\
+                \(6\) & \(\left(6,5, 7\right]\) & \(5\) & \(\frac{5}{32}\) & \(1\) & \(\frac{5}{16}\)\\
+                \(7\) & \(\left(7, 7,5\right]\) & \(1\) & \(\frac{1}{32}\) & \(1\) & \(\frac{1}{16}\)\\
+                \(8\) & \(\left(7,5, 8,5\right]\) & \(3\) & \(\frac{3}{32}\) & \(1\) & \(\frac{3}{32}\)\\
+                \(9\) & \(\left(8,5, 9,5\right]\) & \(4\) & \(\frac{1}{8}\) & \(1\) & \(\frac{1}{8}\)\\
+                \bottomrule
+            \end{tabular}
+        \end{center}
+        Damit können wir nun das Histogramm der benötigten Zeiten der 32 Schülerinnen und Schülern zum Lösen der Rechenaufgabe zeichnen.
+        \begin{center}
+            \begin{tikzpicture}
+                \draw (1.5,0) -- (10,0);
+                \draw (1.5,0) -- (1.5,10);
+
+                \draw (1.5,0) -- (1.4,0) node[left] {\(0\)};
+                \foreach \i in {1,...,10}
+                {
+                    \draw (1.6,\i) -- (1.4,\i) node[left] {\(\frac{\i}{32}\)};
+                }
+                \foreach \i in {1.5,2,...,10}
+                {
+                    \draw (\i,.05) -- (\i,-.05);
+                }
+                \foreach \i in {2,...,10}
+                {
+                    \draw (\i,.1) -- (\i,-.1) node[below] {\(\i\)};
+                }
+                \draw (2.5,0) rectangle (3.5,3);
+                \draw (3.5,0) rectangle (4.5,3);
+                \draw (4.5,0) rectangle (5.5,10);
+                \draw (5.5,0) rectangle (6.5,3);
+                \draw (6.5,0) rectangle (7,10);
+                \draw (7,0) rectangle (7.5,2);
+                \draw (7.5,0) rectangle (8.5,3);
+                \draw (8.5,0) rectangle (9.5,4);
+            \end{tikzpicture}
+        \end{center}
     \end{enumerate}
 \end{document}
