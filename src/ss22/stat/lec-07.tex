@@ -10,4 +10,284 @@
 
 \begin{document}
     \maketitle
+
+
+    \section*{Wahrscheinlichkeitsmaße mit Riemann-Dichten}
+
+    Diskrete Wahrscheinlichkeitsmaße werden über Zähldichten eingeführt, die Elementen einer (höchstens) abzählbaren Menge Wahrscheinlichkeiten zuweisen.
+    In der Praxis benötigt man insbesondere Modelle, in denen reelle Zahlen zur Beschreibung eines Versuchsergebnisses verwendet werden (etwa die reellen Zahlen im Intervall \(\brackets*{0, 1}\) zur Beschreibung einer prozentualen Steigerung).
+    Aus mathematischer Sicht besteht der qualitative Unterschied darin, dass statt abzählbarer Grundräume nun Mengen mit überabzählbar vielen Elementen betrachtet werden.
+    Hier muss eine andere Vorgehensweise zur Definition einer Wahrscheinlichkeitsverteilung gewählt werden.
+    Nicht mehr jedem Elementarereignis, sondern jedem Intervall wird eine Wahrscheinlichkeit zugewiesen.
+
+    Ist der Grundraum \(\Omega\) eine überabzählbare Teilmenge der reellen Zahlen, dann muss aus mathematischen Gründen auch die Potenzmenge als ``Vorrat'' von Ereignissen durch ein anderes Mengensystem ersetzt werden; die geeignete Struktur ist die sogenannte \(\sigma\)-Algebra.
+
+    \begin{definition}
+        Seien \(\Omega \ne \emptyset\) und \(\mathfrak{U} \subseteq \Pot\parentheses*{\Omega}\) ein System von Teilmengen von \(\Omega\).
+        \(\mathfrak{U}\) heißt \emph{\(\sigma\)-Algebra} von Ereignissen über \(\Omega\), falls gilt:
+        \begin{enumerate}
+            \item \(\Omega \in \mathfrak{U}\),
+            \item \(A \in \mathfrak{U} \implies A^c \in \mathfrak{U}\) für jedes \(A \in \mathfrak{U}\),
+            \item für jede Folge \(A_1, A_2, \ldots\) von Mengen aus \(\mathfrak{U}\) gilt: \(\bigcup_{n = 1}^\infty A_n \in \mathfrak{U}\).
+        \end{enumerate}
+    \end{definition}
+
+    Eine \(\sigma\)-Algebra ist ein System von Teilmengen von \(\Omega\), das abgeschlossen ist gegenüber der Bildung von Komplementen und abzählbaren Vereinigungen.
+    Als Elementarereignis bezeichnet man in diesem Zusammenhang eine Menge aus \(\mathfrak{U}\), die keine echte Vereinigung anderer Ereignisse (Mengen aus \(\mathfrak{U}\)) ist.
+    Aus der Definition einer \(\sigma\)-Algebra folgt sofort, dass \(\emptyset \in \mathfrak{U}\) und für jede Folge \(A_1, A_2, \ldots\) von Mengen aus \(\mathfrak{U}\) gilt: \(\bigcap_{n = 1}^\infty A_n \in \mathfrak{U}\).
+    Die Potenzmenge \(\Pot\parentheses*{\Omega}\) einer nicht-leeren Menge \(\Omega\) ist stets eine \(\sigma\)-Algebra.
+    Basierend auf einer \(\sigma\)-Algebra wird der Begriff eines allgemeinen Wahrscheinlichkeitsraums eingeführt.
+
+    \begin{definition}
+        Sei \(\mathfrak{U}\) eine \(\sigma\)-Algebra über \(\Omega \ne \emptyset\).
+        Eine Abbildung \(P: \mathfrak{U} \to \brackets*{0, 1}\) mit
+        \begin{enumerate}
+            \item \(P\parentheses*{A} \ge 0 \quad \forall A \in \mathfrak{U}\),
+            \item \(P\parentheses*{\Omega} = 1\) und
+            \item \(P\parentheses*{\bigcup_{n = 1}^\infty A_n} = \sum_{n = 1}^\infty P\parentheses*{A_n}\) für jede Wahl paarweise disjunkter Mengen aus \(\mathfrak{U}\) (\(\sigma\)-Additivität)
+        \end{enumerate}
+        heißt \emph{Wahrscheinlichkeitsverteilung} oder \emph{Wahrscheinlichkeitsmaß} auf \(\Omega\) bzw. \(\parentheses*{\Omega, \mathfrak{U}}\).
+        \(\parentheses*{\Omega, \mathfrak{U}, P}\) heißt \emph{Wahrscheinlichkeitsraum}, \(\parentheses*{\Omega, \mathfrak{U}}\) heißt \emph{messbarer Raum} oder \emph{Messraum}.
+    \end{definition}
+
+    Aus den Eigenschaften (ii) und (iii) in Definition 2 folgt unmittelbar \(P\parentheses*{\emptyset} = 0\).
+    Dazu wähle man in (iii) die Folge paarweiser disjunkter Mengen gemäß \(A_1 = \emptyset\), \(A_2 = \Omega\) und \(A_j = \emptyset, j \ge 3\).
+    Dann gilt
+    \[
+        P\parentheses*{\Omega} = P\parentheses*{\bigcup_{n = 1}^\infty A_n} = \sum_{n = 1}^\infty P\parentheses*{A_n} = P\parentheses*{A_1} + P\parentheses*{\bigcup_{n = 2}^\infty A_n} = P\parentheses*{A_1} + P\parentheses*{\Omega}.
+    \]
+    Daraus folgt direkt \(P\parentheses*{A_1} = P\parentheses*{\emptyset} = 0\).
+
+    \begin{definition}
+        Werden Intervalle \(\brackets*{a, b}\) oder \(\parentheses*{a, b}\) (auch \(\left[0, \infty\right)\), \(\R\)) als Grundraum \(\Omega \subseteq \R\) in einem Modell angesetzt, so wählt man jeweils die kleinstmögliche \(\sigma\)-Algebra, die \emph{alle} Teilmengen \(\left(c, d\right] \subseteq \brackets*{a, b}\) enthält.
+        Diese \(\sigma\)-Algebra bezeichnet man als \emph{Borelsche \(\sigma\)-Algebra} \(\mathcal{B}\) über \(\brackets*{a, b}\) bzw. \(\parentheses*{a, b}\); sie ist eine echte Teilmenge der Potenzmenge von \(\brackets*{a, b}\) bzw. \(\parentheses*{a, b}\).
+        Analog geht man in höheren Dimensionen vor.
+
+        Für \(\Omega = \R^n\) wählt man als Menge von Ereignissen die Borelsche \(\sigma\)-Algebra \(\mathcal{B}^n\), die als kleinstmögliche \(\sigma\)-Algebra definiert ist mit der Eigenschaft, alle \(n\)-dimensionalen Intervalle
+        \[
+            \left(a, b\right] = \braces*{x = \parentheses*{x_1, \ldots, x_n} \in \R^n : a_i < x_i \le b_i, 1 \le i \le n}
+        \]
+        für \(a = \parentheses*{a_1, \ldots, a_n} \in \R^n\) und \(b = \parentheses*{b_1, \ldots, b_n} \in \R^n\) zu enthalten.
+
+        Betrachtet man einen Grundraum \(\tilde{\Omega} \subseteq \R^n\), so ist die geeignete Borelsche \(\sigma\)-Algebra gegeben durch \(\tilde{\mathcal{B}}^n = \braces*{B \cap \tilde{\Omega} : B \in \mathcal{B}^n}\) (die sogenannte \emph{Spur-\(\sigma\)-Algebra}).
+    \end{definition}
+
+    Zunächst wird nun der Fall \(n = 1\) betrachtet, d.h. es wird ein Grundraum \(\Omega \subseteq \R\) zugrunde gelegt.
+    Insbesondere sei angenommen, das \(\Omega\) ein Intervall ist.
+
+    \begin{definition}
+        Eine integrierbare Funktion \(f: \R \to \R\) mit \(f\parentheses*{x} \ge 0, x \in \R\) und \(\int_{-\infty}^\infty f\parentheses*{x}\d x = 1\) heißt \emph{Riemann-Dichte} oder \emph{Riemann-Dichtefunktion}.
+        Über die Festlegung von Wahrscheinlichkeiten mittels
+        \[
+            F\parentheses*{x} = P\parentheses*{\left(-\infty, x\right]} = \int_{-\infty}^x f\parentheses*{y}\d y, \quad x \in \R,
+        \]
+        wird stets eindeutig ein Wahrscheinlichkeitsmaß definiert, die Funktion \(F: \R \to \brackets*{0, 1}\) wird als \emph{Verteilungsfunktion} bezeichnet.
+    \end{definition}
+
+    Die Wahrscheinlichkeit für ein Intervall \(\left(a, b\right] \subseteq \Omega\) ist dann gegeben durch
+    \[
+        P\parentheses*{\left(a, b\right]} = \int_a^b f\parentheses*{x}\d x.
+    \]
+    Mit dieser Setzung ist klar, dass einem einzelnen Punkt (im Gegensatz zu diskreten Wahrscheinlichkeitsmaßen) stets die Wahrscheinlichkeit \(0\) zugewiesen wird; \(P\parentheses*{\braces*{x}} = 0\) für alle \(x \in \Omega\).
+    Das hat auch zur Konsequenz, dass alle Intervalle mit Grenzen \(a, b \in \Omega, a < b\), dieselbe Wahrscheinlichkeit haben:
+    \[
+        P\parentheses*{\parentheses*{a, b}} = P\parentheses*{\brackets*{a, b}} = P\parentheses*{\left(a, b\right]} = P\parentheses*{\left[a, b\right)}.
+    \]
+    Im Folgenden werden wichtige Wahrscheinlichkeitsverteilungen mit Riemann-Dichten vorgestellt, die abkürzend auch als stetige Wahrscheinlichkeitsverteilungen bezeichnet werden.
+
+    \begin{remark}
+        Im weiteren Verlauf kann stets davon ausgegangen werden, das \(\Omega = \R\) gilt.
+        Ist \(\Omega \subsetneq \R\), so kann das Modell auf \(\R\) erweitert werden, indem die Riemann-Dichte für \(x \in \R \setminus \Omega\) zu Null definiert wird.
+    \end{remark}
+
+    \begin{definition}
+        Die \emph{Rechteckverteilung} \(R\parentheses*{a, b}\) ist definiert durch die Dichtefunktion
+        \[
+            f\parentheses*{x} = \frac{1}{b - a}\mathbb{I}_{\brackets*{a, b}}\parentheses*{x} = \begin{cases}
+                \frac{1}{b - a}, & \text{falls }x \in \brackets*{a, b},\\
+                0, & \text{falls }x \not\in \brackets*{a, b}
+            \end{cases}
+        \]
+        für Parameter \(a, b \in \R\) mit \(a < b\).
+        Die Verteilungsfunktion ist gegeben durch
+        \[
+            F\parentheses*{x} = \begin{cases}
+                0, & \text{falls }x < a,\\
+                \frac{x - a}{b - a}, & \text{falls }x \in \brackets*{a, b},\\
+                1, & \text{falls }x > b.
+            \end{cases}
+        \]
+    \end{definition}
+
+    Die Rechteckverteilung \(R\parentheses*{a, b}\) besitzt die Eigenschaft, dass die Wahrscheinlichkeit eines in \(\brackets*{a, b}\) enthaltenen Intervalls nur von der Länge des Intervalls nicht aber von dessen Lage abhängt.
+
+    \begin{definition}
+        Die \emph{Exponentialverteilung} \(\Exp\parentheses*{\lambda}\) ist definiert durch die Dichtefunktion
+        \[
+            f\parentheses*{x} = \lambda e^{-\lambda x}\mathbb{I}_{\parentheses*{0, \infty}}\parentheses*{x} = \begin{cases}
+                \lambda e^{-\lambda x}, & \text{falls }x > 0,\\
+                0, & \text{falls }y \le 0
+            \end{cases}
+        \]
+        für einen Parameter \(\lambda > 0\).
+        Die Verteilungsfunktion ist gegeben durch
+        \[
+            F\parentheses*{x} = \begin{cases}
+                1 - e^{-\lambda x}, & \text{falls }x > 0,\\
+                0, & \text{falls }x \le 0.
+            \end{cases}
+        \]
+    \end{definition}
+
+    Die Exponentialverteilung wird vielfältig und sehr häufig in stochastischen Modellen verwendet (etwa in der Beschreibung von Wartezeiten oder Lebensdauern).
+    Gelegentlich wird eine Parametrisierung \(\Exp\parentheses*{\theta^{-1}}\) mit \(\theta > 0\) gewählt, so dass z.B.
+    \[
+        F\parentheses*{x} = \begin{cases}
+            1 - e^{-\frac{x}{\theta}}, & \text{falls }x > 0,\\
+            0, & \text{falls }x \le 0
+        \end{cases}
+    \]
+    gilt.
+    Die beiden nächsten Verteilungen sind Verallgemeinerungen der Exponentialverteilung und können aufgrund eines weiteren Parameters reale Gegebenheiten oft besser modellieren.
+    Sie werden häufig in technischen Anwendungen verwendet.
+
+    \begin{definition}
+        Die \emph{Weibull-Verteilung} \(\Wei\parentheses*{\alpha, \beta}\) ist definiert durch die Dichtefunktion
+        \[
+            f\parentheses*{x} = \begin{cases}
+                \alpha\beta x^{\beta - 1}e^{-\alpha x^\beta}, & \text{falls }x > 0,\\
+                0, & \text{falls }x \le 0
+            \end{cases}
+        \]
+        für Parameter \(\alpha > 0\) und \(\beta > 0\).
+        Die Verteilungsfunktion ist gegeben durch
+        \[
+            F\parentheses*{x} = \begin{cases}
+                1 - e^{-\alpha x^\beta}, & \text{falls }x > 0,\\
+                0, & \text{falls }x \le 0.
+            \end{cases}
+        \]
+    \end{definition}
+
+    \begin{definition}
+        Die \emph{Gammaverteilung} \(\Gamma\parentheses*{\alpha, \beta}\) ist definiert durch die Dichtefunktion
+        \[
+            f\parentheses*{x} = \begin{cases}
+                \frac{\alpha^\beta}{\Gamma\parentheses*{\beta}}x^{\beta - 1}e^{-\alpha x}, & \text{falls }x > 0,\\
+                0, & \text{falls }x \le 0
+            \end{cases}
+        \]
+        für Parameter \(\alpha > 0\) und \(\beta > 0\).
+        Dabei bezeichnet \(\Gamma\parentheses*{\cdot}\) die durch \(\Gamma\parentheses*{z} = \int_0^\infty t^{z - 1}e^{-t}\d t, z > 0\) definierte Gammafunktion.
+        Eine geschlossene Darstellung der Verteilungsfunktion existiert nur für \(\beta \in \N\); die Verteilung wird dann auch als \emph{Erlang-Verteilung} \(\Erl\parentheses*{\beta}\) bezeichnet.
+        Für \(\beta \in \N\) ist die Verteilungsfunktion gegeben durch
+        \[
+            F\parentheses*{x} = \begin{cases}
+                1 - e^{-\alpha x}\parentheses*{\sum_{j = 0}^{\beta - 1}\frac{\parentheses*{\alpha x}^j}{j!}}, & \text{falls }x > 0,\\
+                0, & \text{falls }x \le 0.
+            \end{cases}
+        \]
+        Für \(\alpha = \lambda\) und \(\beta = 1\) ergibt sich die Exponentialverteilung.
+    \end{definition}
+
+    Die nächste Verteilung hat als eine spezielle Gammaverteilung eine besondere Bedeutung in der schließenden Statistik.
+
+    \begin{definition}
+        Die \emph{\(\chi^2\)-Verteilung} \(\chi^2\parentheses*{n}\) mit \(n\) Freiheitsgraden ist definiert durch die Dichtefunktion
+        \[
+            f\parentheses*{x} = \begin{cases}
+                \frac{1}{2^{\frac{n}{2}}\Gamma\parentheses*{\frac{n}{2}}}x^{\frac{n}{2} - 1}e^{-\frac{x}{2}}, & \text{falls }x > 0,\\
+                0, & \text{falls }x \le 0
+            \end{cases}
+        \]
+        mit \(n \in \N\).
+        Sie stimmt mit der \(\Gamma\parentheses*{\frac{1}{2}, \frac{n}{2}}\)-Verteilung überein.
+    \end{definition}
+
+    Neben der Rechteckverteilung ist eine zweite Verteilung über einem endlichen Intervall von Bedeutung.
+
+    \begin{definition}
+        Die \emph{Betaverteilung} \(\betadist\parentheses*{\alpha, \beta}\) ist definiert durch die Dichtefunktion
+        \[
+            f\parentheses*{x} = \begin{cases}
+                \frac{\Gamma\parentheses*{\alpha + \beta}}{\Gamma\parentheses*{\alpha}\Gamma\parentheses*{\beta}}x^{\alpha - 1}\parentheses*{1 - x}^{\beta - 1}, & \text{falls }x \in \parentheses*{0, 1},\\
+                0, & \text{falls }x \not\in \parentheses*{0, 1}
+            \end{cases}
+        \]
+        für Parameter \(\alpha > 0\) und \(\beta > 0\).
+        Die Verteilungsfunktion ist im Allgemeinen nicht geschlossen darstellbar.
+    \end{definition}
+
+    Die speziellen Betaverteilungen \(\betadist\parentheses*{\alpha, 1}\) heißen auch Potenzverteilungen und besitzen die Verteilungsfunktion
+    \[
+        F\parentheses*{x} = \begin{cases}
+            0, & \text{falls }x < 0,\\
+            x^\alpha, & \text{falls }0 \le x < 1,\\
+            1, & \text{falls }x \ge 1.
+        \end{cases}
+    \]
+    Die Rechteckverteilung \(R\parentheses*{0, 1}\) ist ein Spezialfall mit \(\alpha = 1\).
+
+    In ökonomischen Anwendungen finden Pareto-Verteilungen Verwendung.
+
+    \begin{definition}
+        Die \emph{Pareto-Verteilung} \(\Par\parentheses*{\alpha}\) ist definiert durch die Dichtefunktion
+        \[
+            f\parentheses*{x} = \begin{cases}
+                \frac{\alpha}{x^{\alpha + 1}}, & \text{falls }x \ge 1,\\
+                0, & \text{falls }x < 1
+            \end{cases}
+        \]
+        für einen Parameter \(\alpha > 0\).
+        Die Verteilungsfunktion ist gegeben durch
+        \[
+            F\parentheses*{x} = \begin{cases}
+                1 - x^{-\alpha}, & \text{falls }x \ge 1,\\
+                0, & \text{falls }x < 1
+            \end{cases}
+        \]
+    \end{definition}
+
+    Die in der Stochastik wichtigste Verteilung ist die Normalverteilung.
+
+    \begin{definition}
+        Die \emph{Normalverteilung} \(N\parentheses*{\mu, \sigma^2}\) ist definiert durch die Dichtefunktion
+        \[
+            f\parentheses*{x} = \varphi_{\mu, \sigma^2}\parentheses*{x} = \frac{1}{\sqrt{2\pi}\sigma}\exp\parentheses*{-\frac{\parentheses*{x - \mu}^2}{2\sigma^2}}, \quad x \in \R,
+        \]
+        mit den Parametern \(\mu \in \R\) und \(\sigma > 0\).
+        Die Verteilungsfunktion ist nicht geschlossen darstellbar.
+        Speziell für \(\mu = 0\) und \(\sigma^2 = 1\) heißt \(N\parentheses*{0, 1}\) \emph{Standardnormalverteilung}; die zugehörige Verteilungsfunktion wird mit \(\Phi\), die Riemann-Dichte mit \(\varphi = \varphi_{0, 1}\) bezeichnet.
+        Die Verteilungsfunktion \(\Phi_{\mu, \sigma^2}\) von \(N\parentheses*{\mu, \sigma^2}\) lässt sich durch die Identität
+        \[
+            \Phi_{\mu, \sigma^2}\parentheses*{x} = \Phi\parentheses*{\frac{x - \mu}{\sigma}}, \quad x \in \R
+        \]
+        darstellen.
+        Da \(\varphi\) achsensymmetrisch ist, d.h. \(\varphi\parentheses*{x} = \varphi\parentheses*{-x}, x \in \R\), gilt die Identität
+        \[
+            \Phi\parentheses*{x} = 1 - \Phi\parentheses*{-x}, \quad x \in \R.
+        \]
+    \end{definition}
+
+    Schließlich werden noch zwei weitere Verteilungen mit Riemann-Dichten eingeführt, die in der schließenden Statistik verwendet werden.
+
+    \begin{definition}
+        Die \emph{\(t\)-Verteilung} \(t\parentheses*{n}\) mit \(n\) Freiheitsgraden ist definiert durch die Dichtefunktion
+        \[
+            f\parentheses*{x} = \frac{\Gamma\parentheses*{\frac{n + 1}{2}}}{\sqrt{n\pi}\Gamma\parentheses*{\frac{n}{2}}}\parentheses*{1 + \frac{x^2}{n}}^{-\frac{n + 1}{2}}, \quad x \in \R,
+        \]
+        mit \(n \in \N\).
+        Die Verteilungsfunktion ist nicht geschlossen darstellbar.
+    \end{definition}
+
+    \begin{definition}
+        Die \emph{\(F\)-Verteilung} \(F\parentheses*{n, m}\) mit \(n\) und \(m\) Freiheitsgraden ist definiert durch die Dichtefunktion
+        \[
+            f\parentheses*{x} = \begin{cases}
+                \frac{\Gamma\parentheses*{\frac{n + m}{2}}}{\Gamma\parentheses*{\frac{n}{2}}\Gamma\parentheses*{\frac{m}{2}}}\parentheses*{\frac{n}{m}}^{\frac{n}{2}}\frac{x^{\frac{n}{2} - 1}}{\parentheses*{1 + \frac{n}{m}x}^{\frac{n + m}{2}}}, & \text{falls }x > 0,\\
+                0, & \text{falls }x \le 0.
+            \end{cases}
+        \]
+        mit \(n \in \N\) und \(m \in \N\). Die Verteilungsfunktion ist nicht geschlossen darstellbar.
+    \end{definition}
 \end{document}
