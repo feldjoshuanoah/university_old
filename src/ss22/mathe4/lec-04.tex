@@ -1,0 +1,34 @@
+\documentclass{lecture}
+
+\institute{Applied and Computational Mathematics}
+\title{Vorlesung 4}
+\author{Joshua Feld, 406718}
+\course{Mathematische Grundlagen IV}
+\professor{Torrilhon \& Berkels}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \begin{example}
+        Betrachte \(\Omega = \brackets*{0, 1}^2 \subset \R^2, u: \Omega \times \brackets*{0, T} \to \R\) mit
+        \[
+            \partial_t u - \Delta u = f, \quad x \in \Omega, t \in \brackets*{0, T}
+        \]
+    \end{example}
+
+    \begin{remark}
+        \begin{enumerate}
+            \item Die Anzahl an Rand- und Anfangsbedingungen hängt von der partiellen Differentialgleichung ab.
+            \item Die Poission-Gleichung \(\Delta u = f\) auf einem Gebit \(\Omega\) erwartet pro Randpunkt \(x \in \partial\Omega\) eine Randbedingung.
+            Es wird unterschieden zwischen
+            \begin{enumerate}
+                \item Dirichlet-Bedingung: \(u\parentheses*{x} = g\parentheses*{x}, x \in \partial\Omega\),
+                \item Neumann-Bedingung: \(\partial_n u\parentheses*{x} = h\parentheses*{x}, x \in \partial\Omega\), wobei \(\partial_n = n \cdot \nabla\),
+                \item Robin-Bedingung: \(\alpha\parentheses*{x}u\parentheses*{x} + \beta\parentheses*{x}\partial_n u\parentheses*{x} = r\parentheses*{x}, x \in \partial\Omega\).
+            \end{enumerate}
+        \end{enumerate}
+    \end{remark}
+\end{document}
