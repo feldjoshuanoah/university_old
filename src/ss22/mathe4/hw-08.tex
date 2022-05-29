@@ -1,0 +1,227 @@
+\documentclass{exercise}
+
+\institute{Applied and Computational Mathematics}
+\title{Hausaufgabenübung 8}
+\author{Joshua Feld, 406718}
+\course{Mathematische Grundlagen IV}
+\professor{Torrilhon \& Berkels}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \section*{Aufgabe 1}
+
+    \begin{problem}
+        Gegeben ist das PDE-System 1. Ordnung für \(U: \Omega \subset \R^2 \times \R^+ \to \R^3\)
+        \[
+            \left\{\begin{array}{l}
+                \partial_t u_1 + 3\partial_{x_1}u_2 + 2\partial_{x_2}u_1 + \partial_{x_2}u_2 = 0,\\
+                \partial_t u_2 + \partial_{x_1}u_2 + 3\partial_{x_2}u_2 = 0,\\
+                \partial_t u_3 + 2\partial_{x_1}u_2 + 3\partial_{x_1}u_3 + 2\partial_{x_2}u_3 = 0,\\
+            \end{array}\right.
+        \]
+        Zeigen Sie, dass das System mit den Flussfunktionen \(F^{\parentheses*{i}}: \R^3 \to \R^3, i = 1, 2\) in der Form
+        \[
+            \partial_t U + \vecdiv F\parentheses*{U} = \partial_t U + \sum_{i = 1}^2 \partial_{x_i}F^{\parentheses*{i}}\parentheses*{U} = 0
+        \]
+        geschrieben werden kann und überprüfen Sie, ob das System hyperbolisch ist.
+        Dies ist der Fall, wenn die gerichtete Transportmatrix
+        \[
+            A^{\parentheses*{\xi}}\parentheses*{U} = \parentheses*{\sum_{i = 1}^2 \xi_i\frac{\partial F^{\parentheses*{i}}}{\partial u_j}}_{i, j = 1, 2, 3}
+        \]
+        für alle Richtungen \(\xi \in \R^2\) diagonalisierbar ist.
+    \end{problem}
+
+    \subsection*{Lösung}
+    Wir erkennen, dass sich das System schreiben lässt als
+    \[
+        \partial_t U +  \underbrace{\begin{pmatrix}
+            0 & 3 & 0\\
+            0 & 1 & 0\\
+            0 & 2 & 3
+        \end{pmatrix}}_{=: A^{\parentheses*{1}}}\partial_{x_1}U + \underbrace{\begin{pmatrix}
+            2 & 1 & 0\\
+            0 & 3 & 0\\
+            0 & 0 & 2
+        \end{pmatrix}}_{=: A^{\parentheses*{2}}}\partial_{x_2}U = 0.
+    \]
+    Folglich lässt sich das System für die Flussfunktion \(F\parentheses*{U} = \parentheses*{A^{\parentheses*{1}}U, A^{\parentheses*{2}}U}\) in der geforderten Form schreiben:
+    \[
+        \partial_t + \vecdiv F\parentheses*{U} = \partial_t U + \sum_{i = 1}^n \partial_{x_i}F^{\parentheses*{i}}\parentheses*{U} = \partial_t U + A^{\parentheses*{1}}\partial_{x_1}U + A^{\parentheses*{2}}\partial_{x_2}U = 0.
+    \]
+    Wir überprüfen nun, ob das System zudem hyperbolisch ist, die gerichtete Transportmatrix
+    \[
+        A^{\parentheses*{\xi}}\parentheses*{U} = \parentheses*{\sum_{i = 1}^2 \xi_i\frac{\partial F^{\parentheses*{i}}}{\partial u_j}}_{i, j = 1, 2, 3} = \xi_1 A^{\parentheses*{1}} + \xi_2 A^{\parentheses*{2}} = \begin{pmatrix}
+            2\xi_2 & 3\xi_1 + \xi_2 & 0\\
+            0 & \xi_1 + 3\xi_2 & 0\\
+            0 & 2\xi_1 & 3\xi_1 + 2\xi_2
+        \end{pmatrix}
+    \]
+    also für alle \(U \in \R^3\) und alle Einheitsvektoren \(\xi \in \R^2\) reelle Eigenwerte hat und diagonalisierbar ist.
+    Die Eigenwerte sind offensichtlich
+    \[
+        \lambda_1 = 2\xi_2, \quad \lambda_2 = \xi_1 + 3\xi_2, \quad \lambda_3 = 3\xi_1 + 2\xi_2
+    \]
+    und somit reell.
+    Das System ist jedoch nicht allgemein diagonalisierbar: Für die Richtung \(\hat{\xi} = \frac{1}{\sqrt{2}}\parentheses*{1, -1}^T\), beispielsweise, hat der Eigenwert \(-\sqrt{2}\) die algebraische Vielfachheit \(2\), die geometrische Vielfachheit ist jedoch \(1\), wie man leicht sieht
+    \[
+        A^{\parentheses*{\hat{\xi}}} - \parentheses*{-\sqrt{2}}I = \begin{pmatrix}
+            0 & \sqrt{2} & 0\\
+            0 & 0 & 0\\
+            0 & \sqrt{2} & \frac{3}{2}\sqrt{2}
+        \end{pmatrix}.
+    \]
+    Somit ist das System nicht hyperbolisch.
+
+
+    \section*{Aufgabe 2}
+
+    \begin{problem}
+        Gegeben ist das Problem
+        \begin{align*}
+            \partial_t u\parentheses*{x, t} &= \partial_{xx}u\parentheses*{x, t} - u\parentheses*{x, t} + \sin\parentheses*{\pi x}, \quad x \in \parentheses*{0, 1}, t > 0,\\
+            u\parentheses*{0, t} &= 0, \quad t > 0,\\
+            u_x\parentheses*{1, t} &= 0, \quad t > 0,\\
+            u\parentheses*{x, 0} &= a, \quad x \in \parentheses*{0, 1},
+        \end{align*}
+        wobei \(a \in \R\), das heißt die Anfangsbedingung ist eine konstante Funktion.
+        \begin{enumerate}
+            \item Berechnen Sie die zugehörigen Eigenwerte und die normierten Eigenfunktionen.
+            \item Entwickeln Sie die Anfangsbedingung und den Quellterm in Eigenfunktionen.
+            \item Berechnen Sie die Lösung des Problems mit dem Eigenfunktionen-Ansatz.
+        \end{enumerate}
+    \end{problem}
+
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item Um die Eigenvektoren und Eigenwerte zu finden, lösen wir die folgende Gleichung
+        \begin{align*}
+            \varphi''\parentheses*{x} + \lambda\varphi\parentheses*{x} &= 0, \quad x \in \parentheses*{0, 1},\\
+            \varphi\parentheses*{0} = \varphi_x\parentheses*{1} &= 0
+        \end{align*}
+        \[
+            \implies \varphi\parentheses*{x} = C_1\sin\parentheses*{\sqrt{\lambda}x} + C_2\cos\parentheses*{\sqrt{\lambda}x}.
+        \]
+        Mit den Randbedingungen für \(\varphi\) erhält man
+        \begin{align*}
+            0 = \varphi\parentheses*{0} &= C_2 \implies C_2 = 0,\\
+            0 = \varphi_x\parentheses*{1} &= C_1\sqrt{\lambda}\cos\parentheses*{\sqrt{\lambda}} \implies \lambda_k = \parentheses*{\frac{\parentheses*{2k + 1}\pi}{2}}^2, \quad k \in \N
+        \end{align*}
+        \[
+            \implies \varphi_k\parentheses*{x} = C_1\sin\parentheses*{\frac{\parentheses*{2k + 1}\pi}{2}x}, \quad k \in \N.
+        \]
+        \(C_1\) erhalten wir durch Normalisierung von \(\phi_k\parentheses*{x}\):
+        \[
+            1 \stackrel{!}{=} \int_0^1 \varphi_k\parentheses*{x}^2 \d x = C_1^2 \int_0^1\sin^2\parentheses*{\frac{\parentheses*{2k + 1}\pi}{2}x}\d x = \frac{1}{2}C_1^2 \implies C_1 = \sqrt{2}.
+        \]
+        Die Eigenfunktionen sind somit gegeben durch
+        \[
+            \varphi_k\parentheses*{x} = \sqrt{2}\sin\parentheses*{\sqrt{\lambda_k}x}, \quad k \in \N,
+        \]
+        mit \(\sqrt{\lambda_k} = \frac{\parentheses*{2k + 1}\pi}{2}\).
+        \item Wir betrachten eine konstante Funktion \(a\parentheses*{x, t} = a\).
+        Dann gilt
+        \[
+            a = \sum_{k = 1}^\infty \beta_k \varphi_k\parentheses*{x} = \sum_{k = 1}^\infty \beta_k \sqrt{2}\sin\parentheses*{\frac{\parentheses*{2k + 1}\pi}{2}x}.
+        \]
+        Die Koeffizienten der Entwicklung sind dann
+        \[
+            \beta_k = \int_0^1 a\sqrt{2}\sin\parentheses*{\frac{\parentheses*{2k + 1}\pi}{2}x}\d x = \frac{a\parentheses*{2\sqrt{2}}}{\pi\parentheses*{2k + 1}}, \quad k \in \N.
+        \]
+        Die Eigenzerlegung für \(\sin\parentheses*{\pi x}\) ergibt
+        \[
+            \sin\parentheses*{\pi x} = \sum_{k = 1}^\infty \gamma_k \sqrt{2}\sin\parentheses*{\frac{\parentheses*{2k + 1}\pi}{2}x},
+        \]
+        mit
+        \[
+            \gamma_k = \int_0^1 \sin\parentheses*{\pi x}\sqrt{2}\sin\parentheses*{\frac{\parentheses*{2k + 1}\pi}{2}x}\d x = -\frac{4\sqrt{2}\parentheses*{-1}^k}{\parentheses*{4k^2 + 4k - 3}\pi}.
+        \]
+        \item Wir verwenden den Eigenfunktionen-Ansatz
+        \[
+            u\parentheses*{x, t} = \sum_{k = 1}^\infty \alpha_k\parentheses*{t} \varphi_k\parentheses*{x}.
+        \]
+        Setzen wir alle oben hergeleiteten Entwicklungen in die PDE ein, so erhalten wir
+        \begin{align*}
+            \parentheses*{\sum_{k = 1}^\infty \alpha_k\parentheses*{t}\varphi_k\parentheses*{x}}_t &= \parentheses*{\sum_{k = 1}^\infty \alpha_k\parentheses*{t}\varphi_k\parentheses*{x}}_{xx} - \sum_{k = 1}^\infty \alpha_k\parentheses*{t}\varphi_k\parentheses*{x} + \sum_{k = 1}^\infty \gamma_k\varphi_k\parentheses*{x}\\
+            \iff \sum_{k = 1}^\infty \alpha_k'\parentheses*{t}\varphi_k\parentheses*{x} &= -\sum_{k = 1}^\infty \alpha_k\parentheses*{t}\lambda_k\varphi_k\parentheses*{x} - \sum_{k = 1}^\infty \alpha_k\parentheses*{t}\varphi_k\parentheses*{x} + \sum_{k = 1}^\infty \gamma_k\varphi_k\parentheses*{x}\\
+            \iff 0 &= \sum_{k = 1}^\infty\parentheses*{\alpha_k'\parentheses*{t} + \parentheses*{\lambda_k + 1}\alpha_k\parentheses*{t} - \gamma_k}\varphi_k\parentheses*{x}.
+        \end{align*}
+        Da die \(\varphi_k\) linear unabhängig sind, ergibt sich die folgende ODE:
+        \[
+            \alpha_k'\parentheses*{t} = -\parentheses*{\lambda_k + 1}\alpha_k\parentheses*{t} + \gamma_k.
+        \]
+        Diese hat die Lösung
+        \[
+            \alpha_k\parentheses*{t} = \frac{\gamma_k}{\lambda_k + 1} + C_k e^{-\parentheses*{\lambda_k + 1}t}.
+        \]
+        Die Konstante \(C_k\) erhalten wir aus der Nutzung der Anfangsbedingung
+        \[
+            u\parentheses*{x, 0} = \sum_{k = 1}^\infty \alpha_k\parentheses*{0}\sqrt{2}\sin\parentheses*{\frac{\parentheses*{2k + 1}\pi}{2}\pi x} \stackrel{!}{=} a
+        \]
+        \[
+            \implies \alpha_k\parentheses*{0} = C_k + \frac{\gamma_k}{\lambda_k + 1} = \beta_k \implies C_k = \beta_k - \frac{\gamma_k}{\lambda_k + 1}.
+        \]
+        Unter verwendung der Ausdrücke für \(\beta_k\), \(\gamma_k\) und \(\lambda_k\) erhalten wir den Ausdruck
+        \[
+            C_k = \frac{a\parentheses*{2\sqrt{2}}}{\pi\parentheses*{2k + 1}} + \frac{16\sqrt{2}\parentheses*{-1}^k}{\parentheses*{4k^2 + 4k - 3}\pi\parentheses*{4k^2 \pi^2 + 4k\pi + 4 + \pi^2}}.
+        \]
+        Die finale Lösung \(u\parentheses*{x, t}\) ist somit
+        \[
+            u\parentheses*{x, t} = \sum_{k = 1}^\infty\parentheses*{\beta_k e^{-\parentheses*{\lambda_k + 1}t} + \frac{\gamma_k}{\lambda_k + 1}\parentheses*{1 - e^{-\parentheses*{\lambda_k + 1}t}}}\varphi_k.
+        \]
+    \end{enumerate}
+
+
+    \clearpage\section*{Aufgabe 3}
+
+    \begin{problem}
+        Gegeben sei die folgende Funktionenfolge
+        \[
+            f_k\parentheses*{x} = \sqrt{x^2 + \frac{1}{k}}\text{ für }x \in \Omega = \parentheses*{-1, 1}, k = 1, 2, \ldots.
+        \]
+        \begin{enumerate}
+            \item Zeige Sie, dass \(f_k \in C^1\parentheses*{\Omega}\) für alle \(k = 1, 2, \ldots\) gilt und bestimmen Sie die \(\infty\)-Norm
+            \[
+                \norm*{f_k}_\infty = \sup_{x \in \Omega}\absolute*{f_k\parentheses*{x}}.
+            \]
+            \item Zeigen Sie, dass \(\parentheses*{f_k}_{k \in \N}\) eine Cauchyfolge ist.
+            \item Zeigen Sie, dass der Grenzwert nicht in \(\parentheses*{C^1, \norm*{\cdot}_\infty}\) liegt.
+            \item Folgern Sie, dass \(\parentheses*{C^1, \norm*{\cdot}_\infty}\) kein Banachraum ist.
+        \end{enumerate}
+    \end{problem}
+
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item Da
+        \[
+            f_k'\parentheses*{x} = \frac{x}{\sqrt{x^2 + \frac{1}{k}}}
+        \]
+        und \(\sqrt{x^2 + \frac{1}{k}} \ne 0\) für alle \(x \in \parentheses*{-1, 1}\) ist \(f'\parentheses*{x}\) stetig auf \(\parentheses*{-1, 1}\).
+        Somit gilt \(f_k \in C^1\parentheses*{\Omega}\).
+        Die Funktion \(f_k\) ist monoton auf \(\parentheses*{0, 1}\) und symmetrisch.
+        Das Supremum wird also auf dem Rand angenommen.
+        Es gilt
+        \[
+            \sup_{x \in \Omega}\absolute*{f_k\parentheses*{x}} = \sup_{x \in \Omega}\absolute*{\sqrt{x^2 + \frac{1}{k}}} = \sqrt{1 + \frac{1}{k}}.
+        \]
+        \item Seien \(N, M \in \N\) und ohne Beschränkung der Allgemeinheit sei \(N < M\).
+        Dann gilt
+        \[
+            \norm*{f_N - f_M}_\infty = \sup_{x \in \Omega}\absolute*{f_N\parentheses*{x} - f_M\parentheses*{x}} = \sup_{x \in \Omega}\absolute*{\sqrt{x^2 + \frac{1}{N}} - \sqrt{x^2 + \frac{1}{M}}} = \frac{1}{\sqrt{N}} - \frac{1}{\sqrt{M}} < \frac{1}{\sqrt{N}}.
+        \]
+        Also gilt für alle \(\epsilon > 0\) und \(N, M \ge N_\epsilon = \frac{1}{\epsilon^2}\)
+        \[
+            \norm*{f_N - f_M}_\infty < \frac{1}{\sqrt{N}} \le \frac{1}{\sqrt{N_\epsilon}} = \epsilon
+        \]
+        und \(f_k\) ist eine Cauchyfolge.
+        \item Wir zeigen, dass der Grenzwert der Folge durch \(f\parentheses*{x} = \absolute*{x}\) gegeben ist:
+        \[
+            \norm*{f_k\parentheses*{x} - f\parentheses*{x}}_\infty = \sup_{x \in \Omega}\absolute*{\sqrt{x^2 + \frac{1}{k}} - \absolute*{x}} = \sqrt{\frac{1}{k}} \xrightarrow{k \to \infty} 0.
+        \]
+        Da \(f\) stetig aber nicht stetig differenzierbar ist, liegt der Grenzwert nicht in \(\parentheses*{C^1\parentheses*{\Omega}, \norm*{\cdot}_\infty}\) (der Grenzwert ist eindeutig, da \(f_k\) und \(f\) stetig sind).
+        \item Der Raum \(\parentheses*{C^1, \norm*{\cdot}_\infty}\) ist kein Banachraum, da \(f_k\) eine Cauchyfolge ist, ber nicht gegen ein Element aus \(\parentheses*{C^1, \norm*{\cdot}_\infty}\) konvergiert.
+    \end{enumerate}
+\end{document}

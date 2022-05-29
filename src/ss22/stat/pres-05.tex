@@ -1,0 +1,195 @@
+\documentclass{exercise}
+
+\institute{Institut für Statistik und Wirtschaftsmathematik}
+\title{Präsenzübung 5}
+\author{Joshua Feld, 406718}
+\course{Statistik}
+\professor{Cramer}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \section*{Aufgabe 1}
+
+    \begin{problem}
+        Laura, Inge und Klara sind bei ihrer Freundin Lisa zum Abendessen eingeladen.
+        Da man in Aachen gelegentlich mit Regen rechnen muss, bringen die drei jeweils ihren Schirm mit und stellen ihn in den dafür vorgesehenen Schirmständer.
+        Als sich Laura, Inge und Klara nach einem langen, feuchtfröhlichen Abend schließlich auf den Heimweg begeben wollen, gelingt es den dreien nicht mehr, ihre Schirme richtig zuzuordnen.
+        Sie wählen daher jeweils zufällig einen der drei im Schirmständer vorhandenen Schirme aus.
+        \begin{enumerate}
+            \item Geben Sie zu diesem Zufallsexperiment einen geeigneten Wahrscheinlichkeitsraum an.
+            \item Berechnen Sie die Wahrscheinlichkeit dafür, dass bei dieser zufälligen Auswahl mindestens eine der drei Freundinnen den richtigen Schirm erhält.
+            Führen Sie diese Berechnung mittels Anwendung der Siebformel von Sylvester-Poincaré durch.
+        \end{enumerate}
+    \end{problem}
+
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item Um die Situation einfach zu beschreiben, werden im mathematischen Modell die drei Freundinnen Laura, Inge und Klara ebenso wie die zugehörigen Schirme jeweils mit den Zahlen \(1, 2, 3\) durchnummeriert (derart, dass jede Person und ihr Schirm die gleiche Nummer erhält).
+        Für die zufällige Auswahl der Schirme aus dem Schirmständer gilt:
+        \begin{itemize}
+            \item Die Ziehung erfolgt \emph{ohne Zurücklegen}, da jeder Schirm nur jeweils einer Person zugeordnet wird.
+            \item Die Ziehung erfolgt \emph{unter Berücksichtigung der Reihenfolge}, da es laut Aufgabenstellung auf die richtige Zuordnung ankommt. (Es macht einen Unterschied, ob beispielsweise die erste oder die dritte Person Schirm Nr. \(1\) erhält.)
+        \end{itemize}
+        Eine geeignete Ergebnismenge für dieses Zufallsexperiment ist gegeben durch
+        \[
+            \Omega = \braces*{\parentheses*{\omega_1, \omega_2, \omega_3} : \omega_1, \omega_2, \omega_3 \in \braces*{1, 2, 3}, \omega_i \ne \omega_j\text{ für }i \ne j}
+        \]
+        mit folgender Interpretation: Für \(i, j \in \braces*{1, 2, 3}\) bedeutet \(\omega_i = j\), dass die \(i\)-te Person den \(j\)-ten Schirm erhält.
+        Es folgt wiederum
+        \[
+            \absolute*{\Omega} = 3 \cdot 2 \cdot 1 = 6.
+        \]
+        Aufgrund der zufälligen Auswahl der Regenschirme können wir die betrachtete Situation als Laplace-Experiment auffassen.
+        Somit bezeichne \(P\) die (diskrete) Gleichverteilung auf \(\Omega\), d.h.
+        \[
+            P\parentheses*{E} = \frac{\absolute*{E}}{\absolute*{\Omega}} = \frac{\absolute*{E}}{6}, \quad E \subseteq \Omega.
+        \]
+        \item Wir berachten die folgenden Ereignisse:
+        \begin{align*}
+            A_1: \quad &\text{``Laura erhält ihren Schirm''},\\
+            A_2: \quad &\text{``Inge erhält ihren Schirm''},\\
+            A_3: \quad &\text{``Klara erhält ihren Schirm''}.
+        \end{align*}
+        Dann gilt gemäß der gewählten Nummerierung und der Wahl von \(\Omega\):
+        \begin{align*}
+            A_1 &= \braces*{\parentheses*{\omega_1, \omega_2, \omega_3} \in \Omega : \omega_1 = 1} = \braces*{\parentheses*{1, 2, 3}, \parentheses*{1, 3, 2}},\\
+            A_2 &= \braces*{\parentheses*{\omega_1, \omega_2, \omega_3} \in \Omega : \omega_2 = 2} = \braces*{\parentheses*{1, 2, 3}, \parentheses*{3, 2, 1}},\\
+            A_3 &= \braces*{\parentheses*{\omega_1, \omega_2, \omega_3} \in \Omega : \omega_3 = 3} = \braces*{\parentheses*{1, 2, 3}, \parentheses*{2, 1, 3}}.
+        \end{align*}
+        Hieraus folgt
+        \begin{align*}
+            A_1 \cap A_2 &= \braces*{\parentheses*{\omega_1, \omega_2, \omega_3} \in \Omega : \omega_1 = 1, \omega_2 = 2} = \braces*{\parentheses*{1, 2, 3}},\\
+            A_1 \cap A_3 &= \braces*{\parentheses*{\omega_1, \omega_2, \omega_3} \in \Omega : \omega_1 = 1, \omega_3 = 3} = \braces*{\parentheses*{1, 2, 3}},\\
+            A_2 \cap A_3 &= \braces*{\parentheses*{\omega_1, \omega_2, \omega_3} \in \Omega : \omega_2 = 2, \omega_3 = 3} = \braces*{\parentheses*{1, 2, 3}},\\
+            A_1 \cap A_2 \cap A_3 &= \braces*{\parentheses*{\omega_1, \omega_2, \omega_3} \in \Omega : \omega_1 = 1, \omega_2 = 2, \omega_3 = 3} = \braces*{\parentheses*{1, 2, 3}}.
+        \end{align*}
+        Das gesuchte Ereignis ist gegeben durch \(A_1 \cup A_2 \cup A_3\).
+        Dann folgt mit der Siebformel
+        \begin{align*}
+            P\parentheses*{A_1 \cup A_2 \cup A_3} &= P\parentheses*{A_1} + P\parentheses*{A_2} + P\parentheses*{A_3} - P\parentheses*{A_1 \cap A_2} - P\parentheses*{A_1 \cap A_3} - P\parentheses*{A_2 \cap A_3} + P\parentheses*{A_1 \cap A_2 \cap A_3}\\
+            &= \frac{1}{\absolute*{\Omega}}\parentheses*{\absolute*{A_1} + \absolute*{A_2} + \absolute*{A_3} - \absolute*{A_1 \cap A_2} - \absolute*{A_1 \cap A_3} - \absolute*{A_2 \cap A_3} + \absolute*{A_1 \cap A_2 \cap A_3}}\\
+            &= \frac{1}{6} \cdot \parentheses*{2 + 2 + 2 - 1 - 1 - 1 + 1}\\
+            &= \frac{2}{3}.
+        \end{align*}
+    \end{enumerate}
+
+
+    \section*{Aufgabe 2}
+
+    \begin{problem}
+        Ein Unternehmen erhält mit Wahrscheinlichkeit \(\frac{1}{3}\) die Genehmigung für ein neues Produktionsverfahren.
+        Die Wahrscheinlichkeit dafür, dass ein bereits angenommener Auftrag von dem Unternehmen \emph{rechtzeitig} ausgeführt werden kann, beträgt \(\frac{4}{5}\) unter Verwendung dieses neuen Verfahrens und \(\frac{2}{5}\) ohne dessen Nutzung.
+        \begin{enumerate}
+            \item Berechnen Sie die Wahrscheinlichkeit dafür, dass das Unternehmen den Auftrag rechtzeitig ausführen kann.
+            \item Dem Unternehmen gelingt es, den Auftrag rechtzeitig zu erfüllen.
+            Wie groß ist die Wahrscheinlichkeit dafür, dass das Unternehmen die Genehmigung \emph{nicht} erhalten hat?
+            \item Die Konkurrenz hat erfahren, dass es dem Unternehmen \emph{nicht} gelungen ist, den Auftrag rechtzeitig zu erfüllen, und möchte hieraus die Wahrscheinlichkeit dafür ermitteln, dass die Firma die Genehmigung erhalten hat.
+            Wie groß ist diese Wahrscheinlichkeit?
+        \end{enumerate}
+    \end{problem}
+
+    \subsection*{Lösung}
+    Es bezeichne
+    \begin{align*}
+        G: \quad &\text{``Die Genehmigung wird erteilt''},\\
+        R: \quad &\text{``Der Auftrag wird rechtzeitig durchgeführt''}.
+    \end{align*}
+    Weiter bezeichne \(P\) die zugehörige Wahrscheinlichkeitsverteilung.
+    Dann gilt gemäß Aufgabenstellung
+    \[
+        P\parentheses*{R \mid G} = \frac{4}{5}, \quad P\parentheses*{R \mid G^c} = \frac{2}{5}, \quad P\parentheses*{G} = \frac{1}{3}.
+    \]
+    \begin{enumerate}
+        \item Mit dem Satz der totalen Wahrscheinlichkeit folgt
+        \[
+            P\parentheses*{R} = P\parentheses*{R \mid G}P\parentheses*{G} + P\parentheses*{R \mid G^c}P\parentheses*{G^c} = \frac{4}{5} \cdot \frac{1}{3} + \frac{2}{5} \cdot \frac{2}{3} = \frac{8}{15}.
+        \]
+        \item Mit der Bayes-Formel folgt
+        \[
+            P\parentheses*{G^c \mid R} = \frac{P\parentheses*{R \mid G^c}P\parentheses*{G^c}}{P\parentheses*{R}} = \frac{P\parentheses*{R \mid G^c}\parentheses*{1 - P\parentheses*{G}}}{P\parentheses*{R}} = \frac{\frac{2}{5} \cdot \frac{2}{3}}{\frac{8}{15}} = \frac{1}{2}.
+        \]
+        \item Wiederum mit der Bayes-Formel erhält man
+        \[
+            P\parentheses*{G \mid R^c} = \frac{P\parentheses*{R^c \mid G}P\parentheses*{G}}{P\parentheses*{R^c}} = \frac{\parentheses*{1 - P\parentheses*{R \mid G}}P\parentheses*{G}}{1 - P\parentheses*{R}} = \frac{\parentheses*{1 - \frac{4}{5}} \cdot \frac{1}{3}}{1 - \frac{8}{15}} = \frac{1}{7}.
+        \]
+    \end{enumerate}
+
+
+    \section*{Aufgabe 3}
+
+    \begin{problem}
+        Während eines Fluges versage jedes Triebwerk eines Flugzeuges unabhängig von den anderen mit Wahrscheinlichkeit \(p \in \parentheses*{0, 1}\).
+        Das Flugzeug bleibe flugfähig, wenn mindestens die Hälfte der Triebwerke funktioniert.
+        \begin{enumerate}
+            \item Vergleichen Sie die Zuverlässigkeiten von Flugzeugen mit zwei bzw. vier Triebwerken: Berechnen Sie die Wahrscheinlichkeiten dafür, dass das jeweilige Flugzeug flugfähig ist, in Abhängigkeit von \(p\), und geben Sie an, für welche \(p \in \parentheses*{0, 1}\) Flugzeuge mit vier Triebwerken mit größerer Wahrscheinlichkeit flugfähig bleiben als Flugzeuge mit zwei Triebwerken.
+            \item Berechnen Sie zu beiden Flugzeug-Typen die in a) bestimmten Zuverlässigkeiten explizit für
+            \[
+                p = \frac{1}{2}, \quad p = \frac{1}{3}, \quad p = \frac{1}{20}.
+            \]
+        \end{enumerate}
+    \end{problem}
+
+    \subsection*{Lösung}
+    Es bezeichne
+    \begin{align*}
+        Z: \quad &\text{``Das Flugzeug mit zwei Triebwerken ist flugfähig''},\\
+        V: \quad &\text{``Das Flugzeug mit vier Triebwerken ist flugfähig''},\\
+        E_k: \quad &\text{``Es fallen }k\text{ Triebwerke des Flugzeugs aus''},\\
+        X: \quad &\text{(Zufällige) Anzahl der ausfallenden Triebwerke},\\
+        P: \quad &\text{Zugrundeliegende Wahrscheinlichkeitsverteilung}.
+    \end{align*}
+    \begin{enumerate}
+        \item Gemäß Aufgabenstellung fallen die Triebwerke unabhängig voneinander, jeweils mit einer Wahrscheinlichkeit \(p\) aus.
+        Damit lässt sich das betrachtete Zufallsexperiment gemäß der Vorlesung mit Hilfe der Binomialverteilung \(\bin\parentheses*{n, p}\) mit Parametern \(n \in \braces*{2, 4}\) und \(p \in \parentheses*{0, 1}\) modellieren.
+        Es gilt damit
+        \[
+            P\parentheses*{E_k} = P\parentheses*{X = k} = \binom{n}{k}p^k\parentheses*{1 - p}^{n - k}, \quad k \in \braces*{0, \ldots, n}.
+        \]
+        Für die Zuverlässigkeit eines Flugzeugs mit zwei Triebwerken (\(n = 2\)) erhält man für \(p \in \parentheses*{0, 1}\)
+        \[
+            P\parentheses*{Z} = 1 - P\parentheses*{Z^c} = 1 - P\parentheses*{E_2} = 1 - P\parentheses*{X = 2} = 1 - \binom{2}{2}p^2\parentheses*{1 - p}^{2 - 2} = 1 - p^2.
+        \]
+        Für die Zuverlässigkeit eines Flugzeugs mit vier Triebwerken (\(n = 4\)) erhält man für \(p \in \parentheses*{0, 1}\)
+        \begin{align*}
+            P\parentheses*{V} &= 1 - P\parentheses*{V^c}\\
+            &= 1 - P\parentheses*{E_3 \cup E_4}\ \parentheses*{= 1 - P\parentheses*{X \ge 3}}\\
+            &= 1 - \parentheses*{P\parentheses*{E_3} + P\parentheses*{E_4}}\ \parentheses*{= 1 - \parentheses*{P\parentheses*{X = 3} + P\parentheses*{X = 4}}}\\
+            &= 1 - \binom{4}{3}p^3\parentheses*{1 - p}^{4 - 3} - \binom{4}{4}p^4\parentheses*{1 - p}^{4 - 4}\\
+            &= 1 - \frac{4!}{3!1!}p^3\parentheses*{1 - p} - p^4\\
+            &= 1 - p^3\parentheses*{4 - 3p}.
+        \end{align*}
+        Es folgt für \(p \in \parentheses*{0, 1}\):
+        \begin{align*}
+            P\parentheses*{V} \ge P\parentheses*{Z} &\iff 1 - p^3\parentheses*{4 - 3p} \ge 1 - p^2\\
+            &\iff p^2 \ge p^3\parentheses*{4 - 3p}\\
+            &\iff 1 \ge 4p - 3p^2\\
+            &\iff p^2 - \frac{4}{3}p + \frac{1}{3} \ge 0\\
+            &\iff \parentheses*{p - 1}\parentheses*{p - \frac{1}{3}} \ge 0\\
+            &\iff p \ge 1 \lor p \le \frac{1}{3}
+        \end{align*}
+        Für \(p \in \parentheses*{0, 1}\) ist hiervon nur die zweite Bedingung erfüllbar, d.h. für \(p \in \parentheses*{0, \frac{1}{3}}\) sind Flugzeuge mit vier Triebwerken zuverlässiger, für \(p \in \parentheses*{\frac{1}{3}, 1}\) Flugzeuge mit zwei Triebwerken.
+        Für \(p = \frac{1}{3}\) ist die Zuverlässigkeit gleich groß.
+        \item Einsetzen der vorgegebenen Ausfallwarscheinlichkeiten ergibt
+        \begin{itemize}
+            \item für \(p = \frac{1}{2}\)
+            \begin{align*}
+                P\parentheses*{Z} &= 1 - \parentheses*{\frac{1}{2}}^2 = \frac{3}{4},\\
+                P\parentheses*{V} &= 1 - \parentheses*{\frac{1}{2}}^3 \cdot \parentheses*{4 - 3 \cdot \frac{1}{2}} = 1 - \frac{1}{8} \cdot \frac{5}{2} = \frac{11}{16},
+            \end{align*}
+            \item für \(p = \frac{1}{3}\)
+            \begin{align*}
+                P\parentheses*{Z} &= 1 - \parentheses*{\frac{1}{3}}^2 = \frac{8}{9},\\
+                P\parentheses*{V} &= 1 - \parentheses*{\frac{1}{3}}^3 \cdot \parentheses*{4 - 3 \cdot \frac{1}{3}} = 1 - \frac{1}{27} \cdot 3 = \frac{8}{9},
+            \end{align*}
+            \item für \(p = \frac{1}{20}\)
+            \begin{align*}
+                P\parentheses*{Z} &= 1 - \parentheses*{\frac{1}{20}}^2 = 0,9975,\\
+                P\parentheses*{V} &= 1 - \parentheses*{\frac{1}{20}}^3 \cdot \parentheses*{4 - 3 \cdot \frac{1}{20}} \approx 0,9995.
+            \end{align*}
+        \end{itemize}
+    \end{enumerate}
+\end{document}

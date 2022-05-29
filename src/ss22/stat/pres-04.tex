@@ -1,0 +1,294 @@
+\documentclass{exercise}
+
+\institute{Institut für Statistik und Wirtschaftsmathematik}
+\title{Präsenzübung 4}
+\author{Joshua Feld, 406718}
+\course{Statistik}
+\professor{Cramer}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \section*{Aufgabe 1}
+
+    \begin{problem}
+        Beim Würfeln mit einem \emph{unsymmetrischen} sechsseitigen Würfel interessiert man sich für die Wahrscheinlichkeiten, mit denen die einzelnen Augenzahlen \(1, \ldots, 6\) geworfen werden.
+        Es sind aber lediglich zu den Ereignissen
+        \begin{align*}
+            A &\hat{=} \text{``Es wird eine gerade Zahl geworfen''},\\
+            B &\hat{=} \text{``Es wird eine Augenzahl kleiner oder gleich }3\text{ geworfen''},\\
+            C &\hat{=} \text{``Es wird eine Eins oder eine Vier geworfen''}
+        \end{align*}
+        die folgenden Wahrscheinlichkeiten bekannt (mit \(P\) als zugrundeliegender Wahrscheinlichkeitsverteilung):
+        \[
+            P\parentheses*{A} = \frac{5}{8}, \quad P\parentheses*{C} = \frac{5}{12}, \quad P\parentheses*{A \cup B} = \frac{23}{24}, \quad P\parentheses*{A \cap B} = \frac{1}{6}, \quad P\parentheses*{A \cap B} = \frac{1}{3}.
+        \]
+        Bestimmen Sie aus diesen Angaben die zugehörige Zähldichte, d.h. \(P\parentheses*{\braces*{i}}\) für \(i \in \braces*{1, \ldots, 6}\).
+    \end{problem}
+
+    \subsection*{Lösung}
+    Mit der Ergebnismenge
+    \[
+        \Omega := \braces*{1, \ldots, 6}
+    \]
+    erhält man aus der Aufgabenstellung
+    \[
+        A = \braces*{2, 4, 6}, \quad B = \braces*{1, 2, 3}, \quad C = \braces*{1, 4}, \quad A \cup B = \braces*{1, 2, 3, 4, 6}, \quad A \cap B = \braces*{2}, \quad A \cap C = \braces*{4}.
+    \]
+    Es bezeichne \(p: \Omega \to \brackets*{0, 1}\) die gesuchte Zähldichte, d.h. es gilt
+    \[
+        p\parentheses*{\omega} = P\parentheses*{\braces*{\omega}}, \quad \omega \in \Omega.
+    \]
+    Dann folgt zunächst aus den zuvor angegebenen Mengendarstellungen:
+    \begin{align*}
+        p\parentheses*{2} &= P\parentheses*{\braces*{2}} = P\parentheses*{A \cap B} = \frac{1}{6},\\
+        p\parentheses*{4} &= P\parentheses*{\braces*{4}} = P\parentheses*{A \cap C} = \frac{1}{3}.
+    \end{align*}
+    Weiter folgt
+    \begin{align*}
+        P\parentheses*{A} &= \sum_{\omega \in A}p\parentheses*{\omega} = p\parentheses*{2} + p\parentheses*{4} + p\parentheses*{6},\\
+        P\parentheses*{C} &= \sum_{\omega \in C}p\parentheses*{\omega} = p\parentheses*{1} + p\parentheses*{4}\\
+        P\parentheses*{A \cup B} &= \sum_{\omega \in A \cup B}p\parentheses*{\omega} = p\parentheses*{1} + p\parentheses*{2} + p\parentheses*{3} + p\parentheses*{4} + p\parentheses*{6}.
+    \end{align*}
+    Hieraus erhält man
+    \begin{align*}
+        p\parentheses*{6} &= P\parentheses*{A} - p\parentheses*{2} - p\parentheses*{4} = \frac{5}{8} - \frac{1}{6} - \frac{1}{3} = \frac{1}{8},\\
+        p\parentheses*{1} &= P\parentheses*{C} - p\parentheses*{4} = \frac{5}{12} - \frac{1}{3} = \frac{1}{12},\\
+        p\parentheses*{3} &= P\parentheses*{A \cup B} - p\parentheses*{1} - p\parentheses*{2} - p\parentheses*{4} - p\parentheses*{6} = \frac{23}{24} - \frac{1}{12} - \frac{1}{6} - \frac{1}{3} - \frac{1}{8} = \frac{1}{4}.
+    \end{align*}
+    Schließlich gilt mit der Normierungseigenschaft für Zähldichten
+    \[
+        1 = P\parentheses*{\Omega} = \sum_{\omega \in \Omega}p\parentheses*{\omega} = \sum_{i = 1}^6 p\parentheses*{i} \implies p\parentheses*{5} = 1 - \sum_{\substack{1 \le i \le 6,\\i \ne 5}} p\parentheses*{i} = 1 - \frac{1}{12} - \frac{1}{6} - \frac{1}{4} - \frac{1}{3} - \frac{1}{8} = \frac{1}{24}.
+    \]
+
+
+    \section*{Aufgabe 2}
+
+    \begin{problem}
+        Bei einem Sportfest nimmt ein gedopter Sportler an zwei aufeinanderfolgenden Wettkämpfen teil.
+        Hierbei bezeichne \(A\) das Ereignis, dass er den ersten Wettkampf gewinnt, \(B\) das Ereignis, dass er den zweiten Wettkampf gewinnt, und \(C\) das Ereignis, dass er \emph{vor} den Wettkämpfen wegen Dopings ausgeschlossen wird.
+        Es seien folgende Wahrscheinlichkeiten bekannt:
+        \[
+            P\parentheses*{A} = \frac{3}{5}, \quad P\parentheses*{B} = \frac{3}{10}, \quad P\parentheses*{C^c} = \frac{9}{10}, \quad P\parentheses*{A \cup B} = \frac{7}{10}.
+        \]
+        Berechnen Sie aus diesen Angaben die folgenden Wahrscheinlichkeiten:
+        \begin{align*}
+            \text{a) }&P\parentheses*{A \cap B}, & \text{c) }&P\parentheses*{C \cap A}, & \text{e) }&P\parentheses*{A \cap \parentheses*{A^c \cup B}},\\
+            \text{b) }&P\parentheses*{\parentheses*{A \cup B}^c}, & \text{d) }&P\parentheses*{A \cup B \cup C}, & \text{f) }&P\parentheses*{C^c \cap A}.
+        \end{align*}
+    \end{problem}
+
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item Es gilt
+        \[
+            P\parentheses*{A \cup B} = P\parentheses*{A} + P\parentheses*{B} - P\parentheses*{A \cap B}.
+        \]
+        Hieraus folgt
+        \[
+            P\parentheses*{A \cap B} = P\parentheses*{A} + P\parentheses*{B} - P\parentheses*{A \cup B} = \frac{3}{5} + \frac{3}{10} - \frac{7}{10} = \frac{1}{5}.
+        \]
+        \item Man erhält
+        \[
+            \parentheses*{\parentheses*{A \cup B}^c} = 1 - P\parentheses*{A \cup B} = 1 - \frac{7}{10} = \frac{3}{10}.
+        \]
+        \item Zunächst folgt aus der Aufgabenstellung
+        \[
+            C \cap A = \emptyset \quad \text{und} \quad C \cap B = \emptyset.
+        \]
+        Hiermit erhält man
+        \[
+            P\parentheses*{C \cap A} = P\parentheses*{\emptyset} = 0,
+        \]
+        da \(P\parentheses*{\emptyset} = P\parentheses*{\Omega^c} = 1 - P\parentheses*{\Omega} = 1 - 1 = 0\).
+        \item Man erhält
+        \begin{align*}
+            P\parentheses*{A \cup B \cup C} &= P\parentheses*{\parentheses*{A \cup B} \cup C}\\
+            &= P\parentheses*{A \cup B} + P\parentheses*{C} - P\parentheses*{\parentheses*{A \cup B} \cap C}\\
+            &= P\parentheses*{A \cup B} + P\parentheses*{C} - P\parentheses*{\parentheses*{A \cap C} \cup \parentheses*{B \cap C}}\\
+            &= P\parentheses*{A \cup B} + 1 - P\parentheses*{C^c} - P\parentheses*{\emptyset}\\
+            &= \frac{7}{10} + 1 - \frac{9}{10}\\
+            &= \frac{4}{5}.
+        \end{align*}
+        \item Man erhält
+        \[
+            P\parentheses*{A \cap \parentheses*{A^c \cup B}} = P\parentheses*{\parentheses*{A \cap A^c} \cup \parentheses*{A \cap B}} = P\parentheses*{A \cap B} = \frac{1}{5}.
+        \]
+        \item Wie bereits in c) festgestellt, ist \(A \cap C = \emptyset\).
+        Hiermit folgt zunächst
+        \[
+            A \subseteq C^c \implies A \cap C^c = A.
+        \]
+        Hiermit erhält man
+        \[
+            P\parentheses*{C^c \cap A} = P\parentheses*{A} = \frac{3}{5}.
+        \]
+    \end{enumerate}
+
+
+    \section*{Aufgabe 3}
+
+    \begin{problem}
+        Die erste Glücksspirale wurde 1971 folgendermaßen durchgeführt: In einer einzigen Trommel befanden sich 70 gleichartige Kugeln, von denen jeweils 7 mit einer der Ziffern \(0, 1, 2, \ldots, 9\) beschriftet waren.
+        Um eine 7-stellige Gewinnzahl zu ermitteln, wurden aus der Trommel -- jeweils nach gründlichem Mischen -- nacheinander 7 Kugeln ohne Zurücklegen gezogen.
+        
+        Berechnen Sie jeweils die Wahrscheinlichkeit dafür, dass bei dieser Ausspielung eine der folgenden Gewinnzahlen gezogen wurde.
+        \begin{enumerate}
+            \item \(4444444\),
+            \item \(9876543\),
+            \item \(2224755\).
+        \end{enumerate}
+        Was dieses Ausspielungsverfahren fair?
+    \end{problem}
+
+    \subsection*{Lösung}
+    In unserem Modell nehmen wir an, dass alle Kugeln unterscheidbar sind und nummerieren alle 70 Kugeln folgendermaßen mit den Zahlen \(1, \ldots, 70\) durch:
+    \begin{align*}
+        1, \ldots, 7&: \quad \text{Kugeln mit der Ziffer }0,\\
+        8, \ldots, 14&: \quad \text{Kugeln mit der Ziffer }1,\\
+        &\vdots\\
+        64, \ldots, 70&: \quad \text{Kugeln mit der Ziffer }9.
+    \end{align*}
+    Aus der Aufgabenstellung folgt:
+    \begin{itemize}
+        \item Die Ziehung der Kugeln erfolgt \emph{ohne Zurücklegen}.
+        \item Die \emph{Reihenfolge} der Ziehung ist \emph{wesentlich} (da z.B. \(9876543\) eine andere Gewinnzahl als \(3456789\) ist).
+    \end{itemize}
+    Eine geeignete Ergebnismenge ist somit
+    \[
+        \Omega = \braces*{\parentheses*{\omega_1, \ldots, \omega_7} : \omega_1, \ldots, \omega_7 \in \braces*{1, \ldots, 70}, \omega_i \ne \omega_j\text{ für }i \ne j},
+    \]
+    für die \(\absolute*{\Omega} = 70 \cdot 69 \cdot \ldots \cdot 64 = \frac{70!}{63!}\) gilt.
+    Da in der Aufgabenstellung von ``gründlichem Mischen'' die Rede ist, können wir die Glücksspirale als Laplace-Experiment betrachten, d.h.
+    \[
+        P\parentheses*{E} = \frac{\absolute*{E}}{\absolute*{\Omega}} = \frac{\absolute*{E}}{70 \cdot 69 \cdot \ldots \cdot 64}\text{ für }E \subseteq \Omega.
+    \]
+    \begin{enumerate}
+        \item Bezeichne \(A\) das Ereignis ``Gewinnzahl \(4444444\)'', dann ist
+        \[
+            A = \braces*{\parentheses*{\omega_1, \ldots, \omega_7} \in \Omega : \omega_1, \ldots, \omega_7 \in \braces*{29, \ldots, 35}},
+        \]
+        also die Menge der \(\parentheses*{7, 7}\)-Permutationen aus \(\braces*{29, \ldots, 35}\) ohne Wiederholung.
+        Damit folgt
+        \[
+            \absolute*{A} = 7 \cdot 6 \cdot \ldots \cdot 1 = 7!
+        \]
+        und somit
+        \[
+            P\parentheses*{A} = \frac{\absolute*{A}}{\absolute*{\Omega}} = \frac{7!}{\frac{70!}{63!}} \approx 0,83 \cdot 10^{-9}.
+        \]
+        \item Bezeichne \(B\) das Ereignis ``Gewinnzahl \(9876543\)'', dann ist
+        \[
+            B = \braces*{\parentheses*{\omega_1, \ldots, \omega_7} \in \Omega : \omega_1 \in \braces*{64, \ldots, 70}, \omega_2 \in \braces*{57, \ldots, 63}, \ldots, \omega_7 \in \braces*{22, \ldots, 28}}.
+        \]
+        Für jede Komponente von \(\parentheses*{\omega_1, \ldots, \omega_7}\) gibt es (unabhängig voneinander) \(7\) Auswahlmöglichkeiten.
+        Damit folgt
+        \[
+            \absolute*{B} = 7 \cdot \ldots \cdot 7 = 7^7
+        \]
+        und somit
+        \[
+            P\parentheses*{B} = \frac{\absolute*{B}}{\absolute*{\Omega}} = \frac{7^7}{\frac{70!}{63!}} \approx 136,31 \cdot 10^{-9}.
+        \]
+        \item Bezeichne \(C\) das Ereignis ``Gewinnzahl \(2224755\)'', dann ist
+        \begin{align*}
+            C = \{\parentheses*{\omega_1, \ldots, \omega_7} \in \Omega : \omega_1, \omega_2, \omega_3 &\in \braces*{15, \ldots, 31},\\
+            \omega_4 &\in \braces*{29, \ldots, 35},\\
+            \omega_5 &\in \braces*{50, \ldots, 56},\\
+            \omega_6, \omega_7 &\in \braces*{36, \ldots, 42}\}.
+        \end{align*}
+        Die einzelnen Komponenten von \(\parentheses*{\omega_1, \ldots, \omega_7}\) werden jeweils aus einer \(7\)-elementigen Menge unter Berücksichtigung der Reihenfolge ohne Wiederholung ausgewählt (\(\parentheses*{7, k}\)-Permutationen ohne Wiederholung mit \(k = 3\), \(k = 1\) bzw. \(k = 2\)).
+        Damit folgt
+        \[
+            \absolute*{C} = \parentheses*{7 \cdot 6 \cdot 5} \cdot 7 \cdot 7 \cdot \parentheses*{7 \cdot 6} = 7^4 \cdot 6^2 \cdot 5
+        \]
+        und somit
+        \[
+            P\parentheses*{C} = \frac{\absolute*{C}}{\absolute*{\Omega}} = \frac{7^4 \cdot 6^2 \cdot 5}{\frac{70!}{63!}} \approx 71,53 \cdot 10^{-9}.
+        \]
+    \end{enumerate}
+    Aus a) und b) folgt
+    \[
+        \frac{P\parentheses*{\text{``Gewinnzahl }9876543\text{''}}}{P\parentheses*{\text{``Gewinnzahl }4444444\text{''}}} = \frac{P\parentheses*{B}}{P\parentheses*{A}} = \frac{7^7}{7!} \approx 163,4.
+    \]
+    Damit war das Ziehungsverfahren offenbar nicht fair in dem Sinne, dass jede Ziffernfolge die gleiche Gewinnchance hatte.
+    Gewinnzahlen mit lauter verschiedenen Ziffern (wie oben in b)) besaßen die höchste Gewinnwahrscheinlichkeit, Gewinnzahlen mit identischen Ziffern (wie oben in a)) die geringste Gewinnwahrscheinlichkeit.
+
+
+    \section*{Aufgabe 4}
+
+    \begin{problem}
+        Die Funktion \(f: \R \to \R\) sei gegeben durch
+        \[
+            f\parentheses*{x} = \begin{cases}
+                \frac{c}{\sqrt{x + 2}}, & \text{falls }2 \le x \le 7,\\
+                0, & \text{sonst},
+            \end{cases}
+        \]
+        mit einer Konstanten \(c \in \R\).
+        \begin{enumerate}
+            \item Bestimmen Sie \(c\) so, dass \(f\) eine Riemann-Dichte ist.
+            \item Bestimmen Sie für die in a) ermittelte Konstante \(c\) die zu \(f\) gehörige Verteilungsfunktion \(F\).
+            \item Berechnen Sie für die in a) ermittelte Konstante \(c\) die folgenden Wahrscheinlichkeiten:
+            \[
+                \text{(i) }P\parentheses*{\left(-\infty, 5\right]}, \quad \text{(ii) }P\parentheses*{\left(3, 5\right]}, \quad \text{(iii) }P\parentheses*{\parentheses*{5, \infty}}.
+            \]
+        \end{enumerate}
+    \end{problem}
+
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item Die gegebene Funktion \(f: \R \to \R\) ist eine Riemann-Dichte, falls die folgenden beiden Bedingungen erfüllt sind:
+        \begin{enumerate}
+            \item \(f\parentheses*{x} \ge 0\) für alle \(x \in \R\),
+            \item \(\int_{-\infty}^\infty f\parentheses*{x}\d x = 1\).
+        \end{enumerate}
+        Aufgrund der Definition von \(f\) und (i) muss zunächst \(c \ge 0\) sein.
+        Weiter folgt aus (ii):
+        \[
+            1 = \int_{-\infty}^\infty f\parentheses*{x}\d x = \int_2^7 \frac{c}{\sqrt{x + 2}}\d x = c\int_2^7 \parentheses*{x + 2}^{-\frac{1}{2}}\d x = 2c\left.\parentheses*{x + 2}^{\frac{1}{2}}\right|_2^7 = 2c\parentheses*{\sqrt{9} - \sqrt{4}} = 2c \implies c = \frac{1}{2}.
+        \]
+        Für \(c = \frac{1}{2}\) ist somit \(f\) eine Riemann-Dichte.
+        \item Die zu \(f\) gehörige Verteilungsfunktion \(F\) ist gegeben durch
+        \[
+            F\parentheses*{x} = \int_{-\infty}^x f\parentheses*{t}\d t, \quad x \in \R.
+        \]
+        Für \(x < 2\) gilt
+        \[
+            F\parentheses*{x} = \int_{-\infty}^x f\parentheses*{t}\d t = \int_{-\infty}^x 0\d t = 0.
+        \]
+        Für \(2 \le x \le 7\) gilt
+        \[
+            F\parentheses*{x} = \int_{-\infty}^x f\parentheses*{t}\d t = \int_2^x \frac{1}{2\sqrt{t + 2}}\d t = \frac{1}{2}\int_2^x \parentheses*{t + 2}^{-\frac{1}{2}}\d t = \frac{1}{2} \cdot \left.2 \cdot \parentheses*{t + 2}^{\frac{1}{2}}\right|_2^x = \sqrt{x + 2} - \sqrt{4} = \sqrt{x + 2} - 2.
+        \]
+        Für \(x > 7\) gilt
+        \[
+            F\parentheses*{x} = \int_{-\infty}^x f\parentheses*{t}\d t = \int_2^7 \frac{1}{2\sqrt{t + 2}}\d t = \sqrt{9} - 2 = 1.
+        \]
+        Insgesamt erhalten wir somit folgende Darstellung für die Verteilungsfunktion:
+        \[
+            F\parentheses*{x} = \begin{cases}
+                0, & \text{falls }x < 2,\\
+                \sqrt{x + 2} - 2, & \text{falls }2 \le x \le 7,\\
+                1, & \text{falls }x > 7.
+            \end{cases}
+        \]
+        \item Mit \(c = \frac{1}{2}\) erhält man die folgenden Wahrscheinlichkeiten:
+        \begin{enumerate}
+            \item \(P\parentheses*{\left(-\infty, 5\right]} = F\parentheses*{5} = \sqrt{7} - 2 \approx 0,646\),
+            \item \(P\parentheses*{\left(3, 5\right]} = \int_3^5 f\parentheses*{t}\d t = \int_{-\infty}^5 f\parentheses*{t}\d t - \int_{-\infty}^3 f\parentheses*{t}\d t = F\parentheses*{5} - F\parentheses*{3} = \sqrt{7} - 2 - \parentheses*{\sqrt{5} - \sqrt{2}} \approx 0,41\),
+            \item
+            \begin{align*}
+                P\parentheses*{\parentheses*{5, \infty}} &= P\parentheses*{\parentheses*{-\infty, \infty} \setminus \left(-\infty, 5\right]}\\
+                &= P\parentheses*{\parentheses*{-\infty, \infty}} - P\parentheses*{\left(-\infty, 5\right]}\\
+                &= \int_{-\infty}^\infty f\parentheses*{t}\d t - \int_{-\infty}^5 f\parentheses*{t}\d t\\
+                &= 1 - F\parentheses*{5}\\
+                &= 1 - \parentheses*{\sqrt{7} - 2}\\
+                &\approx 0,354.
+            \end{align*}
+        \end{enumerate}
+    \end{enumerate}
+\end{document}

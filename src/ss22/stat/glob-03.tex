@@ -30,12 +30,19 @@
     \end{problem}
 
     \subsection*{Lösung}
+    Gemäß der Aufgabenstellung beschreiben
     \begin{enumerate}
-        \item
-        \item
-        \item
-        \item
-        \item
+        \item \(B^c\) die Menge der Nichtraucher,
+        \item \(A \cap B\) die Menge der männlichen Raucher,
+        \item \(B \setminus A = B \cap A^c\) die Menge der weiblichen Raucher,
+        \item \(\parentheses*{A \cup B}^c = A^c \cap B^c\) die Menge der weiblichen Nichtraucher.
+        \item Zunächst gilt
+        \begin{align*}
+            \parentheses*{A \cup B^c} \cap \parentheses*{A^c \cup B} &= \parentheses*{A \cap \parentheses*{A^c \cup B}} \cup \parentheses*{B^c \cap \parentheses*{A^c \cup B}}\\
+            &= \parentheses*{\parentheses*{A \cap A^c} \cup \parentheses*{A \cap B}} \cup \parentheses*{\parentheses*{B^c \cap A^c} \cup \parentheses*{B^c \cap B}}\\
+            &= \parentheses*{A \cap B} \cup \parentheses*{A^c \cap B^c}.
+        \end{align*}
+        Damit beschreibt \(\parentheses*{A \cup B^c} \cap \parentheses*{A^c \cup B}\) die Menge der männlichen Raucher und weiblichen Nichtraucher (vgl. b) und d)).
     \end{enumerate}
 
 
@@ -56,11 +63,42 @@
     \end{problem}
 
     \subsection*{Lösung}
+    Es seien
+    \begin{align*}
+        D &\hat{=} \text{Menge der Deutsch sprechenden Personen},\\
+        E &\hat{=} \text{Menge der Englisch sprechenden Personen},\\
+        F &\hat{=} \text{Menge der Französisch sprechenden Personen}.
+    \end{align*}
+    Mit diesen Bezeichnungen gilt
+    \begin{align*}
+        D &= \parentheses*{D \cap E \cap F} \cup \parentheses*{D \cap E \cap F^c} \cup \parentheses*{D \cap E^c \cap F} \cup \parentheses*{D \cap E^c \cap F^c},\\
+        E &= \parentheses*{D \cap E \cap F} \cup \parentheses*{D^c \cap E \cap F} \cup \parentheses*{D \cap E \cap F^c} \cup \parentheses*{D^c \cap E \cap F^c},\\
+        F &= \parentheses*{D \cap E \cap F} \cup \parentheses*{D^c \cap E \cap F} \cup \parentheses*{D \cap E^c \cap F} \cup \parentheses*{D^c \cap E^c \cap F},\\
+    \end{align*}
+    Da eine disjunkte Zerlegung der Menge \(D \cup E \cup F\) vorliegt, erhält man hieraus mit den gemäß Aufgabenstellung gegebenen Anzahlen
+    \[
+        250 = \absolute*{D \cup E \cup F} = \absolute*{D \cap E \cap F} + 60 + 85 + 25 + 20 + 20 + 12 + 8 = \absolute*{D \cap E \cap F} + 210.
+    \]
+    Es folgt
+    \[
+        \absolute*{D \cap E \cap F} = 250 - 210 = 40.
+    \]
+    Hiermit ergeben sich aus den oben angegebenen disjunkten Zerlegungen der Mengen \(D\), \(E\) und \(F\) die folgenden Anzahlen:
+    \[
+        \absolute*{D} = 40 + 20 + 12 + 60 = 132, \quad \absolute*{E} = 40 + 20 + 8 + 85 = 153, \quad \absolute*{F} = 40 + 8 + 12 + 25 = 85.
+    \]
+    Da die Auswahl aus den Bewerbungen zufällig erfolgt, kann die Situation mithilfe eines Laplace-Raums modelliert werden.
+    Gemäß Aufgabenstellung gilt für den zugehörigen Ergebnisraum \(\Omega\) (mit den o.a. Bezeichnungen):
+    \[
+        \Omega = D \cup E \cup F
+    \]
+    (Jede Person spricht mindestens eine der drei Sprachen).
+    Mit \(P\) als (diskreter) Gleichverteilung auf \(\Omega\) und \(\absolute*{\Omega} = 250\) folgt dann:
     \begin{enumerate}
-        \item
-        \item
-        \item
-        \item 
+        \item \(P\parentheses*{D} = \frac{\absolute*{D}}{\absolute*{\Omega}} = \frac{132}{250} = 0,528\),
+        \item \(P\parentheses*{E} = \frac{\absolute*{E}}{\absolute*{\Omega}} = \frac{153}{250} = 0,612\),
+        \item \(P\parentheses*{F} = \frac{\absolute*{F}}{\absolute*{\Omega}} = \frac{85}{250} = 0,34\),
+        \item \(P\parentheses*{D \cap E \cap F} = \frac{\absolute*{D \cap E \cap F}}{\absolute*{\Omega}} = \frac{40}{250} = 0,16\),
     \end{enumerate}
 
 
@@ -82,13 +120,41 @@
 
     \subsection*{Lösung}
     \begin{enumerate}
-        \item
-        \item
+        \item Eine geeignete Grundmenge ist
+        \[
+            \Omega = \braces*{\parentheses*{\omega_1, \ldots, \omega_7} : \omega_1, \ldots, \omega_7 \in \braces*{0, 1}},
+        \]
+        mit folgender Interpretation:
+        Für \(i \in \braces*{1, \ldots, 7}\) bedeutet \(\omega_i = 0\) ``Kopf'' und \(\omega_i = 1\) ``Zahl'' im \(i\)-ten Wurf.
+        Da die Münze homogen sein soll, kann die Situation durch einen Laplace-Raum \(\parentheses*{\Omega, P}\) beschrieben werden, d.h. es gilt
+        \[
+            P\parentheses*{E} = \frac{\absolute*{E}}{\absolute*{\Omega}}, \quad E \subseteq \Omega.
+        \]
+        \item Die Anzahl möglicher Versuchsausgänge ist gegeben durch
+        \[
+            \absolute*{\Omega} = 2^7 = 128.
+        \]
         \item
         \begin{enumerate}
-            \item
-            \item
-            \item
+            \item Das gesuchte Ereignis kann beschrieben werden durch
+            \[
+                A := \braces*{\parentheses*{\omega_1, \ldots, \omega_7} \in \Omega : \sum_{i = 1}^7 \omega_i = 6} = \braces*{\parentheses*{0, 1, \ldots, 1}, \parentheses*{1, 0, 1, \ldots, 1}, \ldots, \parentheses*{1, \ldots, 1, 0}}.
+            \]
+            Die Wahrscheinlichkeit für \(A\) ist somit \(P\parentheses*{A} = \frac{\absolute*{A}}{\absolute*{\Omega}} = \frac{7}{128}\).
+            \item Das gesuchte Ereignis kann beschrieben werden durch
+            \[
+                B := \braces*{\parentheses*{\omega_1, \ldots, \omega_7} \in \Omega : \sum_{i = 1}^7 \omega_i \ge 6} = A \cup \braces*{\parentheses*{1, \ldots, 1}}.
+            \]
+            Die Wahrscheinlichkeit für \(B\) ist somit \(P\parentheses*{B} = \frac{\absolute*{B}}{\absolute*{\Omega}} = \frac{1}{16}\).
+            \item Es bezeichne \(C\) das gesuchte Ereignis.
+            Dann ist
+            \[
+                C^c = \braces*{\parentheses*{1, 0, 1, 0, 1, 0, 1}, \parentheses*{0, 1, 0, 1, 0, 1, 0}}.
+            \]
+            Damit ist die Wahrscheinlichkeit für das Ereignis \(C\) gegeben durch
+            \[
+                P\parentheses*{C} = 1 - P\parentheses*{C^c} = 1 - \frac{\absolute*{C^c}}{\absolute*{\Omega}} = 1 - \frac{1}{64} = \frac{63}{64}.
+            \]
         \end{enumerate}
     \end{enumerate}
 
@@ -105,7 +171,55 @@
 
     \subsection*{Lösung}
     \begin{enumerate}
-        \item
-        \item
+        \item Sei \(k \in \N\) (beliebig).
+        In unserem Modell denken wir uns die \(365\) verschiedenen Tage des Jahres der Reihe nach durchnummeriert.
+        Die Verteilung der \(k\) Personen auf die \(365\) Tage des Jahres entspricht der \(k\)-fachen Ziehung aus einer Urne, in der sich \(365\) mit den Zahlen \(1, \ldots, 365\) durchnummerierte Kugeln befinden.
+        Hierbei nehmen wir in dieser Aufgabe (der Einfachheit halber) an, dass alle Tage des Jahres als Geburtstage gleich wahrscheinlich sind.
+        Es gilt:
+        \begin{itemize}
+            \item Die Ziehung erfolgt \emph{mit Zurücklegen}, da mehrere Personen am gleichen Tag Geburtstag haben können.
+            \item Die einzelnen Personen werden unterschieden, d.h. die Ziehung erfolgt \emph{unter Berücksichtigung der Reihenfolge}.
+        \end{itemize}
+        Eine geeignete Ergebnismenge ist damit gegeben durch
+        \[
+            \Omega_k = \braces*{\parentheses*{\omega_1, \ldots, \omega_k} : \omega_1, \ldots, \omega_k \in \braces*{1, \ldots, 365}},
+        \]
+        mit der folgenden Interpretation: Für \(i \in \braces*{1, \ldots, k}\) und \(j \in \braces*{1, \ldots, 365}\) bedeutet \(\omega_i = j\), dass die \(i\)-te Person am \(j\)-ten Tag des Jahres Geburtstag hat.
+        Es folgt (mit \(n = 365\)):
+        \[
+            \absolute*{\Omega_k} = 365^k.
+        \]
+        Gesucht ist die Wahrscheinlichkeit des Ereignisses
+        \[
+            E_k: \quad \text{``Mindestens zwei der }k\text{ Personen haben am selben Tag Geburtstag''}.
+        \]
+        Dann ist das Komplementärereignis
+        \[
+            E_k^c = \braces*{\parentheses*{\omega_1, \ldots, \omega_k} \in \Omega_k : \omega_i \ne \omega_j\text{ für }i \ne j}.
+        \]
+        Dies ist die Menge aller \(\parentheses*{n, k}\)-Permutationen \emph{ohne} Wiederholung mit \(n = 365\).
+        Es folgt für \(k \le 365\)
+        \[
+            \absolute*{E_k^c} = 365 \cdot 364 \cdot \ldots \cdot \parentheses*{365 - k + 1} = \frac{365!}{\parentheses*{365 - k}!}.
+        \]
+        Mit \(P\) als (diskreter) Gleichverteilung auf \(\Omega_k\) folgt dann für \(k \le 365\)
+        \begin{equation}\label{eq:1}
+            P\parentheses*{E_k} = 1 - P\parentheses*{E_k^c} = 1 - \frac{\absolute*{E_k^c}}{\absolute*{\Omega_k}} = 1 - \frac{365!}{365^k\parentheses*{365 - k}!} = 1 - \frac{365 \cdot 364 \cdot \ldots \cdot \parentheses*{365 - k + 1}}{365^k}.
+        \end{equation}
+        Für \(k > 365\) ist \(\absolute*{E_k^c} = 0\) und damit
+        \[
+            P\parentheses*{E_k} = 1 - P\parentheses*{E_k^c} = 1 - 0 = 1.
+        \]
+        \item Aus \eqref{eq:1} ergeben sich für \(k \in \braces*{10, 22, 23, 40}\) die folgenden Wahrscheinlichkeiten für das betreffende Ereignis \(E_k\):
+        \begin{center}
+            \begin{tabular}{lcccc}
+                \toprule
+                \(k\) & \(10\) & \(22\) & \(23\) & \(40\)\\
+                \midrule
+                \(P\parentheses*{E_k}\) & \(0,117\) & \(0,476\) & \(0,507\) & \(0,891\)\\
+                \bottomrule
+            \end{tabular}
+        \end{center}
+        Bereits ab der Personenanzahl \(k = 23\) ist die Wahrscheinlichkeit dafür, dass mindestens zwei der \(k\) Personen am selben Tag des Jahres Geburtstag haben, größer als \(0,5\) und damit größer als die Wahrscheinlichkeit dafür, dass alle \(k\) Personen an verschiedenen Tagen Geburtstag haben.
     \end{enumerate}
 \end{document}

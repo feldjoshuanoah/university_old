@@ -1,0 +1,128 @@
+\documentclass{exercise}
+
+\institute{Institut für Statistik und Wirtschaftsmathematik}
+\title{Globalübung 4}
+\author{Joshua Feld, 406718}
+\course{Statistik}
+\professor{Cramer}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \section*{Aufgabe 1}
+
+    \begin{problem}
+        In einer Warensendung mit \(100\) Transistoren befinden sich \(5\) defekte Stücke.
+        Der Empfänger entnimmt der Sendung zufällig \(10\) Transistoren und überprüft diese.
+        Er verweigert die Annahme der Warensendung, wenn sich unter den überprüften Transistoren mindestens \(2\) als defekt erweisen.
+        \begin{enumerate}
+            \item Berechnen Sie die Wahrscheinlichkeit dafür, dass
+            \begin{enumerate}
+                \item von den \(10\) entnommenen Transistoren genau einer defekt ist,
+                \item der Empfänger die Annahme der Warensendung verweigert
+            \end{enumerate}
+            unter der Voraussetzung, dass die überprüften Transistoren \emph{nicht} wieder in die Warensendung zurückgelegt werden.
+            \item Berechnen Sie die entsprechenden Wahrscheinlichkeiten für die Ereignisse aus a) unter der Voraussetzung, dass jeder überprüfte Transistor anschließend wieder in die Warensendung zurückgelegt wird.
+        \end{enumerate}
+    \end{problem}
+
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item
+        \begin{enumerate}
+            \item
+            \item
+        \end{enumerate}
+        \item
+    \end{enumerate}
+
+
+    \section*{Aufgabe 2}
+
+    \begin{problem}
+        In einem Supermarkt soll mittels eines neu entwickelten Werbeplakats zum Kauf zweier Produkte \(P_1\) und \(P_2\) animiert werden.
+        Es bezeichnen \(A\) bzw. \(B\) die Ereignisse, dass ein (beliebig ausgewählter) Kunde Produkt \(P_1\) bzw. \(P_2\) kauft, und \(P\) die zugrundeliegende Wahrscheinlichkeitsverteilung.
+        Hierbei seien die folgenden Wahrscheinlichkeiten bekannt:
+        \[
+            P\parentheses*{A} = \frac{1}{2}, \quad P\parentheses*{B} = \frac{1}{5}, \quad P\parentheses*{A \cap B} = \frac{1}{10}.
+        \]
+        Berechnen Sie aus diesen Angaben die folgenden Wahrscheinlichkeiten:
+        \begin{align*}
+            &\text{a) }P\parentheses*{A \cup B}, & &\text{c) }P\parentheses*{A^c \cap B^c}, & &\text{e) }P\parentheses*{A \cap \parentheses*{A^c \cup B}},\\
+            &\text{b) }P\parentheses*{\parentheses*{A \cap B}^c}, & &\text{d) }P\parentheses*{A \cup B^c}, & &\text{f) }P\parentheses*{\parentheses*{A^c \cap B^c} \cup \parentheses*{A \cap B}}.
+        \end{align*}
+        Beschreiben Sie zusätzlich die betrachteten Ereignisse jeweils verbal im Rahmen des gegebenen Zusammenhangs.
+    \end{problem}
+
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item \(A \cup B\): Der Kunde kauft \(P_1\) oder \(P_2\).
+        \[
+            P\parentheses*{A \cup B} = P\parentheses*{A} + P\parentheses*{B} - P\parentheses*{A \cap B} = \frac{1}{2} + \frac{1}{5} - \frac{1}{10} = \frac{3}{5}.
+        \]
+        \item \(\parentheses*{A \cap B}^c = A^c \cup B^c\): Der Kunde kauft \emph{nicht} beide Produkte.
+        \[
+            P\parentheses*{\parentheses*{A \cap B}^c} = 1 - P\parentheses*{A \cap B} = 1 - \frac{1}{10} = \frac{9}{10}.
+        \]
+        \item \(A^c \cap B^c = \parentheses*{A \cup B}^c\): Der Kunde kauft keins der beiden Produkte.
+        \[
+            P\parentheses*{A^c \cap B^c} = P\parentheses*{\parentheses*{A \cup B}^c} = 1 - P\parentheses*{A \cup B} = 1 - \frac{3}{5} = \frac{2}{5}
+        \]
+        \item \(A \cup B^c = \parentheses*{A^c \cap B}^c\): Der Kunde kauft \(P_1\) oder \emph{nicht} \(P_2\), d.h. der Kunde kauft nicht ausschließlich \(P_2\).
+        \begin{align*}
+            P\parentheses*{A \cup B^c} &= P\parentheses*{A} + P\parentheses*{B^c} - P\parentheses*{A \cap B^c}\\
+            &= P\parentheses*{A} + 1 - P\parentheses*{B} - \parentheses*{P\parentheses*{A} - P\parentheses*{A \cap B}}\\
+            &= 1 - P\parentheses*{B} + P\parentheses*{A \cap B}\\
+            &= 1 - \frac{1}{5} + \frac{1}{10} = \frac{9}{10}
+        \end{align*}
+        \item \(A \cap \parentheses*{A^c \cup B} = \parentheses*{A \cap A^c} \cup \parentheses*{A \cap B} = A \cap B\): Der Kunde kauft \(P_1\) und \(P_2\).
+        \[
+            P\parentheses*{A \cap \parentheses*{A^c \cup B}} = P\parentheses*{A \cap B} = \frac{1}{10}
+        \]
+        \item \(\parentheses*{A^c \cap B^c} \cup \parentheses*{A \cap B}\): Der Kunde kauft kein Produkt oder beide.
+        \begin{align*}
+            P\parentheses*{\parentheses*{A^c \cap B^c} \cup \parentheses*{A \cap B}} &= P\parentheses*{A^c \cap B^c} + P\parentheses*{A \cap B} - P\parentheses*{\parentheses*{A^c \cap B^c} \cap \parentheses*{A \cap B}}\\
+            &= P\parentheses*{A^c \cap B^c} + P\parentheses*{A \cap B} - \underbrace{P\parentheses*{\emptyset}}_{= 0}\\
+            &= \frac{2}{5} + \frac{1}{10} = \frac{1}{2}
+        \end{align*}
+    \end{enumerate}
+
+
+    \section*{Aufgabe 3}
+
+    \begin{problem}
+        Herr Planlos trifft zu einem zufälligen Zeitpunkt an einer Bushaltestelle ein, von der aus Busse in die gewünschte Richtung im Zehn-Minuten-Takt abfahren.
+        Seine Wartezeit auf den nächsten Bus kann mithilfe der stetigen Gleichverteilung \(R\parentheses*{0, 10}\) auf dem Intervall \(\brackets*{0, 10}\) modelliert werden.
+
+        Es bezeichne \(F\) die Verteilungsfunktion von \(R\parentheses*{0, 10}\).
+        Dann gibt \(F\parentheses*{x}\) für \(x \in \R\) die Wahrscheinlichkeit dafür an, dass Herr Planlos höchstens \(x\) Minuten auf den nächsten Bus warten muss.
+
+        Berechnen Sie die Wahrscheinlichkeit dafür, dass die Wartezeit von Herrn Planlos auf den nächsten Bus mehr als 7 Minuten beträgt.
+    \end{problem}
+
+    \subsection*{Lösung}
+
+
+    \section*{Aufgabe 4}
+
+    \begin{problem}
+        Weisen Sie nach, dass durch die nachstehenden Funktionen eine Zähldichte bzw. eine Riemann-Dichte auf dem jeweils angegebenen Träger definiert ist.
+        \begin{enumerate}
+            \item \(p_k = p\parentheses*{1 - p}^k, k \in \N_0\), für ein \(p \in \parentheses*{0, 1}\) (Geometrische Verteilung \(\geo\parentheses*{p}\)),
+            \item \(p_k = \frac{\lambda^k}{k!}e^{-\lambda}, k \in \N_0\), für ein \(\lambda > 0\) (Poisson-Verteilung \(\po\parentheses*{\lambda}\)),
+            \item \(f\parentheses*{x} = \begin{cases}
+                \lambda e^{-\lambda x}, & \text{falls }x > 0,\\
+                0, & \text{falls }x \le 0,
+            \end{cases}\) für ein \(\lambda > 0\) (Exponentialverteilung \(\Exp\parentheses*{\lambda}\)),
+            \item \(f\parentheses*{x} = \begin{cases}
+                \frac{\alpha}{x^{\alpha + 1}}, & \text{falls }x \ge 1,\\
+                0, & \text{falls }x < 0,
+            \end{cases}\) für ein \(\alpha > 0\) (Pareto-Verteilung \(\Par\parentheses*{\lambda}\)).
+        \end{enumerate}
+    \end{problem}
+
+    \subsection*{Lösung}
+\end{document}

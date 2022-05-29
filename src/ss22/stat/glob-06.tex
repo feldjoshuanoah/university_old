@@ -1,0 +1,241 @@
+\documentclass{exercise}
+
+\institute{Institut für Statistik und Wirtschaftsmathematik}
+\title{Globalübung 6}
+\author{Joshua Feld, 406718}
+\course{Statistik}
+\professor{Cramer}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \section*{Aufgabe 1}
+
+    \begin{problem}
+        J. Walker steht nach einem feuchtfröhlichen Abend reichlich mitgenommen vor seiner Haustür und bemüht sich, den passenden Schlüssel zu finden.
+        Hierzu verwendet er folgende Strategie: Er greift zufällig einen der acht Schlussel in seiner Manteltasche heraus und probiert ihn aus.
+        Passt der Schlüssel nicht, legt er ihn wieder in seine Manteltasche zurück und wiederholt diese Vorgehensweise (unabhängig von den vorigen Versuchen) so lange, bis er den passenden Schlüssel gefunden hat.
+        
+        Wie groß ist die Wahrscheinlichkeit dafür, dass Mr. Walker
+        \begin{enumerate}
+            \item den passenden Schlüssel im zweiten Versuch findet,
+            \item midenstens fünf Versuche benötigt, den passenden Schlüssel zu finden,
+            \item den passenden Schlüssel überhaupt nicht findet?
+        \end{enumerate}
+    \end{problem}
+
+    \subsection*{Lösung}
+    Es bezeiche \(X\) die Anzahl der Fehlversuche, die benötigt werden, bis der passende Schlüssel (erstmalig) gefunden ist (ohne den letzten erfolgreichen Versuch).
+    Dann gilt, dass die (diskrete) Zufallsvariable \(X\) geometrisch mit Parameter \(p = \frac{1}{8}\) verteilt ist (kurz: \(X \sim \geo\parentheses*{\frac{1}{8}}\)).
+    \begin{enumerate}
+        \item \(P\parentheses*{X = 1} = \frac{1}{8} \cdot \frac{7}{8} \approx 0,109\).
+        \item Das Ereignis \(\braces*{X \ge 4}\) lässt sich disjunkt in die Ereignisse
+        \[
+            \braces*{X = 4}, \braces*{X = 5}, \ldots
+        \]
+        zerlegen.
+        Es gilt daher
+        \begin{align*}
+            P\parentheses*{X \ge 4} &= P\parentheses*{\bigcup_{k = 4}^\infty \braces*{X = k}}\\
+            &= \sum_{k = 4}^\infty P\parentheses*{X = k}\\
+            &= \frac{1}{8}\sum_{k = 4}^\infty \parentheses*{\frac{7}{8}}^k\\
+            &= \frac{1}{8}\sum_{j = 0}^\infty \parentheses*{\frac{7}{8}}^{j + 4}\\
+            &= \frac{1}{8} \cdot \parentheses*{\frac{7}{8}}^4 \cdot \sum_{j = 0}^\infty \parentheses*{\frac{7}{8}}^j\\
+            &= \frac{1}{8} \cdot \parentheses*{\frac{7}{8}}^4 \cdot \frac{1}{1 - \frac{7}{8}}\\
+            &= \parentheses*{\frac{7}{8}}^4 \approx 0,586.
+        \end{align*}
+        \item Wir betrachten hierzu das zugehörige Komplementärereignis \(\braces*{X \in \N_0}\), das sich analog zu b) in die Ereignisse
+        \[
+            \braces*{X = 0}, \braces*{X = 1}, \ldots
+        \]
+        zerlegen lässt.
+        Es folgt
+        \[
+            P\parentheses*{X \in \N_0} = P\parentheses*{\bigcup_{k = 0}^\infty \braces*{X = k}} = \sum_{k = 0}^\infty P\parentheses*{X = k} = \frac{1}{8}\sum_{k = 0}^\infty \parentheses*{\frac{7}{8}}^k = \frac{1}{8} \cdot \frac{1}{1 - \frac{7}{8}} = 1.
+        \]
+        Hiermit erhält man für das gesuchte Ereignis
+        \[
+            P\parentheses*{X = \infty} = P\parentheses*{X \not\in \N_0} = 1 - P\parentheses*{X \in \N_0} = 0.
+        \]
+    \end{enumerate}
+
+
+    \section*{Aufgabe 2}
+
+    \begin{problem}
+        Es sei \(X\) eine mit Parametern \(n \in \N\) und \(p \in \parentheses*{0, 1}\) binomialverteilte Zufallsvariable auf einem Wahrscheinlichkeitsraum \(\parentheses*{\Omega, \mathfrak{U}, P}\) (kurz: \(X \sim \bin\parentheses*{n, p}\)).
+        Damit ist die Zähldichte \(p^X\) der (diskreten) Zufallsvariablen \(X\) nach der Vorlesung gegeben durch
+        \[
+            p^X\parentheses*{k} = P\parentheses*{X = k} = \binom{n}{k}p^k\parentheses*{1 - p}^{n - k}\text{ für } k \in \braces*{0, \ldots, n}.
+        \]
+        \begin{enumerate}
+            \item Bestimmen und skizzieren Sie die Verteilungsfunktion \(F^X\) der Zufallsvariablen \(X\) für \(n = 8\) und \(p = 0,5\).
+            \item Berechnen Sie für \(n = 8\) und \(p = 0,5\) die folgenden Wahrscheinlichkeiten:
+            \[
+                \text{(i) }P\parentheses*{X \le 3}, \quad \text{(ii) }P\parentheses*{X > 5}, \quad \text{(iii) }P\parentheses*{2 < X \le 4}, \quad \text{(iv) }P\parentheses*{2 \le X \le 4}. 
+            \]
+        \end{enumerate}
+    \end{problem}
+
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item Wir bestimmen zunächst die Verteilungsfunktion \(F^X\) der Zufallsvariablen \(X\) für \(n \in \N\) und \(p \in \parentheses*{0, 1}\) beliebig.
+        Dann gilt
+        \begin{align}
+            F^X\parentheses*{x} &= P\parentheses*{X \le x}\nonumber\\
+            &= \sum_{k = 0}^{\floor*{x}}\underbrace{p^X\parentheses*{k}}_{= P\parentheses*{X = k}}\nonumber\\
+            &= \sum_{\substack{k = 0\\k \le x}}^n \binom{n}{k}p^k \parentheses*{1 - p}^{n - k}\nonumber\\
+            &= \begin{cases}
+                0, & \text{falls }x < 0,\\
+                \sum_{k = 0}^m \binom{n}{k}p^k \parentheses*{1 - p}^{n - k}, & \text{falls }m \le x < m + 1, m \in \braces*{0, \ldots, n - 1},\\
+                1, & \text{falls }x \ge n,
+            \end{cases}\label{eq:1}
+        \end{align}
+        Hierbei wurde in der letzten Zeile benutzt, dass nach dem binomischen Lehrsatz
+        \begin{equation}\label{eq:2}
+            \sum_{k = 0}^n \binom{n}{k}p^k\parentheses*{1 - p}^{n - k} = \parentheses*{p + \parentheses*{1 + p}}^n = 1^n = 1.
+        \end{equation}
+        Aus \eqref{eq:1} und \eqref{eq:2} erhält man speziell
+        \begin{equation}\label{eq:3}
+            F^X\parentheses*{m} = \sum_{k = 0}^m \binom{n}{k}p^k \parentheses*{1 - p}^{n - k}, \quad m \in \braces*{0, \ldots, n}.
+        \end{equation}
+        Gemäß \eqref{eq:1} reicht es zur vollständigen Bestimmung der Verteilungsfunktion \(F^X\) aus, diese Funktionswerte \(F^X\parentheses*{0}, \ldots, F^X\parentheses*{n}\) in den Trägerpunkten \(0, \ldots, n\) zu berechnen.
+        Seien nun \(n = 8\) und \(p = 0,5\).
+        Dann gilt gemäß Aufgabenstellung für die Zähldichte
+        \[
+            p^X\parentheses*{k} = \binom{8}{k} \cdot \underbrace{0,5^k \cdot \parentheses*{1 - 0,5}^{8 - k}}_{= 0,5^k \cdot 0,5^{8 - k} = 0,5^8} = \binom{8}{k} \cdot 0,5^8, \quad k \in \braces*{0, \ldots, 8}.
+        \]
+        Hieraus folgt mit \eqref{eq:3}
+        \[
+            F^X\parentheses*{m} = 0,5^8 \cdot \sum_{k = 0}^m \binom{8}{k}, \quad m \in \braces*{0, \ldots, 8}.
+        \]
+        Für \(m \in \braces*{0, \ldots, 8}\) sind die Werte \(F^X\parentheses*{m}\) der Verteilungsfunktion zusammen mit den Werten \(p^X\parentheses*{m}\) der Zähldichte in der folgenden Tabelle angegeben:
+        \begin{center}
+            \begin{tabular}{lccccccccc}
+                \toprule
+                \(m\) & \(0\) & \(1\) & \(2\) & \(3\) & \(4\) & \(5\) & \(6\) & \(7\) & \(8\)\\
+                \midrule
+                \(p^X\parentheses*{m}\) & \(0,5^8\) & \(8 \cdot 0,5^8\) & \(28 \cdot 0,5^8\) & \(56 \cdot 0,5^8\) & \(70 \cdot 0,5^8\) & \(56 \cdot 0,5^8\) & \(28 \cdot 0,5^8\) & \(8 \cdot 0,5^8\) & \(0,5^8\)\\
+                \(F^X\parentheses*{m}\) & \(0,5^8\) & \(9 \cdot 0,5^8\) & \(37 \cdot 0,5^8\) & \(93 \cdot 0,5^8\) & \(163 \cdot 0,5^8\) & \(219 \cdot 0,5^8\) & \(247 \cdot 0,5^8\) & \(255 \cdot 0,5^8\) & \(256 \cdot 0,5^8\)\\
+                \bottomrule
+            \end{tabular}
+        \end{center}
+        Hieraus erhält man mit \eqref{eq:1}
+        \[
+            F^X\parentheses*{x} = \begin{cases}
+                0, & \text{falls }x < 0,\\
+                0,0039, & \text{falls }0 \le x < 1,\\
+                0,0352, & \text{falls }1 \le x < 2,\\
+                0,1445, & \text{falls }2 \le x < 3,\\
+                0,3633, & \text{falls }3 \le x < 4,\\
+                0,6367, & \text{falls }4 \le x < 5,\\
+                0,8555, & \text{falls }5 \le x < 6,\\
+                0,9648, & \text{falls }6 \le x < 7,\\
+                0,9961, & \text{falls }7 \le x < 8,\\
+                1, & \text{falls }x \ge 8.
+            \end{cases}
+        \]
+        \begin{center}
+            \begin{tikzpicture}
+                \draw[->] (-1.5,0) -- (9.5,0) node[above] {\(x\)};
+                \foreach \i in {-1,0,...,9}
+                {
+                    \draw (\i,.1) -- (\i,-.1) node[below] {\(\i\)};
+                }
+                \draw[->] (0,0) -- (0,10.5) node[right] {\(F^X\parentheses*{x}\)};
+                \foreach \i in {1,...,9}
+                {
+                    \draw (.1,\i) -- (-.1,\i) node[left] {\(0,\i\)};
+                }
+                \draw (.1,10) -- (-.1,10) node[left] {\(1\)};
+                \draw (0,0.039) -- (1,0.039);
+                \draw (1,0.352) -- (2,0.352);
+                \draw (2,1.445) -- (3,1.445);
+                \draw (3,3.633) -- (4,3.633);
+                \draw (4,6.367) -- (5,6.367);
+                \draw (5,8.555) -- (6,8.555);
+                \draw (6,9.648) -- (7,9.648);
+                \draw (7,9.961) -- (8,9.961);
+                \draw (8,10) -- (9,10);
+                \fill (0,0.039) circle (.5mm);
+                \fill (1,0.352) circle (.5mm);
+                \fill (2,1.445) circle (.5mm);
+                \fill (3,3.633) circle (.5mm);
+                \fill (4,6.367) circle (.5mm);
+                \fill (5,8.555) circle (.5mm);
+                \fill (6,9.648) circle (.5mm);
+                \fill (7,9.961) circle (.5mm);
+                \fill (8,10) circle (.5mm);
+            \end{tikzpicture}
+        \end{center}
+        \item
+        \begin{enumerate}
+            \item \(P\parentheses*{X \le 3} = F^X\parentheses*{3} \approx 0,3633\).
+            \item \(P\parentheses*{X > 5} = 1 - P\parentheses*{X \le 5} = 1 - F^X\parentheses*{5} \approx 1 - 0,8555 = 0,1445\).
+            \item \(P\parentheses*{2 < X \le 4} = P\parentheses*{X \le 4} - P\parentheses*{X \le 2} = F^X\parentheses*{4} - F^X\parentheses*{2} \approx 0,6367 - 0,1445 = 0,4922\).
+            \item
+            \begin{align*}
+                P\parentheses*{2 \le X \le 4} &= P\parentheses*{\braces*{\omega \in \Omega : X\parentheses*{\omega} = 2} \cup \braces*{\omega \in \Omega : 2 < X\parentheses*{\omega} \le 4}}\\
+                &= P\parentheses*{\braces*{\omega \in \Omega : X\parentheses*{\omega} = 2}} + P\parentheses*{\braces*{\omega \in \Omega : 2 < X\parentheses*{\omega} \le 4}}\\
+                &= P\parentheses*{X = 2} + P\parentheses*{2 < X \le 4}\\
+                &= F^X\parentheses*{2} - \lim_{x \to 2^-}F^X\parentheses*{x} + F^{X}\parentheses*{4} - F^X\parentheses*{2}\\
+                &= F^X\parentheses*{4} - \underbrace{\lim_{x \to 2^-}F^X\parentheses*{x}}_{= F^X\parentheses*{1}}\\
+                &= F^X\parentheses*{4} - F^X\parentheses*{1}\\
+                &\approx 0,6367 - 0,0352 = 0,6015.
+            \end{align*}
+        \end{enumerate} 
+    \end{enumerate}
+
+
+    \section*{Aufgabe 3}
+
+    \begin{problem}
+        Es seien \(X\) und \(Y\) zwei stochastisch unabhängige Zufallsvariablen auf einem Wahrscheinlichkeitsraum \(\parentheses*{\Omega, \mathfrak{U}, P}\), die jeweils gleichverteilt auf dem Intervall \(\brackets*{0, 2}\) sind (kurz: \(X \sim R\parentheses*{0, 2}\) und \(Y \sim R\parentheses*{0, 2}\)).
+        Zeigen Sie, dass durch
+        \[
+            f^Z\parentheses*{z} = \begin{cases}
+                0, & \text{falls }z < 0,\\
+                \frac{z}{4}, & \text{falls }0 \le z < 2,\\
+                1 - \frac{z}{4}, & \text{falls }2 \le z \le 4,\\
+                0, & \text{falls }z > 4
+            \end{cases}
+        \]
+        eine Riemann-Dichte der (stetigen) Zufallsvariablen \(Z = X + Y\) gegeben ist.
+    \end{problem}
+
+    \subsection*{Lösung}
+    Gemäß Voraussetzung und Vorlesung ist eine Riemann-Dichte \(f\) von \(X\) bzw. \(Y\) gegeben durch
+    \[
+        f\parentheses*{x} = \begin{cases}
+            \frac{1}{2}, & \text{falls }x \in \brackets*{0, 2},\\
+            0, & \text{falls }x \in \R \setminus \brackets*{0, 2}.
+        \end{cases}
+    \]
+    Weiter sind \(X\) und \(Y\) stochastisch unabhängig gemäß Voraussetzung.
+    Eine Dichtefunktion \(f^Z\) von \(Z = X + Y\) ist dann gemäß der Faltungsformel für stetige Zufallsvariablen gegeben durch
+    \[
+        f^Z\parentheses*{z} = \int_{-\infty}^\infty f\parentheses*{z - y}\underbrace{f\parentheses*{y}}_{\substack{= 0\text{ für}\\y < 0\text{ oder }y > 2}}\d y = \frac{1}{2}\int_0^2 \underbrace{f\parentheses*{z - y}}_{\substack{\ne 0\\\iff 0 \le z - y \le 2\\\iff z - 2 \le y \le z}}\d y.
+    \]
+    \begin{itemize}
+        \item Fall 1: Sei \(z < 0\). Dann folgt
+        \begin{equation}\label{eq:4}
+            f^Z\parentheses*{z} = \frac{1}{2}\int_0^2 \underbrace{f\parentheses*{z - y}}_{\substack{= 0\text{, da }z - y < 0\\\text{für }y \in \brackets*{0, 2}}}\d y = 0.
+        \end{equation}
+        \item Fall 2: Sei \(0 \le z < 2\). Dann folgt
+        \begin{equation}
+            f^Z\parentheses*{z} = \frac{1}{2}\int_0^2 \underbrace{f\parentheses*{z - y}}_{\substack{= 0\text{ für }z - y < 0\\\iff z < y}}\d y = \frac{1}{2}\int_0^z \underbrace{f\parentheses*{z - y}}_{\substack{= \frac{1}{2}\text{, da}\\0 \le z - y \le 2}}\d y = \frac{1}{4}\int_0^z \d y = \frac{1}{4}z.
+        \end{equation}
+        \item Fall 3: Sei \(2 \le z \le 4\). Dann folgt
+        \begin{equation}
+            f^Z\parentheses*{z} = \frac{1}{2}\int_0^2 \underbrace{f\parentheses*{z - y}}_{\substack{= 0\text{ für }z - y > 2\\\iff y < z - 2}}\d y = \frac{1}{2}\int_{z - 2}^2 \underbrace{f\parentheses*{z - y}}_{\substack{= \frac{1}{2}\text{, da}\\0 \le z - y \le 2}}\d y = \frac{1}{4}\int_{z - 2}^2 \d y = \frac{1}{4}\parentheses*{2 - \parentheses*{z - 2}} = \frac{1}{4}\parentheses*{4 - z}.
+        \end{equation}
+        \item Fall 4: Sei \(z > 4\). Dann folgt
+        \begin{equation}\label{eq:7}
+            f^Z\parentheses*{z} = \frac{1}{2}\int_0^2 \underbrace{f\parentheses*{z - y}}_{\substack{= 0\text{, da}\\z - y > 4 - 2 = 2}}\d y = 0.
+        \end{equation}
+    \end{itemize}
+    Mit \eqref{eq:4} - \eqref{eq:7} hat damit die Riemann-Dichte \(f^Z\) von \(Z\) insgesamt die in der Aufgabenstellung angegebene Darstellung.
+\end{document}

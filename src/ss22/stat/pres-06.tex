@@ -1,0 +1,114 @@
+\documentclass{exercise}
+
+\institute{Institut für Statistik und Wirtschaftsmathematik}
+\title{Präsenzübung 6}
+\author{Joshua Feld, 406718}
+\course{Statistik}
+\professor{Cramer}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \section*{Aufgabe 1}
+
+    \begin{problem}
+        Bäcker H. backt jeden Morgen frische Brötchen für ein Kurhotel.
+        Die zufällige Anzahl \(X\) der jeweils nachgefragten Brötchen werde durch die folgende Zähldichte \(p^X: \R \to \R\) beschrieben:
+        \[
+            p^X\parentheses*{x} = \begin{cases}
+                \frac{1}{10000}, & \text{falls }x \in \braces*{1, \ldots, 1000},\\
+                \frac{1}{500}, & \text{falls }x \in \braces*{1001, \ldots, 1400},\\
+                \frac{1}{6000}, & \text{falls }x \in \braces*{1401, \ldots, 2000},\\
+                0, & \text{sonst}.
+            \end{cases}
+        \]
+        \begin{enumerate}
+            \item Zeigen Sie, dass durch \(p^X\) tatsächlich die Zähldichte einer diskreten Zufallsvariablen \(X\) gegeben ist.
+            Bestimmen Sie darüber hinaus den \emph{Träger}
+            \[
+                T^X = \braces*{x \in \R : p^X\parentheses*{x} > 0}
+            \]
+            der (diskreten) Zufallsvariablen \(X\).
+            \item Bäcker H. vermag täglich maximal \(1500\) Brötchen zu liefern.
+            Berechnen Sie die Wahrscheinlichkeit dafür, dass die Nachfrage des Hotels die Lieferkapazität des Bäckers übersteigt.
+        \end{enumerate}
+    \end{problem}
+
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item
+        \item 
+    \end{enumerate}
+
+
+    \section*{Aufgabe 2}
+
+    \begin{problem}
+        Die Anzahl der täglich in der Abteilung einer Haftpflichtversicherung eintreffenden Schadensmeldungen kann durch eine Poisson-verteilte Zufallsvariable mit Parameter \(\lambda = 6\) beschrieben werden.
+
+        Berechnen Sie die Wahrscheinlichkeit dafür, dass an einem Tag in dieser Abteilung
+        \begin{enumerate}
+            \item genau fünf Schadensmeldungen,
+            \item mindestens vier Schadensmeldungen eintreffen.
+        \end{enumerate}
+    \end{problem}
+
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item
+        \item 
+    \end{enumerate}
+
+
+    \section*{Aufgabe 3}
+
+    \begin{problem}
+        Die Lebensdauer (in Stunden) von Energiesparlampen eines bestimmten Fabrikats kann durch eine mit Parameter \(\lambda > 0\) exponentialverteilte Zufallsvariable \(X\) beschrieben werden.
+        Die zugehörige Verteilungsfunktion \(F^X: \R \to \brackets*{0, 1}\) ist damit gegeben durch
+        \[
+            F^X\parentheses*{x} = \begin{cases}
+                0, &\text{falls }x < 0,\\
+                1 - e^{-\lambda x}, & \text{falls }x \ge 0.
+            \end{cases}
+        \]
+        \begin{enumerate}
+            \item Berechnen Sie für \(\lambda = \frac{1}{800}\) die Wahrscheinlichkeit dafür, dass die Lebensdauer einer derartigen Energiesparlampe
+            \begin{enumerate}
+                \item höchstens \(300\) Stunden,
+                \item mehr als \(120\) Stunden,
+                \item mindestens \(240\) und höchstens \(360\) Stunden
+            \end{enumerate}
+            beträgt?
+            \item Für welchen Wert des Parameters \(\lambda\) ergibt sich eine Lebensdauerverteilung, bei der mit Wahrscheinlichkeit \(0,99\) die Lebensdauer einer derartigen Energiesparlampe mindestens \(100\) Stunden beträgt?
+        \end{enumerate}
+    \end{problem}
+
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item
+        \begin{enumerate}
+            \item
+            \item
+            \item
+        \end{enumerate}
+        \item
+    \end{enumerate}
+
+
+    \section*{Aufgabe 4}
+
+    \begin{problem}
+        Es seien \(X\) und \(Y\) stochastisch unabhängige, diskrete Zufallsvariablen auf einem Wahrscheinlichkeitsraum \(\parentheses*{\Omega, \mathfrak{U}, P}\) mit \(\mathcal{X} = \braces*{0, 1, 2, 3}\) für \(X\) und \(\mathcal{Y} = \braces*{1, 2, 3, 4}\) für \(Y\).
+        Die zugehörigen Zähldichten \(p^X\) und \(p^Y\) seien gegeben durch:
+        \begin{align*}
+            p^X\parentheses*{k} = P\parentheses*{X = k} = \frac{1}{4}\text{ für }k \in \mathcal{X},\\
+            p^Y\parentheses*{k} = P\parentheses*{Y = k} = \frac{1}{4}\text{ für }k \in \mathcal{Y}.
+        \end{align*}
+        Bestimmen Sie die Verteilung (d.h. die zugehörige Zähldichte) von \(Z = X + Y\).
+    \end{problem}
+
+    \subsection*{Lösung}
+\end{document}
