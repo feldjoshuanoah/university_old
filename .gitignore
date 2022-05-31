@@ -1,5 +1,6 @@
 *.aux
-*.thm
 *.log
 *.pdf
+*.synctex.gz
+*.thm
 client_secrets.json
