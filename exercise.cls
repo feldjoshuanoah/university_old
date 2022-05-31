@@ -3,6 +3,11 @@
 
 \input{common.tex}
 
+\pretocmd{\section}{%
+	\ifnum\value{section}=0 \else\clearpage\fi
+	\stepcounter{section}
+}{}{}
+
 \titleformat{\subsection}[runin]{\sffamily\bfseries}{\thesubsection.}{1mm}{}[.\quad]
 
 \setenumerate{label=\alph*)}
