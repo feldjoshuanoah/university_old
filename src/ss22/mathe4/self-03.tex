@@ -46,5 +46,43 @@
     \end{problem}
 
     \subsection*{Lösung}
-
+    \begin{enumerate}
+        \item
+        \begin{align*}
+            \varepsilon_{2m}^{2kl} &= e^{-\frac{2\pi i}{2m} \cdot 2kl} = e^{-\frac{2\pi i}{m} \cdot kl} = \varepsilon_m^{kl},\\
+            \varepsilon_m^{k\parentheses*{m + l}} &= \underbrace{e^{-\frac{2\pi i}{m} \cdot km}}_{= 1} \cdot e^{-\frac{2\pi i}{m} \cdot kl} = e^{-\frac{2\pi i}{m} \cdot kl} = \varepsilon_m^{kl},\\
+            \varepsilon_{2m}^{\parentheses*{2k + 1}\parentheses*{m + l}} &= \underbrace{\varepsilon_{2m}^{2kl}}_{= \varepsilon_m^{kl}} \cdot \underbrace{\varepsilon_{2m}^{2km}}_{= 1} \cdot \varepsilon_{2m}^{m + l} = \varepsilon_m^{kl} \cdot \underbrace{e^{-\frac{2\pi i}{2m} \cdot m}}_{= -1} \cdot \varepsilon_{2m}^l = \parentheses*{-1}\varepsilon_m^{kl}\varepsilon_{2m}^l.
+        \end{align*}
+        \item Wir verwenden die Definition der Fourier-Koeffizienten: Sei \(f_{l_1, l_2} := f\parentheses*{x_{l_1}, y_{l_2}}\).
+        Dann ist
+        \begin{align*}
+            d_{2k_1, 2k_2} &= \frac{1}{2m_1 \cdot 2m_2}\sum_{l_1 = 0}^{2m_1 - 1}\sum_{l_2 = 0}^{2m_2 - 1}f_{l_1, l_2} \cdot \varepsilon_{2m_1}^{2l_1 k_1} \cdot \varepsilon_{2m_2}^{2l_2 k_2}\\
+            &= \frac{1}{4m_1 m_2}\sum_{l_1 = 0}^{2m_1 - 1}\sum_{l_2 = 0}^{2m_2 - 1}f_{l_1, l_2} \cdot \varepsilon_{m_1}^{l_1 k_1} \cdot \varepsilon_{m_2}^{l_2 k_2}\\
+            &= \frac{1}{4m_1 m_2}\sum_{l_1 = 0}^{2m_1 - 1}\varepsilon_{m_1}^{l_1 k_1} \cdot \sum_{l_2 = 0}^{2m_2 - 1}f_{l_1, l_2} \cdot \varepsilon_{m_2}^{l_2 k_2}.
+        \end{align*}
+        Dabei gilt
+        \begin{align*}
+            \sum_{l_2 = 0}^{2m_2 - 1}f_{l_1, l_2} \cdot \varepsilon_{m_2}^{l_2 k_2} &= \sum_{l_2 = 0}^{m_2 - 1}\parentheses*{f_{l_1, l_2}\varepsilon_{m_2}^{l_2 k_2} + f_{l_1, l_2 + m_2}\varepsilon_{m_2}^{k_2\parentheses*{l_2 + m_2}}}\\
+            \implies d_{2k_1, 2k_2} &= \frac{1}{4m_1 m_2}\parentheses*{\sum_{l_2 = 0}^{m_2 - 1}\varepsilon_{m_2}^{k_2 l_2}\sum_{l_1 = 0}^{2m_1 - 1}f_{l_1, l_2} \cdot \varepsilon_{m_1}^{l_1 k_1} + \sum_{l_2 = 0}^{m_2 - 1}\varepsilon_{m_2}^{k_2 l_2}\sum_{l_1 = 0}^{2m_1 - 1}f_{l_1, l_2 + m_2} \cdot \varepsilon_{m_1}^{l_1 k_1}}.
+        \end{align*}
+        Weiterhin gilt
+        \begin{align*}
+            \sum_{l_1 = 0}^{2m_1 - 1}f_{l_1, l_2} \cdot \varepsilon_{m_1}^{l_1 k_1} &= \sum_{l_1 = 0}^{m_1 - 1}\parentheses*{f_{l_1, l_2}\varepsilon_{m_1}^{l_1 k_1} + f_{l_1 + m_1, l_2}\varepsilon_{m_1}^{k_1\parentheses*{l_1 + m_1}}},\\
+            \sum_{l_1 = 0}^{2m_1 - 1}f_{l_1, l_2 + m_2} \cdot \varepsilon_{m_1}^{l_1 k_1} &= \sum_{l_1 = 0}^{m_1 - 1}\parentheses*{f_{l_1, l_2 + m_2}\varepsilon_{m_1}^{l_1 k_1} + f_{l_1 + m_1, l_2 + m_2}\varepsilon_{m_1}^{l_1 k_1}}
+        \end{align*}
+        und damit folgt
+        \begin{align*}
+            d_{2k_1, 2k_2} &= \frac{1}{4m_1 m_2}\sum_{l_1 = 0}^{m_1 - 1}\sum_{l_2 = 0}^{m_2 - 1}\parentheses*{f_{l_1, l_2} + f_{l_1 + m_1, l_2} + f_{l_1, l_2 + m_2} + f_{l_1 + m_1, l_2 + m_2}} \cdot \varepsilon_{m_1}^{k_1 l_1}\varepsilon_{m_2}^{k_2 l_2},\\
+            d_{2k_1, 2k_2 + 1} &= \frac{1}{4m_1 m_2}\sum_{l_1 = 0}^{2m_1 - 1}\sum_{l_2 = 0}^{2m_2 - 1}f_{l_1, l_2} \cdot \varepsilon_{2m_1}^{2l_1 k_1}\varepsilon_{2m_2}^{l_2\parentheses*{2k_2 + 1}}\\
+            &= \frac{1}{4m_1 m_2}\sum_{l_1 = 0}^{2m_1 - 1}\varepsilon_{m_1}^{l_1 k_1}\parentheses*{f_{l_1, l_2} \cdot \varepsilon_{2m_2}^{l_2\parentheses*{2k_2 + 1}}}\\
+            &= \frac{1}{4m_1 m_2}\sum_{l_1 = 0}^{m_1 - 1}\sum_{l_2 = 0}^{m_2 - 1}\parentheses*{f_{l_1, l_2} + f_{l_1 + m_1, l_2} - f_{l_1, l_2 + m_2} - f_{l_1 + m_1, l_2 + m_2}} \cdot \varepsilon_{m_1}^{l_1 k_1} \cdot \varepsilon_{m_2}^{l_2 k_2} \cdot \varepsilon_{2m_2}^{l_2}.
+        \end{align*}
+        Analog ergibt sich
+        \begin{align*}
+            d_{2k_1 + 1, 2k_2} =\ &\frac{1}{4m_1 m_2}\sum_{l_1 = 0}^{m_1 - 1}\sum_{l_2 = 0}^{m_2 - 1}\parentheses*{f_{l_1, l_2} + f_{l_1, l_2 + m_2} - f_{l_1 + m_1, l_2} - f_{l_1 + m_1, l_2 + m_2}}\\
+            &\cdot \varepsilon_{m_2}^{k_2 l_2} \cdot \varepsilon_{m_1}^{k_1 l_1} \cdot \varepsilon_{2m_1}^{l_1},\\
+            d_{2k_1 + 1, 2k_2 + 1} =\ &\frac{1}{4m_1 m_2}\sum_{l_1 = 0}^{m_1 - 1}\sum_{l_2 = 0}^{m_2 - 1}\parentheses*{f_{l_1, l_2} - f_{l_1 + m_1, l_2} - f_{l_1, l_2 + m_2} - f_{l_1 + m_1, l_2} + f_{l_1 + m_1, l_2 + m_2}}\\
+            &\cdot \varepsilon_{m_2}^{k_2 l_2} \cdot \varepsilon_{2m_2}^{l_2} \cdot \varepsilon_{m_1}^{l_1 k_1} \cdot \varepsilon_{2m_1}^{l_1}.
+        \end{align*}
+    \end{enumerate}
 \end{document}
