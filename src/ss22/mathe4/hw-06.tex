@@ -10,4 +10,219 @@
 
 \begin{document}
     \maketitle
+
+
+    \section*{Aufgabe 1}
+
+    \begin{problem}
+        Bestimmen Sie eine Lösung der Wärmeleitungsgleichung mit periodischen Randbedingungen:
+        \begin{align*}
+            \partial_t u\parentheses*{t, x} - \Delta u\parentheses*{t, x} &= 0, \quad t > 0, x \in \parentheses*{-\pi, \pi}\\
+            u\parentheses*{t, -\pi} &= u\parentheses*{t, \pi},\\
+            \partial_x u\parentheses*{t, -\pi} &= \partial_x u\parentheses*{t, \pi},\\
+            u\parentheses*{0, x} &= \cos\parentheses*{2x}.
+        \end{align*}
+        Nutzen Sie dazu den Seperationsansatz.
+    \end{problem}
+
+    \subsection*{Lösung}
+    Der Separationsansatz ist \(u\parentheses*{x, t} = X\parentheses*{x}T\parentheses*{t}\). Umgeformt in DGL ergibt sich
+    \[
+        \frac{T'\parentheses*{t}}{T\parentheses*{t}} = \frac{X''\parentheses*{x}}{X\parentheses*{x}} = -\lambda^2 \equiv \text{konst.}
+    \]
+    Daraus folgt
+    \begin{align}
+        X''\parentheses*{x} + \lambda^2 X\parentheses*{x} &= 0 \quad \text{mit} \quad X\parentheses*{-\pi} = X\parentheses*{\pi}, X'\parentheses*{-\pi} = X'\parentheses*{\pi},\label{eq:1}\\
+        T'\parentheses*{t} + \lambda^2 T\parentheses*{t} &= 0.\label{eq:2}
+    \end{align}
+    Wir nutzen den Ansatz \(X\parentheses*{x} = Ce^{\mu x}\).
+    Einsetzen in \eqref{eq:1} ergibt die Gleichung
+    \[
+        \mu^2 Ce^{\mu x} + \lambda^2 Ce^{\mu x} = 0.
+    \]
+    Daraus ergeben sich die Eigenwerte
+    \[
+        \mu_1 = \lambda i, \quad \mu_2 = -\lambda i,
+    \]
+    also
+    \[
+        X\parentheses*{x} = C_1 e^{i\lambda x} + C_2 e^{-i\lambda x}.
+    \]
+    Durch Anwendung der Randwertbedingungen
+    \begin{align*}
+        X\parentheses*{-\pi} = C_1 e^{-i\lambda\pi} + C_2 e^{i\lambda\pi} &= C_1 e^{i\lambda\pi} + C_2 e^{-i\lambda\pi} = X\parentheses*{\pi}\\
+        X'\parentheses*{-\pi} = i\lambda\parentheses*{C_1 e^{-i\lambda\pi} - C_2 e^{i\lambda\pi}} &= i\lambda\parentheses*{C_1 e^{i\lambda\pi} - C_2 e^{-i\lambda\pi}} = X'\parentheses*{\pi}
+    \end{align*}
+    folgen die Gleichungen
+    \begin{align}
+        C_2\parentheses*{e^{i\lambda\pi} - e^{-i\lambda\pi}} = C_1\parentheses*{e^{i\lambda\pi} - e^{-i\lambda\pi}},\label{eq:2}\\
+        C_2\parentheses*{e^{i\lambda\pi} - e^{-i\lambda\pi}} = C_1\parentheses*{e^{-i\lambda\pi} - e^{-i\lambda\pi}}.\label{eq:3}
+    \end{align}
+    Aus \(\eqref{eq:2} - \eqref{eq:3}\) folgt
+    \[
+        \sin\parentheses*{\lambda\pi} = 0 \iff \lambda \in \Z
+    \]
+    und somit ergibt sich schließlich
+    \[
+        X\parentheses*{x} = \sum a_n\cos\parentheses*{nx} + b_n\sin\parentheses*{nx}.
+    \]
+    Mit dem Ansatz \(T\parentheses*{t} = Ke^{-\lambda^2 t}\) und dem Anfangswert
+    \[
+        X\parentheses*{x}T\parentheses*{0} = \cos\parentheses*{2x} = X\parentheses*{x}K
+    \]
+    folgt
+    \[
+        X\parentheses*{x} = \frac{1}{K}\cos\parentheses*{2x}.
+    \]
+    Man müsste \(\cos\parentheses*{2x}\) in einer Fourierreihe entwickeln, das ist aber einfach: Wähle \(a_2 = \frac{1}{K}\) und die restlichen Koeffizienten \(a_n, b_n\) gleich Null, dann gilt schlussendlich
+    \[
+        u\parentheses*{x, t} = e^{-4t}\cos\parentheses*{2x}.
+    \]
+
+
+    \section*{Aufgabe 2}
+
+    \begin{problem}
+        Gegeben sei die Transportgleichung
+        \begin{align*}
+            u_x\parentheses*{x, y} + u_y\parentheses*{x, y} &= 0, \quad \parentheses*{x, y} \in \R \times \R,\\
+            u\parentheses*{0, y} &= \cos\parentheses*{y}, \quad y \in \R.
+        \end{align*}
+        \begin{enumerate}
+            \item Ermitteln Sie mithilfe der Charakteristikenmethode einen Kandidaten \(u\) für die Lösung dieser Transportgleichung.
+            \item Verifizieren Sie, dass Ihr Kandidat \(u\) aus Teil a) die Transportgleichung erfüllt.
+        \end{enumerate}
+    \end{problem}
+
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item Wir suchen einen charakteristischen Weg \(\parentheses*{x\parentheses*{s}, y\parentheses*{s}}\) mit \(\parentheses*{x\parentheses*{0}, y\parentheses*{0}} = \parentheses*{0, y_0}\), entlang dem sich das Anfangswertproblem auf eine gewöhnliche DGL reduziert.
+        Wir definieren
+        \[
+            z\parentheses*{s} := u\parentheses*{x\parentheses*{s}, y\parentheses*{s}}, \quad s \in \R
+        \]
+        und berechnen
+        \[
+            z'\parentheses*{s} = x'\parentheses*{s}u_x\parentheses*{x\parentheses*{s}, y\parentheses*{s}} + y'\parentheses*{s}u_y\parentheses*{x\parentheses*{s}, y\parentheses*{s}}.
+        \]
+        Nehmen wir \(x'\parentheses*{s} = 1\) und \(y'\parentheses*{s} = 1\), dann ist mit der obigen PDE \(z'\parentheses*{s} = 0\).
+        Daher ist \(z = z\parentheses*{s}\) eine konstante Funktion von \(s\) für jede Wahl von \(y_0\).
+        Die Differentialgleichungen für \(x'\parentheses*{s}\) und \(y'\parentheses*{s}\) liefern
+        \[
+            x'\parentheses*{s} = 1 \quad \text{und} \quad y'\parentheses*{s} = 1.
+        \]
+        Es folgt
+        \[
+            x\parentheses*{s} = s + \alpha_1 \quad \text{und} \quad y\parentheses*{s} = s + \alpha_2.
+        \]
+        Weiterhin erhalten wir
+        \[
+            0 = x\parentheses*{0} = 0 + \alpha_1 \implies x\parentheses*{s} = s
+        \]
+        und
+        \[
+            y_0 = y\parentheses*{0} = 0 + \alpha_2 \implies y\parentheses*{s} = s + y_0.
+        \]
+        Da \(z'\parentheses*{s} = 0\), ist \(u\parentheses*{x\parentheses*{s}, y\parentheses*{s}}\) konstant für gegebene \(x_0\) und \(y_0\) und mit
+        \[
+            y\parentheses*{s} = s + y_0 \implies y_0 = y\parentheses*{s} - s\text{ und }x\parentheses*{s} = s
+        \]
+        folgt
+        \[
+            u\parentheses*{x\parentheses*{s}, y\parentheses*{s}} = u\parentheses*{0, y_0} = \cos\parentheses*{y_0} = \cos\parentheses*{y\parentheses*{s} - s} = \cos\parentheses*{y\parentheses*{s} - x\parentheses*{s}}.
+        \]
+        Somit gilt
+        \[
+            u\parentheses*{x, y} = \cos\parentheses*{y\parentheses*{s} - x\parentheses*{s}}, \quad \parentheses*{x, y} \in \R \times \R.
+        \]
+        \item Wir berechnen
+        \begin{align*}
+            u_x &= \sin\parentheses*{y\parentheses*{s} - x\parentheses*{s}},\\
+            u_y &= -\sin\parentheses*{y\parentheses*{s} - x\parentheses*{s}}\\
+            \implies u_x + u_y &= 0.
+        \end{align*}
+        Außerdem wird die Randbedingung \(u\parentheses*{0, y} = \cos\parentheses*{y}\) erfüllt.
+    \end{enumerate}
+
+
+    \section*{Aufgabe 3}
+
+    \begin{problem}
+        Eine Matrix \(A \in \C^{n \times n}\) heißt strikt diagonaldominant, falls für alle \(i = 1, \ldots, n\) gilt:
+        \[
+            \sum_{j = 1, i \ne j}^n\absolute*{a_{ij}} < \absolute*{a_{ii}}.
+        \]
+        Zeigen Sie, dass jede strikt diagonaldominante Matrix invertierbar ist.
+    \end{problem}
+
+    \subsection*{Lösung}
+    Betrachte die Gershgorin-Kreise der Matrix \(A\):
+    \[
+        G_i = \braces*{x \in \C : \absolute*{x - a_{ii}} \le \sum_{i = 1, i \ne j}^n\absolute*{a_{ij}}}.
+    \]
+    Da \(\sum_{j = 1, i \ne j}^n \absolute*{a_{ij}} < \absolute*{a_{ii}}\) für alle \(i = 1, \ldots, n\) gilt, wissen wir, dass \(0 \not\in G_i\) für alle \(i = 1, \ldots, n\) gilt.
+    Da \(\sigma\parentheses*{A} \subset \bigcup_{i = 1}^n G_i\), folgt somit \(0 \not\in \sigma\parentheses*{A}\).
+    Damit ist \(A\) invertierbar.
+
+
+    \section*{Aufgabe 4}
+
+    \begin{problem}
+        Gegeben sei das Problem
+        \begin{align*}
+            -\parentheses*{a_{11}\partial_x^2 u\parentheses*{x, y} + 2a_{12}\partial_x \partial_y u\parentheses*{x, y} + a_{22}\partial_x^2 u\parentheses*{x, y}} &= f\parentheses*{x, y}, \quad x \in \Omega,\\
+            u\parentheses*{x, y} &= g\parentheses*{x, y}, \quad x \in \partial\Omega.
+        \end{align*}
+        Für den diskreten Differentialoperator sei folgender Differenzenstern gegeben:
+        \[
+            \frac{1}{h^2}\begin{bmatrix}
+                a_{12}^- & -\parentheses*{a_{22} - \absolute*{a_{12}}} & -a_{12}^+\\
+                -\parentheses*{a_{11} - \absolute*{a_{12}}} & 2\parentheses*{a_{11} + a_{22} - \absolute*{a_{12}}} & -\parentheses*{a_{11} - \absolute*{a_{12}}}\\
+                -a_{12}^+ & -\parentheses*{a_{22} - \absolute*{a_{12}}} & a_{12}^-
+            \end{bmatrix}
+        \]
+        mit \(a_{12}^+ = \max\braces*{a_{12}, 0}\) und \(a_{12}^- = \min\braces*{a_{12}, 0}\).
+        Zeigen Sie, dass die resultierende Matrix für
+        \[
+            a_{11} > 0, \quad a_{22} > 0, \quad \absolute*{a_{11}} > \absolute*{a_{12}}, \quad \absolute*{a_{22}} > \absolute*{a_{12}}
+        \]
+        eine \(M\)-Matrix ist.
+        Hierbei können Sie die Irreduzibilität als gegeben annehmen.
+    \end{problem}
+
+    \subsection*{Lösung}
+    Eine Zeile der Matrix \(A\) für einen Gitterknoten, dessen Nachbarknoten nicht auf dem Rand liegen, ist gegeben als
+    \begin{align*}
+        \frac{1}{h^2}&\left[\ldots, -a_{12}^+, -\parentheses*{a_{22} - \absolute*{a_{12}}}, a_{12}^-, \ldots, -\parentheses*{a_{11} - \absolute*{a_{12}}}, 2\parentheses*{a_{11} + a_{22} - \absolute*{a_{12}}},\right.\\
+        &\left.-\parentheses*{a_{11} - \absolute*{a_{12}}}, \ldots, a_{12}^-, -\parentheses*{a_{22} - \absolute*{a_{12}}}, -a_{12}^+, \ldots\right],
+    \end{align*}
+    wobei \(2\parentheses*{a_{11} + a_{22} - \absolute*{a_{12}}}\) auf der Diagonalen liegt.
+    Anhand der Definition von \(a_{12}^+\) und \(a_{12}^-\) und den Bedingungen an \(a_{11}\), \(a_{12}\) und \(a_{22}\) erkennt man schnell, dass alle Diagonaleinträge positiv und alle anderen Einträge negativ sein müssen.
+    Es handelt sich also um eine \(L\)-Matrix.
+    Als nächstes zeigen wir Diagonaldominanz.
+    Wir machen eine Fallunterscheidung:
+    \begin{itemize}
+        \item \(a_{12} \ge 0\): Damit gilt \(a_{12}^- = 0\) und \(a_{12}^+ = a_{12}\).
+        Somit erhalten wir
+        \begin{align*}
+            t
+        \end{align*}
+        \item \(a_{12} < 0\): Damit gilt \(a_{12}^- = a_{12}\) und \(a_{12}^+ = 0\).
+        Somit erhalten wir
+        \begin{align*}
+            t
+        \end{align*}
+    \end{itemize}
+    Damit gilt für jede Zeile in der keiner der Nachbarknoten ein Randknoten ist:
+
+    \[
+        \sum_{j = 1, i \ne j}^n \absolute*{a_{ij}} = \absolute*{a_{ii}}.
+    \]
+    Falls einer der Nachbarknoten ein Randknoten ist, trägt dieser nicht zur Matrix \(A\) bei und entfällt damit in den Summen.
+    Damit folgt für die zugehörigen Zeilen \(\parentheses*{A_{ij}}_{j = 1, \ldots, n}\)
+    \[
+        \sum_{j = 1, i \ne j}^n \absolute*{a_{ij}} < \absolute*{a_{ii}}.
+    \]
+    Die Matrix \(A\) ist also diagonaldominant und irreduzibel diagonaldominant.
+    Da \(A\) eine irreduzibel diagonaldominante \(L\)-Matrix ist, ist \(A\) eine \(M\)-Matrix.
 \end{document}
