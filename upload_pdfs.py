@@ -20,7 +20,7 @@ basedir.Upload()
 ids = {'src': basedir['id']}
 
 for root, directories, files in os.walk('src', topdown=True):
-    parent = ids[root.split('/')[-1]]
+    parent = ids[root.split(os.sep)[-1]]
     # Create the initial empty folder structure
     for directory in directories:
         folder = drive.CreateFile({
@@ -38,11 +38,14 @@ for root, directories, files in os.walk('src', topdown=True):
                 'parents': [{'kind': 'drive#parentReference', 'id': parent}],
                 'mimeType': 'application/pdf'
             })
-            compile_command = 'pdflatex -interaction nonstopmode -output-directory ' + root + ' ' + os.path.join(root, file)
+            compile_command = 'pdflatex -interaction nonstopmode -output-directory ' + root.replace(os.sep, '/') + ' ' + os.path.join(root, file).replace(os.sep, '/')
             os.system(compile_command)
             os.system(compile_command)
             pdf.SetContentFile(os.path.join(root, file.split('.')[0] + '.pdf'))
             pdf.Upload()
 
 # Clean up the src directory after the compilation of all the TeX files
-os.system('find src \\( -name "*.log" -o -name "*.pdf" -o -name "*.aux" -o -name "*.thm" \\) -type f -delete')
+for root, directories, files in os.walk('src'):
+    for file in files:
+        if file.endswith(('.aux', '.log', '.pdf', '.synctex.gz', '.thm')):
+            os.remove(os.path.join(root, file))
