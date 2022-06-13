@@ -1,0 +1,75 @@
+\documentclass{exercise}
+
+\institute{Applied and Computational Mathematics}
+\title{Selbstrechenübung 9}
+\author{Joshua Feld, 406718}
+\course{Mathematische Grundlagen IV}
+\professor{Torrilhon \& Berkels}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \section*{Aufgabe 1}
+    
+    \begin{problem}
+        Gegeben ist das Konvektions-Diffusionsproblem: Gesucht ist \(u \in C^2\parentheses*{0, 1}\) mit
+        \begin{align*}
+            -u''\parentheses*{x} + 7u'\parentheses*{x} &= f\parentheses*{x}, \quad x \in \parentheses*{0, 1},\\
+            u\parentheses*{0} = u\parentheses*{1} &= 0.
+        \end{align*}
+        Dieses Problem soll mithilfe einer finite Differenzen Methode auf einem regelmäßigen Gitter der Schrittweite \(h\) und den Gitterpunkten \(0 = x_0 < x_1 < \cdots < x_n = 1\) approximiert und in ein lineares Gleichungssystem der Form \(A_h u_h = b_h\) überführt werden.
+        Dazu sollen die Differenzenquotienten
+        \begin{align*}
+            u'\parentheses*{x_i} &\approx \frac{u\parentheses*{x_{i + 1}} - u\parentheses*{x_i}}{h}\\
+            u''\parentheses*{x_i} &\approx \frac{u\parentheses*{x_{i + 1}} - 2u\parentheses*{x_i} + u\parentheses*{x_{i - 1}}}{h^2}
+        \end{align*}
+        benutzt werden.
+        \begin{enumerate}
+            \item Bestimmen Sie \(A_h\) und \(b_h\).
+            \item Geben Sie eine Bedingung an, unter der \(A_h\) diagonaldominant ist.
+            \item Geben Sie eine mögliche finite Differenzen Diskretisierung für die gegebene Differentialgleichung an, sodass die resultierende Matrix \(A_h\) \emph{für alle} \(h > 0\) strikt diagonaldominant ist.
+        \end{enumerate}
+        \emph{Hinweis: Eine Matrix \(A\) ist diagonaldominant, wenn
+        \[
+            \sum_{i \ne j}\absolute*{a_{ij}} \le \absolute*{a_{ii}} \quad \forall i.
+        \]
+        Eine Matrix \(A\) ist strikt diagonaldominant, wenn sie diagonaldominant ist und für mindestens ein \(i = k\)
+        \[
+            \sum_{k \ne j}\absolute*{a_{kj}} < \absolute*{a_{kk}}.
+        \]}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item
+        \item
+        \item
+    \end{enumerate}
+
+
+    \section*{Aufgabe 2}
+    
+    \begin{problem}
+        Gegeben seien die Funktionen \(h, f_\alpha \in \mathcal{D}\parentheses*{\R^n}, \alpha > 0\) definiert durch
+        \[
+            h\parentheses*{x} := \begin{cases}
+                0, & \text{falls }\absolute*{x} \ge 1,\\
+                \exp\parentheses*{-\frac{1}{1 - \absolute*{x}^2}}, & \text{falls }\absolute*{x} < 1
+            \end{cases}
+        \]
+        und
+        \[
+            f_\alpha\parentheses*{x} := \frac{1}{M\alpha^n}h\parentheses*{\frac{x}{\alpha}}, \quad M := \int_{\R^n}h\parentheses*{x}\d x.
+        \]
+        Zeigen Sie, dass für die reguläre Distribution
+        \[
+            T_{f_\alpha}\parentheses*{\phi} := \int_{\R^n}f_\alpha\parentheses*{x}\phi\parentheses*{x}\d x, \quad \phi \in \mathcal{D}\parentheses*{\R^n},
+        \]
+        der Grenzwert \(\lim_{\alpha \to 0}T_{f_\alpha} = \delta\) im distributionellen Sinn erfüllt ist.
+    \end{problem}
+    
+    \subsection*{Lösung}
+\end{document}

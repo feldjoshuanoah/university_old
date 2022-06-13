@@ -10,4 +10,72 @@
 
 \begin{document}
     \maketitle
+
+
+    \section*{Aufgabe 1}
+    
+    \begin{problem}
+        Gegeben sei das Gebiet \(\Omega = \parentheses*{0, L_x} \times \parentheses*{0, L_x} \subset \R^2\).
+        Bestimmen Sie die Eigenwerte \(\lambda\) und die zugehörigen Eigenfunktionen \(u\parentheses*{x, y}\) des Laplace-Operators auf den Gebiet \(\Omega\) mit \(u\parentheses*{x, y} = 0\) auf \(\partial\Omega\), d.h. gesucht sind alle \(u \in C^2\parentheses*{\Omega} \ne 0\) und \(\lambda \in \R\) mit
+        \begin{align}
+            -\Delta u\parentheses*{x, y} &= \lambda u\parentheses*{x, y},\label{eq:1}\\
+            u\parentheses*{x, y} &= 0, \quad \text{auf }\partial\Omega.\nonumber
+        \end{align}
+        Gehen Sie dabei wie folgt vor:
+        \begin{enumerate}
+            \item Lösen Sie zuerst das eindimensionale Eigenwertproblem: Bestimmen Sie alle \(\mu \in \R\) für die eine Lösung \(f \in C^2\parentheses*{\parentheses*{0, L}} \ne 0\) der Gleichung
+            \begin{equation}\label{eq:2}
+                -f''\parentheses*{x} = \mu f\parentheses*{x}
+            \end{equation}
+            mit \(f\parentheses*{0} = f\parentheses*{L} = 0\) existiert.
+            Wie sieht die zu \(\mu\) gehörige Eigenfunktion \(f\) aus?
+            \item Reduzieren Sie jetzt Gleichung \eqref{eq:1} mithilfe des Ansatzes
+            \[
+                u\parentheses*{x, y} = v\parentheses*{x}w\parentheses*{y}
+            \]
+            auf zwei Gleichungen vom Typ \eqref{eq:2}.
+            Bestimmen Sie mithilfe der Ergebnisse aus a) die Werte \(\lambda \in \R\), für die eine Lösung \(u\parentheses*{x, y}\) der Gleichung \eqref{eq:1} existiert.
+            Wie sehen diese Lösungen aus?
+            Wie groß ist der kleinste Eigenwert?
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item
+        \item
+    \end{enumerate}
+
+
+    \section*{Aufgabe 2}
+    
+    \begin{problem}
+        \begin{enumerate}
+            \item Zeigen Sie, dass
+            \[
+                \phi_{j, k}\parentheses*{x, y} = \cos\parentheses*{j\pi x}\sin\parentheses*{k\pi y}, \quad j = 0, 1, 2, \ldots, k = 1, 2, \ldots
+            \]
+            die Eigenfunktionen des Laplace-Operators auf \(\Omega = \brackets*{0, 1}^2\) sind.
+            Wie sind die Eigenwerte?
+            \item Entwickeln Sie die Funktion
+            \[
+                f\parentheses*{x, y} = \frac{1}{2}\parentheses*{\sin\parentheses*{4\pi y} - \cos\parentheses*{4\pi x}\sin\parentheses*{10\pi y}}
+            \]
+            in den Eigenfunktionen \(\phi_{j, k}\).
+            \item Geben Sie die Lösung des Anfangsrandwertproblems and
+            \begin{align*}
+                \partial_t u\parentheses*{t, x, y} &= \Delta u\parentheses*{t, x, y} + f\parentheses*{x, y}, \quad \text{in }\Omega,\\
+                u\parentheses*{t, x, y} &= 0, \quad y \in \braces*{0, 1}, x \in \parentheses*{0, 1},\\
+                \partial_x u\parentheses*{t, x, y} &= 0, \quad x \in \braces*{0, 1}, y \in \parentheses*{0, 1},\\
+                u\parentheses*{0, x, y} &= 0.
+            \end{align*}
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item
+        \item
+        \item
+    \end{enumerate}
 \end{document}

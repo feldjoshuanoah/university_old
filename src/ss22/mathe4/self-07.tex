@@ -10,4 +10,96 @@
 
 \begin{document}
     \maketitle
+
+
+    \section*{Aufgabe 1}
+    
+    \begin{problem}
+        \emph{Laut ADAC bildeten sich auf den deutschen Autobahnen im Jahr 2009 pro Tag Staus mit einer durchschnittlichen Länge von \(1000\sis{\kilo\meter}\).
+        Um ein Straßennetzwerk effizient auslasten zu können, muss das Verkehrsaufkommen auf den Straßen möglichst realistisch simuliert werden.
+        Ein einfaches eindimensionales Verkehrsfluss-Modell wird in dieser Aufgabe vorgestellt.}
+
+        Die Anzahl der Fahrzeuge pro Länge wird Verkehrsdichte \(\rho\parentheses*{\hat{t}, \hat{x}}\) genannt, die vom Ort \(\hat{x}\) und der Zeit \(\hat{t}\) abhängt.
+        Bezeichne \(v\parentheses*{\hat{x}}\) die Geschwindigkeit des Verkehrsflusses an der Stelle \(\hat{x}\) zum Zeitpunkt \(\hat{t}\), so lässt sich aus der Erhaltung der Fahrzeuge (also ohne Zu- und Abfahrten) die Gleichung
+        \begin{equation}\label{eq:1}
+            \frac{\partial\rho}{\partial\hat{t}} + \frac{\partial\parentheses*{\rho v}}{\partial\hat{x}} = 0
+        \end{equation}
+        herleiten.
+        Diese Gleichung hat allerdings immernoch zwei unbekannte Funktionen und ist daher in dieser Form nicht lösbar.
+        \begin{enumerate}
+            \item Bei dem Lighthill-Whitham Modell nimmt man den Zusammenhang
+            \[
+                v\parentheses*{\rho} = v_{\text{max}}\parentheses*{1 - \frac{\rho}{\rho_{\text{max}}}}
+            \]
+            an, wobei \(v_{\text{max}}\) die Maximalgeschwindigkeit und \(\rho_{\text{max}}\) die Maximaldichte bezeichnen.
+            Zeigen Sie durch geeignete Substitutionen, dass \eqref{eq:1} auf die \emph{Burgers'sche Gleichung}
+            \[
+                \frac{\partial u}{\partial t} + u \cdot \frac{\partial u}{\partial x} = 0
+            \]
+            umgeformt werden kann.
+            Dabei sind \(u\), \(t\) und \(x\) dimensionslose Größen.
+            \item Erstellen Sie ein \(t\)-\(x\)-Diagramm für den Verlauf der Charakteristiken der Burgers'schen Gleichung auf \(\Omega = \brackets*{-5, 5} \times \brackets*{0, 2}\) mit dem Anfangswert
+            \[
+                u\parentheses*{x, 0} = 1 + e^{-x^2}.
+            \]
+            Was bedeutet en Schnittpunkt zweier Charakteristiken für die Lösung?
+        \end{enumerate}
+    \end{problem}
+
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item
+        \item
+    \end{enumerate}
+
+
+    \section*{Aufgabe 2}
+    
+    \begin{problem}
+        Wir betrachten das Poisson-Problem:
+        \begin{align*}
+            -\Delta u\parentheses*{x, y} &= f\parentheses*{x, y}, \quad \parentheses*{x, y} \in \Omega = \parentheses*{0, 1}^2,\\
+            u\parentheses*{x, y} &= g\parentheses*{x, y}, \quad \parentheses*{x, y} \in \partial\Omega.
+        \end{align*}
+        Bestimmen Sie, ob für diese Probleme die Konvergenzaussagen aus der Vorlesung erfüllt sind:
+        \begin{enumerate}
+            \item Problem 1:
+            \begin{align*}
+                u\parentheses*{x, y} &= \parentheses*{1 - \parentheses*{2x - 1}^4}\parentheses*{\parentheses*{2y - 1}^2 - 1},\\
+                f\parentheses*{x, y} &= 8 \cdot \parentheses*{24 \cdot \parentheses*{1 - 2x}^2\parentheses*{y - 1}y + \parentheses*{1 - 2x}^4 - 1},\\
+                g\parentheses*{x, y} &= u\parentheses*{x, y}.
+            \end{align*}
+            \item Problem 2:
+            \begin{align*}
+                u\parentheses*{x, y} &= y^4\parentheses*{\frac{1}{6}x^3\log\parentheses*{x} - \frac{11x^3}{36}},\\
+                f\parentheses*{x, y} &= \frac{1}{3}xy^2 \cdot \parentheses*{-3 \cdot \parentheses*{2x^2 + y^2}\log\parentheses*{x} + 11x^2 + 3y^2},\\
+                g\parentheses*{x, y} &= u\parentheses*{x, y}.
+            \end{align*}
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item
+        \item 
+    \end{enumerate}
+
+
+    \section*{Aufgabe 3}
+    
+    \begin{problem}
+        Diskretisieren Sie das Konvektionsproblem
+        \begin{align*}
+            u'\parentheses*{x} &= f\parentheses*{x}, \quad x \in \Omega = \parentheses*{0, 1}, u \in C^2\parentheses*{\Omega},\\
+            u\parentheses*{0} &= 0
+        \end{align*}
+        mit der einseitigen finiten Differenz
+        \[
+            u'\parentheses*{x} \approx \frac{u\parentheses*{x} - u\parentheses*{x - h}}{h}, \quad h = \frac{1}{n}, n \in \N
+        \]
+        und stellen Sie das zugehörige Gleichungssystem \(Au_h = b\) auf.
+        Bestimmen Sie \(A^{-1}\) und \(\norm*{A^{-1}}_\infty\).
+    \end{problem}
+    
+    \subsection*{Lösung}
 \end{document}
