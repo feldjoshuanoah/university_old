@@ -18,7 +18,56 @@
         Ein Balken wird in der dargestellten Weise beansprucht.
         Die Profile \(A\) - \(D\) stehen zur Verfügung.
         Berechnen Sie die maximal zu erwartenden Biegespannungen, wenn die Querschnittsfläche stets die gleiche Größe hat.
-        
+        \begin{center}
+            \begin{tikzpicture}
+                \draw (0,0) rectangle (6,.5);
+                \draw[dashed] (-.5,.25) -- (6.5,.25);
+                \draw[->] (1.5,1.5) node[below right] {\(F\)} -- (1.5,.5);
+                \draw[->] (4.5,1.5) -- (4.5,.5);
+                \draw[|<->] (.5,.75) -- (1.5,.75) node[midway,above] {\(a\)};
+                \draw[<->|] (4.5,.75) -- (5.5,.75) node[midway,above] {\(a\)};
+                \draw[|<->|] (.5,-.75) -- (5.5,-.75) node[midway,below] {\(l\)};
+                \draw (.3,-.35) -- (.5,0) -- (.7,-.35) -- cycle;
+                \draw (.15,-.35) -- (.85,-.35);
+                \draw (5.3,-.35) -- (5.5,0) -- (5.7,-.35) -- cycle;
+                \draw (5.15,-.35) -- (5.85,-.35);
+                \draw (5.15,-.45) -- (5.85,-.45);
+            \end{tikzpicture}
+
+            \begin{tikzpicture}
+                \draw (0,0) rectangle (2,3);
+                \node[anchor=south west] at (0,0) {\(A\)};
+                \draw[fill=white!80!black] (1,2) circle (.5cm);
+                \draw (.25,2) node[below] {\(y\)} -- (1.75,2);
+                \draw (1,2.75) -- (1,1.25);
+                \node at (1,.75) {\(d\)};
+                \begin{scope}[shift={(2,0)}]
+                    \draw (0,0) rectangle (2,3);
+                    \node[anchor=south west] at (0,0) {\(B\)};
+                    \draw[fill=white!80!black] (.5,1.5) rectangle (1.5,2.5);
+                    \draw (.25,2) node[below] {\(y\)} -- (1.75,2);
+                    \draw (1,2.75) -- (1,1.25);
+                    \node at (1,.75) {\(b\)};
+                \end{scope}
+                \begin{scope}[shift={(4,0)}]
+                    \draw (0,0) rectangle (2,3);
+                    \node[anchor=south west] at (0,0) {\(C\)};
+                    \draw[fill=white!80!black] (.75,1.5) rectangle (1.25,2.5);
+                    \draw (.25,2) node[below] {\(y\)} -- (1.75,2);
+                    \draw (1,2.75) -- (1,1.25);
+                    \node at (1,.75) {\(\frac{h}{b} = 2\)};
+                \end{scope}
+                \begin{scope}[shift={(6,0)}]
+                    \draw (0,0) rectangle (2,3);
+                    \node[anchor=south west] at (0,0) {\(D\)};
+                    \draw[fill=white!80!black] (1,2) circle (.5cm);
+                    \draw[fill=white] (1,2) circle (.4cm);
+                    \draw (.25,2) node[below] {\(y\)} -- (1.75,2);
+                    \draw (1,2.75) -- (1,1.25);
+                    \node at (1,.75) {\(i = \frac{d_i}{d_a} = 0,8\)};
+                \end{scope}
+            \end{tikzpicture}
+        \end{center}
         Gegeben: \(F\), \(A\), \(a\)
     \end{problem}
     
