@@ -1,0 +1,357 @@
+\documentclass{lecture}
+
+\institute{Institut für Statistik und Wirtschaftsmathematik}
+\title{Vorlesung 9}
+\author{Joshua Feld, 406718}
+\course{Statistik}
+\professor{Cramer}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    In stochastischen Modellen benötigt man häufig Folgen von Ereignissen und deren Eigenschaften.
+
+    \begin{definition}
+        Seien \(\mathfrak{U}\) eine \(\sigma\)-Algebra über \(\Omega \ne \emptyset\) und \(\parentheses*{A_n}_{n \in N} \subseteq \mathfrak{U}\).
+        \[
+            \parentheses*{A_n}_n\text{ heißt}\begin{cases}
+                \text{\emph{isoton} (monoton wachsend)}, & \text{falls }A_n \subseteq A_{n + 1} \forall n \in \N,\\
+                \text{\emph{antiton} (monoton fallend)}, & \text{falls }A_n \supseteq A_{n + 1} \forall n \in \N.
+            \end{cases}
+        \]
+        Für isotone bzw. antitone Ereignisfolgen heißt jeweils
+        \[
+            \lim_{n \to \infty}A_n = \bigcup_{n = 1}^\infty A_n\text{ bzw. }\lim_{n \to \infty}A_n = \bigcap_{n = 1}^\infty A_n
+        \]
+        der \emph{Grenzwert} (Limes) von \(\parentheses*{A_n}_{n \in \N}\).
+
+        Für eine beliebige Ereignisfolge \(\parentheses*{A_n}_n\) heißen
+        \[
+            \limsup_{n \to \infty}A_n = \lim_{n \to \infty}\parentheses*{\bigcup_{k = n}^\infty A_k} = \bigcap_{n = 1}^\infty\bigcup_{k = n}^\infty A_k
+        \]
+        der \emph{limes superior} und
+        \[
+            \liminf_{n \to \infty}A_n = \lim_{n \to \infty}\parentheses*{\bigcap_{k = n}^\infty A_k} = \bigcup_{n = 1}^\infty\bigcap_{k = n}^\infty A_k
+        \]
+        der \emph{limes inferior} der Folge \(\parentheses*{A_n}_{n \in \N}\).
+    \end{definition}
+
+    \begin{remark}
+        Mit \(\parentheses*{A_n}_n \subseteq \mathfrak{U}\) sind der limes superior und der limes inferior selbst wieder Ereignisse aus \(\mathfrak{U}\), d.h.
+        \[
+            \limsup_{n \to \infty}A_n, \liminf_{n \to \infty}A_n \in \mathfrak{U}
+        \]
+        und es gilt
+        \begin{align*}
+            \limsup_{n \to \infty}A_n &= \braces*{\omega \in \Omega : \omega\text{ liegt in unendlich vielen der }A_i},\\
+            \liminf_{n \to \infty}A_n &= \braces*{\omega \in \Omega : \omega\text{ liegt in allen }A_i\text{ bis auf endlich viele}}.
+        \end{align*}
+        Der limes superior beschreibt also das Ereignis, dass unendlich viele der \(A_i\) entreten, der limes inferior das Ereignis, dass alle bis auf endlich viele der \(A_i\) eintreten.
+    \end{remark}
+
+    Für Ereignisfolgen erhält man folgende Eigenschaften.
+
+    \begin{lemma}
+        Seien \(\parentheses*{\Omega, \mathfrak{U}, P}\) ein Wahrscheinlichkeitsraum und \(\parentheses*{A_n}_n \subseteq \mathfrak{U}\).
+        Dann gilt:
+        \begin{enumerate}
+            \item \(P\parentheses*{\bigcup_{n = 1}^\infty A_n} = P\parentheses*{\lim_{n \to \infty}A_n} = \lim_{n \to \infty}P\parentheses*{A_n}\), falls die Ereignisfolge \(\parentheses*{A_n}_n\) isoton ist (Stetigkeit von \(P\) von unten),
+            \item \(P\parentheses*{\bigcap_{n = 1}^\infty A_n} = P\parentheses*{\lim_{n \to \infty}A_n} = \lim_{n \to \infty}P\parentheses*{A_n}\), falls \(\parentheses*{A_n}_n\) antiton ist (Stetigkeit von \(P\) von oben),
+            \item \(P\parentheses*{\limsup_{n \to \infty}A_n} = \lim_{n \to \infty}P\parentheses*{\bigcup_{k = n}^\infty A_k}\), \(P\parentheses*{\liminf_{n \to \infty}A_n} = \lim_{n \to \infty}P\parentheses*{\bigcap_{k = n}^\infty A_k}\).
+        \end{enumerate}
+    \end{lemma}
+
+    \begin{proof}
+        \begin{enumerate}
+            \item Seien \(B_1 = A_1\), \(B_{n + 1} = A_{n + 1} \cap A_n^c\) und \(A_n \subseteq A_{n + 1}, n \in \N\).
+            Damit sind die Mengen \(B_1, B_2, \ldots\) paarweise disjunkt und es gilt
+            \[
+                \bigcup_{n = 1}^\infty B_n = B_1 \cup \bigcup_{n = 2}^\infty\underbrace{\parentheses*{A_n \cap A_{n - 1}^c}}_{\subseteq A_n} \subseteq \bigcup_{n = 1}^\infty A_n.
+            \]
+            Weiterhin folgt
+            \[
+                \omega \in \bigcup_{n = 1}^\infty A_n \implies \exists i: \omega \in A_i \land \omega \not\in A_j \forall j < i \implies \omega \in B_i \implies \omega \in \bigcup_{n = 1}^\infty A_n.
+            \]
+            Damit gilt unter Anwendung der \(\sigma\)-Additivität von \(P\):
+            \begin{align*}
+                P\parentheses*{\bigcup_{n = 1}^\infty A_n} &= P\parentheses*{\bigcup_{n = 1}^\infty B_n} = \sum_{n = 1}^\infty P\parentheses*{B_n}\\
+                &\stackrel{A_1 = B_1}{=} P\parentheses*{A_1} + \sum_{n = 2}^\infty P\parentheses*{B_n}\\
+                &= P\parentheses*{A_1} + \lim_{m \to \infty}\sum_{n = 1}^m\underbrace{P\parentheses*{B_{n + 1}}}_{= P\parentheses*{A_{n + 1}} - P\parentheses*{A_n}}\\
+                &= P\parentheses*{A_1} + \lim_{m \to \infty}\parentheses*{P\parentheses*{A_{m + 1}} - P\parentheses*{A_1}} = \lim_{m \to \infty}P\parentheses*{A_m}.
+            \end{align*}
+            \item Mit der de Morganschen Regel folgt aus (i): \(\bigcap_{n = 1}^\infty A_n = \parentheses*{\bigcup_{n = 1}^\infty A_n^c}^c\), wobei \(\parentheses*{A_n^c}_n\) eine isotone Mengenfolge ist.
+            Damit gilt:
+            \[
+                P\parentheses*{\bigcap_{n = 1}^\infty A_n} = 1 - P\parentheses*{\bigcup_{n = 1}^\infty A_n^c} = 1 - \lim_{m \to \infty}\underbrace{P\parentheses*{A_m^c}}_{= 1 - P\parentheses*{A_m}} = \lim_{m \to \infty}P\parentheses*{A_m}.
+            \]
+            \item Die Anwendung von (i) und (ii) liefert
+            \[
+                P\parentheses*{\limsup_{n \to \infty}A_n} = P\parentheses*{\lim_{n \to \infty}\bigcup_{k = n}^\infty A_k} = \lim_{n \to \infty}P\parentheses*{\bigcup_{k = n}^\infty A_k},
+            \]
+            denn \(\parentheses*{\bigcup_{k = n}^\infty A_k}_n\) ist eine antitone Folge und
+            \[
+                P\parentheses*{\liminf_{n \to \infty}A_n} = P\parentheses*{\lim_{n \to \infty}\bigcap_{k = n}^\infty A_k} = \lim_{n \to \infty}P\parentheses*{\bigcap_{k = n}^\infty A_k},
+            \]
+            denn \(\parentheses*{\bigcap_{k = n}^\infty A_k}_n\) ist eine isotone Folge.
+        \end{enumerate}
+    \end{proof}
+
+    Die Wahrscheinlichkeit für ein Vereinigungsereignis ist die Summe der Einzelwahrscheinlichkeiten, falls die Ereignisse paarweise disjunkt sind.
+    Ist dies nicht der Fall, lässt sich die Wahrscheinlichkeit auf die Wahrscheinlichkeiten aller Schnittereignisse zurückführen.
+
+    \begin{lemma}
+        Für Ereignisse \(\parentheses*{A_n}_{n \in \N}\) in einem Wahrscheinlichkeitsraum \(\parentheses*{\Omega, \mathfrak{U}, P}\) gilt:
+        \begin{align*}
+            P\parentheses*{\bigcup_{k = 1}^n A_k} = &\sum_{k = 1}^n P\parentheses*{A_k} - \sum_{1 \le i_1 < i_2 \le n} P\parentheses*{A_{i_1} \cap A_{i_2}}\\
+            &+ \sum_{1 \le i_1 < i_2 < i_3 \le n}P\parentheses*{A_{i_1} \cap A_{i_2} \cap A_{i_3}}\\
+            &\pm \cdots + \parentheses*{-1}^{n + 1}P\parentheses*{\bigcap_{k = 1}^n A_k}.
+        \end{align*}
+    \end{lemma}
+    In den Fällen \(n = 2\) und \(n = 3\) gelten somit speziell:
+    \begin{align*}
+        P\parentheses*{A_1 \cup A_2} =\ &P\parentheses*{A_1} + P\parentheses*{A_2} - P\parentheses*{A_1 \cap A_2},\\
+        P\parentheses*{A_1 \cup A_2 \cup A_3} =\ &P\parentheses*{A_1} + P\parentheses*{A_2} - P\parentheses*{A_1 \cap A_2}\\
+        &- P\parentheses*{A_1 \cap A_2} - P\parentheses*{A_1 \cap A_3} - P\parentheses*{A_2 \cap A_3}\\
+        &+ P\parentheses*{A_1 \cap A_2 \cap A_3}.
+    \end{align*}
+
+    \begin{remark}
+        Aus der Sylvester-Poincaré-Siebformel werden sogenannte Bonferroni-Ungleichungen gewonnen.
+        Seien \(A_1, \ldots, A_n\) Ereignisse aus \(\mathfrak{U}\) im Wahrscheinlichkeitsraum \(\parentheses*{\Omega, \mathfrak{U}, P}\).
+        Dann gilt
+        \[
+            \sum_{k = 1}^n P\parentheses*{A_k} - \sum_{1 \le i_1 < i_2 \le n}P\parentheses*{A_{i_1} \cap A_{i_2}} \le P\parentheses*{\bigcup_{k = 1}^n A_k} \le \sum_{k = 1}^n P\parentheses*{A_k}.
+        \]
+        Weitere Ungleichungen entstehen durch Abbruch der Siebformel nach Termen gerader bzw. ungerader Ordnung.
+    \end{remark}
+
+
+    \section*{Bedingte Wahrscheinlichkeiten}
+
+    Das Konzept der bedingten Wahrscheinlichkeit dient der Beschreibung des Einflusses von Vor- oder Zusatzinformationen bzw. deren Einbeziehung in ein stochastisches Modell.
+
+    Für \(A \in \mathfrak{U}\) ist \(P\parentheses*{A}\) die Wahrscheinlichkeit des Eintretens von Ereignis \(A\).
+    Nun sei bekannt oder gefordert, dass Ereignis \(B \in \mathfrak{U}\) eintritt.
+    Welchen Einfluss hat diese Information auf die Wahrscheinlichkeit des Eintretens von \(A\)?
+
+    \begin{center}
+        \begin{tabular}{cl}
+            \toprule
+            Mathematisches Objekt & Interpretation\\
+            \midrule
+            \(\Omega\) & Grundraum, Ergebnisraum\\
+            \(\omega\) & (mögliches) Ergebnis\\
+            \(A \in \mathfrak{U}\) & Ereignis\\
+            \(\mathfrak{U}\) & Menge der (möglichen) Ereignisse\\
+            \(\Omega\) & sicheres Ereignis\\
+            \(\emptyset\) & unmögliches Ereignis\\
+            \(\omega \in A\) & Ereignis \(A\) tritt ein\\
+            \(\omega \in A^c\) & Ereignis \(A\) tritt nicht ein\\
+            \(\omega \in A \cup B\) & Ereignis \(A\) oder Ereignis \(B\) tritt ein\\
+            \(\omega \in A \cap B\) & Ereignis \(A\) und Ereignis \(B\) treten ein\\
+            \(A \subseteq B\) & Eintreten von Ereignis \(A\) impliziert Eintreten von Ereignis \(B\)\\
+            \(A \cap B = \emptyset\) & Ereignisse \(A\) und \(B\) schließen einander aus, \(A\) und \(B\) sind disjunkt\\
+            \(\omega \in \bigcup_{i \in I}A_i\) & mindestens ein Ereignis \(A_i, i \in I\) tritt ein\\
+            \(\omega \in \bigcap_{i \in I}A_i\) & alle Ereignisse \(A_i, i \in I\) treten ein\\
+            \(\omega \in \limsup_{i \in I}A_i\) & unendlich viele Ereignisse \(A_i, i \in I\) treten ein\\
+            \(\omega \in \liminf_{i \in I}A_i\) & alle bis auf endlich viele Ereignisse \(A_i, i \in I\) treten ein\\
+            \bottomrule
+        \end{tabular}
+    \end{center}
+
+    \begin{example}
+        \begin{enumerate}
+            \item Würfelwurf: Wie groß ist die Wahrscheinlichkeit für das Auftreten der Zwei unter der Bedingung, dass eine gerade Zahl auftritt?
+            Die intuitive Antwort ist \(\frac{1}{3}\).
+            In Gedanken schränkt man den Grundraum auf die Menge \(\braces*{2, 4, 6}\) ein.
+            \item Urnenmodell: Aus einer Urne mit zwei weißen und drei schwarzen Kugeln werden zwei Kugeln ohne Zurücklegen gezogen.
+            Dann erscheint klar:
+            \[
+                P\binom{\text{Die zweite Kugel ist schwarz bedingt unter der Kenntnis,}}{\text{dass die erste Kugel weiß ist}} = \frac{3}{4}.
+            \]
+            Die Ziehung der Kugeln wird als Laplace-Experiment mit dem Grundraum
+            \[
+                \Omega = \braces*{\parentheses*{i, j} : i, j \in \braces*{1, \ldots, 5}, i \ne j}
+            \]
+            mit \(\absolute*{\Omega} = 5 \cdot 4\) modelliert.
+            Die Interpretation von \(\Omega\) ist gegeben durch: Die weißen Kugeln haben die Nummern \(1\) und \(2\), die schwarzen Kugeln die Nummern \(3\), \(4\) und \(5\).
+            Mit der Definition
+            \begin{quote}
+                Ereignis \(A\): ``Zweite Kugel ist schwarz'' und
+
+                Ereignis \(B\): ``Erste Kugel ist weiß''
+            \end{quote}
+            gilt dann
+            \begin{align*}
+                A \cap B &= \braces*{\parentheses*{1, 3}, \parentheses*{1, 4}, \parentheses*{1, 5}, \parentheses*{2, 3}, \parentheses*{2, 4}, \parentheses*{2, 5}}, \absolute*{A \cap B} = 6, P\parentheses*{A \cap B} = \frac{3}{10},\\
+                B &= \braces*{\parentheses*{1, 2}, \parentheses*{1, 2}, \parentheses*{1, 2}, \parentheses*{1, 2}, \parentheses*{1, 2}, \parentheses*{1, 2}, \parentheses*{1, 2}, \parentheses*{1, 2}}, \absolute*{B} = 8, P\parentheses*{B} = \frac{2}{5}.
+            \end{align*}
+            Damit ist
+            \[
+                \frac{P\parentheses*{A \cap B}}{P\parentheses*{B}} = \frac{\frac{3}{10}}{\frac{2}{5}} = \frac{3}{4}.
+            \]
+            Dieser Quotient wird allgemein als bedingte Wahrscheinlichkeit definiert.
+        \end{enumerate}
+    \end{example}
+
+    \begin{definition}
+        Sei \(\parentheses*{\Omega, \mathfrak{U}, P}\) ein Wahrscheinlichkeitsraum.
+        Für jedes \(B \in \mathfrak{U}\) mit \(P\parentheses*{B} > 0\) wird durch
+        \[
+            P\parentheses*{A \mid B} = \frac{P\parentheses*{A \cap B}}{P\parentheses*{B}}, \quad A \in \mathfrak{U},
+        \]
+        eine Wahrscheinlichkeitsverteilung \(P\parentheses*{\cdot \mid B}\) auf \(\mathfrak{U}\) definiert, die sogenannte \emph{bedingte Verteilung} unter (der Hypothese) \(B\).
+        \(P\parentheses*{A \mid B}\) heißt \emph{(elementar) bedingte Wahrscheinlichkeit} von \(A\) unter \(B\). 
+    \end{definition}
+
+    Als Funktion von \(A\) bildet \(P\parentheses*{A \mid B}\) wiederum eine Wahrscheinlichkeitsverteilung und \(\parentheses*{\Omega, \mathfrak{U}, P\parentheses*{\cdot \mid B}}\) ist ein Wahrscheinlichkeitsraum.
+    Wegen \(P\parentheses*{A \mid B} = P\parentheses*{A \cap B \mid B}\) ist auch \(\parentheses*{B, \braces*{A \cap B : A \in \mathfrak{U}}, P\parentheses*{\cdot \mid B}}\) ein Wahrscheinlichkeitsraum über dem (eingeschränkten) Grundraum \(B \subseteq \Omega\).
+    Die Menge \(\braces*{A \cap B : A \in \mathfrak{U}}\) ist eine \(\sigma\)-Algebra über \(B\).
+
+    Für das Arbeiten mit bedingten Wahrscheinlichkeiten sind die nachfolgenden Eigenschaften und Begriffe wesentlich.
+
+    \begin{lemma}
+        Seien \(\parentheses*{\Omega, \mathfrak{U}, P}\) ein Wahrscheinlichkeitsraum und \(A, B \in \mathfrak{U}\) mit \(P\parentheses*{A} > 0, P\parentheses*{B} > 0\) sowie \(A_1, \ldots, A_n \in \mathfrak{U}\) mit \(P\parentheses*{\bigcap_{i = 1}^{n - 1}A_i} > 0\).
+        Dann gilt:
+        \begin{enumerate}
+            \item \(P\parentheses*{A \mid B} = P\parentheses*{B \mid A} \cdot \frac{P\parentheses*{A}}{P\parentheses*{B}}\),
+            \item \(P\parentheses*{\bigcap_{i = 1}^n A_i} = P\parentheses*{A_1} \cdot P\parentheses*{A_2 \mid A_1} \cdot P\parentheses*{A_3 \mid A_1 \cap A_2} \cdot \ldots \cdot P\parentheses*{A_n \mid \bigcap_{i = 1}^{n - 1}A_i}\).
+        \end{enumerate}
+    \end{lemma}
+
+    \begin{proof}
+        \begin{enumerate}
+            \item \(P\parentheses*{A \mid B}\frac{P\parentheses*{A}}{P\parentheses*{B}} = \frac{P\parentheses*{B \cap A}}{P\parentheses*{A}}\frac{P\parentheses*{A}}{P\parentheses*{B}} = P\parentheses*{A \mid B}\).
+            \item
+            \begin{align*}
+                &P\parentheses*{A_1} \cdot P\parentheses*{A_2 \mid A_1} \cdot P\parentheses*{A_3 \mid A_1 \cap A_2} \cdot \ldots \cdot P\parentheses*{A_n \mid \bigcap_{i = 1}^{n - 1}A_i}\\
+                &= P\parentheses*{A_1} \cdot \frac{P\parentheses*{A_1 \cap A_2}}{P\parentheses*{A_1}} \cdot \frac{P\parentheses*{A_1 \cap A_2 \cap A_3}}{P\parentheses*{A_1 \cap A_2}} \cdot \ldots \cdot \frac{P\parentheses*{\bigcap_{i = 1}^n A_i}}{P\parentheses*{\bigcap_{i = 1}^{n - 1} A_i}} = P\parentheses*{\bigcap_{i = 1}^n A_i}.
+            \end{align*}
+        \end{enumerate}
+    \end{proof}
+
+    \begin{lemma}
+        Seien \(\parentheses*{\Omega, \mathfrak{U}, P}\) ein Wahrscheinlichkeitsraum und \(A \in \mathfrak{U}, \parentheses*{B_n}_n \subseteq \mathfrak{U}\), \(B_n\) paarweise disjunkt mit \(A \subseteq \bigcup_{n = 1}^\infty B_n\).
+        Dann gilt:
+        \[
+            P\parentheses*{A} = \sum_{n = 1}^\infty P\parentheses*{A \cap B_n} = \sum_{n = 1}^\infty P\parentheses*{A \mid B_n} \cdot P\parentheses*{B_n}.
+        \]
+        Ist \(P\parentheses*{B_n} = 0\), so ist \(P\parentheses*{A \mid B_n}\) nicht definiert.
+        Man setzt in diesem Fall \(P\parentheses*{B_n} \cdot P\parentheses*{A \mid B_n} = 0\) mit \(P\parentheses*{A \mid B_n} \in \brackets*{0, 1}\) beliebig.
+    \end{lemma}
+
+    \begin{proof}
+        Wegen \(A \subseteq \bigcup_{n = 1}^\infty B_n\) ist \(A = \bigcup_{n = 1}^\infty \underbrace{\parentheses*{A \cap B_n}}_{\text{paarweise disjunkt}}\).
+        Damit folgt
+        \[
+            P\parentheses*{A} = P\parentheses*{\bigcup_{n = 1}^\infty\parentheses*{A \cap B_n}} = \sum_{n = 1}^\infty P\parentheses*{A \cap B_n} = \sum_{n = 1}^\infty P\parentheses*{A \mid B_n} \cdot P\parentheses*{B_n}.
+        \]
+    \end{proof}
+
+    \begin{lemma}
+        Seien \(\parentheses*{\Omega, \mathfrak{U}, P}\) ein Wahrscheinlichkeitsraum und \(A \in \mathfrak{U}, \parentheses*{B_n}_n \subseteq \mathfrak{U}, B_1, B_2, \ldots\) paarweise disjunkt, \(A \subseteq \cup_{n = 1}^\infty B_n\) mit \(P\parentheses*{A} > 0\).
+        Dann gilt für jedes \(k \in \N\)
+        \[
+            P\parentheses*{B_k \mid A} = \frac{P\parentheses*{B_k} \cdot P\parentheses*{A \mid B_k}}{\sum_{n = 1}^\infty P\parentheses*{A \mid B_n} \cdot P\parentheses*{B_n}}.
+        \]
+    \end{lemma}
+
+    \begin{proof}
+        Wegen \(P\parentheses*{B_k \mid A} = \frac{P\parentheses*{B_k} \cdot P\parentheses*{A \mid B_k}}{P\parentheses*{A}}\) folgt nach der Formel von der totalen Wahrscheinlichkeit die Behauptung.
+    \end{proof}
+
+    Bei der Bayesschen Formel wird von der ``Wirkung'' \(A\) auf eine ``Ursache'' \(B_k\) geschlossen.
+    In einem medizinischen Kontext kann obige Formel wie folgt interpretiert werden: Ein Arzt stellt ein Symptom \(A\) fest, das von verschiedenen Krankheiten \(B_1, \ldots, B_n\) herrühren kann.
+    \begin{enumerate}[label=(\roman*)]
+        \item Die relative Häufigkeit einer jeden Krankheit sei bekannt.
+        Diese ist eine ``Schätzung'' für \(P\parentheses*{B_k}, k = 1, 2, \ldots\).
+        \item Wenn die Krankheit \(B_k\) vorliegt, dann seien die relativen Häufigkeiten für das Auftreten von Symptom \(A\) bekannt.
+        Diese liefern Werte für \(P\parentheses*{A \mid B_k}, k = 1, 2, \ldots\).
+    \end{enumerate}
+    Gesucht ist die Wahrscheinlichkeit für die Krankheit Bk , wenn Symptom \(A\) auftritt.
+    \(P\parentheses*{B_k}\) heißt auch a priori Wahrscheinlichkeit, \(P\parentheses*{B_k \mid A}\) a posteriori Wahrscheinlichkeit.
+
+
+    \section*{Stochastische Unabhängigkeit von Ereignissen}
+
+    Die stochastische Unabhängigkeit ist ein zentraler Begriff in der Stochastik.
+    Zunächst wird die stochastische Unabhängigkeit von zwei oder mehr Ereignissen behandelt.
+    Intuitiv würden Ereignisse \(A\) und \(B\) als unabhängig betrachtet werden, wenn die Wahrscheinlichkeit von \(A\) nicht davon abhängt, ob \(B\) eingetreten ist oder nicht, d.h. die bedingte Wahrscheinlichkeit \(P\parentheses*{A \mid B}\) ist unabhängig von \(B\): \(P\parentheses*{A \mid B} = P\parentheses*{A}\).
+    Dabei wird jedoch \(P\parentheses*{B} > 0\) vorausgesetzt, da sonst die bedingte Wahrscheinlichkeit nicht definiert ist.
+    Unter Berücksichtigung der Definition von \(P\parentheses*{A \mid B}\) folgt äquivalent die Gleichung
+    \[
+        P\parentheses*{A \mid B} = P\parentheses*{A} \iff \frac{P\parentheses*{A \cap B}}{P\parentheses*{B}} = P\parentheses*{A} \iff P\parentheses*{A \cap B} = P\parentheses*{A} \cdot P\parentheses*{B}.
+    \]
+    Diese intuitive Vorgehensweise impliziert also, dass die Wahrscheinlichkeit des Schnittereignisses \(A \cap B\) als Produkt der Wahrscheinlichkeiten der Ereignisse \(A\) und \(B\) bestimmt werden kann.
+    Da diese Beziehung auch für den Fall \(P\parentheses*{B} = 0\) verwendet werden kann, wird die stochastische Unabhängigkeit in dieser Weise definiert.
+
+    \begin{definition}
+        Seien \(\parentheses*{\Omega, \mathfrak{U}, P}\) ein Wahrscheinlichkeitsraum und \(A, B \in \mathfrak{U}\).
+        Die Ereignisse \(A\) und \(B\) heißen \emph{stochastisch unabhängig}, falls gilt:
+        \[
+            P\parentheses*{A \cap B} = P\parentheses*{A} \cdot P\parentheses*{B}.
+        \]
+    \end{definition}
+
+    \begin{example}
+        Seien \(\Omega = \braces*{1, 2, 3, 4}\) und \(P\) die Laplace-Verteilung auf \(\Omega\).
+        Die Ereignisse \(A = \braces*{1, 2}\) und \(B = \braces*{1, 3}\) sind stochastisch unabhängig, da \(P\parentheses*{A} = P\parentheses*{B} = \frac{1}{2}\) und
+        \[
+            P\parentheses*{A \cap B} = P\parentheses*{\braces*{1}} = \frac{1}{4} = \frac{1}{2} \cdot \frac{1}{2} = P\parentheses*{A} \cdot P\parentheses*{B}.
+        \]
+    \end{example}
+
+    \begin{lemma}
+        Für Ereignisse \(A\) und \(B\) in einem Wahrscheinlichkeitsraum \(\parentheses*{\Omega, \mathfrak{U}, P}\) gelten folgende Eigenschaften:
+        \begin{enumerate}
+            \item Sind \(A\) und \(B\) stochastisch unabhängig, dann sind auch die Ereignisse
+            \[
+                A\text{ und }B^c, \quad A^c\text{ und }B \quad \text{sowie }A^c\text{ und }B^c
+            \]
+            jeweils stochastisch unabhängig.
+            \item Ist \(P\parentheses*{B} > 0\), so gilt:
+            \[
+                A\text{ und }B\text{ sind stochastisch unabhängig} \iff P\parentheses*{A \mid B} = P\parentheses*{A}.
+            \]
+            \item Ist \(P\parentheses*{A} \in \braces*{0, 1}\), so gilt für alle Ereignisse \(B \in \mathfrak{U}\): \(A\) und \(B\) sind stochastisch unabhängig.
+        \end{enumerate}
+    \end{lemma}
+
+    Als Erweiterung des obigen Unabhängigkeitsbegriffs wird die stochastische Unabhängigkeit einer Familie von Ereignissen definiert.
+
+    \begin{definition}
+        Seien \(I\) eine beliebige Indexmenge und \(A_i, i \in I\) Ereignisse in einem Wahrscheinlichkeitsraum \(\parentheses*{\Omega, \mathfrak{U}, P}\).
+        Dann heißen diese Ereignisse
+        \begin{enumerate}
+            \item \emph{paarweise stochastisch unabhängig}, falls
+            \[
+                P\parentheses*{A_i \cap A_j} = P\parentheses*{A_i} \cdot P\parentheses*{A_j} \quad \forall i, j \in I, i \ne j.
+            \]
+            \item \emph{(gemeinsam) stochastisch unabhängig}, falls für jede endliche Auswahl von Indizes \(\braces*{i_1, \ldots, i_s} \subseteq I\) gilt:
+            \[
+                P\parentheses*{A_{i_1} \cap \cdots \cap A_{i_s}} = P\parentheses*{A_{i_1} \cdot \ldots \cdot P\parentheses*{A_{i_s}}}.
+            \]
+        \end{enumerate}
+    \end{definition}
+
+    Für \(n = 3\) lassen sich die Forderungen der paarweisen bzw. gemeinsamen stochastischen Unabhängigkeit folgendermaßen formulieren:
+    \begin{enumerate}[label=(\roman*)]
+        \item Die Ereignisse \(A_1, A_2, A_3\) sind paarweise stochastisch unabhängig, wenn gilt:
+        \[
+            P\parentheses*{A_1, \cap A_2} = P\parentheses*{A_1}P\parentheses*{A_2}, \quad P\parentheses*{A_1, \cap A_3} = P\parentheses*{A_1}P\parentheses*{A_3}, \quad P\parentheses*{A_2, \cap A_3} = P\parentheses*{A_2}P\parentheses*{A_3}.
+        \]
+        \item \(A_1, A_2, A_3\) sind gemeinsam stochastisch unabhängig, wenn gilt:
+        \[
+            P\parentheses*{A_1, \cap A_2} = P\parentheses*{A_1}P\parentheses*{A_2}, \quad P\parentheses*{A_1, \cap A_3} = P\parentheses*{A_1}P\parentheses*{A_3}, \quad P\parentheses*{A_2, \cap A_3} = P\parentheses*{A_2}P\parentheses*{A_3},
+        \]
+        \[
+            P\parentheses*{A_1 \cap A_2 \cap A_3} = P\parentheses*{A_1}P\parentheses*{A_2}P\parentheses*{A_3}.
+        \]
+    \end{enumerate}
+    Im Vergleich zur paarweise stochastischen Unabhängigkeit kommt bei der gemeinsamen stochastischen Unabhängigkeit im zweiten Fall (\(n = 3\)) eine zusätzliche Forderung hinzu.
+    Aus der gemeinsamen stochastischen Unabhängigkeit von Ereignissen folgt deren paarweise stochastische Unabhängigkeit.
+    Die Umkehrung ist aber im Allgemeinen nicht richtig.
+\end{document}

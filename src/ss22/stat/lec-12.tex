@@ -1,0 +1,151 @@
+\documentclass{lecture}
+
+\institute{Institut für Statistik und Wirtschaftsmathematik}
+\title{Vorlesung 12}
+\author{Joshua Feld, 406718}
+\course{Statistik}
+\professor{Cramer}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    Auch für die Verteilung der Summe zweier unabhängiger Zufallsvariablen mit Riemann-Dichten existieren zum diskreten Fall analoge Darstellungen, sogenannte Faltungsformeln.
+
+    \begin{theorem}
+        Seien \(X\) und \(Y\) stochastisch unabhängige Zufallsvariablen auf \(\R\) mit den Riemann-Dichten \(f\) bzw. \(g\).
+        Dann hat \(X + Y\) die Riemann-Dichte \(h\) gegeben durch die Faltungsformeln
+        \[
+            h\parentheses*{z} = \int_{-\infty}^\infty f\parentheses*{z - y}g\parentheses*{y}\d y = \int_{-\infty}^\infty f\parentheses*{x}g\parentheses*{z - x}\d x, \quad z \in \R,
+        \]
+        d.h. \(P\parentheses*{X + Y \in \parentheses*{a, b}} = \int_a^b h\parentheses*{z}\d z, a < b\).
+    \end{theorem}
+
+    \begin{example}
+        \begin{enumerate}
+            \item Seien \(X\) und \(Y\) stochastisch unabhängige \(\Exp\parentheses*{\lambda}\)-verteilte Zufallsvariablen.
+            Dann ist die Dichte \(h\) von \(X + Y\) gegeben durch
+            \[
+                h\parentheses*{z} = \begin{cases}
+                    \int_0^z \lambda e^{-\lambda\parentheses*{z - y}}\lambda e^{-\lambda y}\d y = \lambda^2 ze^{-\lambda z}, & \text{falls }z > 0,\\
+                    0, & \text{falls }z \le 0,
+                \end{cases}
+            \]
+            d.h. \(X + Y \sim \Gamma\parentheses*{\lambda, 2}\).
+            Durch vollständige Induktion folgt:
+            \begin{quote}
+                Seien \(X_1, \ldots, X_n\) stochastisch unabhängige, \(\Exp\parentheses*{\lambda}\)-verteilte Zufallsvariablen.
+                Dann besitzt \(\sum_{i = 1}^n X_i\) eine \(\Gamma\parentheses*{\lambda, n}\)-Verteilung.
+            \end{quote}
+            Allgemeiner gilt: Seien \(X\) und \(Y\) stochastisch unabhängige Zufallsvariablen mit \(X \sim \Gamma\parentheses*{\lambda, \beta}\) und \(Y \sim \Gamma\parentheses*{\lambda, \gamma}\).
+            Dann ist \(X + Y\) wiederum gammaverteilt: \(X + Y \sim \Gamma\parentheses*{\lambda, \beta + \gamma}\).
+            Eine entsprechende Aussage gilt für \(n > 2\) normalverteilte Zufallsvariablen.
+
+            Insbesondere erhält man für stochastisch unabhängige \(N\parentheses*{\mu, \sigma^2}\)-verteilte Zufallsvariablen \(X_1, \ldots, X_n\):
+            \[
+                \sum_{i = 1}^n X_i \sim N\parentheses*{n\mu, n\sigma^2}.
+            \]
+            Die Zufallsvariable \(aX\) hat für \(a > 0\) eine \(N\parentheses*{a\mu, a^2 \sigma^2}\)-Verteilung, denn für \(x \in \R\) gilt
+            \begin{align*}
+                P\parentheses*{aX \le x} &= P\parentheses*{X \le \frac{x}{a}}\\
+                &= \int_{-\infty}^{\frac{x}{a}}f\parentheses*{z}\d z\\
+                &= \frac{1}{a}\int_{-\infty}^x f\parentheses*{\frac{z}{a}}\d z\\
+                &= \frac{1}{\sqrt{2\pi}a\sigma}\int_{-\infty}^x \exp\braces*{-\frac{\parentheses*{\frac{z}{a} - \mu}^2}{2\sigma^2}}\d z\\
+                &= \frac{1}{\sqrt{2\pi}a\sigma}\int_{-\infty}^x \exp\braces*{-\frac{\parentheses*{u - a\mu}^2}{2a^2 \sigma^2}}\d z = P\parentheses*{Z \le x},
+            \end{align*}
+            wobei \(Z \sim N\parentheses*{a\mu, a^2 \sigma^2}\) und \(f\) die Dichtefunktion von \(N\parentheses*{\mu, \sigma^2}\) ist.
+            Daraus folgt, dass das arithmetische Mittel \(\bar{X}_n = \frac{1}{n}\sum_{i = 1}^n X_i\) ebenfalls normalverteilt ist: \(\bar{X}_n \sim N\parentheses*{\mu, \frac{\sigma^2}{n}}\).
+            Dies ist in der schließenden Statistik von Bedeutung.
+        \end{enumerate}
+    \end{example}
+
+
+    \section*{Verteilungsfunktion und Quantilfunktion}
+
+    In dieser Vorlesung werden nur zwei Formen von Wahrscheinlichkeitsverteilungen thematisiert.
+    Diskrete Wahrscheinlichkeitsverteilungen werden über eine Zähldichte beschrieben, die übrigen Wahrscheinlichkeitsmaße werden über Riemann-Dichten eingeführt.
+    Neben dieser Beschreibung durch Dichten gibt es auch andere Möglichkeiten zur Festlegung von Wahrscheinlichkeitsverteilungen. In Bezeichnung B 3.4 wurde bereits eine weitere Größe vorgestellt, die sogenannte Verteilungsfunktion, die nun ausführlicher behandelt wird.
+
+    \begin{definition}
+        Seien \(\parentheses*{\Omega, \mathfrak{U}, P}\) ein Wahrscheinlichkeitsraum und \(X\) eine Zufallsvariable auf \(\parentheses*{\Omega, \mathfrak{U}, P}\) mit Wahrscheinlichkeitsverteilung \(P^X\).
+        Die Funktion
+        \[
+            F^X: \R \to \R, x \mapsto P^X\parentheses*{\left(-\infty, x\right]} = P\parentheses*{X \le x}
+        \]
+        heißt die zu \(P^X\) gehörige \emph{Verteilungsfunktion}.
+        Ist aus dem Kontext die Zugehörigkeit von \(F^X\) zu \(X\) klar, so wird auch kurz \(F\) geschrieben.
+        Übliche Bezeichnungen und Sprechweisen sind: \(F\) ist die Verteilungsfunktion von \(X\), \(X\) ist nach \(F\) verteilt, \(X \sim F\).
+    \end{definition}
+
+    \(F^X\parentheses*{x}\) ist also die Wahrscheinlichkeit, dass die Zufallsvariable \(X\) Werte kleiner oder gleich \(x \in \R\) annimmt.
+
+    \begin{remark}
+        \begin{enumerate}
+            \item Sei \(p^X\) die Zähldichte von \(P^X\).
+            Dann ist
+            \[
+                F^X\parentheses*{x} = P^X\parentheses*{\left(-\infty, x\right]} = \sum_{y \in \left(-\infty, x\right]}p^X\parentheses*{y} = \sum_{\substack{y \le x\\y \in \supp\parentheses*{P^X}}}p^X\parentheses*{y}, \quad x \in \R.
+            \]
+            \item Ist \(f^X\) die Riemann-Dichte von \(P^X\), so ist für \(x \in \R\)
+            \[
+                F^X\parentheses*{x} = P^X\parentheses*{\left(-\infty, x\right]} = P\parentheses*{X \le x} = P\parentheses*{\braces*{\omega \in \Omega : X\parentheses*{\omega} \le x}} = \int_{-\infty}^x f^X\parentheses*{y}\d y.
+            \]
+        \end{enumerate}
+    \end{remark}
+
+    \begin{lemma}
+        \begin{enumerate}
+            \item Sei \(F^X\) die zu \(P^X\) gehörige Verteilungsfunktion.
+            Dann gilt:
+            \begin{enumerate}
+                \item \(F^X\) ist monoton wachsend,
+                \item \(F^X\) ist rechtsseitig stetig,
+                \item \(\lim_{x \to -\infty}F^X\parentheses*{x} = 0\), \(\lim_{x \to \infty}F^X\parentheses*{x} = 1\).
+            \end{enumerate}
+            \(P^X\) ist durch \(F^X\) eindeutig bestimmt.
+            \item Jede Funktion mit den Eigenschaften a) - c) ist eine Verteilungsfunktion und bestimmt eindeutig ein Wahrscheinlichkeitsmaß auf \(\R\).
+        \end{enumerate}
+    \end{lemma}
+
+    \begin{remark}
+        \begin{enumerate}
+            \item Für Verteilungsfunktionen können folgende Rechenregeln abgeleitet werden:
+            \begin{align*}
+                P\parentheses*{a < X \le b} &= F^X\parentheses*{b} - F^X\parentheses*{a}, \quad a < b,\\
+                P\parentheses*{t < X} &= 1 - F^X\parentheses*{t}, \quad t \in \R.
+            \end{align*}
+            \item Es gilt: \(P\parentheses*{X = x} = F^X\parentheses*{x} - F^X\parentheses*{x-}\), wobei \(F^X\parentheses*{x-} = \lim_{t \to x, t < x}F^X\parentheses*{t}\), d.h. \(F^X\) ist stetig in \(x\) genau dann, wenn \(P\parentheses*{X = x} = 0\) ist.
+            Ansonsten liegt bei \(x\) eine Sprungstelle von \(F^X\) vor.
+
+            Aus \(P\parentheses*{X = x} = 0\) folgt zunächst die linksseitige Stetigkeit von \(F^X\) an der Stelle \(x\).
+            Da \(F^X\) als Verteilungsfunktion ohnehin rechtsseitig stetig ist, folgt dann auch die Stetigkeit von \(F^X\) an der Stelle \(x\).
+            Gilt daher \(P\parentheses*{X = x} = 0\), so folgt insbesondere die für stetige Verteilungsfunktionen stets erfüllte Beziehung
+            \[
+                P\parentheses*{x \le X} = 1 - F^X\parentheses*{x}.
+            \]
+            Weiterhin gilt, dass es höchstens abzählbar viele Punkte \(x \in \R\) mit \(P\parentheses*{X = x} > 0\) gibt, d.h. es gibt höchstens abzählbar viele Unstetigkeitsstellen der Vertelungsfunktion.
+            \item Seien \(P^X\) ein diskretes Wahrscheinlichkeitsmaß und \(\braces*{x_1, x_2, \ldots} , x_i < x_{i + 1}, i \in \N\), eine Abzählung des Trägers von \(P^X\).
+            Dann gilt
+            \[
+                P^X\parentheses*{\parentheses*{-\infty, x_{i + 1}}} = \underbrace{P^X\parentheses*{\left(-\infty, x_i\right]}}_{= F^X\parentheses*{x_i}} + \underbrace{P^X\parentheses*{\parentheses*{x_i, x_{i + 1}}}}_{= 0}.
+            \]
+            Ist damit \(t \in \left[x_i, x_{i + 1}\right)\), so folgt wegen \(\left(-\infty, x_i\right] \subseteq \left(-\infty, t\right] \subseteq \parentheses*{-\infty, x_{i + 1}}\)
+            \[
+                P^X\parentheses*{\left(-\infty, x_i\right]} \le P^X\parentheses*{\parentheses*{-\infty, t}} \le P^X\parentheses*{\parentheses*{-\infty, x_{i + 1}}},
+            \]
+            d.h. \(F^X\parentheses*{x_i} = F^X\parentheses*{t}\) für alle \(t \in \left[x_i, x_{i + 1}\right)\).
+            Somit ist \(F^X\) eine Treppenfunktion, die Sprünge an den Trägerpunkten \(x_i\) besitzt und zwischen je zwei Trägerpunkten konstant ist.
+            \item Ist ein Wahrscheinlichkeitsmaß \(P\) über die Verteilungsfunktion \(F\) gegeben, sodass \(F\) auf der Menge \(\braces*{y : 0 < F\parentheses*{y} < 1} = \parentheses*{a, b}\) stetig differenzierbar ist, so wird durch
+            \[
+                f\parentheses*{x} = \begin{cases}
+                    0, & \text{falls }x \le a,\\
+                    F'\parentheses*{x}, & \text{falls }a < x < b,\\
+                    0, & \text{falls }x \ge b
+                \end{cases}
+            \]
+            die zu \(P\) gehörige Riemann-Dichtefunktion erklärt.
+        \end{enumerate}
+    \end{remark}
+\end{document}
