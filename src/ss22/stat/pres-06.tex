@@ -38,9 +38,32 @@
     \end{problem}
 
     \subsection*{Lösung}
+    Eine Funktion \(p: \R \to \R\) ist Zähldichte einer diskreten Zufallsvariablen genau dann, wenn folgende beiden Bedingungen erfüllt sind:
+    \begin{enumerate}[label=(\roman*)]
+        \item \(p\parentheses*{x} \ge 0\) für alle \(x \in \R\),
+        \item \(\sum_{x \in T}p\parentheses*{x} = 1\), wobei \(T = \braces*{x \in \R : p\parentheses*{x} > 0}\) der zugehörige (höchstens abzählbare) Träger ist.
+    \end{enumerate}
     \begin{enumerate}
-        \item
-        \item 
+        \item Gemäß Aufgabenstellung ist der Träger von \(X\) gegeben durch
+        \[
+            T^X = \braces*{x \in \R : p^X\parentheses*{x} > 0} = \braces*{1, \ldots, 2000}.
+        \]
+        \begin{enumerate}
+            \item \(p^X\parentheses*{x} \ge 0\) für alle \(x \in \R\) gemäß Definition.
+            \item
+            \begin{align*}
+                \sum_{x \in T^X}p^X\parentheses*{x} &= \sum_{x = 1}^{2000}p^X\parentheses*{x}\\
+                &= \sum_{x = 1}^{1000}\frac{1}{10000} + \sum_{x = 1001}^{1400}\frac{1}{500} + \sum_{x = 1401}^{2000}\frac{1}{6000}\\
+                &= 1000 \cdot \frac{1}{10000} + 400 \cdot \frac{1}{500} + 600 \cdot \frac{1}{6000}\\
+                &= \frac{1}{10} + \frac{4}{5} + \frac{1}{10} = 1.
+            \end{align*}
+        \end{enumerate}
+        Somit ist \(p^X\) wirklich eine Zähldichte.
+        \item Es bezeichne \(P\) die zugrundeliegende Wahrscheinlichkeitsverteilung.
+        Es gilt
+        \[
+            P\parentheses*{X > 1500} = P\parentheses*{X \ge 1501} = \sum_{x = 1501}^{2000}\underbrace{P\parentheses*{X = x}}_{= p^X\parentheses*{x}} = \sum_{x = 1501}^{2000}p^X\parentheses*{x} = \sum_{x = 1501}^{2000}\frac{1}{6000} = \frac{1}{12} \approx 0,083.
+        \]
     \end{enumerate}
 
 
@@ -57,9 +80,25 @@
     \end{problem}
 
     \subsection*{Lösung}
+    Es bezeichnen \(X\) die Anzahl der täglich eintreffenden Schadensmeldungen und \(P\) die zugrundeliegende Wahrscheinlichkeitsverteilung.
+    Dann gilt gemäß Aufgabenstellung
+    \[
+        P\parentheses*{X = k} = p^X\parentheses*{k} = \frac{\lambda^k}{k!}e^{-\lambda} = \frac{6^k}{k!}e^{-6}, \quad k \in \N_0.
+    \]
     \begin{enumerate}
-        \item
-        \item 
+        \item Die Wahrscheinlichkeit dafür, dass an einem Tag genau fünf Schäden gemeldet werden ist gegeben durch
+        \[
+            P\parentheses*{X = 5} = p^X\parentheses*{5} = \frac{6^5}{5!}e^{-6} \approx 0,161.
+        \]
+        \item Die Wahrscheinlichkeit dafür, dass an einem Tag mindestens vier Schäden gemeldet werden, ist gegeben durch
+        \begin{align*}
+            P\parentheses*{X \ge 4} &= 1 - P\parentheses*{X < 4}\\
+            &= 1 - P\parentheses*{X \le 3}\\
+            &= 1 - \parentheses*{P\parentheses*{X = 0} + P\parentheses*{X = 1} + P\parentheses*{X = 2} + P\parentheses*{X = 3}}\\
+            &= 1 - \parentheses*{\frac{6^0}{0!}e^{-6} + \frac{6^1}{1!}e^{-6} + \frac{6^2}{2!}e^{-6} + \frac{6^3}{3!}e^{-6}}\\
+            &= 1 - e^{-6} \cdot \parentheses*{1 + 6 + 18 + 36}\\
+            &= 1- 61e^{-6} \approx 0,849.
+        \end{align*}
     \end{enumerate}
 
 
@@ -87,14 +126,28 @@
     \end{problem}
 
     \subsection*{Lösung}
+    Da \(X \sim \Exp\parentheses*{\lambda}\) mit \(\lambda > 0\) ergibt sich die zugehörige Verteilungsfunktion
+    \[
+        F^X\parentheses*{x} = \begin{cases}
+            0, & \text{falls }x < 0,\\
+            1 - e^{-\lambda x}, & \text{falls }y \ge 0.
+        \end{cases}
+    \]
     \begin{enumerate}
-        \item
+        \item Seien \(\lambda = \frac{1}{800}\) und \(P\) die zugrundeliegende Wahrscheinlichkeitsverteilung.
+        Dann gilt:
         \begin{enumerate}
-            \item
-            \item
-            \item
+            \item \(P\parentheses*{X \le 300} = F^X\parentheses*{300} = 1 - e^{-\frac{300}{800}} = 1 - e^{-\frac{3}{8}} \approx 0,313\),
+            \item \(P\parentheses*{X > 120} = 1 - P\parentheses*{X \le 120} = 1 - F^X\parentheses*{120} = e^{-\frac{120}{800}} = e^{-\frac{3}{20}} \approx 0,861\),
+            \item \(P\parentheses*{240 \le X \le 360} = P\parentheses*{240 < X \le 360} = F^X\parentheses*{360} - F^X\parentheses*{240} = 1 - e^{-\frac{360}{800}} - \parentheses*{1 - e^{-\frac{240}{800}}} = e^{-\frac{3}{10}} - e^{-\frac{9}{20}} \approx 0,103\).
         \end{enumerate}
         \item
+        \[
+            P\parentheses*{X \ge 100} = P\parentheses*{X > 100} = 1 - P\parentheses*{X \le 100} = 1 - F^X\parentheses*{100} = e^{-100} \stackrel{!}{=} 0,99
+        \]
+        \[
+            \iff -100\lambda = \ln\parentheses*{0,99} \iff \lambda = -\frac{\ln\parentheses*{0,99}}{100} \approx 1,005 \cdot 10^{-4}.
+        \]
     \end{enumerate}
 
 
@@ -111,4 +164,24 @@
     \end{problem}
 
     \subsection*{Lösung}
+    Gemäß Aufgabenstellung besitzt die Zufallsvariable \(Z = X + Y\) folgenden Wertebereich:
+    \[
+        \mathcal{Z} = \braces*{x + y : x \in \mathcal{X}, y \in \mathcal{Y}} = \braces*{x + y : x \in \braces*{0, 1, 2, 3}, y \in \braces*{1, 2, 3, 4}} = \braces*{1, \ldots, 7}.
+    \]
+    Da \(X\) und \(Y\) nach Voraussetzung stochastisch unabhängig sind, folgt mit dem Faltungssatz für diskrete, (stochastisch) unabhängige Zufallsvariablen
+    \begin{equation}\label{eq:1}
+        p^Z\parentheses*{z} = P\parentheses*{Z = z} = \sum_{y \in \mathcal{Y}}p^X\parentheses*{z - y}p^Y\parentheses*{y} = \sum_{y = 1}^4 p^X\parentheses*{z - y}\underbrace{p^Y\parentheses*{y}}_{= \frac{1}{4}} = \frac{1}{4}\sum_{y = 1}^4 p^X\parentheses*{z - y}, \quad z \in \mathcal{Z} = \braces*{1, \ldots, 7}.
+    \end{equation}
+    Man beachte, dass laut Aufgabenstellung \(p^X\parentheses*{x} = 0\) für \(x \in \R \setminus \mathcal{X}\) und \(p^Y\parentheses*{y} = 0\) für \(y \in \R \setminus \mathcal{Y}\) ist.
+    Aus \eqref{eq:1} erhält man mit der Definition von \(p^X\):
+    \begin{align*}
+        p^Z\parentheses*{1} &= \frac{1}{4}\sum_{y = 1}^4 p^X\parentheses*{1 - y} = \frac{1}{4}\parentheses*{p^X\parentheses*{0} + p^X\parentheses*{-1} + p^X\parentheses*{-2} + p^X\parentheses*{-3}} = \frac{1}{4} \cdot \parentheses*{\frac{1}{4} + 0 + 0 + 0} = \frac{1}{16},\\
+        p^Z\parentheses*{2} &= \frac{1}{4}\sum_{y = 1}^4 p^X\parentheses*{2 - y} = \frac{1}{4}\parentheses*{p^X\parentheses*{1} + p^X\parentheses*{0} + p^X\parentheses*{-1} + p^X\parentheses*{-2}} = \frac{1}{4} \cdot \parentheses*{\frac{1}{4} + \frac{1}{4} + 0 + 0} = \frac{1}{8},\\
+        p^Z\parentheses*{3} &= \frac{1}{4}\sum_{y = 1}^4 p^X\parentheses*{3 - y} = \frac{1}{4}\parentheses*{p^X\parentheses*{2} + p^X\parentheses*{1} + p^X\parentheses*{0} + p^X\parentheses*{-1}} = \frac{1}{4} \cdot \parentheses*{\frac{1}{4} + \frac{1}{4} + \frac{1}{4} + 0} = \frac{3}{16},\\
+        p^Z\parentheses*{4} &= \frac{1}{4}\sum_{y = 1}^4 p^X\parentheses*{4 - y} = \frac{1}{4}\parentheses*{p^X\parentheses*{3} + p^X\parentheses*{2} + p^X\parentheses*{1} + p^X\parentheses*{0}} = \frac{1}{4} \cdot \parentheses*{\frac{1}{4} + \frac{1}{4} + \frac{1}{4} + \frac{1}{4}} = \frac{1}{4},\\
+        p^Z\parentheses*{5} &= \frac{1}{4}\sum_{y = 1}^4 p^X\parentheses*{5 - y} = \frac{1}{4}\parentheses*{p^X\parentheses*{4} + p^X\parentheses*{3} + p^X\parentheses*{2} + p^X\parentheses*{1}} = \frac{1}{4} \cdot \parentheses*{0 + \frac{1}{4} + \frac{1}{4} + \frac{1}{4}} = \frac{3}{16},\\
+        p^Z\parentheses*{6} &= \frac{1}{4}\sum_{y = 1}^4 p^X\parentheses*{6 - y} = \frac{1}{4}\parentheses*{p^X\parentheses*{5} + p^X\parentheses*{4} + p^X\parentheses*{3} + p^X\parentheses*{2}} = \frac{1}{4} \cdot \parentheses*{0 + 0 + \frac{1}{4} + \frac{1}{4}} = \frac{1}{8},\\
+        p^Z\parentheses*{7} &= \frac{1}{4}\sum_{y = 1}^4 p^X\parentheses*{7 - y} = \frac{1}{4}\parentheses*{p^X\parentheses*{6} + p^X\parentheses*{5} + p^X\parentheses*{4} + p^X\parentheses*{3}} = \frac{1}{4} \cdot \parentheses*{0 + 0 + 0 + \frac{1}{4}} = \frac{1}{16}.
+    \end{align*}
+    Man erkennt deutlich die Symmetrie der Verteilung von \(Z\) (bzgl. \(z = 4\)).
 \end{document}
