@@ -1,0 +1,234 @@
+\documentclass{exercise}
+
+\institute{Institut für Statistik und Wirtschaftsmathematik}
+\title{Globalübung 7}
+\author{Joshua Feld, 406718}
+\course{Statistik}
+\professor{Cramer}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \section*{Aufgabe 1}
+    
+    \begin{problem}
+        \(X\) und \(Y\) seien zwei diskrete Zufallsvariablen auf einem Wahrscheinlichkeitsraum \(\parentheses*{\Omega, \mathfrak{U}, P}\), wobei \(X\) die Werte \(-1\), \(0\) und \(1\) und \(Y\) die Werte \(1\), \(2\) und \(3\) annimmt.
+        Die zugehörigen Wahrscheinlichkeiten \(P\parentheses*{X = i, Y = j}\) für \(i \in \braces*{-1, 0, 1}, j \in \braces*{1, 2, 3}\) sind in der folgenden Tabelle angegeben:
+        \begin{center}
+            \begin{tabular}{ccccc}
+                \toprule
+                \multicolumn{2}{c}{\multirow{2}{*}{\(P\parentheses*{X = i, Y = j}\)}} & \multicolumn{3}{c}{\(j\)}\\
+                \multicolumn{2}{c}{\multirow{2}{*}{}} & \(1\) & \(2\) & \(3\)\\
+                \midrule
+                \multirow{3}{*}{\(i\)} & \(-1\) & \(\frac{1}{20}\) & \(\frac{1}{5}\) & \(0\)\\
+                & \(0\) & \(\frac{1}{5}\) & \(\frac{1}{5}\) & \(\frac{1}{10}\)\\
+                & \(1\) & \(\frac{1}{10}\) & \(\frac{1}{10}\) & \(\frac{1}{20}\)\\
+                \bottomrule
+            \end{tabular}
+        \end{center}
+        \begin{enumerate}
+            \item Bestimmen Sie die zugehörigen Rand-Zähldichten \(p^X\) von \(X\) und \(p^Y\) von \(Y\), für die in der gegebenen Situation gilt:
+            \begin{align*}
+                p^X\parentheses*{i} &= P\parentheses*{X = i} = \sum_{j \in \braces*{1, 2, 3}}P\parentheses*{X = i, Y = j}, \quad i \in \braces*{-1, 0, 1},\\
+                p^Y\parentheses*{j} &= P\parentheses*{Y = j} = \sum_{i \in \braces*{-1, 0, 1}}P\parentheses*{X = i, Y = j}, \quad j \in \braces*{1, 2, 3}.
+            \end{align*}
+            Entscheiden Sie, ob die Zufallsvariablen \(X\) und \(Y\) stochastisch unabhängig sind.
+            \item Berechnen Sie die bedingte Wahrscheinlichkeit \(P\parentheses*{X = 0 \mid Y \ge 2}\).
+            \item Bestimmen Sie die Verteilung der Zufallsvariablen \(Z = X + Y\), deren Zähldichte \(p^Z\) in der vorliegenden Situation gegeben ist durch:
+            \[
+                p^Z\parentheses*{k} = \sum_{j \in \braces*{1, 2, 3}}P\parentheses*{X = k - j, Y = j} = \sum_{i \in \braces*{-1, 0, 1}}P\parentheses*{X = i, Y = k - i}, \quad k \in \braces*{0, 1, 2, 3, 4}.
+            \]
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item Gemäß Aufgabenstellung ergeben sich folgende Werte für die Rand-Zähldichten \(p^X\) von \(X\) bzw. \(p^Y\) von \(Y\):
+        \begin{align*}
+            p^X\parentheses*{-1} &= P\parentheses*{X = -1} = \sum_{j = 1}^3 P\parentheses*{X = -1, Y = j} = \frac{1}{20} + \frac{1}{5} + 0 = \frac{1}{4},\\
+            p^X\parentheses*{0} &= P\parentheses*{X = 0} = \sum_{j = 1}^3 P\parentheses*{X = 0, Y = j} = \frac{1}{5} + \frac{1}{5} + \frac{1}{10} = \frac{1}{2},\\
+            p^X\parentheses*{1} &= P\parentheses*{X = 1} = \sum_{j = 1}^3 P\parentheses*{X = 1, Y = j} = \frac{1}{10} + \frac{1}{10} + \frac{1}{20} = \frac{1}{4},\\
+            p^Y\parentheses*{1} &= P\parentheses*{Y = 1} = \sum_{i = -1}^1 P\parentheses*{X = i, Y = 1} = \frac{1}{20} + \frac{1}{5} + \frac{1}{10} = \frac{7}{20},\\
+            p^Y\parentheses*{2} &= P\parentheses*{Y = 2} = \sum_{i = -1}^1 P\parentheses*{X = i, Y = 2} = \frac{1}{5} + \frac{1}{5} + \frac{1}{10} = \frac{1}{2},\\
+            p^Y\parentheses*{3} &= P\parentheses*{Y = 3} = \sum_{i = -1}^1 P\parentheses*{X = i, Y = 3} = 0 + \frac{1}{10} + \frac{1}{20} = \frac{3}{20}.
+        \end{align*}
+        Hiermit erhält man die folgende, um die Rand-Zähldichten ergänzte Tabelle zur Verteilung des (diskreten) zweidimensionalen Zufallsvektors \(\parentheses*{X, Y}\):
+        \begin{center}
+            \begin{tabular}{cccccc}
+                \toprule
+                \multicolumn{2}{c}{\multirow{2}{*}{\(P\parentheses*{X = i, Y = j}\)}} & \multicolumn{3}{c}{\(j\)} & \multirow{2}{*}{\(P\parentheses*{X = i}\)}\\
+                \multicolumn{2}{c}{\multirow{2}{*}{}} & \(1\) & \(2\) & \(3\) & \multirow{2}{*}{}\\
+                \midrule
+                \multirow{3}{*}{\(i\)} & \(-1\) & \(\frac{1}{20}\) & \(\frac{1}{5}\) & \(0\) & \(\frac{1}{4}\)\\
+                & \(0\) & \(\frac{1}{5}\) & \(\frac{1}{5}\) & \(\frac{1}{10}\) & \(\frac{1}{2}\)\\
+                & \(1\) & \(\frac{1}{10}\) & \(\frac{1}{10}\) & \(\frac{1}{20}\) & \(\frac{1}{4}\)\\
+                \multicolumn{2}{c}{\(P\parentheses*{Y = j}\)} & \(\frac{7}{20}\) & \(\frac{1}{2}\) & \(\frac{3}{20}\) &\\
+                \bottomrule
+            \end{tabular}
+        \end{center}
+        In der vorliegenden Situation sind \(X\) und \(Y\) stochastisch unabhängig, falls \emph{für alle} \(i \in \braces*{-1, 0, 1}, j \in \braces*{1, 2, 3}\) gilt:
+        \[
+            P\parentheses*{X = i, Y = j} = P\parentheses*{X = i}P\parentheses*{Y = j}.
+        \]
+        Hier gilt jedoch z.B.:
+        \[
+            P\parentheses*{X = -1, Y = 3} = 0 \ne \frac{1}{4} \cdot \frac{3}{20} = P\parentheses*{X = -1} \cdot P\parentheses*{Y = 3}.
+        \]
+        Deshalb sind \(X\) und \(Y\) \emph{nicht} stochastisch unabhängig.
+        \item Gemäß der Definition bedingter Wahrscheinlichkeiten in B5.2 und laut Aufgabenstellung folgt:
+        \[
+            P\parentheses*{X = 0 \mid Y \ge 2} = \frac{P\parentheses*{X = 0, Y \ge 2}}{P\parentheses*{Y \ge 2}} = \frac{P\parentheses*{X = 0, Y = 2} + P\parentheses*{X = 0, Y = 3}}{P\parentheses*{Y = 2} + P\parentheses*{Y = 3}} = \frac{\frac{1}{5} + \frac{1}{10}}{\frac{1}{2} + \frac{3}{20}} = \frac{\frac{3}{10}}{\frac{13}{20}} = \frac{6}{13}.
+        \]
+        Im zweiten Schritt ging ein, dass sich laut Aufgabenstellung das Ereignis \(\braces*{Y \ge 2}\) disjunkt in die Ereignisse \(\braces*{Y = 2}\) und \(\braces*{Y= 3}\) und das Ereignis \(\braces*{X = 0} \cap \braces*{Y \ge 2}\) disjunkt in die Ereignisse \(\braces*{X = 0} \cap \braces*{Y = 2}\) und \(\braces*{X = 0} \cap \braces*{Y = 3}\) zerlegen lässt.
+        \item Gemäß Aufgabenstellung besitzt die Zufallsvariable \(Z = X + Y\) den folgenden Wertebereich:
+        \[
+            \mathcal{Z} = \braces*{i + j : i \in \braces*{-1, 0, 1}, j \in \braces*{1, 2, 3}} = \braces*{0, 1, 2, 3, 4}.
+        \]
+        Für die zugehörige Zähldichte \(p^Z\) gilt (analog zur Situation für unabhängige Zufallsvariablen; vgl. Aufgabe 4 aus der sechsten Präsenzübung):
+        \[
+            p^Z\parentheses*{k} = \sum_{j \in \braces*{1, 2, 3}}P\parentheses*{X = k - j, Y = j} = \sum_{i \in \braces*{-1, 0, 1}}P\parentheses*{X = i, Y = k - i}, \quad k \in \mathcal{Z}.
+        \]
+        Hiermit und mit den laut Aufgabenstellung gegebenen Wahrscheinlichkeiten erhält man:
+        \begin{align*}
+            p^Z\parentheses*{0} &= P\parentheses*{Z = 0} = P\parentheses*{X = -1, Y = 1} = \frac{1}{20},\\
+            p^Z\parentheses*{1} &= P\parentheses*{Z = 1} = P\parentheses*{X = -1, Y = 2} + P\parentheses*{X = 0, Y = 1} = \frac{1}{5} + \frac{1}{5} = \frac{2}{5},\\
+            p^Z\parentheses*{2} &= P\parentheses*{Z = 2} = P\parentheses*{X = -1, Y = 3} + P\parentheses*{X = 0, Y = 2} + P\parentheses*{X = 1, Y = 1} = 0 + \frac{1}{5} + \frac{1}{10} = \frac{3}{10},\\
+            p^Z\parentheses*{3} &= P\parentheses*{Z = 3} = P\parentheses*{X = 0, Y = 3} + P\parentheses*{X = 1, Y = 2} = \frac{1}{10} + \frac{1}{10} = \frac{1}{5},\\
+            p^Z\parentheses*{4} &= P\parentheses*{Z = 4} = P\parentheses*{X = 1, Y = 3} = \frac{1}{20}.
+        \end{align*}
+    \end{enumerate}
+    
+    
+    \section*{Aufgabe 2}
+    
+    \begin{problem}
+        Die Riemann-Dichte \(f^{\parentheses*{X, Y}}: \R^2 \to \R\) des zweidimensionalen stetigen Zufallsvektors \(\parentheses*{X, Y}\) sei gegeben durch:
+        \[
+            f^{\parentheses*{X, Y}}\parentheses*{x, y} = \begin{cases}
+                2, & \text{falls }x, y \ge 0\text{ und }x + y \le 1,\\
+                0, & \text{sonst}.
+            \end{cases}
+        \]
+        Bestimmen Sie die zugehörigen Randdichten \(f^X\) und \(f^Y\) von \(X\) bzw. \(Y\).
+    \end{problem}
+    
+    \subsection*{Lösung}
+    Zunächst gilt (da gemäß Aufgabenstellung die Bedingungen zur Festlegung der Dichtefunktion symmetrisch in den beiden Variablen \(x\) und \(y\) sind):
+    \[
+        f^{\parentheses*{X, Y}}\parentheses*{x, y} = \begin{cases}
+            2, & \text{falls }x, y \ge 0\text{ und }x + y \le 1,\\
+            0, & \text{sonst}
+        \end{cases} = f^{\parentheses*{X, Y}}\parentheses*{y, x}
+    \]
+    für \(x, y \in \R\).
+    D.h.: Die Dichtefunktion \(f^{\parentheses*{X, Y}}\) ist symmetrisch bzgl. ihrer beiden Argumente.
+    Wir bestimmen zunächst die Randdichte \(f^X\) von \(X\).
+    \begin{itemize}
+        \item Fall 1: \(x \in \R \setminus \brackets*{0, 1}\).
+        Dann ist \(x < 0\) oder \(x > 1\) und damit \(x + y > 1\) für \(y \ge 0\).
+        Es folgt daher:
+        \[
+            f^X\parentheses*{x} = \int_{-\infty}^\infty \underbrace{f^{\parentheses*{X, Y}}\parentheses*{x, y}}_{= 0\text{ für }y < 0}\d y = \int_0^\infty\underbrace{f^{\parentheses*{X, Y}}\parentheses*{x, y}}_{\substack{= 0\text{, da}\\x < 0\text{ oder }x + y > 1}}\d y = 0
+        \]
+        \item Fall 2: \(x \in \brackets*{0, 1}\).
+        Dann ist \(x \ge 0\) und \(x + y \le 1 \iff y \le 1 - x\) für \(y \in \R\).
+        Hiermit folgt
+        \[
+            f^X\parentheses*{x} = \int_{-\infty}^\infty \underbrace{f^{\parentheses*{X, Y}}\parentheses*{x, y}}_{= 0\text{ für }y < 0}\d y = \int_0^\infty \underbrace{f^{\parentheses*{X, Y}}\parentheses*{x, y}}_{\substack{= 0\text{ für}\\x + y > 1 \iff y > 1 - x}}\d y = \int_0^{1 - x}2\d y = 2 \cdot \parentheses*{1 - x}.
+        \]
+    \end{itemize}
+    Man erhält somit
+    \[
+        f^X\parentheses*{x} = \begin{cases}
+            2 \cdot \parentheses*{1 - x}, & \text{falls }x \in \brackets*{0, 1},\\
+            0, & \text{sonst}.
+        \end{cases}
+    \]
+    Aufgrund der anfangs festgestellten Symmetrie gilt
+    \[
+        f^Y\parentheses*{y} = \int_{-\infty}^\infty f^{\parentheses*{X, Y}}\parentheses*{x, y}\d x = \int_{-\infty}^\infty f^{\parentheses*{X, Y}}\parentheses*{y, x}\d x = f^X\parentheses*{y}, \quad y \in \R.
+    \]
+    Insgesamt erhält man
+    \[
+        f^Y\parentheses*{t} = f^X\parentheses*{t} = \begin{cases}
+            2 \cdot \parentheses*{1 - t}, & \text{falls }t \in \brackets*{0, 1},\\
+            0, & \text{sonst}.
+        \end{cases}
+    \]
+    
+    \section*{Aufgabe 3}
+    
+    \begin{problem}
+        In einem \(220\)-Volt-Stromkreis werde die Spannung \(U\) (in Volt) gemessen.
+        Hierbei kann die Messabweichung \(X\) (in Volt) als standardnormalverteilt angenommen werden, d.h. für die gemessene Spannung \(U\) gelte:
+        \[
+            U = 220 + X \quad \text{mit} \quad X \sim N\parentheses*{0, 1}.
+        \]
+        \begin{enumerate}
+            \item Wie groß ist die Wahrscheinlichkeit, dass bei einer Messung höchstens \(221\) Volt gemessen werden?
+            \item Wie groß ist die Wahrscheinlichkeit, dass bei drei unabhängig voneinander erfolgenden Messungen alle drei Messwerte um weniger als \(1,1\) Volt vom Sollwert \(220\) Volt abweichen?
+            \item Ab wie vielen voneinander unabhänggen Messungen ist die Wahrscheinlichkeit für das Auftreten mindestens einer Abweichung von über \(2\) Volt vom Sollwert \(220\) Volt größer als \(50\%\)?
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    Gemäß Aufgabenstellung gilt die folgende Modellgleichung:
+    \begin{equation}\label{eq:1}
+        \underbrace{U}_{\substack{\text{gemessene}\\\text{Spannung}}} = \underbrace{220}_{\text{Sollwert}} + \underbrace{X}_{\substack{\text{Abweichung}\\\text{vom Sollwert}}} \quad \text{mit} \quad X \sim N\parentheses*{0, 1}.
+    \end{equation}
+    Es bezeichnen \(\parentheses*{\Omega, \mathfrak{U}, P}\) den zugrundeliegenden Wahrscheinlichkeitsraum und \(\Phi\) die Verteilungsfunktion der Standard-Normalverteilung \(N\parentheses*{0, 1}\) (d.h. \(\Phi\) ist die Verteilungsfunktion der Zufallsvariablen \(X\)).
+    Zugehörige, ausgewählte Funktionswerte \(\Phi\) sind in der Tabelle des siebten Übungsblatts zur Globalübung angegeben.
+    \begin{enumerate}
+        \item Man erhält mit \eqref{eq:1}
+        \[
+            P\parentheses*{U \le 221} = P\parentheses*{X + 220 \le 221} = P\parentheses*{X \le 1} = \Phi\parentheses*{1} \approx 0,841.
+        \]
+        \item Es bezeichnen \(U_1, U_2, U_3\) die hierbei gemessenen Spannungen und \(X_1, X_2, X_3\) die zugehörigen Abweichungen gemäß \eqref{eq:1}.
+        Es gilt somit:
+        \begin{equation}\label{eq:2}
+            U_i = 220 + X_i \quad \text{mit} \quad X_i \sim N\parentheses*{0, 1} \quad \text{für} \quad i \in \braces*{1, 2, 3}.
+        \end{equation}
+        Hierbei sind \(U_1, U_2, U_3\) bzw. \(X_1, X_2, X_3\) stochastisch unabhängig.
+        Es folgt
+        \begin{align*}
+            P\parentheses*{\absolute*{X_1} < 1,1, \absolute*{X_2} < 1,1, \absolute*{X_3} < 1,1} &= P\parentheses*{\absolute*{X_1} < 1,1} \cdot P\parentheses*{\absolute*{X_2} < 1,1} \cdot P\parentheses*{\absolute*{X_3} < 1,1}\\
+            &= \parentheses*{P\parentheses*{\absolute*{X} < 1,1}}^3\\
+            &= \parentheses*{P\parentheses*{-1,1 < X < 1,1}}^3\\
+            &= P\parentheses*{P\parentheses*{-1,1 < X \le 1,1}}^3\\
+            &= \parentheses*{\Phi\parentheses*{1,1} - \Phi\parentheses*{-1,1}}^3\\
+            &= \parentheses*{2\Phi\parentheses*{1,1} - 1}^3\\
+            &\approx \parentheses*{2 \cdot 0,864334 - 1}^3 \approx 0,387.
+        \end{align*}
+        Hierbei ging im zweiten Schritt ein, dass \(X_1, X_2, X_3\) und \(X\) gemäß \eqref{eq:1} und \eqref{eq:2} die gleiche Verteilung (nämlich \(N\parentheses*{0, 1}\)) besitzen und demnach gilt:
+        \[
+            P\parentheses*{X_i \in A} = P\parentheses*{X \in A}
+        \]
+        für \(i \in \braces*{1, 2, 3}\) und alle Ereignisse \(A \subseteq \R\).
+        Weiter ging im dritten Schritt ein, dass die \emph{stetige} Zufallsvariable \(X\) gemäß Vorlesung jeden Wert \(x \in \R\) mit Wahrscheinlichkeit \(0\) annimmt, und im letzten Schritt wurde die Symmetrie der Standardnormalverteilung und die hieraus resultierende Gleichheit \(\Phi\parentheses*{-x} = 1 - \Phi\parentheses*{x}\) für \(x \in \R\) verwendet.
+        \item Analog zu b) bezeichnen \(U_1, \ldots, U_n\) die hierbei gemessenen Spannungen und \(X_1, \ldots, X_n\) die zugehörigen Abweichungen gemäß \eqref{eq:1}.
+        Es gilt somit
+        \[
+            U_i = 220 + X_i \quad \text{mit} \quad X_i \sim N\parentheses*{0, 1} \quad \text{für} \quad i \in \braces*{1, \ldots, n}.
+        \]
+        Hierbei sind \(U_1, U_2, U_3\) bzw. \(X_1, X_2, X_3\) stochastisch unabhängig.
+        Analog zu b) erhält man
+        \begin{align*}
+            P\parentheses*{\absolute*{X_1} \le 2, \ldots, \absolute*{X_n} \le 2} &= P\parentheses*{\absolute*{X_1} \le 2} \cdot \ldots \cdot P\parentheses*{\absolute*{X_n} \le 2}\\
+            &= \parentheses*{P\parentheses*{\absolute*{X} \le 2}}^n\\
+            &= \parentheses*{P\parentheses*{-2 \le X \le 2}}^n\\
+            &= \parentheses*{P\parentheses*{-2 < X \le 2}}^n\\
+            &= \parentheses*{\Phi\parentheses*{2} - \Phi\parentheses*{-2}}^n\\
+            &= \parentheses*{2\Phi\parentheses*{2} - 1}^n
+        \end{align*}
+        Nun folgt
+        \begin{align*}
+            \parentheses*{2\Phi\parentheses*{2} - 1}^n \stackrel{!}{<} 0,5 &\iff \ln\parentheses*{\parentheses*{2\Phi\parentheses*{2} - 1}^n} < \ln\parentheses*{0,5}\\
+            &\iff n \cdot \underbrace{\ln(\underbrace{2\Phi\parentheses*{2} - 1}_{< 1})}_{< 0} < \ln\parentheses*{0,5}\\
+            &\iff n > \frac{\ln\parentheses*{0,5}}{\ln\parentheses*{2\Phi\parentheses*{2} - 1}} \approx \frac{\ln\parentheses*{0,5}}{\ln\parentheses*{2 \cdot 0,97725 - 1}} \approx 14,88.
+        \end{align*}
+        Da \(n \in \N\) sein muss, ist \(n = 15\) die gesuchte Lösung, d.h.: Ab \(15\) voneinander unabhängigen Messungen ist die Wahrscheinlichkeit für das Auftreten mindestens einer Abweichung von über \(2\) Volt vom Sollwert \(220\) Volt größer als \(50\%\).
+    \end{enumerate}
+\end{document}

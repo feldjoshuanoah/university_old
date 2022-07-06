@@ -1,0 +1,227 @@
+\documentclass{exercise}
+
+\institute{Institut für Statistik und Wirtschaftsmathematik}
+\title{Globalübung 9}
+\author{Joshua Feld, 406718}
+\course{Statistik}
+\professor{Cramer}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \section*{Aufgabe 1}
+    
+    \begin{problem}
+        Eine Bank betreibt in einer Region insgesamt \(200\) Geldautomaten, von denen jeder (unabhängig von den übrigen Automaten) mit Wahrscheinlichkeit \(0,05\) aufgrund einer Störung innerhalb einer Woche mindestens einmal ausfällt.
+        Für die Einrichtung eines ständigen Wartungsdienstes ist die Wahrscheinlichkeit von Interesse, dass die Anzahl der Geldautomaten, die in einer Woche mindestens eine derartige Störung aufweisen, mindestens \(5\) und höchstens \(15\) beträgt.
+        \begin{enumerate}
+            \item Beschreiben Sie die Ausfälle der \(200\) Geldautomaten durch geeignet gewählte Zufallsvariablen einschließlich Angabe der zugehörigen Wahrscheinlichkeitsverteilungen.
+            \item Schätzen Sie die gesuchte Wahrscheinlichkeit mittels der Tschebyscheff–Ungleichung nach unten ab.
+            \item Berechnen Sie die gesuchte Wahrscheinlichkeit approximativ mithilfe des Zentralen Grenzwertsatzes.
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item Die Störungen  können beschrieben werden durch Zufallsvariablen \(X_1, \ldots, X_{200}\) mit folgender Interpretation:
+        \[
+            X_i = \begin{cases}
+                1, & i\text{-ter Automat fällt mindestens einmal aus},\\
+                0, & \text{sonst},
+            \end{cases} \quad i \in \braces*{1, \ldots, 200}.
+        \]
+        Gemäß Aufgabenstellung sind die Zuffallsvariablen \(X_1, \ldots, X_{200}\) stochastisch unabhängig mit
+        \[
+            X_i \sim \bin\parentheses*{1, 0,05}, \quad i \in \braces*{1, \ldots, 200}.
+        \]
+        Damit sind \(X_1, \ldots, X_{200}\) stochastisch unabhängige, identisch verteilte Bernoulli-Zufallsvariablen mit ``Trefferwahrscheinlichkeit'' \(p = 0,05\).
+        
+        Die gesamte Anzahl der Geldautomaten, die innerhalb einer Woche mindestens eine Störung aufweisen, ist dann gegeben durch
+        \[
+            S_n = \sum_{i = 1}^n X_i
+        \]
+        mit \(n = 200\).
+        Es folgt
+        \begin{align*}
+            E\parentheses*{S_n} &= \sum_{i = 1}^n \underbrace{E\parentheses*{X_i}}_{= p} = np = 200 \cdot \frac{1}{20} = 10,\\
+            \Var\parentheses*{S_n} &= \sum_{i = 1}^n \underbrace{\Var\parentheses*{X_i}}_{= p\parentheses*{1 - p}} = np\parentheses*{1 - p} = 200 \cdot \frac{1}{20} \cdot \frac{19}{20} = \frac{19}{2}.
+        \end{align*}
+        Gesucht ist nun gemäß Aufgabenstellung die Wahrscheinlichkeit \(P\parentheses*{5 \le S_n \le 15}\).
+        \item Es gilt mit \(n = 200\):
+        \begin{align*}
+            P\parentheses*{5 \le S_n \le 15} &= P\parentheses*{5 - E\parentheses*{S_n} \le S_n - E\parentheses*{S_n} \le 15 - E\parentheses*{S_n}}\\
+            &= P\parentheses*{-5 \le S_n - E\parentheses*{S_n} \le 5}\\
+            &= P\parentheses*{\absolute*{S_n - E\parentheses*{S_n}} \le 5}\\
+            &= 1 - \underbrace{P\parentheses*{\absolute*{S_n - E\parentheses*{S_n}} > 5}}_{\le P\parentheses*{\absolute*{S_n - E\parentheses*{S_n}} \ge 5} \le \frac{\Var\parentheses*{S_n}}{5^2}}\\
+            &\ge 1 - \frac{\Var\parentheses*{S_n}}{5^2}\\
+            &= 1 - \frac{19}{50} = \frac{31}{50} = 0,62.
+        \end{align*}
+        \item Es bezeichne \(\Phi\) die Verteilungsfunktion fer Standard-Normalverteilung \(N\parentheses*{0, 1}\).
+        Dann gilt wiederum mit \(n = 200\):
+        \begin{align*}
+            P\parentheses*{5 \le S_n \le 15} &= P\parentheses*{S_n \le 15} - P\parentheses*{S_n < 5}\\
+            &= P\parentheses*{S_n \le 15} - P\parentheses*{S_n \le 4}\\
+            &= P\parentheses*{\frac{S_n - np}{\sqrt{np\parentheses*{1 - p}}} \le \frac{15 - np}{\sqrt{np\parentheses*{1 - p}}}} - P\parentheses*{\frac{S_n - np}{\sqrt{np\parentheses*{1 - p}}} \le \frac{4 - np}{\sqrt{np\parentheses*{1 - p}}}}\\
+            &= \Phi\parentheses*{\frac{15 - np}{\sqrt{np\parentheses*{1 - p}}}} - \Phi\parentheses*{\frac{4 - np}{\sqrt{np\parentheses*{1 - p}}}}\\
+            &= \Phi\parentheses*{\frac{15 - 10}{\sqrt{\frac{19}{2}}}} - \Phi\parentheses*{\frac{4 - 10}{\sqrt{\frac{19}{2}}}}\\
+            &\approx \Phi\parentheses*{1,62} - \Phi\parentheses*{-1,95}\\
+            &= \Phi\parentheses*{1,62} - \parentheses*{1 - \Phi\parentheses*{1,95}}\\
+            &\approx 0,947 - 1 + 0,974 = 0,921.
+        \end{align*}
+    \end{enumerate}
+    
+    
+    \section*{Aufgabe 2}
+    
+    \begin{problem}
+        Ein Gerät enthält ein elektronisches Bauteil, dessen Funktionstüchtigkeit für die einwandfreie Funktion des Geräts erforderlich ist.
+        Fällt das Bauteil aus, wird es unmittelbar durch ein gleichwertiges Reserveelement ersetzt.
+        Die erwartete Lebensdauer eines derartigen elektronischen Bauteils betrage \(\mu = 1000\) (Std.), die zugehörige Standardabweichung \(\sigma = 600\) (Std.).
+        Die Reparaturzeiten können hierbei als vernachlässigbar klein angesehen werden und daher unberücksichtigt bleiben.
+        Gehen Sie weiter davon aus, dass die einzelnen Bauteile unabhängig voneinander ausfallen.
+        Bestimmen Sie (approximativ) die Mindestanzahl \(m\) von Reserveelementen, die gelagert werden müssen, um eine ununterbrochene, einwandfreie Funktion des Geräts für mehr als \(t = 8000\) Stunden mit einer Sicherheitswahrscheinlichkeit von mindestens \(95\%\) zu garantieren.
+        
+        \emph{Hinweis: Quantile zur Standardnormalverteilung können einerseits aus Tabellen mit Verteilungsfunktionswerten zur Standardnormalverteilung abgelesen werden.
+        Eine derartige Tabelle wurde mit dem Übungsblatt zur siebten Globalübung ausgegeben.}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    Insgesamt sind \(n\) elektronische Bauteile erforderlich, und zwar ein, welches am Anfang im Gerät eingebaut ist, sowie \(m = n - 1\) Reserve-Bauteile.
+    Die Ausfälle der \(n\) elektronischen Bauteile können beschrieben werden durch identisch verteilte Zufallsvariablen \(X_1, \ldots, X_n\) mit folgender Interpretation:
+    \[
+        X_i = \text{Lebensdauer des }i\text{-ten Bauteils (in Stunden)}, \quad i \in \braces*{1, \ldots, n}.
+    \]
+    Gemäß Aufgabenstellung kann davon ausgegangen werden, dass die Ausfälle der elektronischen Bauteile unabhängig voneinander erfolgen, d.h. \(X_1, \ldots, X_n\) sind stochastisch unabhängig.
+    Weiter gilt gemäß Aufgabenstellung
+    \[
+        \mu = E\parentheses*{E_1} = 1000, \quad \sigma = \sqrt{\Var\parentheses*{X_1}} = 600.
+    \]
+    Die gesamte Lebensdauer sämtlicher \(n\) Bauteile (und damit die Funktionsdauer des Geräts) ist gegeben durch
+    \[
+        S_n = \sum_{i = 1}^n X_i.
+    \]
+    Gesucht ist nun ein minimales \(n \in \N\) (bzw. \(m = n - 1 \in \N_0\) mit \(P\parentheses*{S_n > 8000} \ge 0,95\).
+    Mit \(t = 8000\) gilt für \(n \in \N\)
+    \[
+        P\parentheses*{S_n > t} = 1 - P\parentheses*{S_n \le t} = 1 - P\parentheses*{\frac{S_n - n\mu}{\sqrt{n}\sigma} \le \frac{t - n\mu}{\sqrt{n}\sigma}} \approx 1 - \Phi\parentheses*{\frac{t - n\mu}{\sqrt{n}\sigma}} = \Phi\parentheses*{\frac{n\mu - t}{\sqrt{n}\sigma}}.
+    \]
+    Mit dieser Approximation folgt für \(n \in \N\):
+    \begin{align*}
+        P\parentheses*{S_n > t} \ge 0,95 & \iff \Phi\parentheses*{\frac{n\mu - t}{\sqrt{n}\sigma}} \ge 0,95\\
+        &\iff \frac{n\mu - t}{\sqrt{n}\sigma} \ge \Phi^{-1}\parentheses*{0,95} = c\\
+        &\iff n\mu - t \ge c\sigma\sqrt{n}\\
+        &\iff \underbrace{n - \frac{c\sigma}{\mu}\sqrt{n} - \frac{t}{\mu} \ge 0}_{\text{Quadratische Ungleichung in }\sqrt{n}}\\
+        &\iff \parentheses*{\sqrt{n}}^2 - 2 \cdot \frac{c\sigma}{2\mu}\sqrt{n} + \parentheses*{\frac{c\sigma}{2\mu}}^2 \ge \frac{t}{\mu} + \parentheses*{\frac{c\sigma}{2\mu}}^2\\
+        &\iff \parentheses*{\sqrt{n} - \frac{c\sigma}{2\mu}}^2 \ge \underbrace{\frac{4t\mu + c^2 \sigma^2}{4\mu^2}}_{> 0\text{, da }t > 0\text{ und }\mu > 0}\\
+        &\iff \absolute*{\sqrt{n} - \frac{c\sigma}{2\mu}} \ge \sqrt{\frac{4t\mu + c^2 \sigma^2}{4\mu^2}} = \frac{\sqrt{4t\mu + c^2 \sigma^2}}{2\mu}\\
+        &\iff \sqrt{n} - \frac{c\sigma}{2\mu} \ge \frac{\sqrt{4t\mu + c^2 \sigma^2}}{2\mu}\text{ oder }\sqrt{n} - \frac{c\sigma}{2\mu} \le -\frac{\sqrt{4t\mu + c^2 \sigma^2}}{2\mu}\\
+        &\iff \sqrt{n} \ge \frac{c\sigma + \sqrt{4t\mu + c^2 \sigma^2}}{2\mu}\text{ oder }\sqrt{n} \le \frac{c\sigma - \sqrt{4t\mu + c^2 \sigma^2}}{2\mu}
+    \end{align*}
+    Mit \(\mu = 1000\), \(\sigma = 600\), \(t = 8000\) und \(c = \Phi^{-1}\parentheses*{0,95} \approx 1,64\) erhält man
+    \begin{align*}
+        \frac{c\sigma + \sqrt{4t\mu + c^2 \sigma^2}}{2\mu} &\approx \frac{1,64 \cdot 600 + \sqrt{32000000 + 1,64^2 \cdot 360000}}{2000} \approx 3,363,\\
+        \frac{c\sigma - \sqrt{4t\mu + c^2 \sigma^2}}{2\mu} &\approx \frac{1,64 \cdot 600 - \sqrt{32000000 + 1,64^2 \cdot 360000}}{2000} \approx -2,379.
+    \end{align*}
+    Wegen \(\sqrt{n} \ge 0\) ist somit nur die erste Ungleichung erfüllbar.
+    Es folgt daher
+    \[
+        P\parentheses*{S_n > t} \ge 0,95 \iff \sqrt{n} \ge \frac{c\sigma + \sqrt{4t\mu + c^2 \sigma^2}}{2\mu} \approx 3,363 \iff n \ge 3,363^2 \approx 11,31.
+    \]
+    Wegen \(n \in \N\) müssen somit insgesamt mindestens \(n = 12\) Bauteile vorhanden sein, d.h. es müssen mindestens \(m = n - 1 = 11\) Bauteile gelagert werden, um eine ununterbrochene, einwandfreie Funktion des Geräts für mehr als \(t = 8000\) Stunden mit einer Sicherheitswahrscheinlichkeit von mindestens \(95\%\) zu garantieren.
+    
+    
+    \section*{Aufgabe 3}
+    
+    \begin{problem}
+        Auf dem letzten (durchgeführten) Aachener Weihnachtsmarkt wurden vom Gewerbeaufsichtsamt an zwei Glühweinständen Untersuchungen angestellt, um die erwartete Füllmenge \(\mu\) der Becher zu bestimmen.
+        Hierbei wurden am ersten Stand die Füllmengen \(x_1, \ldots, x_n\) und am zweiten Stand die Füllmengen \(y_1, \ldots, y_m\) gemessen.
+        
+        Es werde angenommen, dass diese \(n + m\) Messwerte als Realisationen von Zufallsvariablen \(X_1, \ldots, X_n\) bzw. \(Y_1, \ldots, Y_m\) aufgefasst werden können, die (gemeinsam) stochastisch unabhängig sind mit \(\mu = E\parentheses*{X_i} = E\parentheses*{Y_j} \ge 0\), \(\sigma_1^2 = \Var\parentheses*{X_i} > 0\) und \(\sigma_2^2 = \Var\parentheses*{Y_j} > 0\) für \(i = 1, \ldots, n\) bzw. \(j = 1, \ldots, m\).
+        
+        Zur Schätzung von \(\mu\) soll eine Schätzungsfunktion der Form
+        \[
+            \hat{\mu} = a\bar{X}_n + b\bar{Y}_m + c = a\frac{1}{n}\sum_{i = 1}^n X_i + b\frac{1}{m}\sum_{i = 1}^m Y_j + c
+        \]
+        mit \(a, b, c \in \R\) verwendet werden.
+        \begin{enumerate}
+            \item Bestimmen Sie \(a, b, c\) so, dass der Schätzer \(\hat{\mu}\) erwartungstreu für \(\mu\) ist, d.h. es soll gelten:
+            \[
+            E_{\mu}\parentheses*{\hat{\mu}} = \mu
+            \]
+            für \emph{alle} \(\mu \in \left[0, \infty\right)\).
+            \item Bestimmen Sie \(a, b, c\) so, dass \(\hat{\mu}\) unter allen erwartungstreuen Schätzern der oben angegebenen Form minimale Varianz besitzt.
+            Welcher Schätzer ergibt sich speziell für \(\sigma_1^2 = \sigma_2^2\)?
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item In der gegebenen Situation ist der Schätzer \(\hat{\mu}\) gemäß Definition 1 der achtzehnten Vorlesung erwartungstreu für \(\mu\), wenn folgende Bedingung erfüllt ist:
+        \[
+            E_\mu\parentheses*{\hat{\mu}} = \mu \quad \forall\mu \in \left[0, \infty\right).
+        \]
+        Mit dieser Bedingung erhält man
+        \begin{align}
+            \mu = E_\mu\parentheses*{\hat{\mu}} &= E_\mu\parentheses*{a\frac{1}{n}\sum_{i = 1}^n X_i + b\frac{1}{m}\sum_{j = 1}^m Y_j + c}\nonumber\\
+            &= a\frac{1}{n}\sum_{i = 1}^n \underbrace{E_\mu\parentheses*{X_i}}_{= \mu} + b\frac{1}{m}\sum_{j = 1}^m \underbrace{E_\mu\parentheses*{Y_j}}_{= \mu} + c\nonumber\\
+            &= a\mu + b\mu + c\nonumber\\
+            &= \parentheses*{a + b}\mu + c, \quad \mu \in \left[0, \infty\right).\label{eq:1}
+        \end{align}
+        Da Gleichung \eqref{eq:1} im Falle der Erwartungstreue von \(\hat{\mu}\) für \emph{alle} \(\mu \in \left[0, \infty\right)\) erfüllt sein muss, können wir spezielle Werte für \(\mu\) einsetzen, um hieraus die Koeffizienten \(a, b, c\) (teilweise) zu bestimmen.
+        Einsetzen von \(\mu = 0\) in \eqref{eq:1} liefert
+        \[
+            0 = \parentheses*{a + b} \cdot 0 + c = c.
+        \]
+        Einsetzen von \(c = 0\) und \(\mu = 1\) in \eqref{eq:1} liefert
+        \[
+            1 = \parentheses*{a + b} \cdot 1 + 0 = a + b \iff b = 1 - a.
+        \]
+        Somit ist der Schätzer \(\hat{\mu} = a\bar{X}_n + b\bar{X}_m + c\) genau dann erwartungstreu für \(\mu\), wenn er folgende Darstellung besitzt:
+        \begin{equation}\label{eq:2}
+            \hat{\mu} = a\bar{X}_n + \parentheses*{1 - a}\bar{Y}_m, \quad a \in \R.
+        \end{equation}
+        \item Sei \(\hat{\mu}\) gegeben wie in \eqref{eq:2}.
+        Dann gilt
+        \begin{align}
+            \Var_\mu\parentheses*{\hat{\mu}} &= \Var_\mu\parentheses*{a\bar{X}_n + \parentheses*{1 - a}\bar{Y}_m}\nonumber\\
+            &= \Var_\mu\parentheses*{\frac{a}{n}\sum_{i = 1}X_i + \frac{1 - a}{m}\sum_{j = 1}^m Y_j}\nonumber\\
+            &= \frac{a^2}{n^2}\sum_{i = 1}^n \underbrace{\Var_\mu\parentheses*{X_i}}_{= \sigma_1^2} + \frac{\parentheses*{1 - a}^2}{m^2}\sum_{j = 1}^m \underbrace{\Var_\mu\parentheses*{Y_j}}_{= \sigma_2^2}\nonumber\\
+            &= a^2 \frac{\sigma_1^2}{n} + \parentheses*{1 - a}^2 \frac{\sigma_2^2}{m}, \quad a \in \R.\label{eq:3}
+        \end{align}
+        Gemäß \eqref{eq:3} wird im weiteren Verlauf die Funktion \(f: \R \to \left[0, \infty\right)\), definiert durch
+        \[
+            f\parentheses*{a} = a^2 \frac{\sigma_1^2}{n} + \parentheses*{1 - a}^2 \frac{\sigma_2^2}{m}, \quad a \in \R,
+        \]
+        bzgl. Minima diskutiert.
+        Es ist \(f\) differenzierbar auf \(\R\) mit
+        \begin{align}
+            f'\parentheses*{a} &= 2a\frac{\sigma_1^2}{n} - 2 \cdot \parentheses*{1 - a}\frac{\sigma_2^2}{m}\nonumber\\
+            &= 2a\parentheses*{\frac{\sigma_1^2}{n} + \frac{\sigma_2^2}{m}} - 2 \cdot \frac{\sigma_2^2}{m}\nonumber\\
+            &= \underbrace{2 \cdot \parentheses*{\frac{\sigma_1^2}{n} + \frac{\sigma_2^2}{m}}}_{> 0}\Bigg(a - \underbrace{\frac{\frac{\sigma_2^2}{m}}{\frac{\sigma_1^2}{n} + \frac{\sigma_2^2}{m}}}_{= a^*}\Bigg)\begin{cases}
+                > 0, & \text{falls }a > a^*,\\
+                = 0, & \text{falls }a = a^*,\\
+                < 0, & \text{falls }a < a^*.
+            \end{cases}\label{eq:4}
+        \end{align}
+        Aus \eqref{eq:4} folgt, dass \(f\) streng monoton fallend auf \(\left(-\infty, a^*\right]\) und streng monoton wachsend auf \(\left[a^*, \infty\right)\) ist.
+        Somit besitzt \(f\) auf \(\R\) ein \emph{globales} Minimum in
+        \[
+            a^* = \frac{\frac{\sigma_2^2}{m}}{\frac{\sigma_1^2}{n} + \frac{\sigma_2^2}{m}},
+        \]
+        d.h. insgesamt ist der Schätzer \(\hat{\mu} = a\bar{X}_n + b\bar{Y}_m + c\) erwartungstreu für \(\mu\) und besitzt minimale Varianz unter allen erwartungstreuen Schätzern dieser Form genau dann, wenn die Koeffizienten folgende Bedingung erfüllen:
+        \[
+            a = a^*, \quad b = 1 - a^*, \quad c = 0.
+        \]
+        Die zugehörige Darstellung dieses erwartungstreuen Schätzers mit minimaler Varianz ist
+        \begin{equation}\label{eq:5}
+            \hat{\mu} = a^* \bar{X}_n + \parentheses*{1 - a^*}\bar{Y}_m = \frac{\frac{\sigma_2^2}{m}}{\frac{\sigma_1^2}{n} + \frac{\sigma_2^2}{m}}\bar{X}_n + \frac{\frac{\sigma_1^2}{m}}{\frac{\sigma_1^2}{n} + \frac{\sigma_2^2}{m}}\bar{Y}_m = \frac{n\sigma_2^2}{m\sigma_1^2 + n\sigma_2^2}\bar{X}_n + \frac{m\sigma_1^2}{m\sigma_1^2 + n\sigma_2^2}\bar{Y}_m.
+        \end{equation}
+        Für den Spezialfall \(\sigma_1^2 = \sigma_2^2\) erhält man aus \eqref{eq:5} die folgende Darstellung dieses Schätzers:
+        \[
+            \hat{\mu} = \frac{n}{n + m}\bar{X}_n + \frac{m}{n + m}\bar{Y}_m = \underbrace{\frac{1}{n + m}\parentheses*{\sum_{i = 1}^n X_i + \sum_{j = 1}^m Y_j}}_{\substack{\text{Arithm. Mittelwert aller }n + m\\\text{Zufallsvariablen }X_1, \ldots, X_n, Y_1, \ldots Y_m}}.
+        \]
+    \end{enumerate}
+\end{document}

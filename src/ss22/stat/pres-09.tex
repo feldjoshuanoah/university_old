@@ -1,0 +1,159 @@
+\documentclass{exercise}
+
+\institute{Institut für Statistik und Wirtschaftsmathematik}
+\title{Präsenzübung 9}
+\author{Joshua Feld, 406718}
+\course{Statistik}
+\professor{Cramer}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \section*{Aufgabe 1}
+    
+    \begin{problem}
+        Der Betreiber eines Getränkestands auf einem alljährlich stattfindenden Frühjahrsfest setzt morgens \(200\sis{\liter}\) Bowle an, die er in \(0,2\sis{\liter}\)-Bechern verkauft.
+        
+        Aus langjähriger Erfahrung weiß er, dass die Anzahl der Bowle-Becher, die ein Kunde an seinem Stand trinkt, als (diskrete) Zufallsvariable mit Erwartungswert \(\mu = 2,6\) und Varianz \(\sigma^2 = 3\) aufgefasst werden kann.
+        (``Im Mittel'' sollte der Vorrat also für \(\frac{1000}{2,6} \approx 384\) Kunden reichen.)
+        
+        Nehmen Sie bei der Bearbeitung der folgenden Aufgabenteile an, dass der Bowle-Konsum der einzelnen Kunden des Getränkestands unabhängig voneinander erfolgt.
+        \begin{enumerate}
+            \item Wie groß ist (approximativ) die Wahrscheinlichkeit dafür, dass der Vorrat sogar für \(400\) Kunden ausreicht?
+            \item Wie groß ist (approximativ) die Wahrscheinlichkeit dafür, dass der Vorrat \emph{nicht} ausreicht, obwohl nur \(360\) Kunden den Stand besuchen?
+            \item Wie groß muss die Anzahl der Kunden mindestens sein, damit die (approximativ berechnete) Wahrscheinlichkeit dafür, dass der Betreiber abends noch einen (zu entsorgenden) Restbestand hat, höchstens \(0,01\) beträgt?
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    Der Bowle-Konsum an dem Getränkestand kann beschrieben werden durch identisch verteilte Zufallsvariablen \(X_1, \ldots, X_n\) mit folgender Interpretation:
+    \[
+        X_i = \text{Anzahl der Bowle-Becher des }i\text{-ten Kunden}, \quad i \in \braces*{1, \ldots, n}.
+    \]
+    Zusätzliche Annahme (gemäß Aufgabenstellung): \(X_1, \ldots, X_n\) sind stochastisch unabhängig.
+    (Hiermit wird angenommen, dass der Bowle-Konsum der einzelnen Kunden unabhängig voneinander erfolgt!)
+    Weiter gilt gemäß Aufgabenstellung:
+    \[
+        \mu = E\parentheses*{X_1} = 2,6, \quad \sigma^2 = \Var\parentheses*{X_1} = 3.
+    \]
+    Die Gesamtzahl der Becher, die von den \(n\) Kunden gekauft werden, ist dann gegeben durch
+    \[
+        S_n = \sum_{i = 1}^n X_i.
+    \]
+    In den folgenden Lösung ist jeweils zu beachten, dass die angesetzte Bowle-Menge von \(200\sis{\liter}\) der Anzahl von \(1000\) Bechern à \(0,2\sis{\liter}\) entspricht.
+    \begin{enumerate}
+        \item Da der Stichprobenumfang \(n = 400\) sehr hoch ist (und die sonstigen Voraussetzungen erfüllt sind), kann der zentrale Grenzwertsatz angewendet werden.
+        Man erhält mit \(\Phi\) als Bezeichnung für die Verteilungsfunktion der Standard-Normalverteilung:
+        \begin{align*}
+            P\parentheses*{S_n \le 1000} &= P\parentheses*{\frac{S_n - n\mu}{\sqrt{n\sigma^2}} \le \frac{1000 - n\mu}{\sqrt{n\sigma^2}}}\\
+            &\approx \Phi\parentheses*{\frac{1000 - n\mu}{\sqrt{n\sigma^2}}}\\
+            &= \Phi\parentheses*{\frac{1000 - 400 \cdot 2,6}{\sqrt{400 \cdot 3}}}\\
+            &\approx \Phi\parentheses*{-1,15}\\
+            &= 1 - \Phi\parentheses*{1,15}\\
+            &\approx 1 - 0,875 = 0,125
+        \end{align*}
+        \item Wiederum kann der zentrale Grenzwertsatz angewendet werden, da auch der Stichprobenumfang \(n = 360\) hinreichend groß ist.
+        Man erhält analog zu a):
+        \begin{align*}
+            P\parentheses*{S_n > 1000} &= 1 - P\parentheses*{S_n \le 1000}\\
+            &= 1 - P\parentheses*{\frac{S_n - n\mu}{\sqrt{n\sigma^2}} \le \frac{1000 - n\mu}{\sqrt{n\sigma^2}}}\\
+            &\approx 1 - \Phi\parentheses*{\frac{1000 - n\mu}{\sqrt{n\sigma^2}}}\\
+            &= 1 - \Phi\parentheses*{\frac{1000 - 360 \cdot 2,6}{\sqrt{360 \cdot 3}}}\\
+            &\approx 1 - \Phi\parentheses*{1,95}\\
+            &\approx 1- 0,974 = 0,026.
+        \end{align*}
+        \item Auch hierbei kann der zentrale Grenzwertsatz angewendet werden, da der resultierende Stichprobenumfang hinreichend hoch sein wird.
+        Zunächst gilt für \(n \in \N\) analog zu a) bzw. b):
+        \[
+            P\parentheses*{S_n < 1000} = P\parentheses*{S_n \le 999} = P\parentheses*{\frac{S_n - n\mu}{\sqrt{n\sigma^2}} \le \frac{999 - n\mu}{\sqrt{n\sigma^2}}} \approx \Phi\parentheses*{\frac{999 - n\mu}{\sqrt{n\sigma^2}}}.
+        \]
+        Mit dieser Approximaziom folgt für \(n \in \N\) mit \(t = 999\) (als Abkürzung):
+        \begin{align}
+            P\parentheses*{S_n < 1000} \le 0,01 &\iff \Phi\parentheses*{\frac{t - n\mu}{\sqrt{n\sigma^2}}} \le 0,01\nonumber\\
+            &\iff \frac{t - n\mu}{\sqrt{n}\sigma} \le \Phi^{-1}\parentheses*{0,01} = c\nonumber\\
+            &\iff t - n\mu \le c\sigma\sqrt{n}\nonumber\\
+            &\iff \underbrace{n + \frac{c\sigma}{\mu}\sqrt{n} + \frac{t}{\mu} \ge 0}_{\text{Quadratische Ungleichung in }\sqrt{n}}\nonumber\\
+            &\iff \parentheses*{\sqrt{n}}^2 + 2\frac{c\sigma}{2\mu}\sqrt{n} + \parentheses*{\frac{c\sigma}{2\mu}}^2 \ge \frac{t}{\mu} + \parentheses*{\frac{c\sigma}{2\mu}}^2\nonumber\\
+            &\iff \parentheses*{\sqrt{n} + \frac{c\sigma}{2\mu}}^2 \ge \underbrace{\frac{4t\mu + c^2 \sigma^2}{4\mu^2}}_{> 0\text{, da }t > 0\text{ und }\mu > 0}\nonumber\\
+            &\iff \absolute*{\sqrt{n} + \frac{c\sigma}{2\mu}} \ge \sqrt{\frac{4t\mu + c^2 \sigma^2}{4\mu^2}} = \frac{\sqrt{4t\mu + c^2 \sigma^2}}{2\mu}\nonumber\\
+            &\iff \sqrt{n} + \frac{c\sigma}{2\mu} \ge \frac{\sqrt{4t\mu + c^2 \sigma^2}}{2\mu}\text{ oder }\sqrt{n} + \frac{c\sigma}{2\mu} \le -\frac{\sqrt{4t\mu + c^2 \sigma^2}}{2\mu}\nonumber\\
+            &\iff \sqrt{n} \ge \frac{-c\sigma + \sqrt{4t\mu + c^2 \sigma^2}}{2\mu}\text{ oder }\sqrt{n} \le \frac{-c\sigma - \sqrt{4t\mu + c^2 \sigma^2}}{2\mu}\label{eq:1}
+        \end{align}
+        Mit \(\mu = 2,6\), \(\sigma = \sqrt{3}\) und \(c = \Phi^{-1}\parentheses*{0,01} \approx -2,326\) erhält man
+        \begin{align}
+            \frac{-c\sigma + \sqrt{4t\mu + c^2 \sigma^2}}{2\mu} & \approx \frac{-\parentheses*{-2,326} \cdot \sqrt{3} + \sqrt{4 \cdot 999 \cdot 2,6 + \parentheses*{-2,326}^2 \cdot 3}}{2 \cdot 2,6} \approx 20,392,\label{eq:2}\\
+            \frac{-c\sigma - \sqrt{4t\mu + c^2 \sigma^2}}{2\mu} & \approx \frac{-\parentheses*{-2,326} \cdot \sqrt{3} - \sqrt{4 \cdot 999 \cdot 2,6 + \parentheses*{-2,326}^2 \cdot 3}}{2 \cdot 2,6} \approx -18,842.\label{eq:3}
+        \end{align}
+        Wegen \(\sqrt{n} \ge 0\) ist gemäß \eqref{eq:2} und \eqref{eq:3} nur die erste Ungleichung von \eqref{eq:1} erfüllbar.
+        Es folgt daher
+        \begin{equation}\label{eq:4}
+            P\parentheses*{S_n < 1000} \le 0,01 \iff \sqrt{n} \ge \frac{-c\sigma + \sqrt{4t\mu + c^2 \sigma^2}}{2\mu} \approx 20,392 \iff n \ge 20,392^2 \approx 415,834.
+        \end{equation}
+        Mit \(n \in \N\) erhält man somit aus \eqref{eq:4} die Lösung \(n = 416\), d.h.: Die Anzahl der Kunden an dem Getränkestand muss mindestens \(416\) betragen, damit die (approximativ berechnete) Wahrscheinlichkeit dafür, dass der Betreiber abends noch einen (zu entsorgenden) Restbestand hat, höchstens \(0,01\) beträgt.
+    \end{enumerate}
+    
+    
+    \section*{Aufgabe 2}
+    
+    \begin{problem}
+        Zu gegebenem \(n \in \N\) seien \(X_1, \ldots, X_n\) stochastisch unabhängige Zufallsvariablen, die jeweils auf dem Intervall \(\brackets*{0, b}\) (stetig) gleichverteilt seien.
+        Hierbei sei die obere Intervallgrenze \(b > 0\) unbekannt.
+        Zur Schätzung von \(b\) betrachtet man folgende Schätzfunktion:
+        \[
+            \hat{b} = 2\bar{X}_n = \frac{2}{n}\sum_{i = 1}^n X_i.
+        \]
+        \begin{enumerate}
+            \item Ist \(\hat{b}\) ein erwartungstreuer Schätzer für den Parameter \(b\)?
+            \item Bestimmen Sie den mittleren quadratischen Fehler \(\MSE_b\parentheses*{\hat{b}}\) des Schätzers \(\hat{b}\) für \(b > 0\).
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item Gemäß Aufgabenstellung sind die Zufallsvariablen \(X_1, \ldots, X_n\) jeweils (stetig) gleichverteilt auf dem Intervall \(\brackets*{0, b}\) (kurz: \(X_i \sim R\parentheses*{0, b}\) für \(i \in \braces*{1, \ldots, n}\)).
+        Hierbei ist der Parameter \(b > 0\) unbekannt.
+        Damit erhält man mit Beispiel 1, 3) der fünfzehnten Vorlesung für \(b > 0\):
+        \[
+            E_b\parentheses*{X_i} = \frac{b}{2}, \quad i \in \braces*{1, \ldots, n}.
+        \]
+        Hiermit folgt für \(b > 0\):
+        \begin{equation}\label{eq:5}
+            E_b\parentheses*{\hat{b}} = E_b\parentheses*{\frac{2}{n}\sum_{i = 1}^n X_i} = \frac{2}{n}\sum_{i = 1}^n \underbrace{E_b\parentheses*{X_i}}_{= \frac{b}{2}} = \frac{2}{n}n\frac{b}{2} = b.
+        \end{equation}
+        Da Gleichung \eqref{eq:5} für beliebige, also \emph{alle} Parameter \(b > 0\) gilt, ist somit der Schätzer \(\hat{b}\) erwartungstreu für die Schätzung von \(b\) gemäß Definition 1 der achtzehnten Vorlesung.
+        \item Zunächst erhält man mit a) für \(b > 0\):
+        \[
+            \MSE_b\parentheses*{\hat{b}} = E_b\parentheses*{\hat{b} - b}^2 = E_b\parentheses*{\hat{b} - E_b\parentheses*{\hat{b}}}^2 = \Var_b\parentheses*{\hat{b}}.
+        \]
+        Weiter gilt für \(b > 0\) gemäß Voraussetzung und Beispiel 3, 3) der fünfzehnten Vorlesung:
+        \[
+            \Var_b\parentheses*{X_i} = \frac{\parentheses*{b - 0}^2}{12} = \frac{b^2}{12}, \quad i \in \braces*{1, \ldots, n}.
+        \]
+        Hiermit folgt für \(b > 0\):
+        \[
+            \MSE_b\parentheses*{\hat{b}} = \Var_b\parentheses*{\hat{b}} = \Var_b\parentheses*{\frac{2}{n}\sum_{i = 1}^n X_i} = \frac{4}{n^2}\sum_{i = 1}^n \Var_b\parentheses*{X_i} = \frac{4}{n^2}\sum_{i = 1}^n \frac{b^2}{12} = \frac{4}{n^2}n\frac{b^2}{12} = \frac{b^2}{3n}.
+        \]
+    \end{enumerate}
+    
+    
+    \section*{Aufgabe 3}
+    
+    \begin{problem}
+        Im Rahmen einer statistischen Untersuchung wurden die folgenden Beobachtungswerte ermittelt:
+        \[
+            3,8, \quad 2,3, \quad 1,3, \quad 1,7, \quad 1,6, \quad 2,1, \quad -0,2, \quad 0,8.
+        \]
+        Diese Daten können aufgefasst werden als Realisationen \(x_1, \ldots, x_8\) stochastisch unabhängiger, identisch verteilter Zufallsvariablen \(X_1, \ldots, X_8\) mit unbekannter Verteilungsfunktion \(F\).
+        Berechnen Sie aus den gegebenen Beobachtungen einen Schätzwert für \(F\parentheses*{2}\).
+    \end{problem}
+    
+    \subsection*{Lösung}
+    Gemäß der Vorlesung ist allgemein für ein \(t \in \R\) ein geeigneter Schätzwert für den Funktionswert \(F\parentheses*{t}\) der (unbekannten) Verteilungsfunktion \(F\) gegeben durch den entsprechenden Funktionswert der \emph{empirischen} Verteilungsfunktion \(\hat{F}_n\parentheses*{t}\).
+    Damit erhält man hier mit den gegebenen Beobachtungen \(x_1, \ldots, x_8\) folgenden Schätzwert für \(F\parentheses*{2}\):
+    \[
+        \hat{F}_8\parentheses*{2} = \underbrace{\frac{1}{8}\sum_{i = 1}^8 \mathbb{I}_{\left(-\infty, 2\right]}\parentheses*{x_i}}_{\substack{\text{Relativer Anteil}\\\text{aller Beob. }\le 2}} = \frac{5}{8} = 0,625.
+    \]
+\end{document}

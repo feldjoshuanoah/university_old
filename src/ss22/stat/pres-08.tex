@@ -1,0 +1,254 @@
+\documentclass{exercise}
+
+\institute{Institut für Statistik und Wirtschaftsmathematik}
+\title{Präsenzübung 8}
+\author{Joshua Feld, 406718}
+\course{Statistik}
+\professor{Cramer}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \section*{Aufgabe 1}
+    
+    \begin{problem}
+        Es bezeichnen X und Y die zufäälligen Anzahlen der Kunden, die während einer Stunde an zwei Schaltern \(A\) bzw. \(B\) ankommen.
+        Hierbei werde angenommen, dass die beiden Zufallsvariablen \(X\) und \(Y\) stochastisch unabhängig und jeweils mit Parameter \(\lambda = 10\) Poisson-verteilt sind.
+        Dann gibt \(Z = X + Y\) die Gesamtzahl der Kunden an, die während einer Stunde an den beiden Schaltern \(A\) bzw. \(B\) ankommen.
+        Berechnen Sie:
+        \begin{enumerate}
+            \item \(P\parentheses*{19 \le Z \le 21}\),
+            \item \(E\parentheses*{Z}\).
+        \end{enumerate}
+        Hierbei bezeichnet \(P\) die zugrundeliegende Wahrscheinlichkeitsverteilung.
+    \end{problem}
+    
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item Nach Voraussetzung sind \(X\) und \(Y\) stochastisch unabhängig.
+        Folglich ist \(Z = X + Y\) Poisson-verteilt mit Parameter \(\mu = 2\lambda = 20\).
+        Es folgt
+        \[
+            P\parentheses*{Z = k} = \frac{\mu^k}{k!}e^{-\mu} = \frac{20^k}{k!}e^{-20}, \quad k \in \N_0.
+        \]
+        Damit erhält man
+        \[
+            P\parentheses*{19 \le Z \le 20} = P\parentheses*{Z = 19} + P\parentheses*{Z = 20} + P\parentheses*{Z = 21} = \parentheses*{\frac{20^{19}}{19!} + \frac{20^{20}}{20!} + \frac{20^{21}}{21!}}e^{-20} \approx 0,262.
+        \]
+        \item Zunächst gilt gemäß Vorlesung mit \(\lambda = 10\)
+        \[
+            E\parentheses*{X} = E\parentheses*{Y} = \lambda = 10.
+        \]
+        Hiermit folgt
+        \[
+            E\parentheses*{Z} = E\parentheses*{X + Y} = E\parentheses*{X} + E\parentheses*{Y} = 2\lambda = 20.
+        \]
+    \end{enumerate}
+
+
+    \section*{Aufgabe 2}
+    
+    \begin{problem}
+        Die Dichtefunktion \(f^{\parentheses*{X, Y}}: \R^2 \to \R\) des zweidimensionalen stetigen Zufallsvektors \(\parentheses*{X, Y}\) sei gegeben durch
+        \[
+            f^{\parentheses*{X, Y}}\parentheses*{x, y} = \begin{cases}
+                \frac{1}{36}, & \text{falls }0 \le x \le 12\text{ und }5 \le y \le 8,\\
+                0, & \text{sonst}.
+            \end{cases}
+        \]
+        \begin{enumerate}
+            \item Bestimmen Sie Randdichten \(f^X\) und \(f^Y\) von \(X\) bzw. \(Y\) und entscheiden Sie (mit Begründung), ob die Zufallsvariablen \(X\) und \(Y\) stochastisch unabhängig sind.
+            \item Bestimmen Sie die Verteilungsfunktionen \(F^X\) und \(F^Y\) von \(X\) bzw. \(Y\).
+            \item Bestimmen Sie die Verteilungsfunktion \(F^{\parentheses*{X, Y}}\) des Zufallsvektors \(\parentheses*{X, Y}\).
+            \item Berechnen Sie \(\Korr\parentheses*{X, Y}\).
+            \item Berechnen Sie \(E\parentheses*{\frac{X}{Y^2}}\).
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item Zunächst bestimmen wir \(f^X\):
+        \begin{itemize}
+            \item Fall 1: \(x < 0\) oder \(x > 12\):
+            \[
+                f^X\parentheses*{x} = \int_{-\infty}^\infty\underbrace{f^{\parentheses*{X, Y}}\parentheses*{x, y}}_{= 0\text{, da }x \not\in \brackets*{0, 12}}\d y = \int_{-\infty}^\infty 0\d y = 0.
+            \]
+            \item Fall 2: \(0 \le x \le 12\):
+            \[
+                f^X\parentheses*{x} = \int_{-\infty}^\infty f^{\parentheses*{X, Y}}\parentheses*{x, y}\d y = \int_5^8 \frac{1}{36}\d y = \frac{8 - 5}{36} = \frac{1}{12}.
+            \]
+        \end{itemize}
+        Nun bestimmen wir noch \(f^Y\):
+        \begin{itemize}
+            \item Fall 1: \(y < 5\) oder \(y > 8\):
+            \[
+                f^Y\parentheses*{y} = \int_{-\infty}^\infty\underbrace{f^{\parentheses*{X, Y}}\parentheses*{x, y}}_{= 0\text{, da }y \not\in \brackets*{5, 8}}\d y = \int_{-\infty}^\infty 0\d y = 0.
+            \]
+            \item Fall 2: \(5 \le y \le 8\):
+            \[
+                f^Y\parentheses*{y} = \int_{-\infty}^\infty f^{\parentheses*{X, Y}}\parentheses*{x, y}\d y = \int_0^12 \frac{1}{36}\d y = \frac{12}{36} = \frac{1}{3}.
+            \]
+        \end{itemize}
+        Insgesamt erhält man
+        \begin{align}
+            f^X\parentheses*{x} &= \begin{cases}
+                \frac{1}{12}, & \text{falls }x \in \brackets*{0, 12},\\
+                0, & \text{sonst},
+            \end{cases}\label{eq:1}\\
+            f^Y\parentheses*{y} &= \begin{cases}
+                \frac{1}{3}, & \text{falls }y \in \brackets*{5, 8},\\
+                0, & \text{sonst}.
+            \end{cases}\label{eq:2}
+        \end{align}
+        Der Vergleich von \eqref{eq:1} bzw. \eqref{eq:2} mit Definition 5 aus Vorlesung 7 zeigt
+        \[
+            X \sim R\parentheses*{0, 12} \quad \text{und} \quad Y \sim R\parentheses*{5, 8}.
+        \]
+        Weiter folgt für \(x, y \in \R\):
+        \begin{equation}\label{eq:3}
+            f^X\parentheses*{x}f^Y\parentheses*{y} = \begin{cases}
+                \frac{1}{36}, & \text{falls }0 \le x \le 12\text{ und }5 \le y \le 8,\\
+                0, & \text{sonst}
+            \end{cases} = f^{\parentheses*{X, Y}}\parentheses*{x, y}.
+        \end{equation}
+        Gemäß \eqref{eq:3} und Satz C3.14 sind \(X\) und \(Y\) stochastisch unabhängig.
+        \item Wir bestimmen zunächst \(F^X\) mittels \(f^X\):
+        \begin{itemize}
+            \item Fall 1: \(x < 0\):
+            \[
+                F^X\parentheses*{x} = \int_{-\infty}^x f^X\parentheses*{t}\d t = \int_{-\infty}^x 0\d t = 0.
+            \]
+            \item Fall 2: \(0 \le x \le 12\):
+            \[
+                F^X\parentheses*{x} = \int_{-\infty}^x f^X\parentheses*{t}\d t = \int_0^x \frac{1}{12}\d t = \frac{1}{12}x.
+            \]
+            \item Fall 3: \(x > 12\):
+            \[
+                F^X\parentheses*{x} = \int_{-\infty}^x f^X\parentheses*{t}\d t = \int_0^{12}\frac{1}{12}\d t = 1.
+            \]
+        \end{itemize}
+        Nun können wir noch \(F^Y\) mittels \(f^Y\) bestimmen:
+        \begin{itemize}
+            \item Fall 1: \(y < 5\):
+            \[
+                F^Y\parentheses*{y} = \int_{-\infty}^y f^Y\parentheses*{t}\d t = \int_{-\infty}^y 0\d t = 0.
+            \]
+            \item Fall 2: \(5 \le y \le 8\):
+            \[
+                F^Y\parentheses*{y} = \int_{-\infty}^y f^Y\parentheses*{t}\d t = \int_5^y \frac{1}{3}\d t = \frac{1}{3}\parentheses*{y - 5}.
+            \]
+            \item Fall 3: \(y > 8\):
+            \[
+                F^Y\parentheses*{y} = \int_{-\infty}^y f^Y\parentheses*{t}\d t = \int_5^8 \frac{1}{3}\d t = 1.
+            \]
+        \end{itemize}
+        Insegsamt erhalten wir
+        \begin{align}
+            F^X\parentheses*{x} &= \begin{cases}
+                0, & \text{falls }x < 0,\\
+                \frac{1}{12}x, & \text{falls }0 \le x \le 12,\\
+                1, & \text{falls }x > 12,
+            \end{cases}\label{eq:4}\\
+            F^Y\parentheses*{y} &= \begin{cases}
+                0, & \text{falls }y < 5,\\
+                \frac{1}{12}\parentheses*{y - 5}, & \text{falls }5 \le y \le 8,\\
+                1, & \text{falls }y > 8.
+            \end{cases}\label{eq:5}
+        \end{align}
+        Auch hier zeigt der Vergleich von \eqref{eq:4} bzw. \eqref{eq:5} mit Definition 5 der siebten Vorlesung das bereits aus a) bekannte Ergebnis
+        \[
+            X \sim R\parentheses*{0, 12} \quad \text{und} \quad Y \sim R\parentheses*{5, 8}.
+        \]
+        Wenn diese Verteilungen von \(X\) bzw. \(Y\) bekannt sind und verwendet werden dürfen, können alternativ zur obigen Herleitung die Darstellungen \eqref{eq:4} und \eqref{eq:5} von \(F^X\) bzw. \(F^Y\) direkt mithilfe von Definition 5 der siebten Vorlesung angegeben werden.
+        \item Aufgrund der in a) festgestellten stochastischen Unabhängigkeit von \(X\) und \(Y\) gilt zunächst mit Satz C 3.6:
+        \[
+            F^{\parentheses*{X, Y}}\parentheses*{x, y} = F^X\parentheses*{x}F^Y\parentheses*{y}, \quad x, y \in \R.
+        \]
+        \begin{itemize}
+            \item Fall 1: \(x < 0\) oder \(y < 5\):
+            \[
+                F^{\parentheses*{X, Y}}\parentheses*{x, y} = F^X\parentheses*{x}F^Y\parentheses*{y} = 0.
+            \]
+            \item Fall 2: \(x \in \brackets*{0, 12}\) und \(y \in \brackets*{5, 8}\):
+            \[
+                F^{\parentheses*{X, Y}}\parentheses*{x, y} = F^X\parentheses*{x}F^Y\parentheses*{y} = \frac{1}{12}x \cdot \frac{1}{3}\parentheses*{y - 5} = \frac{1}{36}x\parentheses*{y - 5}.
+            \]
+            \item Fall 3: \(x \in \brackets*{0, 12}\) und \(y > 8\):
+            \[
+                F^{\parentheses*{X, Y}}\parentheses*{x, y} = F^X\parentheses*{x}F^Y\parentheses*{y} = \frac{1}{12}x \cdot 1 = \frac{1}{12}x.
+            \]
+            \item Fall 4: \(x > 12\) und \(y \in \brackets*{5, 8}\):
+            \[
+                F^{\parentheses*{X, Y}}\parentheses*{x, y} = F^X\parentheses*{x}F^Y\parentheses*{y} = 1 \cdot \frac{1}{3}\parentheses*{y - 5} = \frac{1}{3}\parentheses*{y - 5}.
+            \]
+            \item Fall 5: \(x > 12\) und \(y > 8\):
+            \[
+                F^{\parentheses*{X, Y}}\parentheses*{x, y} = F^X\parentheses*{x}F^Y\parentheses*{y} = 1 \cdot 1 = 1.
+            \]
+        \end{itemize}
+        Insgesamt erhält man
+        \[
+            F^{\parentheses*{X, Y}}\parentheses*{x, y} = \begin{cases}
+                0, & \text{falls }x < 0\text{ oder }y < 5,\\
+                \frac{1}{36}x\parentheses*{y - 5}, & \text{falls }x \in \brackets*{0, 12}\text{ und }y \in \brackets*{5, 8},\\
+                \frac{1}{12}x, & \text{falls }x \in \brackets*{0, 12}\text{ und }y > 8,\\
+                \frac{1}{3}\parentheses*{y - 5}, & \text{falls }x > 12\text{ und }y \in \brackets*{5, 8},\\
+                1, & \text{falls }x > 12\text{ und }y > 8.
+            \end{cases}
+        \]
+        \item Gemäß a) sind \(X\) und \(Y\) stochastisch unabhängig und damit auch unkorreliert.
+        Mit \(\Kov\parentheses*{X, Y} = 0\) und der Definition von \(\Korr\parentheses*{X, Y}\) folgt
+        \[
+            \Korr\parentheses*{X, Y} = 0.
+        \]
+        \item Unter Anwendung von Satz 5.6 mit \(g: \R^2 \to \R, \parentheses*{x, y} \mapsto g\parentheses*{x} = \frac{x}{y^2}\) erhält man
+        \begin{align*}
+            E\parentheses*{\frac{X}{Y^2}} &= \int_{-\infty}^\infty \int_{-\infty}^\infty \frac{x}{y^2}f^{\parentheses*{X, Y}}\parentheses*{x, y}\d x\d y\\
+            &= \int_5^8 \int_0^{12}\frac{x}{y^2}\frac{1}{36}\d x\d y\\
+            &= \frac{1}{36}\int_5^8 y^{-2}\parentheses*{\int_0^{12}x\d x}\d y\\
+            &= \frac{1}{36}\int_5^8 y^{-2}\brackets*{\frac{x^2}{2}}_{x = 0}^{x = 12}\d y\\
+            &= \frac{1}{36}\int_5^8 72y^{-2}\d y\\
+            &= 2\int_5^8 y^{-2}\d y\\
+            &= 2\brackets*{-y^{-1}}_{y = 5}^{y = 8}\\
+            &= 2 \cdot \frac{3}{40} = \frac{3}{20}.
+        \end{align*}
+    \end{enumerate}
+
+
+    \section*{Aufgabe 3}
+    
+    \begin{problem}
+        Es seien \(X\) und \(Y\) stochastisch unabhängige Zufallsvariablen mit \(X \sim R\parentheses*{-2, 4}\) und \(Y \sim \Exp\parentheses*{0,5}\).
+        (Somit ist \(X\) (stetig) gleichverteilt auf dem Intervall \(\brackets*{-2, 4}\) und \(Y\) exponentialverteilt mit Parameter \(\lambda = 0,5\).)
+        Weiter sei \(V = 3X + Y - 5\).
+        \begin{enumerate}
+            \item Berechnen Sie \(E\parentheses*{V}\).
+            \item Berechnen Sie \(\Var\parentheses*{V}\).
+            \item Berechnen Sie \(\Kov\parentheses*{V, X}\).
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    Zunächst gilt gemäß Beispiel 1, 3) und 4) der fünfzehnten Vorlesung sowie Beispiel 3, 3) und 4) selbiger Vorlesung:
+    \begin{align*}
+        E\parentheses*{X} &= \frac{-2 + 4}{2} = 1, & \Var\parentheses*{X} &= \frac{\parentheses*{4 - \parentheses*{-2}}^2}{12} = 3,\\
+        E\parentheses*{Y} &= \frac{1}{0,5} = 2, & \Var\parentheses*{Y} &= \frac{1}{0,5^2} = 4.
+    \end{align*}
+    \begin{enumerate}
+        \item Mit den Rechenregeln für Erwartungswerte folgt
+        \[
+            E\parentheses*{V} = E\parentheses*{3X + Y - 5} = 3E\parentheses*{X} + E\parentheses*{Y} - 5 = 3 + 2 - 5 = 0.
+        \]
+        \item Mit den Rechenregeln für Varianzen erhält man
+        \[
+            \Var\parentheses*{V} = \Var\parentheses*{3X + Y - 5} = \Var\parentheses*{3X} + \Var\parentheses*{Y} = 3^2 \cdot \Var\parentheses*{X} + \Var\parentheses*{Y} = 9 \cdot 3 + 4 = 31.
+        \]
+        \item Mit den Rechenregeln für Kovarianzen erhält man
+        \[
+            \Kov\parentheses*{V, X} = \Kov\parentheses*{3X + Y - 5, X} = 3\underbrace{\Kov\parentheses*{X, X}}_{= \Var\parentheses*{X}} + \underbrace{\Kov\parentheses*{Y, X}}_{= 0\text{, da }X, Y\text{ unabhängig}} = 3\Var\parentheses*{X} = 3 \cdot 3 = 9.
+        \]
+    \end{enumerate}
+\end{document}

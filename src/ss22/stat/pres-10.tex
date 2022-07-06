@@ -1,0 +1,63 @@
+\documentclass{exercise}
+
+\institute{Institut für Statistik und Wirtschaftsmathematik}
+\title{Präsenzübung 10}
+\author{Joshua Feld, 406718}
+\course{Statistik}
+\professor{Cramer}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \section*{Aufgabe 1}
+    
+    \begin{problem}
+        Es seien \(X_1, \ldots, X_n\) stochastisch unabhängige, jeweils \(\betadist\parentheses*{\alpha, 1}\)-verteilte Zufallsvariablen mit \(\alpha > 0\).
+        Die zugehörige Dichtefunktion \(f_\alpha\) der Zufallsvariablen \(X_i\) für \(i \in \braces*{1, \ldots, n}\) in Abhängigkeit vom Parameter \(\alpha\) ist dann gemäß Definition 10 der siebten Vorlesung gegeben durch
+        \[
+            f_\alpha\parentheses*{x} = \begin{cases}
+                \alpha x^{\alpha - 1}, & \text{falls }x \in \parentheses*{0, 1},\\
+                0, & \text{falls }x \in \R \setminus \parentheses*{0, 1}.
+            \end{cases}
+        \]
+        Bestimmen Sie zu gegebenen Realisationen \(x_1, \ldots, x_n \in \parentheses*{0, 1}\) von \(X_1, \ldots, X_n\) eine Maximum-Likelihood-Schätzung \(\hat{\alpha}\) für den unbekannten Parameter \(\alpha\).
+    \end{problem}
+    
+    \subsection*{Lösung}
+
+
+    \section*{Aufgabe 2}
+    
+    \begin{problem}
+        Peter nimmt an zehn aufeinanderfolgenden Tagen an einem Glücksspiel mit Gewinnwahrscheinlichkeit \(p \in \parentheses*{0, 1}\) teil.
+        Dabei spielt er das Spiel jeden Tag so oft, bis er einmal gewinnt.
+        Danach hört er für diesen Tag auf.
+        Nach dieser Strategie verfährt er an jedem der zehn Tage.
+        Nachfolgend sind die Anzahlen der Spiele angegeben, die Peter an den einzelnen Tagen spielt:
+        \[
+            13, \quad 7, \quad 10, \quad 2, \quad 11, \quad 17, \quad 15, \quad 9, \quad 19, \quad 11.
+        \]
+        Berechnen Sie den zugehörigen Maximum-Likelihood-Schätzwert \(\hat{p}\) von \(p\), der sich für die oben angegebenen Anzahlen ergibt.
+
+        \emph{Hinweis: Die gegebenen Anzahlen können aufgefasst werden als Realisationen stochastisch unabhängiger Zufallsvariablen \(X_1, \ldots, X_n\) mit \(Z_i = X_i - 1 \sim \geo\parentheses*{p}\) für \(i \in \braces*{1, \ldots, n}\).}
+    \end{problem}
+    
+    \subsection*{Lösung}
+
+
+    \section*{Aufgabe 3}
+    
+    \begin{problem}
+        Im Rahmen einer Qualitätskontrolle wurden für \(7\) Energiesparlampen eines bestimmten Fabrikats die folgenden Lebensdauern (in Betriebsstunden) ermittelt:
+        \[
+            3122, \quad 7784, \quad 3870, \quad 5617, \quad 12771, \quad 6201, \quad 10605.
+        \]
+        Diese gemessenen Lebensdauern können als Realisationen stochastisch unabhängiger, jeweils \(\Exp\parentheses*{\lambda}\)-verteilter Zufallsvariablen aufgefasst werden mit \(\lambda > 0\).
+        Ermitteln Sie ein zweiseitiges \(90\%\)-Konfidenzintervall für den unbekannten Parameter \(\lambda\).
+    \end{problem}
+    
+    \subsection*{Lösung}
+\end{document}

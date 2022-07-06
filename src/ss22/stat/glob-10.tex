@@ -1,0 +1,72 @@
+\documentclass{exercise}
+
+\usepackage{multirow}
+\DeclareMathOperator{\Var}{Var}
+
+\institute{Institut für Statistik und Wirtschaftsmathematik}
+\title{Globalübung 9}
+\author{Joshua Feld, 406718}
+\course{Statistik}
+\professor{Cramer}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \section*{Aufgabe 1}
+
+    \begin{problem}
+        Die Zufallsvariablen \(X_1, \ldots, X_n\) seien stochastisch unabhängig und jeweils Pareto-verteilt mit (unbekanntem) Parameter \(\alpha > 0\).
+        Die zugehörige Dichtefunktion \(f_\alpha\) und die zugehörige Verteilungsfunktion \(F_\alpha\) der Zufallsvariablen \(X_i\) für \(i \in \braces*{1, \ldots, n}\) in Abhängigkeit vom Parameter \(\alpha\) sind dann gemäß Definition 11 der siebten Vorlesung gegeben durch
+        \[
+            f_\alpha\parentheses*{x} = \begin{cases}
+                \frac{\alpha}{x^{\alpha + 1}}, \quad \text{falls }x \ge 1,\\
+                0, & \text{falls }x < 1,
+            \end{cases} \quad \text{bzw.} \quad F_\alpha\parentheses*{x} = \begin{cases}
+                1 - \frac{1}{x^\alpha}, & \text{falls }x \ge 1,\\
+                0, & \text{falls }x < 1.
+            \end{cases}
+        \]
+        \begin{enumerate}
+            \item Bestimmen Sie zu gegebenen Realisationen \(x_1, \ldots, x_n \in \parentheses*{1, \infty}\) von \(X_1, \ldots, X_n\) eine Maximum-Likelihood-Schätzung \(\hat{\alpha}\) für den Parameter \(\alpha\).
+            
+            \emph{Hinweis: Betrachten Sie die zugehörige Log-Likelihood-Funktion.}
+            \item Berechnen Sie den aus a) resultierenden Schätzwert zu folgenden Daten:
+            \[
+                1,65, \quad 2,97, \quad 3,52, \quad 3,07, \quad 2,06, \quad 2,41, \quad 3,84, \quad 5,48, \quad 1,86, \quad 4,9, \quad 7,36, \quad 1,58.
+            \]
+            \item Approximieren Sie die Wahrscheinlichkeit dafür, dass \(X_1\) den Wert \(x = 2\) übersteigt, indem Sie den unbekannten Parameter \(\alpha\) durch den in b) berechneten Schätzwert ersetzen.
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item
+        \item
+        \item
+    \end{enumerate}
+    
+    
+    \section*{Aufgabe 2}
+    
+    \begin{problem}
+        Die Zufallsvariablen \(X_1, \ldots, X_n\) seien stochastisch unabhängig und jeweils geometrisch verteilt mit (unbekanntem) Parameter \(p \in \parentheses*{0, 1}\).
+        Bestimmen Sie zu gegebenen Realisationen \(x_1, \ldots, x_n \in \N_0\) von \(X_1, \ldots, X_n\) mit \(\bar{x} > 0\) eine Maximum-Likelihood-Schätzung \(\hat{p}\) für den Parameter \(p\).
+    \end{problem}
+    
+    \subsection*{Lösung}
+    
+    
+    \section*{Aufgabe 3}
+    
+    \begin{problem}
+        Eine Fluggesellschaft möchte wissen, wie hoch der Anteil \(p\) der Passagiere ist, die ihren Flug nicht antreten.
+        Hierzu soll ein Konfidenzintervall für \(p\) bestimmt werden.
+        Die Überprüfung von \(1000\) zufällig ausgewählten Passagieren ergibt, dass \(74\) von ihnen den Flug nicht angetreten haben.
+        Bestimmen Sie anhand dieses Ergebnisses ein approximatives zweiseitiges Konfidenzintervall für \(p\) zum Konfidenzniveau \(90\%\).
+    \end{problem}
+    
+    \subsection*{Lösung}
+\end{document}

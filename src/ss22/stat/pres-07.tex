@@ -1,0 +1,218 @@
+\documentclass{exercise}
+
+\usepackage{multirow}
+
+\institute{Institut für Statistik und Wirtschaftsmathematik}
+\title{Präsenzübung 7}
+\author{Joshua Feld, 406718}
+\course{Statistik}
+\professor{Cramer}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \section*{Aufgabe 1}
+    
+    \begin{problem}
+        Die Verteilungsfunktion \(F^X\) einer stetigen Zufallsvariablen \(X\) sei gegeben durch
+        \[
+            F^X\parentheses*{x} = \begin{cases}
+                1 - \frac{1}{2}e^{-\frac{x}{2}}\parentheses*{x + 2}, & \text{falls }x > 0,\\
+                0, & \text{falls }x \le 0.
+            \end{cases}
+        \]
+        Bestimmen Sie eine Dichtefunktion \(f^X\) von \(X\).
+
+        \emph{Hinweis: Sie können (ohne eigenen Nachweis) verwenden:
+        \[
+            \braces*{x \in \R : 0 < F^X\parentheses*{x} < 1} = \parentheses*{0, \infty}.
+        \]}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    Ist die Verteilungsfunktion \(F^X\) der Zufallsvariablen \(X\) auf
+    \[
+        \braces*{x \in \R : 0 < F^X\parentheses*{x} < 1} = \parentheses*{a, b}
+    \]
+    stetig differenzierbar (mit \(a \in \R \cup \braces*{-\infty}\) und \(b \in \R \cup \braces*{\infty}\)), so ist eine Dichtefunktion \(f^X\) von \(X\) gegeben durch:
+    \[
+        f^X\parentheses*{x} = \begin{cases}
+            0, & \text{falls }x \le a,\\
+            \parentheses*{F^X}'\parentheses*{x}, & \text{falls }a < x < b,\\
+            0, & \text{falls }x \ge b.
+        \end{cases}
+    \]
+    Die gegebene Verteilungsfunktion \(F^X\) ist stetig differenzierbar auf \(\parentheses*{0, \infty}\) mit
+    \[
+        \parentheses*{F^X}'\parentheses*{x} = -\frac{1}{2}e^{-\frac{x}{2}}\parentheses*{-\frac{1}{2}}\parentheses*{x + 2} - \frac{1}{2}e^{-\frac{x}{2}} \cdot 1 = \frac{1}{4}e^{-\frac{x}{2}}\parentheses*{x + 2 - 2} = \frac{1}{4}xe^{-\frac{x}{2}}, \quad x \in \parentheses*{0, \infty}.
+    \]
+    Eine Dichtefunktion \(f^X\) von \(X\) ist, mit dem Hinweis, dass
+    \[
+        \braces*{x \in \R : 0 < F^X\parentheses*{x} < 1} = \parentheses*{0, \infty}
+    \]
+    gilt, dann gegeben durch
+    \[
+        f^X\parentheses*{x} = \begin{cases}
+            0, & \text{falls }x \le 0,\\
+            \frac{1}{4}xe^{-\frac{x}{2}}, & \text{falls }x > 0.
+        \end{cases}
+    \]
+
+
+    \section*{Aufgabe 2}
+    
+    \begin{problem}
+        Gegeben sei die folgende (unvollständige) Wahrscheinlichkeitstabelle eines diskreten Zufallsvektors \(\parentheses*{X, Y}\), der auf einem Wahrscheinlichkeitsraum \(\parentheses*{\Omega, \mathfrak{U}, P}\) definiert ist.
+        Hierbei nehmen \(X\) die Werte \(1\) und \(2\) und \(Y\) die Werte \(1\), \(2\) und \(3\) an.
+        \begin{center}
+            \begin{tabular}{cc|ccc|c}
+                \toprule
+                \multicolumn{2}{c|}{\multirow{2}{*}{\(P\parentheses*{X = i, Y = j}\)}} & \multicolumn{3}{c|}{\(j\)} & \multirow{2}{*}{\(P\parentheses*{X = i}\)}\\
+                \multicolumn{2}{c|}{} & \(1\) & \(2\) & \(3\) &\\
+                \midrule
+                \multirow{2}{*}{\(i\)} & \(1\) & \(0,2\) & ? & ? & \(0,4\)\\
+                & \(2\) & ? & ? & ? & ?\\
+                \midrule
+                \multicolumn{2}{c|}{\(P\parentheses*{Y = j}\)} & ? & \(0,3\) & ? &\\
+                \bottomrule
+            \end{tabular}
+        \end{center}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    Aufgrund der geforderten stochastischen Unabhängigkeit von \(X\) und \(Y\) muss gelten:
+    \[
+        P\parentheses*{X = i, Y = j} = P\parentheses*{X = i} \cdot P\parentheses*{Y = j}, \quad j \in \braces*{1, 2}, j \in \braces*{1, 2, 3}.
+    \]
+    Weiter gilt aufgrund der Eigenschaften von Zähldichten:
+    \[
+        P\parentheses*{X = 1} + P\parentheses*{X = 2} = 1, \quad P\parentheses*{Y = 1} + P\parentheses*{Y = 2} + P\parentheses*{Y = 3} = 1.
+    \]
+    Hiermit erhält man
+    \[
+        0,2 = P\parentheses*{X = 1, Y = 1} = P\parentheses*{X = 1} \cdot P\parentheses*{Y = 2} = 0,4 \cdot P\parentheses*{Y = 1} \iff P\parentheses*{Y = 1} = \frac{0,2}{0,4} = 0,5,
+    \]
+    und dann sukzessive
+    \begin{align*}
+        P\parentheses*{Y = 3} &= 1 - P\parentheses*{Y = 1} - P\parentheses*{Y = 2} = 1 - 0,5 - 0,3 = 0,2,\\
+        P\parentheses*{X = 2} &= 1 - P\parentheses*{X = 1} = 1 - 0,4 = 0,6,\\
+        P\parentheses*{X = 1, Y = 2} &= P\parentheses*{X = 1} \cdot P\parentheses*{Y = 2} = 0,4 \cdot 0,3 = 0,12,\\
+        P\parentheses*{X = 1, Y = 3} &= P\parentheses*{X = 1} \cdot P\parentheses*{Y = 3} = 0,4 \cdot 0,2 = 0,08,\\
+        P\parentheses*{X = 2, Y = 1} &= P\parentheses*{X = 2} \cdot P\parentheses*{Y = 1} = 0,6 \cdot 0,5 = 0,3,\\
+        P\parentheses*{X = 2, Y = 2} &= P\parentheses*{X = 2} \cdot P\parentheses*{Y = 2} = 0,6 \cdot 0,3 = 0,18,\\
+        P\parentheses*{X = 2, Y = 3} &= P\parentheses*{X = 2} \cdot P\parentheses*{Y = 3} = 0,6 \cdot 0,2 = 0,12.
+    \end{align*}
+    \begin{center}
+        \begin{tabular}{cc|ccc|c}
+            \toprule
+            \multicolumn{2}{c|}{\multirow{2}{*}{\(P\parentheses*{X = i, Y = j}\)}} & \multicolumn{3}{c|}{\(j\)} & \multirow{2}{*}{\(P\parentheses*{X = i}\)}\\
+            \multicolumn{2}{c|}{} & \(1\) & \(2\) & \(3\) &\\
+            \midrule
+            \multirow{2}{*}{\(i\)} & \(1\) & \(0,2\) & \(0,12\) & \(0,08\) & \(0,4\)\\
+            & \(2\) & \(0,3\) & \(0,18\) & \(0,12\) & \(0,6\)\\
+            \midrule
+            \multicolumn{2}{c|}{\(P\parentheses*{Y = j}\)} & \(0,5\) & \(0,3\) & \(0,2\) &\\
+            \bottomrule
+        \end{tabular}
+    \end{center}
+        
+
+    \section*{Aufgabe 3}
+    
+    \begin{problem}
+        Das Abwassersystem einer Gemeinde, an das \(1332\) Haushalte angeschlossen sind, ist für eine maximale Last von \(13500\) Litern pro Stunde ausgelegt.
+
+        Nehmen Sie an, dass die einzelnen Abwassermengen (pro Stunde) von \(n\) angeschlossenen Haushalten durch stochastisch unabhängige Zufallsvariablen \(X_1, \ldots, X_n\) beschrieben werden können, wobei \(X_i\) für \(i \in \braces*{1, \ldots, n}\) normalverteilt ist, mit erstem Parameter \(\mu = 10\) (\(\frac{\text{Liter}}{\text{Stunde}}\)) und zweitem Parameter \(\sigma^2 = 4\) (\(\parentheses*{\frac{\text{Liter}}{\text{Stunde}}}^2\)).
+
+        Berechnen Sie die Wahrscheinlichkeit einer Überlastung des Abwassersystems
+        \begin{enumerate}
+            \item für die angeschlossenen \(1332\) Haushalte,
+            \item für den Fall, dass \(8\) weitere Haushalte an das Abwassersystem angeschlossen werden.
+        \end{enumerate}
+        \emph{Hinweis: Beachten Sie, dass unter den gegebenen Voraussetzungen gemäß Vorlesung gilt
+        \[
+            \sum_{i = 1}^n X_i \sim N\parentheses*{n\mu, n\sigma^2}.
+        \]}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    Gemäß Voraussetzung wird die gesamte Abwassermenge von \(n\) angeschlossenen Haushalten beschrieben durch
+    \[
+        S = \sum_{i = 1}^n X_i.
+    \]
+    Da \(X_1, \ldots, X_n\) nach Voraussetzung stochastisch unabhängig sind, folgt
+    \[
+        S = \sum_{i = 1}^n X_i = n\bar{X}_n \sim N\parentheses*{n\mu, n\sigma^2}
+    \]
+    Hieraus folgt weiter
+    \[
+        \frac{S - n\mu}{\sqrt{n\sigma^2}} \sim\parentheses*{0, 1}.
+    \]
+    Mit \(c = 13500\) und \(\Phi\) als Verteilungsfunktion zu \(N\parentheses*{0, 1}\) (sowie mit \(P\) als zugrundeliegender Wahrscheinlichkeitsverteilung) erhält man dann
+    \[
+        P\parentheses*{S > c} = 1 - P\parentheses*{S \le c} = 1 - P\parentheses*{\frac{S - n\mu}{\sqrt{n\sigma^2}} \le \frac{c - n\mu}{\sqrt{n\sigma^2}}} = 1 - \Phi\parentheses*{\frac{c - n\mu}{\sqrt{n\sigma^2}}}.
+    \]
+    Einsetzen der Zahlenwerte:
+    \begin{enumerate}
+        \item \(n = 1332\), \(\mu = 10\), \(\sigma^2 = 4\), \(c = 13500\)
+        \[
+            P\parentheses*{S > c} = 1 - \Phi\parentheses*{\frac{13500 - 1332 \cdot 10}{\sqrt{1332 \cdot 4}}} \approx 1 - \Phi\parentheses*{2,47} \approx 1 - 0,993 = 0,007 = 0,7\%,
+        \]
+        \item \(n = 1340\), \(\mu = 10\), \(\sigma^2 = 4\), \(c = 13500\)
+        \[
+            P\parentheses*{S > c} = 1 - \Phi\parentheses*{\frac{13500 - 1340 \cdot 10}{\sqrt{1340 \cdot 4}}} \approx 1 - \Phi\parentheses*{1,37} \approx 1 - 0,915 = 0,085 = 8,5\%.
+        \]
+    \end{enumerate}
+
+
+    \section*{Aufgabe 4}
+    
+    \begin{problem}
+        Gegeben sei eine mit Parameter \(\lambda = 1\) exponentialverteilte Zufallsvariable (kurz: \(X \sim \Exp\parentheses*{1}\)).
+        Bestimmen Sie mithilfe der Transformationsformel für Dichtefunktionen eine Riemann-Dichte \(f^Y\) der Zufallsvariablen \(Y = e^{-X}\).
+    \end{problem}
+    
+    \subsection*{Lösung}
+    Vor Anwendung der Transformationsformel für Dichtefunktionen müssen zunächst sämtliche zugehörige Voraussetzungen verifiziert werden.
+
+    Gemäß Aufgabenstellung ist eine Riemann-Dichte \(f^X: \R \to \left[0, \infty\right)\) von \(X\) gegeben durch
+    \[
+        f^X\parentheses*{x} = \begin{cases}
+            e^{-x}, & \text{falls }x > 0,\\
+            0, & \text{falls }x \le 0.
+        \end{cases}
+    \]
+    Insbesondere ist hiermit
+    \[
+        f^X\parentheses*{x} > 0\text{ für }x \in \parentheses*{a, b} = \parentheses*{0, \infty} \quad \text{und} \quad f^X\parentheses*{x} = 0\text{ sonst}.
+    \]
+    Weiterhin ist \(Y = e^{-X} = g\parentheses*{X}\) mit \(g: \parentheses*{0, \infty} \to \parentheses*{0, 1}\), definiert durch
+    \[
+        g\parentheses*{x} = e^{-x}, \quad x \in \parentheses*{0, \infty}.
+    \]
+    Hieraus folgt, dass die Funktion \(g: \parentheses*{0, \infty} \to \parentheses*{0, 1}\) bijektiv ist mit Umkehrfunktion \(g^{-1}: \parentheses*{0, 1} \to \parentheses*{0, \infty}\), die gegeben ist durch
+    \[
+        g^{-1}\parentheses*{y} = -\ln\parentheses*{y}, \quad y \in \parentheses*{0, 1}.
+    \]
+    Diese Umkehrfunktion \(g^{-1}\) ist stetig differenzierbar auf \(\parentheses*{0, 1}\) mit
+    \[
+        \parentheses*{g^{-1}}'\parentheses*{y} = -\frac{1}{y}, \quad y \in \parentheses*{0, 1}.
+    \]
+    (Wegen \(\parentheses*{g^{-1}}'\parentheses*{y} \ne 0, y \in \parentheses*{0, 1}\) ist damit auch \(g\) stetig differenzierbar auf \(\parentheses*{0, \infty}\).)
+
+    Damit sind alle Voraussetzungen erfüllt und hiermit folgt für \(y \in \parentheses*{x, d} = \parentheses*{0, 1}\)
+    \[
+        f^Y\parentheses*{y} = \absolute*{\parentheses*{g^{-1}}'\parentheses*{y}}f^X\parentheses*{g^{-1}\parentheses*{y}} = \absolute*{-\frac{1}{y}}e^{-\parentheses*{-\ln\parentheses*{y}}} = \frac{y}{y} = 1.
+    \]
+    Insgesamt erhält man damit aus der vorherigen Gleichung und der Transformationsformel
+    \[
+        f^Y\parentheses*{y} = \begin{cases}
+            1, & \text{falls }y \in \parentheses*{0, 1},\\
+            0, & \text{falls }y \in \R \setminus \parentheses*{0, 1}.
+        \end{cases}
+    \]
+    Aus der Vorlesung ergibt sich daraus \(Y \sim R\parentheses*{0, 1}\).
+\end{document}

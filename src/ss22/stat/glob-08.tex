@@ -1,0 +1,177 @@
+\documentclass{exercise}
+
+\usepackage{multirow}
+
+\institute{Institut für Statistik und Wirtschaftsmathematik}
+\title{Globalübung 8}
+\author{Joshua Feld, 406718}
+\course{Statistik}
+\professor{Cramer}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \section*{Aufgabe 1}
+
+    \begin{problem}
+        Gegeben sei die Situation aus Aufgabe 1 der siebten Globalübung.
+        \begin{enumerate}
+            \item Berechnen Sie \(E\parentheses*{X}\) und \(E\parentheses*{Y}\).
+            \item Berechnen Sie \(\Var\parentheses*{X}\) und \(\Var\parentheses*{Y}\).
+            \item Berechnen Sie \(\Kov\parentheses*{X}\) und \(\Korr\parentheses*{X}\).
+            
+            \emph{Hinweis: In der gegebenen Situation wird der Erwartungswert des (ebenfalls diskreten) Produkts \(XY\) gemäß Satz C5.6 berechnet, wie folgt:
+            \[
+                E\parentheses*{XY} = \sum_{i = -1}^1 \sum_{j = 1}^3 ijP\parentheses*{X = i, Y = j}.
+            \]}
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    Wie in Aufgabe 1 der siebten Globalübung hergeleitet wurde, ergibt sich die folgende, um die Rand-Zähldichten ergänzte Tabelle zur Verteilung des (diskreten) zweidimensionalen Zufallsvektors \(\parentheses*{X, Y}\):
+    \begin{center}
+        \begin{tabular}{cccccc}
+            \toprule
+            \multicolumn{2}{c}{\multirow{2}{*}{\(P\parentheses*{X = i, Y = j}\)}} & \multicolumn{3}{c}{\(j\)} & \multirow{2}{*}{\(P\parentheses*{X = i}\)}\\
+            \multicolumn{2}{c}{\multirow{2}{*}{}} & \(1\) & \(2\) & \(3\) & \multirow{2}{*}{}\\
+            \midrule
+            \multirow{3}{*}{\(i\)} & \(-1\) & \(\frac{1}{20}\) & \(\frac{1}{5}\) & \(0\) & \(\frac{1}{4}\)\\
+            & \(0\) & \(\frac{1}{5}\) & \(\frac{1}{5}\) & \(\frac{1}{10}\) & \(\frac{1}{2}\)\\
+            & \(1\) & \(\frac{1}{10}\) & \(\frac{1}{10}\) & \(\frac{1}{20}\) & \(\frac{1}{4}\)\\
+            \multicolumn{2}{c}{\(P\parentheses*{Y = j}\)} & \(\frac{7}{20}\) & \(\frac{1}{2}\) & \(\frac{3}{20}\) &\\
+            \bottomrule
+        \end{tabular}
+    \end{center}
+    \begin{enumerate}
+        \item Hiermit erhält man gemäß Definition C5.1:
+        \begin{align*}
+            E\parentheses*{X} &= \sum_{i = -1}^1 ip^X\parentheses*{i} = \sum_{i = -1}^1 iP\parentheses*{X = i} = \parentheses*{-1} \cdot \frac{1}{4} + 0 \cdot \frac{1}{2} + 1 \cdot \frac{1}{4} = 0,\\
+            E\parentheses*{Y} &= \sum_{j = 1}^3 jp^Y\parentheses*{j} = \sum_{j = 1}^3 jP\parentheses*{Y = j} = 1 \cdot \frac{7}{20} + 2 \cdot \frac{1}{2} + 3 \cdot \frac{3}{20} = \frac{9}{5}.
+        \end{align*}
+        \item Zunächst gilt gemäß Satz C5.6 (mit \(g: \R \to \R, x \mapto g\parentheses*{x} = x^2\)):
+        \begin{align*}
+            E\parentheses*{X^2} &= \sum_{i = -1}^1 i^2 p^X\parentheses*{i} = \sum_{i = -1}^1 i^2 P\parentheses*{X = i} = \parentheses*{-1}^2 \cdot \frac{1}{4} + 0^2 \cdot \frac{1}{2} + 1^2 \cdot \frac{1}{4} = \frac{1}{2},\\
+            E\parentheses*{Y^2} &= \sum_{j = 1}^3 j^2 p^Y\parentheses*{j} = \sum_{j = 1}^3 j^2 P\parentheses+{Y = j} = 1^2 \cdot \frac{7}{20} + 2^2 \cdot \frac{1}{2} + 3^2 \cdot \frac{3}{20} = \frac{37}{10}.
+        \end{align*}
+        Hieraus folgt mit dem Verschiebungssatz (Lemma C5.12, (2)):
+        \begin{align*}
+            \Var\parentheses*{X} &= E\parentheses*{X^2} - \parentheses*{E\parentheses*{X}}^2 = \frac{1}{2} - 0^2 = \frac{1}{2},\\
+            \Var\parentheses*{Y} &= E\parentheses*{Y^2} - \parentheses*{E\parentheses*{Y}}^2 = \frac{37}{10} - \parentheses*{\frac{9}{5}}^2 = \frac{23}{50}.
+        \end{align*}
+        \item Gemäß Hinweis und Aufgabenstellung gilt:
+        \begin{align*}
+            E\parentheses*{XY} &= \sum_{i = -1}^3 \sum_{j = 1}^3 ijP\parentheses*{X = i, Y = j}\\
+            &= \parentheses*{-1} \cdot \parentheses*{1 \cdot \frac{1}{20} + 2 \cdot \frac{1}{5} + 3 \cdot 0} + 0 + 1 \cdot \parentheses*{1 \cdot \frac{1}{10} + 2 \cdot \frac{1}{10} + 3 \cdot \frac{1}{20}}\\
+            &= -\frac{9}{20} + \frac{9}{20} = 0.
+        \end{align*}
+        Hierbei ergibt sich die Aussage des Hinweises aus Satz C5.6 (mit \(g: \R^2 \to \R, \parentheses*{x, y} \mapsto g\parentheses*{x} = xy\)).
+        Es folgt mit Lemma C5.16, (1):
+        \[
+            \Kov\parentheses*{X, Y} = E\parentheses*{XY} - E\parentheses*{X}E\parentheses*{Y} = 0 - 0 \cdot \frac{9}{5} = 0, \quad \Korr\parentheses*{X, Y} = \frac{\Kov\parentheses*{X, Y}}{\sqrt{\Var\parentheses*{X} \cdot \Var\parentheses*{Y}}} = 0.
+        \]
+    \end{enumerate}
+    
+    
+    \section*{Aufgabe 2}
+    
+    \begin{problem}
+        Gegeben sei die Situation aus Aufgabe 2 der siebten Globalübung.
+        \begin{enumerate}
+            \item Berechnen Sie \(E\parentheses*{X}\) und \(E\parentheses*{Y}\).
+            \item Berechnen Sie \(\Var\parentheses*{X}\) und \(\Var\parentheses*{Y}\).
+            \item Berechnen Sie \(\Kov\parentheses*{X}\) und \(\Korr\parentheses*{X}\).
+            
+            \emph{Hinweis: Zu dem gegebenen stetigen Zufallsvektor \(\parentheses*{X, Y}\) wird der Erwartungswert des Produkts \(XY\) gemäß Satz C5.6 berechnet, wie folgt:
+            \[
+                E\parentheses*{XY} = \int_{-\infty}^\infty \int_{-\infty}^\infty xyf^{\parentheses*{X, Y}}\parentheses*{x, y}\d x\d y.
+            \]}
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    Wie in Aufgabe 2 der siebten Globalübung hergeleitet wurde, ergeben sich folgende Randdichten zu \(X\) bzw. \(Y\):
+    \[
+        f^X\parentheses*{t} = f^Y\parentheses*{t} = \begin{cases}
+            2 \cdot \parentheses*{1 - t}, & \text{falls }t \in \brackets*{0, 1},\\
+            0, & \text{sonst}.
+        \end{cases}
+    \]
+    \begin{enumerate}
+        \item Gemäß Definition der Erwartungswerte für stetige Zufallsvariablen gilt:
+        \begin{align*}
+            E\parentheses*{X} &= \int_{-\infty}^\infty xf^X\parentheses*{x}\d x = \int_0^1 2x\parentheses*{1 - x}\d x = \int_0^1 \parentheses*{2x - 2x^2}\d x = \left.x^2 - \frac{2}{3}x^3\right|_{x = 0}^{x = 1} = 1 - \frac{2}{3} = \frac{1}{3},\\
+            E\parentheses*{Y} &= \int_{-\infty}^\infty yf^Y\parentheses*{y}\d y = \int_{-\infty}^\infty yf^X\parentheses*{y}\d y = E\parentheses*{X} = \frac{1}{3}.
+        \end{align*}
+        \item Zunächst gilt mit Satz C5.6 (und \(g: \R \to \R, x \mapsto g\parentheses*{x} = x^2\)):
+        \begin{align*}
+            E\parentheses*{X^2} &= \int_{-\infty}^\infty x^2 f^X\parentheses*{x}\d x = \int_0^1 2x^2\parentheses*{1 - x}\d x = \int_0^1\parentheses*{2x^2 - 2x^3}\d x = \left.\frac{2}{3}x^3 - \frac{1}{2}x^4\right|_{x = 0}^{x = 1} = \frac{2}{3} - \frac{1}{2} = \frac{1}{6},\\
+            E\parentheses*{Y^2} &= \int_{-\infty}^\infty y^2 f^Y\parentheses*{y}\d y = \int_{-\infty}^\infty y^2 f^X\parentheses*{y}\d y = E\parentheses*{X^2} = \frac{1}{6}.
+        \end{align*}
+        Es folgt mit Lemma C5.12, (1) sowie mit \(E\parentheses*{Y} = E\parentheses*{X}\) und \(E\parentheses*{Y^2} = E\parentheses*{X^2}\):
+        \[
+            \Var\parentheses*{Y} = \Var\parentheses*{X} = E\parentheses*{X^2} - \parentheses*{E\parentheses*{X}}^2 = \frac{1}{6} - \parentheses*{\frac{1}{3}}^2 = \frac{1}{18},
+        \]
+        \item Zunächst gilt gemäß Hinweis (Satz C5.6 mit \(g: \R^2 \to \R, \parentheses*{x, y} \mapsto g\parentheses*{x, y} = xy\)):
+        \begin{align*}
+            E\parentheses*{XY} &= \int_{-\infty}^\infty \int_{-\infty}^\infty xy\underbrace{f^{\parentheses*{X, Y}}\parentheses*{x, y}}_{= 0\text{, falls }x < 0\text{ oder }y < 0}\d x\d y\\
+            &= \int_0^\infty \int_0^\infty xy\underbrace{f^{\parentheses*{X, Y}}\parentheses*{x, y}}_{= 0\text{, falls }x + y > 1 \iff x > 1 - y}\d x\d y\\
+            &= \int_0^1 \int_0^{1 - y}2xy\d x\d y\\
+            &= 2\int_0^1 y\parentheses*{\int_0^{1 - y}x\d x}\d y\\
+            &= 2\int_0^1 y\parentheses*{\left.\frac{1}{2}x^2\right|_{x = 0}^{x = 1 - y}}\d y\\
+            &= 2\int_0^1 \frac{1}{2}y\parentheses*{1 - y}^2 \d y\\
+            &= \int_0^1\parentheses*{y - 2y^2 + y^3}\d y\\
+            &= \left.\frac{1}{2}y^2 - \frac{2}{3}y^3 + \frac{1}{4}y^4\right|_{y = 0}^{y = 1}\\
+            &= \frac{1}{2} - \frac{2}{3} + \frac{1}{4} = \frac{1}{12}.
+        \end{align*}
+        Hiermit erhält man schließlich
+        \begin{align*}
+            \Kov\parentheses*{X, Y} &= E\parentheses*{XY} - E\parentheses*{X}E\parentheses*{Y} = \frac{1}{12} - \frac{1}{3} \cdot \frac{1}{3} = -\frac{1}{36},\\
+            \Korr\parentheses*{X, Y} &= \frac{\Kov\parentheses*{X, Y}}{\sqrt{\Var\parentheses*{X} \cdot \Var\parentheses*{Y}}} = -\frac{\frac{1}{36}}{\sqrt{\parentheses*{\frac{1}{18}}^2}} = -\frac{\frac{1}{36}}{\frac{1}{18}} = -\frac{1}{2}.
+        \end{align*}
+    \end{enumerate}
+    
+    
+    \section*{Aufgabe 3}
+    
+    \begin{problem}
+        Gegeben seien zwei stochastisch unabhängige Zufallsvariablen \(X\) und \(Y\) mit \(X \sim \Exp\parentheses*{2}\) und \(Y \sim R\parentheses*{2, 4}\).
+        (Somit ist \(X\) exponentialverteilt mit Parameter \(\lambda = 2\) und \(Y\) (stetig) gleichverteilt auf dem Intervall \(\brackets*{2, 4}\).)
+        \begin{enumerate}
+            \item Bestimmen Sie eine Dichtefunktion \(f^{\parentheses*{X, Y}}: \R^2 \to \R\) des (zweidimensional stetigen) Zufallsvektors \(\parentheses*{X, Y}\).
+            \item Berechnen Sie \(E\parentheses*{XY}\).
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item Gemäß Voraussetzung und B3.7 bzw. B3.6 sind Riemann-Dichten \(f^X\) von \(X\) und \(f^Y\) von \(Y\) gegeben durch
+        \[
+            f^X\parentheses*{x} = \begin{cases}
+                2e^{-2x}, & \text{falls }x > 0,\\
+                0, & \text{falls }x \le 0,
+            \end{cases} \quad f^Y\parentheses*{y} = \begin{cases}
+                \frac{1}{2}, & \text{falls }y \in \brackets*{2, 4},\\
+                0, & \text{sonst}.
+            \end{cases}
+        \]
+        Weiter sind \(X\) und \(Y\) stochastisch unabhängig nach Voraussetzung.
+        Gemäß Satz C3.14 ist damit eine Riemann-Dichte \(f^{\parentheses*{X, Y}}\) von \(\parentheses*{X, Y}\) gegeben durch (Produktdichte):
+        \[
+            f^{\parentheses*{X, Y}}\parentheses*{x, y} = f^X\parentheses*{x} \cdot f^{Y}\parentheses*{y} = \begin{cases}
+                e^{-2x}, & \text{falls }x > 0\text{ und }2 \le y \le 4,\\
+                0, & \text{sonst}.
+            \end{cases}
+        \]
+        \item Gemäß Voraussetzung sowie Beispiel C5.2, (4) und (3) gilt mit \(\lambda = 2\) sowie \(a = 2\) und \(b = 4\):
+        \[
+            E\parentheses*{X} = \frac{1}{\lambda} = \frac{1}{2}, \quad E\parentheses*{Y} = \frac{a + b}{2} = \frac{2 + 4}{2} = 3.
+        \]
+        Hiermit folgt:
+        \[
+            E\parentheses*{XY} = E\parentheses*{X} \cdot E\parentheses*{Y} = \frac{3}{2}.
+        \]
+    \end{enumerate}
+\end{document}
