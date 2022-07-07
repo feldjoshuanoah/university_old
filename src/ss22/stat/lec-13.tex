@@ -1,0 +1,313 @@
+\documentclass{lecture}
+
+\institute{Institut für Statistik und Wirtschaftsmathematik}
+\title{Vorlesung 13}
+\author{Joshua Feld, 406718}
+\course{Statistik}
+\professor{Cramer}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \begin{example}
+        \begin{enumerate}
+            \item Die Zähldichte der \(\bin\parentheses*{5, \frac{1}{2}}\)-Verteilung ist bestimmt durch
+            \[
+                p^X\parentheses*{x} = \begin{cases}
+                    \binom{5}{x}\parentheses*{\frac{1}{2}}^x \parentheses*{1 - \frac{1}{2}}^{5 - x} = \binom{5}{x}\parentheses*{\frac{1}{2}}^5, & \text{falls }x \in \braces*{0, \ldots, 5},\\
+                    0, & \text{sonst}
+                \end{cases}
+            \]
+            mit \(\supp\parentheses*{P^X} = \braces*{0, \ldots, 5}\).
+            Daher ist die Verteilungsfunktion gegeben durch
+            \[
+                F^X\parentheses*{x} = \begin{cases}
+                    0, & \text{falls }x < 0,\\
+                    \frac{1}{2^5}\sum_{i = 0}^{\floor*{x}}\binom{5}{i}, & \text{falls }0 \le x \le 5,\\
+                    1, & \text{falls }x > 5,
+                \end{cases}
+            \]
+            wobei \(\floor*{x} = \max\braces*{z \in \Z : z \le x}\) die sogenannte untere Gauß-Klammer von \(x \in \R\) bezeichnet.
+            \item Die Verteilungsfunktion der Exponentialverteilung mit Parameter \(\lambda > 0\) ist gegeben durch
+            \[
+                F\parentheses*{x} = \begin{cases}
+                    0, & \text{falls }x < 0,\\
+                    1 - e^{-\lambda x}, & \text{falls }x \ge 0
+                \end{cases}
+            \]
+            und damit stetig auf \(\R\).
+            Die Verteilungsfunktion ergibt sich durch Integration der Riemann-Dichte wie folgt: Da für die Riemann-Dichte \(f\parentheses*{t} = 0\) gilt, falls \(t < 0\) ist, folgt für \(x < 0\)
+            \[
+                F\parentheses*{x} = \int_{-\infty}^x f\parentheses*{t}\d t = \int_{-\infty}^x 0\d t = 0.
+            \]
+            Ist \(x \ge 0\), so liefert dies mit der Darstellung der Riemann-Dichte für positive Argumente
+            \[
+                F\parentheses*{x} = \int_{-\infty}^x f\parentheses*{t}\d t = \int_0^x \lambda e^{-\lambda t} = \brackets*{-e^{-\lambda t}}_0^x = 1 - e^{-\lambda x}.
+            \]
+            \item In statistischen Normalverteilungsmodellen werden häufig die \(\sigma\)-, \(2\sigma\)- und \(3\sigma\)-Bereiche herangezogen, womit die Intervalle
+            \[
+                \parentheses*{\mu - \sigma, \mu + \sigma}, \quad \parentheses*{\mu - 2\sigma, \mu + 2\sigma}, \quad \parentheses*{\mu - 3\sigma, \mu + 3\sigma}
+            \]
+            gemeint sind.
+            Im \(3\sigma\)-Bereich liegt nahezu die gesamte ``Wahrscheinlichkeitsmasse'' einer \(N\parentheses*{\mu, \sigma^2}\)-Verteilung.
+            Mit der Bezeichnung \(\Phi\) für die Verteilungsfunktion der Standardnormalverteilung \(N\parentheses*{0, 1}\) und einer \(N\parentheses*{\mu, \sigma^2}\)-verteilten Zufallsvariablen \(X\) gilt:
+            \begin{align*}
+                P\parentheses*{X \in \parentheses*{\mu - k\sigma, \mu + k\sigma}} &= P\parentheses*{\mu - k\sigma \le X \le \mu + k\sigma}\\
+                &= P\parentheses*{-k \le \frac{X - \mu}{\sigma} \le k}\\
+                &= \Phi\parentheses*{k} - \Phi\parentheses*{-k}\\
+                &= 2\Phi\parentheses*{k} - 1\\
+                &\approx \begin{cases}
+                    0,6827, & \text{falls }k = 1,\\
+                    0,9545, & \text{falls }k = 2,\\
+                    0,9973, & \text{falls }k = 3.
+                \end{cases}
+            \end{align*}
+        \end{enumerate}
+    \end{example}
+
+    Ist die Verteilungsfunktion streng monoton wachsend, so kann die Umkehrfunktion gebildet werden.
+    In einer allgemeineren Definition werden auch Verteilungsfunktionen zugelassen, die stückweise konstant sind.
+
+    \begin{definition}
+        Sei \(F\) eine Verteilungsfunktion.
+        Dann heißt die durch
+        \[
+            F^{-1}\parentheses*{y} = \inf\braces*{x \in \R : F\parentheses*{x} \ge y}, \quad y \in \parentheses*{0, 1}
+        \]
+        definierte Funktion \(F^{-1}: \parentheses*{0, 1} \to \R\) \emph{Quantilfunktion} oder \emph{Pseudoinverse} von \(F\).
+    \end{definition}
+
+    Eigenschaften der Quantilfunktion sind im folgenden Lemma zusammengestellt.
+
+    \begin{lemma}
+        Sei \(F^{-1}\) die Quantilfunktion der Verteilungsfunktion \(F\).
+        Dann gilt:
+        \begin{enumerate}
+            \item \(F^{-1}\) ist monoton wachsend und linksseitig stetig.
+            \item Für alle \(x \in \R\) und \(y \in \parentheses*{0, 1}\) gilt:
+            \begin{enumerate}
+                \item \(F\parentheses*{x} \ge y \iff x \ge F^{-1}\parentheses*{y}\),
+                \item \(F\parentheses*{x-} \le y \iff x \le F^{-1}\parentheses*{y+}\),
+                \item \(F\parentheses*{F^{-1}\parentheses*{y}-} \le y \le F\parentheses*{F^{-1}\parentheses*{y}}\),
+                \item \(F^{-1}\parentheses*{F\parentheses*{x}} \le x \le F^{-1}\parentheses*{F\parentheses*{x}+}\).
+            \end{enumerate}
+            Dabei bezeichnen \(g\parentheses*{t+}\) und \(g\parentheses*{t-}\) den rechtsseitigen bzw. linksseitigen Grenzwert der Funktion \(g\) an der Stelle \(t \in \R\).
+            \item Sei \(X\) eine Zufallsvariable mit stetiger Verteilungsfunktion \(F\).
+            Dann ist \(F\parentheses*{X} \sim R\parentheses*{0, 1}\).
+            \item Sei \(Y \sim R\parentheses*{0, 1}\).
+            Dann ist \(F^{-1}\parentheses*{Y} \sim F\).
+        \end{enumerate}
+    \end{lemma}
+
+    In Lemma 1, (ii), c) und d) gilt offenbar Gleichheit, wenn \(F\) im Punkt \(F^{-1}\parentheses*{y}\) bzw. wenn \(F^{-1}\) im Punkt \(F\parentheses*{x}\) stetig ist.
+    Die Aussage in Lemma 1, (iv) findet u.a. in der Simulation Verwendung und zeigt auf, wie eine rechteckverteilte Zufallsvariable transformiert wird, um eine Zufallsvariable mit Verteilungsfunktion \(F\) zu erhalten.
+
+    Größte Werte \(x \in \R\), für die \(F\parentheses*{x} \le p\) oder kleinste Werte \(x \in \R\), für die \(F\parentheses*{x} > 1 - q\) gilt, spielen in der schließenden Statistik (bei statistischen Tests) eine wichtige Rolle und werden Quantile genannt.
+
+    \begin{definition}
+        Für \(p \in \parentheses*{0, 1}\) heißt \(Q_p = F^{-1}\parentheses*{p}\) das \emph{\(p\)-Quantil} von \(F\) bzw. der zu \(F\) gehörigen Wahrscheinlichkeitsverteilung \(P\).
+    \end{definition}
+
+    \begin{theorem}
+        Sei \(p \in \parentheses*{0, 1}\).
+        Ist \(F\) streng monoton wachsend und stetig, so ist \(Q_p\) die eindeutige Lösung der Gleichung \(F\parentheses*{x} = p\) in \(x \in \R\).
+    \end{theorem}
+
+
+    \section*{Mehrdimensionale Zufallsvariablen und Verteilungen}
+
+    Zufallsvektoren, die auch als mehrdimensionale Zufallsvariablen bezeichnet werden, werden in Definition C 1.3 als Funktionen von \(\Omega\) nach \(\R^n\) eingeführt.
+    Analog zu Definition C 1.5 spricht man von der Verteilung \(P^X\) von \(X = \parentheses*{X_1, \ldots, X_n}\).
+    Hierbei sind die Mengen \(A\), die in \(P^X\) eingesetzt werden können, aus einer geeigneten \(\sigma\)-Algebra zu wählen.
+    In dieser Vorlesung werden zur Vereinfachung nur Zufallsvektoren betrachtet, die entweder in allen Komponenten diskret sind oder Riemann-Dichten besitzen.
+
+    Die gemeinsame Verteilung der Zufallsvariablen \(X_1, \ldots, X_n\) ist durch die Angabe aller Wahrscheinlichkeiten \(P\parentheses*{X_1 \in A_1, \ldots, X_n \in A_n}\), für alle \(A_i \in \mathfrak{U}_i, i \in \braces*{1, \ldots, n}\) bestimmt.
+    Im diskreten Fall kann man sich dabei auf einelementige Mengen beschränken; im Fall von Riemann-Dichten genügt es, für \(A_i\) alle halboffenen Intervalle im \(R_n\) zu betrachten.
+    
+    Wie im eindimensionalen Fall wird die Verteilungsfunktion zur Beschreibung der Wahrscheinlichkeitsverteilung \(P^X\) eingeführt.
+
+    \begin{definition}
+        Sei \(X = \parentheses*{X_1, \ldots, X_n}\) ein Zufallsvektor mit Wahrscheinlichkeitsverteilung \(P^X\).
+        Die durch
+        \begin{align*}
+            F^X\parentheses*{x} &= P^X\parentheses*{\left(-\infty, x_1\right] \times \cdots \times \left(-\infty, x_n\right]}\\
+            &= P\parentheses*{X_1 \in \left(-\infty, x_1\right], \ldots, X_n \in \left(-\infty, x_n\right]}\\
+            &= P\parentheses*{X_1 \le x_1, \ldots, X_n \le x_n}, \quad \parentheses*{x_1, \ldots, x_n} \in \R^n
+        \end{align*}
+        definierte Funktion heißt \emph{multivariate} (oder \emph{mehrdimensionale}) \emph{Verteilungsfunktion}.
+    \end{definition}
+
+    Führt man für einen diskreten \(n\)-dimensionalen Zufallsvektor \(X = \parentheses*{X_1, \ldots, X_n}\) mit Verteilung \(P^X\) analog zum eindimensionalen Fall den Träger
+    \[
+        T = \supp\parentheses*{P^{X_1, \ldots, X_n}} = \braces*{\parentheses*{x_1, \ldots, x_n} \in \R^n : P\parentheses*{X_1 = x_1, \ldots, X_n = x_n} > 0}
+    \]
+    ein, so heißt die Funktion \(p^X: \R^n \to \brackets*{0, 1}\) mit
+    \[
+        p^X\parentheses*{x} = \begin{cases}
+            P^X\parentheses*{\braces*{x}} = P\parentheses*{X = x} = P\parentheses*{X_1 = x_1, \ldots, X_n = x_n}, & \text{falls }x \in T,\\
+            0, & \text{falls }x \not\in T
+        \end{cases}
+    \]
+    Zähldichte von \(P^X\) (bzw. von \(X\)) mit Träger \(T\).
+    Die Verteilungsfunktion \(F^X\) lässt sich schreiben als
+    \[
+        F^X\parentheses*{x_1, \ldots, x_n} = \sum_{\substack{\parentheses*{t_1, \ldots, t_n} \in T,\\t_i \le x_i, 1 \le i \le n}}p^X\parentheses*{t_1, \ldots, t_n}, \quad \parentheses*{x_1, \ldots, x_n} \in \R^n.
+    \]
+    In vielen Anwendungen sind die gemeinsame Verteilung einer Auswahl von Komponenten des Vektors \(X\) und die Verteilungen der Komponenten \(X_i\) des Vektorsvon Interesse.
+    Diese heißen Rand- oder Marginalverteilungen.
+
+    \begin{definition}
+        Sei \(X = \parentheses*{X_1, \ldots, X_n}\) ein Zufallsvektor mit Verteilung \(P^X\).
+        Die Verteilung von \(\parentheses*{X_{i_1}, \ldots, X_{i_m}}\) für \(m \parentheses*{< n}\) Indizes mit \(1 \le i_1 < \cdots < i_m \le n\) heißt \emph{\(m\)-dimensionale Rand-} oder \emph{Marginalverteilung} zu \(\parentheses*{i_1, \ldots, i_m}\).
+        Dier Verteilung von \(X_i\) heißt \emph{\(i\)-te Rand-} oder \emph{Marginalverteilung}.
+    \end{definition}
+
+    Sei \(X = \parentheses*{X_1, \ldots, X_n}\) ein Zufallsvektor mit Verteilung \(P^X\).
+    Die Randverteilung von \(\parentheses*{X_{i_1}, \ldots, X_{i_m}}\) wird bestimmt, indem in den ``nicht benötigten Komponenten'' \(\R\) als Menge eingesetzt wird:
+    Sei \(B = \bigtimes_{j = 1}^m \brackets*{a_j, b_j}\) das kartesische Produkt von Intervallen \(\brackets*{a_j, b_j}, j \in \braces*{1, \ldots, m}\).
+    Dann ist
+    \begin{align*}
+        P^{\parentheses*{X_{i_1}, \ldots, X_{i_m}}}\parentheses*{B} &= P\parentheses*{X_{i_1} \in \brackets*{a_1, b_1}, \ldots, X_{i_m} \in \brackets*{a_m, b_m}}\\
+        &= P\parentheses*{X_{i_j} \in \brackets*{a_j, b_j}, j \in \braces*{1, \ldots, m}\text{, und }X_j \in \R, j \in \braces*{1, \ldots, n} \setminus \braces*{i_1, \ldots, i_m}}.
+    \end{align*}
+    Insbesondere ist die Verteilungsfunktion \(F^{X_i}\) der \(i\)-ten Randverteilung bestimmt durch
+    \[
+        F^{X_i}\parentheses*{x} = P^X(\R \times \cdots \times \R \times \underbrace{\left(-\infty, x\right]}_{i\text{-te Komponente}} \times \R \times \cdots \times \R).
+    \]
+    Dieser Zusammenhang kann wie folgt ausgenutzt werden.
+    Ist die Verteilungsfunktion \(F^{X_1, \ldots, X_n}\) eines Zufallsvektors \(\parentheses*{X_1, \ldots, X_n}\) gegeben, so kann die Verteilungsfunktion eines Teilvektors \(\parentheses*{X_{i_1}, \ldots, X_{i_m}}\) durch Grenzwertbildung ermittelt werden.
+    Es gilt der Zusammenhang
+    \[
+        F^{X_{i_1}, \ldots, X_{i_m}}\parentheses*{x_{i_1}, \ldots, x_{i_m}} = \lim_{x_j \to \infty, j \not\in \braces*{i_1, \ldots, i_m}}F^{X_1, \ldots, X_n}\parentheses*{x_1, \ldots, x_n}.
+    \]
+    Als Spezialfall werde der Fall \(n = 3\) betrachtet.
+    Dann gilt etwa
+    \[
+        F^{X_1}\parentheses*{x_1} = \lim_{x_2, x_3 \to \infty}F^{X_1, X_2, X_3}\parentheses*{x_1, x_2, x_3}, \quad F^{X_2, X_3}\parentheses*{x_2, x_3} = \lim_{x_1 \to \infty}F^{X_1, X_2, X_3}\parentheses*{x_1, x_2, x_3}.
+    \]
+    Die eindimensionalen Randverteilungen legen die gemeinsame Verteilung nicht eindeutig fest, wie das folgende Beispiel zeigt.
+
+    \begin{example}
+        Seien \(X = \parentheses*{X_1, X_2}, Y = \parentheses*{Y_1, Y_2}\) Zufallsvektoren auf dem Wahrscheinlichkeitsraum \(\parentheses*{\Omega, \mathfrak{U}, P}\) mit
+        \[
+            X\parentheses*{\Omega} = Y\parentheses*{\Omega} = \braces*{0, 1}^2 = \braces*{\parentheses*{0, 0}, \parentheses*{1, 0}, \parentheses*{0, 1}, \parentheses*{1, 1}},
+        \]
+        \begin{align*}
+            P^X\parentheses*{\parentheses*{0, 1}} = P^X\parentheses*{\parentheses*{1, 0}} &= \frac{1}{2}, & P^X\parentheses*{\parentheses*{0, 0}} = P^X\parentheses*{\parentheses*{1, 1}} &= 0,\\
+            P^Y\parentheses*{\parentheses*{0, 1}} = P^Y\parentheses*{\parentheses*{1, 0}} &= 0, & P^Y\parentheses*{\parentheses*{0, 0}} = P^Y\parentheses*{\parentheses*{1, 1}} &= \frac{1}{2}.
+        \end{align*}
+        Damit ist offensichtlich \(P^X \ne P^Y\).
+        Für die Randverteilungen gilt jedoch:
+        \begin{align*}
+            P^{X_1}\parentheses*{j} &= P^X\parentheses*{\braces*{j} \times \R}\\
+            &= P\parentheses*{X_1 = j, X_2 \in \braces*{0, 1}}\\
+            &= P\parentheses*{X_1 = j, X_2 = 0} + P\parentheses*{X_1 = j, X_2 = 1}\\
+            &= P^X\parentheses*{\parentheses*{j, 0}} + P^X\parentheses*{\parentheses*{j, 1}} = \frac{1}{2}, \quad j \in \braces*{0, 1},
+        \end{align*}
+        und analog
+        \[
+            P^{Y_1}\parentheses*{j} = P^Y\parentheses*{\parentheses*{j, 0}} + P^Y\parentheses*{\parentheses*{j, 1}} = \frac{1}{2}, \quad j \in \braces*{0, 1}.
+        \]
+        Also ist \(P^{X_1} = P^{Y_1}\).
+        Ebenso zeigt man \(P^{X_2} = P^{Y_2}\).
+    \end{example}
+
+    \begin{example}
+        Diskrete endliche mehrdimensionale Verteilungen werden oft in Form einer sogenannten Wahrscheinlichkeitstafel oder Kontingenztafel notiert.
+        Die Wahrscheinlichkeitsverteilungen \(P^{\parentheses*{X_1, X_2}}\) und \(P^{\parentheses*{Y_1, Y_2}}\) aus vorherigem Beispiel werden dann geschrieben als (\(p_{ij}^{\parentheses*{X_1, X_2}} = P\parentheses*{X_1 = i, X_2 = j}\) etc.)
+        \begin{center}
+            \begin{tabular}{c|cc|c}
+                \(p_{ij}^{\parentheses*{X_1, X_2}}\) & \(0\) & \(1\) & \(P\parentheses*{X_1 = i}\)\\
+                \midrule
+                \(0\) & \(0\) & \(\frac{1}{2}\) & \(\frac{1}{2}\)\\
+                \(1\) & \(\frac{1}{2}\) & \(0\) & \(\frac{1}{2}\)\\
+                \midrule
+                \(P\parentheses*{X_2 = j}\) & \(\frac{1}{2}\) & \(\frac{1}{2}\) & \(1\)
+            \end{tabular} \quad \begin{tabular}{c|cc|c}
+                \(p_{ij}^{\parentheses*{Y_1, Y_2}}\) & \(0\) & \(1\) & \(P\parentheses*{Y_1 = i}\)\\
+                \midrule
+                \(0\) & \(\frac{1}{2}\) & \(0\) & \(\frac{1}{2}\)\\
+                \(1\) & \(0\) & \(\frac{1}{2}\) & \(\frac{1}{2}\)\\
+                \midrule
+                \(P\parentheses*{Y_2 = j}\) & \(\frac{1}{2}\) & \(\frac{1}{2}\) & \(1\)
+            \end{tabular}
+        \end{center}
+        Die Zeilen- und Spaltensummen führen zu den Randverteilungen.
+        Die Aussage aus dem vorherigen Beispiel ist anhand der beiden Tafeln offensichtlich.
+    \end{example}
+
+    Ein Beispiel für eine multivariate diskrete Wahrscheinlichkeitsverteilung wurde in Definition 3 der sechsten Vorlesung mit der Polynomialverteilung bereits gegeben.
+    Diese wird hier in der Notation mit Zufallsvariablen wiederholt und interpretiert.
+
+    \begin{example}
+        Ein Zufallsexperiment liefere eines von \(m \ge 2\) möglichen Ergebnissen \(A_i, 1 \le i \le m\) die als Mengen beschrieben seien.
+        Seien \(A_1, \ldots, A_m\) paarweise disjunkt mit \(P\parentheses*{A_j} = p_j, 1 \le j \le m\) und \(\sum_{j = 1}^m p_j = 1\).
+        Nun betrachtet man die \(n\)-malige unabhängige Versuchswiederholung und beschreibt dieses Experiment über dem Grundraum \(\Omega = \braces*{1, \ldots, m}^n\).
+        Interessiert man sich für die Verteilung der Ergebnisse und beschreibt mit der Zufallsvariablen \(X_j\) die Anzahl des Auftretens von Ereignis \(A_j\) bei \(n\) Versuchen, \(1 \le j \le m\), so kann man für \(k_j \in \N_0, 1 \le j \le m\) mit \(\sum_{j = 1}^m k_j = n\) zeigen:
+        \begin{align*}
+            P\parentheses*{X_1 = k_1, \ldots, X_m = k_m} &= P\parentheses*{\braces*{\omega \in \Omega : X_1\parentheses*{\omega} = k_1, \ldots, X_m\parentheses*{\omega} = k_m}}\\
+            &= P^{\parentheses*{X_1, \ldots, X_m}}\parentheses*{\braces*{\parentheses*{k_1, \ldots, k_m}}}\\
+            &= \frac{n!}{k_1! \cdot \ldots \cdot k_m!}\prod_{i = 1}^m p_i^{k_i}.
+        \end{align*}
+        Die Randverteilung von \(X_1\) ist gegeben durch die Zähldichte (\(k \in \braces*{0, \ldots, n}\))
+        \[
+            P^{X_1}\parentheses*{\braces*{k}} = P^{\parentheses*{X_1, \ldots, X_m}}\parentheses*{\braces*{k} \times \R \times \cdots \times \R} = \cdots = \binom{n}{k}p_1^k\parentheses*{1 - p_1}^{n - k},
+        \]
+        und damit eine \(\bin\parentheses*{n, p_1}\)-Verteilung.
+        Dies gilt entsprechend für die anderen eindimensionalen Randverteilungen mit \(p_j\) an Stelle von \(p_1\).
+    \end{example}
+
+    Bei stochastisch unabhängigen Zufallsvariablen ist die gemeinsame Verteilungsfunktion eindeutig durch die Verteilungsfunktionen der eindimensionalen Randverteilungen bestimmt.
+
+    \begin{theorem}
+        \(X_1, \ldots, X_n\) sind stochastisch unabhängige Zufallsvariablen mit Verteilungsfunktionen \(F^{X_1}, \ldots, F^{X_n}\) genau dann, wenn
+        \[
+            F^{\parentheses*{X_1, \ldots, X_n}}\parentheses*{x_1, \ldots, x_n} = F^{X_1}\parentheses*{x_1} \cdot \ldots \cdot F^{X_n}\parentheses*{x_n} \quad \forall\parentheses*{x_1, \ldots, x_n} \in \R^n.
+        \]
+    \end{theorem}
+
+    Der Begriff der Riemann-Dichte zur Beschreibung einer Wahrscheinlichkeitsverteilung wird auf den \(n\)-dimensionalen Fall übertragen.
+
+    \begin{definition}
+        Eine Riemann-integrierbare Funktion \(f: \R^n \to \R\) heißt \emph{Riemann-Dichtefunktion} (oder Riemann-Dichte oder kurz Dichte) über \(\R^n\), falls \(f\parentheses*{x} \ge 0, x \in \R^n\), und
+        \[
+            \int_{-\infty}^\infty \cdots \int_{-\infty}^\infty f\parentheses*{x_1, \ldots, x_n}\d x_1 \ldots \d x_n = 1
+        \]
+        gilt.
+    \end{definition}
+
+    Eine Riemann-Dichte legt eindeutig ein Wahrscheinlichkeitsmaß über \(\R^n\) fest.
+
+    \begin{remark}
+        Ist \(f\) eine Dichte über \(\R^n\), so ist die zugehörige Verteilungsfunktion \(F\) stetig und gegeben durch
+        \[
+            F\parentheses*{x_1, \ldots, x_n} = \int_{-\infty}^{x_n} \cdots \int_{-\infty}^{x_1}f\parentheses*{y_1, \ldots, y_n}\d y_1 \ldots \d y_n, \quad \parentheses*{x_1, \ldots, x_n} \in \R^n.
+        \]
+        Wahrscheinlichkeiten für das zugehörige Wahrscheinlichkeitsmaß \(P\) bestimmt man über die Integraldarstellung
+        \[
+            P\parentheses*{\bigtimes_{i = 1}^n \brackets*{a_i, b_i}} = \int_{a_n}^{b_n} \cdots \int_{a_1}^{b_1}f\parentheses*{y_1, \ldots, y_n}\d y_1 \ldots \d y_n
+        \]
+        für alle \(a = \parentheses*{a_1, \ldots, a_n} \in \R^n\) und \(b = \parentheses*{b_1, \ldots, b_n} \in \R^n\) mit \(a_i \le b_i, 1 \le i \le n\).
+        Die eindimensionalen Intervalle \(\brackets*{a_i, b_i}, 1 \le i \le n\) können dabei auch (ohne Änderung des Wertes der Wahrscheinlichkeit) durch halboffene oder offene Intervalle ersetzt werden.
+    \end{remark}
+
+    \begin{example}
+        Eine zweidimensionale Dichtefunktion ist gegeben durch
+        \[
+            f\parentheses*{x, y} = \begin{cases}
+                2e^{-\parentheses*{2x + y}}, & \text{falls }x, y \ge 0,\\
+                0, & \text{sonst}.
+            \end{cases}
+        \]
+        Die zugehörige Verteilungsfunktion berechnet sich zu
+        \[
+            F\parentheses*{x, y} = \begin{cases}
+                \parentheses*{1 - e^{-2x}}\parentheses*{1 - e^{-y}}, & \text{falls }x, y \ge 0,\\
+                0, & \text{sonst}.
+            \end{cases}
+        \]
+    \end{example}
+\end{document}

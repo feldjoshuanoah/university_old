@@ -1,0 +1,201 @@
+\documentclass{lecture}
+
+\institute{Institut für Statistik und Wirtschaftsmathematik}
+\title{Vorlesung 14}
+\author{Joshua Feld, 406718}
+\course{Statistik}
+\professor{Cramer}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \begin{example}
+        Die bivariate Normalverteilung eines Zufallsvektors \(\parentheses*{X_1, X_2}\) ist definiert durch die Dichtefunktion (für \(x_1, x_2 \in \R\))
+        \begin{equation}\label{eq:1}
+            f^{X_1, X_2}\parentheses*{x_1, x_2} = \frac{1}{2\pi\sigma_1 \sigma_2 \sqrt{1 - \rho^2}}\exp\parentheses*{-\frac{1}{2 \cdot \parentheses*{1 - \rho^2}}\parentheses*{\frac{\parentheses*{x_1 - \mu_1}^2}{\sigma_1^2} - 2\rho\frac{\parentheses*{x_1 - \mu_1}\parentheses*{x_2 - \mu_2}}{\sigma_1 \sigma_2} + \frac{\parentheses*{x_2 - \mu_2}^2}{\sigma_2^2}}}
+        \end{equation}
+        mit den fünf Parametern \(\mu_1, \mu_2 \in \R\), \(\sigma_1^2, \sigma_2^2 > 0\) und \(\rho \in \parentheses*{-1, 1}\).
+        Sie wird bezeichnet mit \(\parentheses*{X_1, X_2} \sim N_2\parentheses*{\mu_1, \mu_2, \sigma_1^2, \sigma_2^2, \rho}\).
+        Die Dichtefunktion wird direkt aus der in Definition x aus Vorlesung 13 gegebenen Dichte der multivariaten Normalverteilung hergeleitet.
+        Als Matrix \(\Sigma\) wird
+        \[
+            \Sigma = \begin{pmatrix}
+                \sigma_1^2 & \rho\sigma_1 \sigma_2\\
+                \rho\sigma_1 \sigma_2 & \sigma_2^2
+            \end{pmatrix} \in \R^{2 \times 2}
+        \]
+        gewählt, deren Determinante \(\det\Sigma = \sigma_1^2 \sigma_2^2\parentheses*{1 - \rho^2}\) ist.
+        Dies impliziert insbesondere nach dem Minorantenkriterium, dass \(\Sigma\) nur für \(\rho \in \parentheses*{-1, 1}\) positiv definit ist.
+        Der Vektor \(\mu\) ist gegeben durch \(\mu = \parentheses*{\mu_1, \mu_2} \in \R^2\).
+        Ausmultiplizieren des Arguments der Exponentialfunktion in Beispiel x aus Vorlesung 13 mit
+        \[
+            \Sigma^{-1} = \frac{1}{1 - \rho^2}\begin{pmatrix}
+                \frac{1}{\sigma_1^2} & -\frac{\rho}{\sigma_1 \sigma_2}\\
+                -\frac{\rho}{\sigma_1 \sigma_2} & \frac{1}{\sigma_2^2}
+            \end{pmatrix}
+        \]
+        liefert die Darstellung in \eqref{eq:1}.
+    \end{example}
+
+    Die \(i\)-te Randdichte einer multivariaten Verteilung, die durch ihre \(n\)-dimensionale Dichte bestimmt ist, erhält man durch Integration.
+
+    \begin{remark}
+        Ist \(X = \parentheses*{X_1, \ldots, X_n}\) ein Zufallsvektor mit Dichte \(f^X\), so gilt für die \(i\)-te Randdichte (die Dichtefunktion der \(i\)-ten Randverteilung) mit \(t \in \R\):
+        \[
+            f^{X_i}\parentheses*{t} = \int_{-\infty}^\infty \cdots \int_{-\infty}^\infty f^X\parentheses*{x_1, \ldots, x_{i - 1}, t, x_{i + 1}, \ldots, x_n}\d x_1 \ldots \d x_{i - 1} \d x_{i + 1} \ldots \d x_n.
+        \]
+    \end{remark}
+
+    Die multivariate Normalverteilung hat die besondere Eigenschaft, dass die Randverteilungen wiederum Normalverteilungen sind.
+    Für die bivariate Normalverteilung ist diese Aussage im folgenden Satz enthalten.
+
+    \begin{theorem}
+        Sei \(\parentheses*{X_1, X_2} \sim N_2\parentheses*{\mu_1, \mu_2, \sigma_1^2, \sigma_2^2, \rho}\) mit \(\mu_1, \mu_2 \in \R\), \(\sigma_1^2, \sigma_2^2 > 0\) sowie \(\rho \in \parentheses*{-1, 1}\).
+        Dann gilt:
+        \[
+            X_1 \sim N\parentheses*{\mu_1, \sigma_1^2}, \quad X_2 \sim N\parentheses*{\mu_2, \sigma_2^2}.
+        \]
+    \end{theorem}
+
+    \begin{proof}
+        \(\parentheses*{X_1, X_2}\) hat die in \eqref{eq:1} gegebene Dichte.
+        Das Argument der Exponentialfunktion kann durch eine geeignete quadratische Ergänzung als Summe zweier Quadrate geschrieben werden:
+        \begin{align*}
+            &\frac{\parentheses*{x_1 - \mu_1}^2}{\sigma_1^2} - 2\rho\frac{\parentheses*{x_1 - \mu_1}\parentheses*{x_2 - \mu_2}}{\sigma_1 \sigma_2} + \frac{\parentheses*{x_2 - \mu_2}^2}{\sigma_2^2}\\
+            &= \frac{\parentheses*{x_1 - \mu_1}^2}{\sigma_1^2} - 2\rho\frac{\parentheses*{x_1 - \mu_1}\parentheses*{x_2 - \mu_2}}{\sigma_1 \sigma_2} + \frac{\rho^2\parentheses*{x_2 - \mu_2}^2}{\sigma_2^2} + \frac{\parentheses*{1 - \rho^2}\parentheses*{x_2 - \mu_2}^2}{\sigma_2^2}\\
+            &= \parentheses*{\frac{x_1 - \mu_1}{\sigma_1} - \frac{\rho\parentheses*{x_2 - \mu_2}}{\sigma_2}}^2 + \frac{\parentheses*{1 - \rho^2}\parentheses*{x_2 - \mu_2}^2}{\sigma_2^2}\\
+            &= \frac{\parentheses*{x_1 - \mu_1 - \frac{\sigma_1 \rho\parentheses*{x_2 - \mu_2}}{\sigma_2}}^2}{\sigma_1^2} + \frac{\parentheses*{1 - \rho^2}\parentheses*{x_2 - \mu_2}^2}{\sigma_2^2}.
+        \end{align*}
+        Daraus ergibt sich für die Dichte in \eqref{eq:1} die Faktorisierung
+        \[
+            f^{X_1, X_2}\parentheses*{x_1, x_2} = g\parentheses*{x_1, x_2} \cdot h\parentheses*{x_2},
+        \]
+        wobei
+        \[
+            g\parentheses*{x_1, x_2} = \frac{1}{\sqrt{2\pi}\sigma_1\sqrt{1 - \rho^2}}\exp\parentheses*{-\frac{1}{2\parentheses*{1 - \rho^2}\sigma_1^2}\parentheses*{x_1 - \mu_1 - \frac{\sigma_1 \rho\parentheses*{x_2 - \mu_2}}{\sigma_2}}^2}
+        \]
+        und
+        \[
+            h\parentheses*{x_2} = \frac{1}{\sqrt{2\pi}\sigma_2}\exp\parentheses*{-\frac{\parentheses*{x_2 - \mu_2}^2}{2\sigma_2^2}}.
+        \]
+        Dabei ist \(g\parentheses+{\cdot, x_2}\) für jedes feste \(x_2 \in \R\) die Dichte einer \(N\parentheses*{\mu_1 + \frac{\sigma_1 \rho\parentheses*{x_2 - \mu_2}}{\sigma_2}, \parentheses*{1 - \rho^2}\sigma_1^2}\)-Verteilung, \(h\) ist Dichte einer \(N\parentheses*{\mu_2, \sigma_2^2}\)-Verteilung.
+        Die Integration bzgl. \(x_1\) liefert nun
+        \[
+            f^{X_2}\parentheses*{x_2} = \int_{-\infty}^\infty f^{X_1, X_2}\parentheses*{x_1, x_2}\d x_1 = h\parentheses*{x_2}\underbrace{\int_{-\infty}^\infty g\parentheses*{x_1, x_2}\d x_1}_{= 1} = h\parentheses*{x_2},
+        \]
+        da das Integral über eine Dichtefunktion stets gleich Eins ist.
+        Damit ist \(f^{X_2}\) die Dichte einer \(N\parentheses*{\mu_2, \sigma_2^2}\)-Verteilung.
+        Eine analoge Argumentation liefert die Randverteilung von \(X_1\).
+    \end{proof}
+
+    Für Dichten multivariater Verteilungen gilt ferner allgemein der folgende Zusammenhang zur stochastischen Unabhängigkeit.
+
+    \begin{theorem}\label{thrm:2}
+        \(X_1, \ldots, X_n\) sind stochastisch unabhängige Zufallsvariablen mit Dichten \(f^{X_1}, \ldots, f^{X_n}\) genau dann, wenn
+        \[
+            f^{\parentheses*{X_1, \ldots, X_n}}\parentheses*{x_1, \ldots, x_n} = \prod_{i = 1}^n f^{X_i}\parentheses*{x_i} \quad \forall\parentheses*{x_1, \ldots, x_n} \in \R^n.
+        \]
+    \end{theorem}
+
+    Im Fall der stochastischen Unabhängigkeit ist also die gemeinsame Dichte gerade durch das Produkt der Randdichten gegeben.
+    Für die bivariate Normalverteilung liefert Theorem \ref{thrm:2} eine einfache Charakterisierung der stochastischen Unabhängigkeit.
+
+    \begin{theorem}
+        Sei \(\parentheses*{X_1, X_2} \sim N_2\parentheses*{\mu_1, \mu_2, \sigma_1^2, \sigma_2^2, \rho}\) mit \(\mu_1, \mu_2 \in \R\), \(\sigma_1^2, \sigma_2^2 > 0\) sowie \(\rho \in \parentheses*{-1, 1}\).
+        Dann gilt:
+        \[
+            X_1, X_2\text{ stochastisch unabhängig} \iff \rho = 0.
+        \]
+    \end{theorem}
+
+    \begin{proof}
+        Ist \(\rho = 0\), so resultiert direkt die geforderte Produktdarstellung aus \eqref{eq:1} mit den Eigenschaften der Exponentialfunktion.
+        Sei umgekehrt die Gleichung \(f^{X_1, X_2}\parentheses*{x_1, x_2} = f^{X_1}\parentheses*{x_1} \cdot f^{X_2}\parentheses*{x_2}\) für alle \(x_1, x_2 \in \R\) gegeben.
+        Dann gilt speziell für \(x_1 = \mu_1\) und \(x_2 = \mu_2\)
+        \[
+            f^{X_1, X_2}\parentheses*{\mu_1, \mu_2} = f^{X_1}\parentheses*{\mu_1} \cdot f^{X_2}\parentheses*{\mu_2} \iff \frac{1}{2\pi\sigma_1 \sigma_2 \sqrt{1 - \rho^2}} = \frac{1}{\sqrt{2\pi}\sigma_1} \cdot \frac{1}{\sqrt{2\pi}\sigma_2}.
+        \]
+        Die letzte Gleichung ist äquivalent zu \(\sqrt{1 - \rho^2} = 1\) bzw. \(\rho^2 = 0\).
+    \end{proof}
+
+
+    \section*{Transformationen von Zufallsvariablen}
+
+    Ausgehend von einer Wahrscheinlichkeitsverteilung wird in der Analyse stochastischer Modelle häufg die Verteilung transformierter Zufallsvariablen oder Zufallsvektoren benötigt.
+    Als Hilfsmittel zur Berechnung der Verteilungen derartiger Transformationen werden nachfolgend für Zufallsvariablen und Zufallsvektoren mit Riemann-Dichten sogenannte Transformationsformeln betrachtet.
+    Im Eindimensionalen wird meist über die Verteilungsfunktion argumentiert.
+
+    \begin{example}
+        \begin{enumerate}
+            \item Die Normalverteilung wurde in Definition 12 der siebten Vorlesung eingeführt.
+            Dort wurde bereits die folgende Eigenschaft erwähnt: Ist \(X\) standardnormalverteilt und sind \(\mu \in \R, \sigma > 0\) Parameter, so gilt
+            \[
+                Y = \sigma X + \mu \sim N\parentheses*{\mu, \sigma^2},
+            \]
+            d.h. die lineare Transformation \(Y\) einer normalverteilten Zufallsvariablen \(X\) ist wiederum normalverteilt.
+            Für \(y \in \R\) gilt nämlich:
+            \begin{align*}
+                F^Y\parentheses*{y} &= P\parentheses*{Y \le y}\\
+                &= P\parentheses*{X \le \frac{y - \mu}{\sigma}}\\
+                &= \int_{-\infty}^{\frac{y - \mu}{\sigma}}\frac{1}{\sqrt{2\pi}}\exp\braces*{-\frac{x^2}{2}}\d x\\
+                &= \frac{1}{\sqrt{2\pi}\sigma}\int_{-\infty}^y \exp\braces*{-\frac{\parentheses*{x - \mu}^2}{2\sigma^2}}\d x\\
+                &= \Phi_{\mu, \sigma^2}\parentheses*{y},
+            \end{align*}
+            da \(f\parentheses*{x} = \frac{1}{\sqrt{2\pi}\sigma}\exp\braces*{-\frac{\parentheses*{x - \mu}^2}{2\sigma^2}}, x \in \R\) die Dichte der \(N\parentheses*{\mu, \sigma^2}\)-Verteilung ist.
+
+            Andererseits folgt mit derselben Argumentation: Ist \(Y \sim N\parentheses*{\mu, \sigma^2}\), so gilt \(X = \frac{Y - \mu}{\sigma} \sim N\parentheses*{0, 1}\).
+            Da also jede Normalverteilung (durch eine lineare Transformation) auf eine Standardnormalverteilung transformiert werden kann, müssen nur für diese numerische Werte vorliegen; diese findet man in Tabellen zusammengefasst in vielen Büchern zur Statistik.
+            Der Zusammenhang wird in der schließenden Statistik bei zugrundegelegten Normalverteilungen oft verwendet.
+            \item Seien \(X \sim N\parentheses*{0, 1}\) und \(Y = X^2\).
+            Für die Verteilung des Quadrats einer standardnormalverteilten Zufallsvariablen gilt aufgrund der Beziehung \(\Phi\parentheses*{x} = 1 - \Phi\parentheses*{-x}\):
+            \[
+                F^Y\parentheses*{y} = P\parentheses*{X^2 \le y} = \begin{cases}
+                    0, & \text{falls }y \le 0,\\
+                    P\parentheses*{-\sqrt{y} \le X \le \sqrt{y}} = \Phi\parentheses*{\sqrt{y}} - \Phi\parentheses*{-\sqrt{y}} = 2\Phi\parentheses*{\sqrt{y}} - 1, & \text{falls }y > 0.
+                \end{cases}
+            \]
+            Damit gilt für die Dichte von \(Y\) für \(y > 0\):
+            \[
+                f^Y\parentheses*{y} = \frac{\d}{\d y}F^Y\parentheses*{y} = 2\varphi\parentheses*{\sqrt{y}} \cdot \frac{1}{2\sqrt{y}} = \frac{1}{\sqrt{2\pi}}y^{-\frac{1}{2}}e^{-\frac{y}{2}}.
+            \]
+            Wegen \(\Gamma\parentheses*{\frac{1}{2}} = \sqrt{\pi}\) ist \(Y \sim \chi^2\parentheses*{1}\) bzw. \(Y \sim \Gamma\parentheses*{\frac{1}{2}, \frac{1}{2}}\).
+            Damit ist auch die Verteilung einer Summe \(X_1^2 + \cdots + X_n^2\) stochastisch unabhängiger \(N\parentheses*{0, 1}\)-verteilter Zufallsvariablen \(X_1, \ldots, X_n\) wiederum \(\chi^2\)-verteilt: \(\sum_{i = 1}^n X_i^2 \sim \chi^2\parentheses*{n}\) (bzw. \(\sim \Gamma\parentheses*{\frac{1}{2}, \frac{n}{2}}\)).
+            \item Analog zu 1) resultiert für \(X \sim \Gamma\parentheses*{\alpha, \beta}\) und \(a > 0\) die Eigenschaft
+            \[
+                aX \sim \Gamma\parentheses*{\frac{\alpha}{a}, \beta}.
+            \] 
+        \end{enumerate}
+    \end{example}
+
+    \begin{theorem}
+        Die Zufallsvariable \(X\) habe die Riemann-Dichte \(f^X\) mit
+        \[
+            f^X\parentheses*{x}\begin{cases}
+                > 0, & \text{falls }x \in \parentheses*{a, b},\\
+                = 0, & \text{sonst}.
+            \end{cases}
+        \]
+        Weiterhin sei die Funktion \(g: \parentheses*{a, b} \to \parentheses*{c, d}\) bijektiv und stetig differenzierbar mit stetig differenzierbarer Umkehrfunktion \(g^{-1}\).
+        Dann besitzt die transformierte Zufallsvariable \(Y = g\parentheses*{X}\) die Dichte
+        \[
+            f^Y\parentheses*{y} = \begin{cases}
+                \absolute*{\parentheses*{g^{-1}}'\parentheses*{y}}f^X\parentheses*{g^{-1}\parentheses*{y}}, & \text{falls }y \in \parentheses*{c, d},\\
+                0, & \text{sonst}.
+            \end{cases}
+        \]
+    \end{theorem}
+
+    \begin{remark}
+        Die obige Formel enthält die Ableitung der Umkehrfunktion.
+        Unter den Voraussetzungen des Theorem gilt mit einer Formel für die Ableitung der Umkehrfunktion \(\parentheses*{g^{-1}}'\parentheses*{y} = \frac{1}{g'\parentheses*{g^{-1}\parentheses*{y}}}\) die Darstellung
+        \[
+            f^Y\parentheses*{y} = \frac{f^X\parentheses*{g^{-1}\parentheses*{y}}}{\absolute*{g'\parentheses*{g^{-1}\parentheses*{y}}}}, \quad y \in \parentheses*{c, d}.
+        \]
+    \end{remark}
+
+    Auf die linearen Transformationen in Beispiel 2, 1) und 3) ist der Satz direkt anwendbar mit \(g\parentheses*{x} = \sigma x + \mu\) und \(g\parentheses*{x} = ax, x \in \R\).
+    Die Funktion \(g\parentheses*{x} = x^2\) ist auf \(\R\) nicht bijektiv, sodass Theorem 4 in Beispiel 2, 2) nicht von Nutzen ist.
+\end{document}

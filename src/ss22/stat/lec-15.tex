@@ -1,0 +1,292 @@
+\documentclass{lecture}
+
+\institute{Institut für Statistik und Wirtschaftsmathematik}
+\title{Vorlesung 15}
+\author{Joshua Feld, 406718}
+\course{Statistik}
+\professor{Cramer}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \section*{Erwartungswerte, Varianz, Kovarianz und Korrelation}
+    
+    Der Oberbegriff der in der Überschrift genannten Größen ist ``Momente''.
+    Diese sind Kenngrößen von Wahrscheinlichkeitsverteilungen, beschreiben deren Eigenschaften und dienen dem Vergleich von Wahrscheinlichkeitsverteilungen.
+    
+    Im einfachen Würfelwurf mit den möglichen Ergebnissen \(1, \ldots, 6\) ist das ``mittlere'' Ergebnis intuitiv \(\frac{1}{6} \cdot 1 + \cdots + \frac{1}{6} \cdot 6 = 3,5\).
+    Diese Zahl ist selbst offenbar kein mögliches Ergebnis des Würfelwurfs.
+    Versteht man das Zufallsexperiment jedoch als Glücksspiel mit der Auszahlung \(i\,\text{\euro}\), wenn Zahl \(i\) erscheint, so ist \(3,5\,\text{\euro}\) die mittlere Auszahlung und direkt interpretierbar.
+    
+    \begin{definition}
+        Seien \(\parentheses*{\Omega, \mathfrak{U}, P}\) ein Wahrscheinlichkeitsraum und \(X\) eine Zufallsvariable mit
+        \begin{enumerate}[label=\alph*)]
+            \item Zähldichte \(p\) oder
+            \item Riemann-Dichte \(f\).
+        \end{enumerate}
+        \begin{enumerate}
+            \item Sei \(X\parentheses*{\Omega} \subseteq \left[0, \infty\right)\) oder \(X\parentheses*{\Omega} \subseteq \left(-\infty, 0\right]\).
+            \begin{enumerate}[label=\alph*)]
+                \item \(EX \equiv E\parentheses*{X} = \sum_{x \in X\parentheses*{\Omega}}xp\parentheses*{x}\) bzw.
+                \item \(EX \equiv E\parentheses*{X} = \int_{-\infty}^\infty xf\parentheses*{x}\d x\)
+            \end{enumerate}
+            heißt \emph{Erwartungswert} von \(X\) (unter \(P\)).
+            \item Ist \(E\parentheses*{\max\parentheses*{X, 0}} < \infty\) oder \(E\parentheses*{\min\parentheses*{X, 0}} > -\infty\), dann heißt \(EX\) wie in (i) \emph{Erwartungswert} von \(X\) (unter \(P\)).
+        \end{enumerate}
+    \end{definition}
+    
+    Für nicht negative oder nicht positive Zufallsvariablen ist der Erwartungswert immer definiert, wobei er möglicherweise den Wert \(\infty\) oder \(-\infty\) hat.
+    Sind positive und negative Werte möglich, dann sichern die Bedingungen in (ii) die Wohldefiniertheit.
+    Häufig wird in der Definition des Erwartungswerts nicht zugelassen, dass ein unendlicher Wert auftritt.
+    Dann wird z.B. im diskreten Fall die absolute Konvergenz der Reihe gefordert.
+    
+    Im weiteren Verlauf der Vorlesung wird stets die Wohldefiniertheit der auftretenden Erwartungswerte vorausgesetzt.
+    
+    \begin{example}
+        \begin{enumerate}
+            \item Sei \(X \sim \bin\parentheses*{n, p}\):
+            \begin{align*}
+                EX &= \sum_{k = 0}^n k \cdot P^X\parentheses*{k}\\
+                &= \sum_{k = 1}^n \underbrace{n\binom{n}{k}}_{n\binom{n - 1}{k - 1}}p^k \parentheses*{1 - p}^{n - k}\\
+                &= np\sum_{k = 1}^n \binom{n - 1}{k - 1}p^{k - 1}\parentheses*{1 - p}^{n - k}\\
+                &= np\underbrace{\sum_{k = 0}^{n - 1}\binom{n - 1}{k}p^k \parentheses*{1 - p}^{\parentheses*{n - 1} - k}}_{= 1} = np,
+            \end{align*}
+            da die Summanden die Zähldichte einer \(\bin\parentheses*{n - 1, p}\)-Verteilung bilden.
+            \item Sei \(X \sim \po\parentheses*{\lambda}\):
+            \[
+                EX = \sum_{k = 0}^\infty kP^X\parentheses*{k} = \sum_{k = 1}^\infty k\frac{\lambda^k}{k!}e^{-\lambda} = \lambda \underbrace{e^{-\lambda}\sum_{k = 1}^\infty \frac{\lambda^{k - 1}}{\parentheses*{k - 1}!}}_{= 1} = \lambda.
+            \]
+            \item Sei \(X \sim R\parentheses*{a, b}\):
+            \[
+                EX = \int_a^b x\frac{1}{b - a}\d x = \frac{1}{b - a}\frac{b^2 - a^2}{2} = \frac{b + a}{2}.
+            \]
+            \item Sei \(X \sim \Gamma\parentheses*{\alpha, \beta}\):
+            \[
+                EX = \int_0^\infty x\frac{\alpha^\beta}{\Gamma\parentheses*{\beta}}x^{\beta - 1}e^{-\alpha x}\d x = \frac{\beta}{\alpha}\int_0^\infty \frac{\alpha^{\beta + 1}}{\Gamma\parentheses*{\beta + 1}}x^{\parentheses*{\beta + 1} - 1}e^{-\alpha x}\d x = \frac{\beta}{\alpha}.
+            \]
+            Das letzte Integral hat den Wert \(1\), weil der Integrand die Dichte der \(\Gamma\parentheses*{\alpha, \beta + 1}\)-Verteilung ist.
+            Dieser ``Trick'' bei der Integration ist häufig von Nutzen.
+            Ferner wurde verwendet, dass \(\Gamma\parentheses*{\beta + 1} = \beta\Gamma\parentheses*{\beta}, \beta > 0\) gilt.
+            
+            Speziell gilt für \(X \sim \Exp\parentheses*{\lambda}\): \(EX = \frac{1}{\lambda}\).
+            \item Sei \(X \sim N\parentheses*{\mu, \sigma^2}\):
+            \begin{align*}
+                EX &= \int_{-\infty}^\infty xf\parentheses*{x}\d x\\
+                &= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \frac{x}{\sigma}e^{-\frac{\parentheses*{x - \mu}^2}{2\sigma^2}}\d x\\
+                &= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \parentheses*{\sigma y + \mu}e^{-\frac{y^2}{2}}\d y\\
+                &= \frac{\sigma}{\sqrt{2\pi}}\int_{-\infty}^\infty ye^{-\frac{y^2}{2}}\d y + \mu\int_{-\infty}^\infty \underbrace{\frac{1}{\sqrt{2\pi}}e^{-\frac{y^2}{2}}}_{\text{Dichte }\varphi\text{ von }N\parentheses*{0, 1}}\d y\\
+                &= \frac{\sigma}{\sqrt{2\pi}}\underbrace{\brackets*{-e^{-\frac{y^2}{2}}}_{-\infty}^\infty}_{= 0} + \mu = \mu,
+            \end{align*}
+            denn \(\int_{-\infty}^\infty \varphi\parentheses*{y}\d y = 1\).
+            \item Für die Indikatorfunktion \(\mathcal{I}_A\) gilt:
+            \[
+                E\mathcal{I}_A = 0 \cdot P\parentheses*{\mathcal{I}_A = 0} + 1 \cdot P\parentheses*{\mathcal{I}_A = 1} = P\parentheses*{A}.
+            \]
+            Dies ist ein Spezialfall von 1), da \(\mathcal{I}_A \sim \bin\parentheses*{1, p}\) mit \(p = P\parentheses*{A}\).
+        \end{enumerate}
+    \end{example}
+    
+    \begin{remark}
+        Für Zufallsvariablen \(X\) mit Werten in \(\N_0\), d.h. der Träger der diskreten Wahrscheinlichkeitsverteilung \(P^X\) ist enthalten in \(\N_0\), gibt es eine alternative Berechnungsmöglichkeit für den Erwartungswert
+        \[
+            EX = \sum_{n = 1}^\infty P\parentheses*{X \ge n} = \sum_{n = 1}^\infty \parentheses*{1 - F\parentheses*{n} + P\parentheses*{X = n}} = \sum_{n = 0}^\infty \parentheses*{1 - F\parentheses*{n}}.
+        \]
+    \end{remark}
+    
+    \begin{example}
+        Die Zufallsvariable \(X\) beschriebe die Wartezeit bis zum ersten Auftreten des Symbols beim unabhängigen Wiederholen eines Münzwurfs (einschließlich des zugehörigen Wurfs), bei dem die Seite des Symbols mit Wahrscheinlichkeit \(p \in \parentheses*{0, 1}\) fällt.
+        \(X\) ist somit gleich der Anzahl Würfe bis zum ersten Mal das Symbol erscheint.
+        
+        Die Zähldichte von \(X\) ist gegeben durch \(p^X\parentheses*{k} = P\parentheses*{X = k} = p\parentheses*{1 - p}^{k - 1}, k \in \N\).
+        Auch diese Verteilung bezeichnet man als geometrische Verteilung.
+        Hier liegt allerdings ein anderer Träger vor (\(\N\) statt \(\N_0\))!
+        
+        Der Erwartungswert ist unter Anwendung der geometrischen Reihe gegeben durch
+        \[
+            EX = \sum_{n = 1}^\infty P\parentheses*{X \ge n} = \sum_{n = 1}^\infty \sum_{k = n}^\infty p^X\parentheses*{k} = \sum_{n = 1}^\infty \sum_{k = n}^\infty p\parentheses*{1 - p}^{k - 1} = p\sum_{n = 1}^\infty \parentheses*{1 - p}^{n - 1}\underbrace{\sum_{k = 1}^\infty \parentheses*{1 - p}^{k - 1}}_{= \frac{1}{p}} = \frac{1}{p}.
+        \]
+    \end{example}
+    
+    \begin{definition}
+        Als (allgemeines) \emph{Moment} einer Zufallsvariablen \(X\) wird der Erwartungswert einer Funktion \(g\parentheses*{X}\) bezeichnet.
+    \end{definition}
+    
+    Funktionen \(g\) mit besonderer Bedeutung werden später genannt.
+    Zunächst geht es um die Bestimmung von Momenten.
+    Dies wird für einen Zufallsvektor und eine Funktion \(g\) von mehreren Veränderlichen notiert, wobei das Ergebnis der Hintereinanderausführung \(g\parentheses*{X}\) reell ist.
+    
+    \begin{theorem}
+        Seien \(k \in \N\), \(X: \Omega \to \R^k\) ein Zufallsvektor und \(g: \R^k \to \R\) eine stetige Funktion, sodass der Erwartungswert von \(g\parentheses*{X}\) existiert (d.h. wohldefiniert ist).
+        Dann gilt, falls \(P^X\) diskret ist,
+        \begin{enumerate}
+            \item \(E\parentheses*{g\parentheses*{X}} = \sum_{\parentheses*{t_1, \ldots, t_k} \in \supp\parentheses*{P^X}}g\parentheses*{t_1, \ldots, t_k}P^X\parentheses*{\parentheses*{t_1, \ldots, t_k}}\)
+        \end{enumerate}
+        bzw. falls \(P^X\) stetig ist
+        \begin{enumerate}
+            \item[(ii)] \(E\parentheses*{g\parentheses*{X}} = \int_{-\infty}^\infty \cdots \infty_{-\infty}^\infty g\parentheses*{t_1, \ldots, t_k}f^X\parentheses*{t_1, \ldots, t_k}\d t_1 \ldots \d t_k\).
+        \end{enumerate}
+    \end{theorem}
+    
+    In Theorem 1 wird die Erwartungswertbildung auf die Verteilung von \(X\) zurückgeführt.
+    Die nachstehenden Eigenschaften des Erwartungswert-Operators gelten im diskreten wie auch im stetigen Fall (d.h. bei Vorliegen einer Dichte) und sind aufgrund der Definition des Erwartungswerts unmittelbar klar.
+    
+    \begin{lemma}
+        Seien \(X\) und \(Y\) Zufallsvariablen mit endlichem Erwartungswert und \(a, b \in \R\).
+        Dann gilt:
+        \begin{enumerate}
+            \item \(Ea = a\),
+            \item \(E\parentheses*{aX} = aEX\),
+            \item \(E\parentheses*{X + Y} = EX + EY\) (Additivität) und damit \(E\parentheses*{aX + b} = aEX + b\) (Linearität),
+            \item \(E\parentheses*{\absolute*{X + Y}} \le E\parentheses*{\absolute*{X}} + E\parentheses*{\absolute*{Y}}\) (Dreiecksungleichung),
+            \item \(X \le Y\text{ (punktweise Ordnung der Funktionen, d.h. }X\parentheses*{\omega} \le Y\parentheses*{\omega}\text{ für alle }\omega \in \Omega\text{)} \iff EX \le EY\);
+            insbesondere gelten \(EY \ge 0\), falls \(Y \ge 0\), und \(EX \le E\parentheses*{\absolute*{X}}\),
+            \item \(E\parentheses*{\absolute*{X}} = 0 \iff P\parentheses*{X \ne 0} = 0\).
+        \end{enumerate}
+    \end{lemma}
+    
+    \begin{lemma}
+        Seien \(I\) eine Indexmenge und \(X_i, i \in I\) Zufallsvariablen mit endlichem Erwartungswert.
+        Dann gilt:
+        \begin{enumerate}
+            \item \(E\parentheses*{\sup_{i \in I}X_i} \ge \sup_{i \in I}EX_i\),
+            \item \(E\parentheses*{\inf_{i \in I}X_i} \le \inf_{i \in I}EX_i\).
+        \end{enumerate}
+    \end{lemma}
+    
+    Im Fall der stochastischen Unabhängigkeit von Zufallsvariablen ist der Erwartungswert auch multiplikativ.
+    
+    \begin{theorem}
+        Seien \(X_1, \ldots, X_n\) stochastisch unabhängige Zufallsvariablen mit endlichen Erwartungswerten.
+        Dann gilt:
+        \[
+            E\parentheses*{\prod_{i = 1}^n X_i} = \prod_{i = 1}^n E\parentheses*{X_i}.
+        \]
+    \end{theorem}
+    
+    Spezielle Momente sind von besonderer Bedeutung in der Stochastik.
+    Durch Anwendung von Theorem 1 mit speziellen Funktionen \(g\), i.e.,
+    \begin{enumerate}
+        \item \(g\parentheses*{x} = \parentheses*{x - c}^k\) und Zufallsvariable \(X\),
+        \item \(g\parentheses*{x} = \parentheses*{x - EX}^2\) und Zufallsvariable \(X\) bzw. \(c = EX\) und \(k = 2\) in (i),
+        \item \(g\parentheses*{x, y} = \parentheses*{x- EX}\parentheses*{y - EY}\) und Zufallsvektor \(\parentheses*{X, Y}\)
+    \end{enumerate}
+    resultieren folgende Begriffe für spezielle Momente.
+    
+    \begin{definition}
+        Seien \(X\) und \(Y\) Zufallsvariablen und \(c \in \R, k \in \N\).
+        \begin{enumerate}
+            \item \(m_k\parentheses*{c} = E\parentheses*{\parentheses*{X - c}^k}\) heißt \emph{\(k\)-tes Moment} von \(X\) um \(c\) (unter \(P\)) (nichtzentrales Moment).
+            Für \(c = 0\) heißt \(m_k = EX^k\) \(k\)-tes (zentrales) Moment.
+            \item \(\Var X = E\parentheses*{\parentheses*{X - EX}^2}\) heißt \emph{Varianz} (Streuuung von \(X\)) (alternative Notation \(\Var\parentheses*{X}\)).
+            \item \(\sqrt{\Var X}\) heißt \emph{Standardabweichung} von \(X\).
+            \item \(\Kov\parentheses*{X, Y} = E\parentheses*{\parentheses*{X - EX}\parentheses*{Y - EY}}\) heißt \emph{Kovarianz} von \(X\) und \(Y\).
+        \end{enumerate}
+    \end{definition}
+    
+    Die Varianz einer Wahrscheinlichkeitsverteilung ist ein Maß für die Konzentriertheit, d.h. sei bewertet die Verteilung der Wahrscheinlichkeitsmasse um den Erwartungswert.
+    Ist der Großteil der Masse nahe beim Erwartungswert, so ist die Varianz eher klein.
+    Im diskreten Fall dient die Varianz anschaulich zur Bewertung der ``Nähe'' der Trägerpunkte zum Erwartungswert bzw. der ``Verteilung der Gewichte (Wahrscheinlichkeiten)''.
+    Im stetigen Fall wird bewertet, wie viel ``Masse'' der Verteilung auf gewisse Intervalle verteilt ist.
+    Auch dies ist nur eine grobe Vorstellung.
+    Die Varianz dient mit dieser Interpretation insbesondere dem Vergleich von Wahrscheinlichkeitsverteilungen.
+    
+    Die folgende Anmerkung gibt Anhaltspunkte für die (endliche) Existenz von Momenten.
+    
+    \begin{remark}
+        Für Zufallsvariablen \(X\) und \(Y\) gilt:
+        \begin{enumerate}
+            \item \(0 \le \absolute*{X} \le \absolute*{Y}, E\parentheses*{\absolute*{Y}} < \infty \implies EX < \infty, E\parentheses*{\absolute*{X}} < \infty\),
+            \item \(EX^k < \infty\text{ für ein }k \in \N, X \ge 0 \implies EX^l < \infty \forall l \le k\),
+            \item \(EX^2 < \infty \implies E\parentheses*{\parentheses*{X + a}^2} < \infty \forall a \in \R\), insbesondere gilt \(\Var\parentheses*{X} < \infty\).
+        \end{enumerate}
+    \end{remark}
+    
+    
+    \section*{Varianz und Kovarianz}
+    
+    Nun werden Eigenschaften von \(k\)-ten Momenten, Varianz und Kovarianz zusammengestellt.
+    
+    \begin{lemma}
+        Sei \(X\) eine Zufallsvariable mit \(\Var X < \infty\).
+        Dann gilt:
+        \begin{enumerate}
+            \item \(\Var\parentheses*{a + bX} = b^2 \Var X \forall a, b \in \R\),
+            \item \(\Var X = EX^2 - E^2 X\),
+            \item \(\Var X = 0 \iff P\parentheses*{X \ne EX} = 0\),
+            \item \(\Var X = \min_{a \in \R}E\parentheses*{\parentheses*{X - a}^2}\), d.h. \(EX\) minimiert die mittlere quadratische Abweichung von \(X\) zu \(a\).
+        \end{enumerate}
+    \end{lemma}
+    
+    \begin{proof}
+        \begin{enumerate}
+            \item \(\Var\parentheses*{a + bX} = E\parentheses*{\parentheses*{a + bX - E\parentheses*{a + bX}}^2} = E\parentheses*{\parentheses*{a + bX - a - bEX}^2} = b^2 E\parentheses*{X - EX}^2 = b^2 \Var X.\)
+            \item Aus der Linearität des Erwartungswerts folgt mit einer binomischen Formel:
+            \begin{align*}
+                \Var X &= E\parentheses*{\parentheses*{X - EX}^2}\\
+                &= E\parentheses*{X^2 - 2X \cdot EX + \parentheses*{EX}^2}\\
+                &= EX^2 - 2EX \cdot EX + \parentheses*{EX}^2\\
+                &= EX^2 - \parentheses*{EX}^2\\
+                &= EX^2 - E^2 X,
+            \end{align*}
+            wobei die Notation \(E^2 X = \parentheses*{EX}^2\) verwendet wird.
+            \item[(iv)] Sei \(\mu = EX\).
+            Wie in (ii) folgt:
+            \begin{align*}
+                E\parentheses*{\parentheses*{X - a}^2} &= E\parentheses*{\parentheses*{X - \mu + \mu - a}^2}\\
+                &= E\parentheses*{X - \mu}^2 + 2\parentheses*{\mu - a}\underbrace{E\parentheses*{X - \mu}}_{= 0} + \parentheses*{\mu - a}^2\\
+                &= \Var X + \parentheses*{\mu - a}^2 \ge \Var X
+            \end{align*}
+            mit Gleichheit genau dann, wenn \(\mu = a\).
+        \end{enumerate}
+    \end{proof}
+    
+    Die im Beweis von Lemma 3, (iv) hergeleitete Identität
+    \[
+        E\parentheses*{\parentheses*{X - a} 2} = \Var X + \parentheses*{EX - a}^2, \quad a \in \R,
+    \]
+    wird auch als Verschiebungssatz oder Satz von Steiner bezeichnet.
+    Lemma 3, (i) zeigt die Bedeutung der Varianz als sogenanntes Skalenmaß.
+    Einer lediglich um einen additiven Parameter verschobenen Verteilung wird dieselbe Varianz zugeordnet.
+    Demgegenüber wird der Erwartungswert \(EX\) als Lagemaß bezeichnet.
+    
+    \begin{example}
+        \begin{enumerate}
+            \item \(X \sim \bin\parentheses*{n, p}\): \(\Var X = np\parentheses*{1 - p}\),
+            \item \(X \sim \po\parentheses*{\lambda}\): \(\Var X = \lambda \parentheses*{= EX}\),
+            \item \(X \sim R\parentheses*{a, b}\): \(\Var X = \frac{\parentheses*{a - b}^2}{12}\),
+            \item \(X \sim \Gamma\parentheses*{\alpha, \beta}\): \(\Var X = \frac{\beta}{\alpha^2}\), insbesondere gilt für \(X \sim \Exp\parentheses*{\lambda}\): \(\Var X = \frac{1}{\lambda^2}\),
+            \item \(X \sim N\parentheses*{\mu, \sigma^2}\): \(\Var X = \sigma^2\).
+        \end{enumerate}
+    \end{example}
+    
+    \begin{remark}
+        Eine Zufallsvariable \(X\) mit \(EX = 0\) und \(\Var X = 1\) heißt standardisiert.
+        Ist eine Zufallsvariable \(Y\) gegeben mit \(EY = \mu\) und \(0 < \Var Y = \sigma^2 < \infty\), dann gilt für die Zufallsvariable \(X = \frac{Y - EY}{\sqrt{\Var Y}} = \frac{Y - \mu}{\sigma}\): \(EX = 0\) und \(\Var X = 1\).
+        Dieser Vorgang heißt Standardisierung.
+    \end{remark}
+    
+    \begin{lemma}
+        Seien \(X\) und \(Y\) Zufallsvariablen mit \(\Var X < \infty, \Var Y < \infty\).
+        Dann gilt:
+        \[
+            \Var\parentheses*{X + Y} = \Var X + \Var Y + 2\Kov\parentheses*{X, Y}.
+        \]
+        Allgemeiner gilt für Zufallsvariablen \(X_1, \ldots, X_n\) mit \(EX_i^2 < \infty, 1 \le i \le n\):
+        \[
+            \Var\parentheses*{\sum_{i = 1}^n X_i} = \sum_{i = 1}^n \Var X_i + 2 {\sum\sum}_{1 \le i < j \le n}\Kov\parentheses*{X_i, X_j}.
+        \]
+    \end{lemma}
+    
+    \begin{proof}
+        Der Beweis wird nur für zwei Zufallsvariablen \(X\) und \(Y\) ausgeführt:
+        \begin{align*}
+            \Var\parentheses*{X + Y} &= E\parentheses*{X + Y - E\parentheses*{X + Y}}^2\\
+            &= E\parentheses*{\parentheses*{X - EX} + \parentheses*{Y - EY}}^2\\
+            &= E\parentheses*{\parentheses*{X - EX}^2 + 2\parentheses*{X - EX}\parentheses*{Y - EX} + \parentheses*{Y - EY}^2}\\
+            &= \Var X + \Var Y + 2\Kov\parentheses*{X, Y}.
+        \end{align*}
+    \end{proof}
+\end{document}

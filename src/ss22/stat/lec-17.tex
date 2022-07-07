@@ -1,0 +1,379 @@
+\documentclass{lecture}
+
+\institute{Institut für Statistik und Wirtschaftsmathematik}
+\title{Vorlesung 17}
+\author{Joshua Feld, 406718}
+\course{Statistik}
+\professor{Cramer}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \section*{Grenzwertsätze}
+
+    Explizite Ausdrücke für die Wahrscheinlichkeitsverteilung einer Summe \(S_n\) stochastisch unabhängiger Zufallsvariablen sind nur für wenige Verteilungstypen verfügbar.
+    Daher ist man an der Beschreibung des asymptotischen Verhaltens von \(S_n\) und von \(P^{S_n}\) interessiert.
+    Die Resultate sind auch für die schließende Statistik von besonderer Bedeutung.
+    In diesem Abschnitt werden das schwache Gesetz großer Zahlen sowie der Zentrale Grenzwertsatz vorgestellt.
+    Es gibt in der Literatur unterschiedliche Versionen, die sich in der Wahl der Voraussetzungen und damit auch in der Allgemeinheit der Aussagen unterscheiden.
+
+    \begin{theorem}
+        Seien \(X_1, X_2, \ldots\) paarweise unkorrelierte Zufallsvariablen (d.h. \(\Kov\parentheses*{X_i, X_j} = 0 \forall i \ne j\)) mit \(EX_i = \mu \forall i \in \N\) und \(\Var X_i \le M < \infty \forall i \in \N\) für eine Konstante \(M > 0\).
+        Dann gilt:
+        \[
+            P\parentheses*{\absolute*{\frac{1}{n}\sum_{i = 1}^n X_i - \mu} \ge \varepsilon} \le \frac{M}{n\varepsilon^2} \xrightarrow{n \to \infty} 0 \quad \forall\varepsilon > 0.
+        \]
+    \end{theorem}
+
+    \begin{proof}
+        Mit \(E\parentheses*{\frac{1}{n}\sum_{i = 1}^n X_i} = \frac{1}{n}\sum_{i = 1}^n \mu = \mu\) und \(\Var\parentheses*{\frac{1}{n}\sum_{i = 1}^n X_i} = \frac{1}{n^2}\sum_{i = 1}^n \Var X_i \le \frac{M}{n}\) erhält man mit der Ungleichung von Tschebyscheff aus Theorem 3, (iii) der sechzehnten Vorlesung für beliebiges \(\varepsilon > 0\):
+        \[
+            P\parentheses*{\absolute*{\frac{1}{n}\sum_{i = 1}^n X_i - \mu} \ge \varepsilon} \le \frac{\frac{1}{n^2}\sum_{i = 1}^n \Var X_i}{\varepsilon^2} \le \frac{M}{n\varepsilon^2}.
+        \]
+    \end{proof}
+
+    Das Theorem sagt also (unter den gegebenen Voraussetzungen) aus: Die Wahrscheinlichkeit, dass das arithmetische Mittel der Zufallsvariablen vom Erwartungswert der Verteilung um mindestens \(\varepsilon\) abweicht, geht mit wachsendem Stichprobenumfang gegen Null.
+    Die Aussage des Theorems wird auch in der Form \(P - \lim_{n \to \infty}\frac{1}{n}\sum_{i = 1}^n X_i = \mu\) notiert.
+    Diese Art der Konvergenz wird als ``stochastische Konvergenz'' bezeichnet.
+    Das arithmetische Mittel kann in diesem Sinne als ein ``Schätzer'' für den Erwartungswert der Verteilung gesehen werden.
+
+    \begin{remark}
+        Das schwache Gesetz großer Zahlen eröfnet auch die Möglichkeit, relative Häufgkeiten bei unabhängigen Versuchswiederholungen (z.B. Häufgkeit des Auftretens der Ziffer \(6\) beim wiederholten Würfelwurf) in Zusammenhang mit den entsprechenden Wahrscheinlichkeiten im zugehörigen stochastischen Modell zu bringen.
+        
+        Allgemein seien ein diskreter Wahrscheinlichkeitsraum \(\parentheses*{\Omega, P}\) und ein Ereignis \(A \subseteq \Omega\) mit \(P\parentheses*{A} = p \in \parentheses*{0, 1}\) gegeben.
+        Betrachtet wird die \(n\)-fache unabhängige Wiederholung des Zufallsexperiments beschrieben durch den Produktraum.
+        
+        Mit \(A_i\) sei das Ereignis beschrieben, dass der \(i\)-te Versuch das Ergebnis \(A\) zeigt (etwa das Auftreten der Ziffer \(6\) im Würfelexperiment).
+        Dann sind die Indikator-Zufallsvariablen \(X_i = \mathcal{I}_{A_i}, 1 \le i \le n\) stochastisch unabhängig, und es gilt
+        \[
+            X_i \sim \bin\parentheses*{1, p}, EX_i = P\parentheses*{A_i} = p, \Var X_i = p\parentheses*{1 - p}, \quad 1 \le i \le n.
+        \]
+        Damit ist die Aussage des schwachen Gesetzes großer Zahlen gültig:
+        \[
+            P - \lim_{n \to \infty}\frac{1}{n}\sum_{i = 1}^n X_i = p.
+        \]
+        Die relative Häufgkeit \(\frac{1}{n}\sum_{i = 1}^n X_i\) von \(A\) bei \(n\) Versuchen (z.B. der Ziffer \(6\) bei \(n\) Versuchen) konvergiert also stochastisch gegen den Erwartungswert \(p\) (\(= \frac{1}{6}\) im Würfelbeispiel).
+    \end{remark}
+
+    \begin{theorem}
+        Sei \(X_1, X_2, \ldots\) eine Folge stochastisch unabhängiger, identisch verteilter Zufallsvariablen mit \(EX_1 = \mu\) und \(0 < \Var X_1 = \sigma^2 < \infty\).
+        Dann gilt für
+        \[
+            S_n^* = \frac{\sum_{i = 1}^n X_i - n\mu}{\sigma\sqrt{n}} \parentheses*{= \frac{\frac{1}{n}\sum_{i = 1}^n X_i - \mu}{\frac{\sigma}{\sqrt{n}}}}:
+        \]
+        \[
+            \lim_{n \to \infty}P\parentheses*{S_n^* \le t} = \int_{-\infty}^t \frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}\d x = \Phi\parentheses*{t}, \quad t \in \R.
+        \]
+    \end{theorem}
+
+    Die Summe \(S_n^*\) im Theorem ist die standardisierte Summe der \(X_i\)'s, denn \(ES_n^* = 0\) und \(\Var S_n^* = 1\).
+    Das bedeutende Theorem sagt also aus, dass die Verteilungsfunktion der standardisierten Partialsummen der Zufallsvariablen mit wachsendem \(n\) gegen die Verteilungsfunktion der Standardnormalverteilung konvergiert, und dies unabhängig von der Wahl der Verteilung der zugrundeliegenden Zufallsvariablen!
+
+    Für große \(n\) gilt somit für \(t \in \R\)
+    \[
+        P\parentheses*{S_n^* \le t} \approx \Phi\parentheses*{t}
+    \]
+    bzw.
+    \[
+        P\parentheses*{\sum_{i = 1}^n X_i \le t} = P\parentheses*{S_n^* \le \frac{t - n\mu}{\sqrt{n}\sigma}} \approx \Phi\parentheses*{\frac{t - n\mu}{\sqrt{n}\sigma}} = \Phi_{n\mu, n\sigma^2}\parentheses*{t}.
+    \]
+    Dieser Sachverhalt wird auch mit der Notation
+    \[
+        \sum_{i = 1}^n X_i \stackrel{\text{as}}{\sim} N\parentheses*{n\mu, n\sigma^2}
+    \]
+    bezeichnet.
+    Der obige Zusammenhang ist übrigens für alle \(t \in \R\) exakt, falls die zugrundeliegende Verteilung eine Normalverteilung \(N\parentheses*{\mu, \sigma^2}\) ist.
+    Unter geeigneten Voraussetzungen ist daher \(S_n^*\) für große \(n\) näherungsweise standardnormalverteilt.
+    Dies bedeutet, dass das arithmetische Mittel der Zufallsvariablen ebenfalls approximativ normalverteilt ist:
+    \[
+        \frac{1}{n}\sum_{i = 1}^n X_i \stackrel{\text{as}}{\sim} N\parentheses*{\mu, \frac{\sigma^2}{n}}.
+    \]
+
+
+    \section*{Schließende Statistik}
+
+
+    \section*{Problemstellungen der schließenden Statistik}
+
+    Mit den Mitteln der deskriptiven Statistik werden für eine Gruppe von Objekten Eigenschaften eines Merkmals dieser Objekte anhand von Beobachtungswerten beschrieben.
+    Alle Aussagen beziehen sich ausschließlich auf die zugrundeliegenden Objekte und die für diese beobachteten Werte.
+    
+    In vielen Fällen ist man jedoch nicht an den untersuchten Objekten selbst interessiert, sondern möchte vielmehr Aussagen über eine größere Gruppe machen, die sogenannte Gesamtpopulation (Grundgesamtheit).
+    Beispielsweise soll anhand eines Fragebogens die Lebenssituation von Studierenden untersucht werden.
+    Da es aber im Allgemeinen zu zeit- und kostenaufwändig ist, alle Studierenden (einer Hochschule) zu befragen, wird eine Einschränkung auf eine Teilgruppe von Studierenden vorgenommen.
+    Dabei wird unterstellt, dass die in der Teilgruppe erhaltenen Aussagen für die Gesamtgruppe repräsentativ sind, d.h. das Ergebnis bei Befragung der Gesamtpopulation entspräche weitgehend dem in der befragten, kleineren Gruppe.
+    Eine ähnliche Fragestellung besteht etwa bei Wahlprognosen.
+    Es wird versucht, mittels einer kleinen Gruppe von befragten Wählern das Wahlergebnis möglichst gut vorherzusagen.
+    Dabei ist aber aus Erfahrungen der Vergangenheit klar, dass die so getrofenen Prognosen meist mehr oder weniger fehlerbehaftet sind.
+    Dies ist dadurch bedingt, dass die befragte Gruppe im Allgemeinen natürlich kein Spiegel der Gesamtpopulation ist.
+    Diese Fehler sind durch die Vorgehensweise bedingt und daher auch in Interpretationen zu berücksichtigen.
+    Verfahren zur Verringerung derartiger Fehler sowie die Festlegung von ``repräsentativen'' Stichproben werden in der Stichprobentheorie behandelt, die hier nicht weiter betrachtet wird.
+    
+    Grundfragestellungen der Schließenden Statistik können aus dem folgenden Beispiel abgeleitet werden und treten in vielen Anwendungsbereichen auf (z.B. Marktund Meinungsforschung, Medizin, etc.).
+
+    \begin{example}
+        Zu Zwecken der Qualitätssicherung werden z.B. einer laufenden Produktion Proben entnommen und Merkmalsausprägungen notiert.
+        In einem zugrundeliegenden stochastischen Modell werden die Ausprägungen als Realisationen von Zufallsvariablen aufgefasst, für die eine Verteilung angenommen wird.
+        Diese ist entweder vollständig unbekannt oder nur bis auf gewisse Parameter bekannt.
+        In diesem Zusammenhang sind Themen von Interesse
+        \begin{enumerate}
+            \item wie ein unbekannter Parameter aufrund der Daten bestmöglich festgelegt (``geschätzt'') werden kann,
+            \item wie ein Intervall beschaffen sein soll, in dem der ``wahre'' Wert des Parameters mit hoher Wahrscheinlichkeit liegt,
+            \item wie man die Frage beantwortet, dass der ``wahre'' Parameter einen Schwellenwert überschreitet.
+        \end{enumerate}
+    \end{example}
+
+    Die schließende Statistik stellt die zur Umsetzung solcher Vorhaben benötigten Verfahren und Methoden bereit.
+    Der Begrif wie auch die alternative Bezeichnung induktive Statistik verdeutlichen die Vorgehensweise, eine Aussage von einer Teilpopulation auf die Gesamtpopulation zu übertragen.
+    Die schließende Statistik bedient sich dabei zur Modellierung der Wahrscheinlichkeitstheorie.
+    Ein wesentlicher Punkt in der Anwendung der Verfahren der Inferenzstatistik ist (wie auch in der deskriptiven Statistik), dass die verwendeten Verfahren den Merkmalstypen adäquat sein müssen.
+    Es macht z.B. keinen Sinn, das arithmetische Mittel von Beobachtungswerten eines nominalen Merkmals wie Haarfarbe zu berechnen.
+    Dies impliziert, dass vor der Anwendung statistischer Verfahren grundsätzlich die Frage des Merkmalstyps beantwortet werden muss.
+    Anschließend ist ein für diesen Typ geeignetes Verfahren zu wählen.
+
+
+    \section*{Grundbegriffe}
+
+    Die Verfahren der Inferenzstatistik beruhen auf den Messungen eines Merkmals \(X\) in einer Teilgruppe der Grundgesamtheit, der sogenannten Stichprobe.
+    Diese wird mit
+    \[
+        X_1, \ldots X_n
+    \]
+    bezeichnet, wobei \(n\) die Anzahl der Objekte der Teilgruppe ist und Stichprobenumfang heißt.
+    Die Zufallsvariable \(X_i\), die die \(i\)-te Messung beschreibt, heißt Stichprobenvariable.
+    Von den Objekten, die zur Messung herangezogen werden, wird im Folgenden angenommen, dass sie aus der Gesamtpopulation zufällig ausgewählt werden.
+    Dies soll die Repräsentativität der Stichprobe sicherstellen.
+    Es kann dabei natürlich zu Verzerrungen kommen.
+    Dies kann im Allgemeinen aber durch einen hinreichend großen Stichprobenumfang zumindest gemildert werden.
+    Für eine Stichprobenvariable \(X_i\) wird im stochastischen Modell eine Wahrscheinlichkeitsverteilung unterstellt, die etwa durch die Verteilungsfunktion festgelegt wird:
+    \[
+        F_i\parentheses*{t} = P\parentheses*{X_i \le t}, \quad t \in \R.
+    \]
+    Im Folgenden wird -- sofern nichts anderes angegeben ist -- angenommen, dass die Zufallsvariablen \(X_1, \ldots, X_n\) stochastisch unabhängig sind und jeweils dieselbe Wahrscheinlichkeitsverteilung \(P\) besitzen.
+    Dies ist ein spezielles, in der Praxis häufg genutztes Modell.
+    Entsprechend der englischen Bezeichnung ``independent and identically distributed'' wird diese Eigenschaft nachfolgend mit ``iid'' abgekürzt.
+    Als Schreibweise wird
+    \[
+        X_1, \ldots, X_n \stackrel{\text{iid}}{\sim} P
+    \]
+    verwendet.
+    Statt \(P\) schreibt man auch \(F\) oder \(f\), falls \(P\) durch die Verteilungsfunktion \(F\) oder die Dichtefunktion \(f\) gegeben ist.
+
+    In der Wahrscheinlichkeitsrechnung wird unterstellt, dass die dem Modell zugrundeliegende Wahrscheinlichkeitsverteilung vollständig bekannt ist.
+    Dies ist in der Inferenzstatistik nicht oder nur teilweise der Fall.
+    Daher geht man zunächst von einer Klasse \(\mathcal{P}\) von Wahrscheinlichkeitsverteilungen mit speziellen Eigenschaften aus:
+    \[
+        \mathcal{P} = \braces*{P : P\text{ hat spezielle Eigenschaften}}.
+    \]
+
+    \begin{definition}
+        Seien \(n \in \N\), \(X_1, \ldots, X_n\) stochastisch unabhängige und identisch verteilte Zufallsvariablen auf einem Wahrscheinlichkeitsraum \(\parentheses*{\Omega, \mathfrak{U}, P}\) mit Werten in \(\parentheses*{\R, \mathcal{B}}\), \(X = \parentheses*{X_1, \ldots, X_n}\) und \(\mathcal{P}\) eine Menge von Wahrscheinlichkeitsmaßen auf \(\R\).
+        Dann heißen
+        \begin{enumerate}
+            \item \(\parentheses*{X_1, \ldots, X_n}\) \emph{Stichprobe}.
+            Abkürzend wird auch \(X_1, \ldots, X_n\) als Stichprobe bezeichnet.
+            \item \(X_i\) \emph{Stichprobenvariablen}, \(1 \le i \le n\).
+            \item \(n\) \emph{Stichprobenumfang}.
+            \item \(\parentheses*{x_1, \ldots, x_n} = X\parentheses*{\omega} = \parentheses*{X_1\parentheses*{\omega}, \ldots, X_n\parentheses*{\omega}} \in \R^n\) für \(\omega \in \Omega\) \emph{Realisation} (der Stichprobe \(\parentheses*{X_1, \ldots, X_n}\)), \emph{Stichprobenergebnis} oder \emph{Beobachtung}.
+            Die Menge aller möglichen Stichprobenergebnisse heißt \emph{Stichprobenraum}.
+            \item \(X_1\parentheses*{\omega}, \ldots, X_n\parentheses*{\omega}\) \emph{Beobachtungen} oder \emph{Realisationen} von \(X_1, \ldots, X_n\).
+            \item die Forderung \(X_1, \ldots, X_n \stackrel{\text{iid}}{\sim} P \in \mathcal{P}\) \emph{Verteilungsannahme} oder \emph{Verteilungsmodell}.
+            Sofern die Menge \(\mathcal{P}\) im Kontext klar ist, wird die Notation \(X_1, \ldots, X_n \stackrel{\text{iid}}{\sim} P\) verwendet.
+        \end{enumerate}
+        Ist \(T: \R^n \to \R\) eine Funktion der Stichprobe \(\parentheses*{X_1, \ldots, X_n}\), so wird \(T\parentheses*{X_1, \ldots, X_n}\) als \emph{Statistik} bezeichnet.
+        Im Schätzkontext wird sie auch \emph{Schätzer} oder \emph{Schätzfunktion}, bei der Verwendung im Rahmen von Hypothesentests \emph{Teststatistik} genannt.
+        Für eine Beobachtung \(\parentheses*{x_1, \ldots, x_n}\) heißt \(T\parentheses*{x_1, \ldots, x_n}\) \emph{Schätzwert} bzw. \emph{Realisation} der Teststatistik.
+    \end{definition}
+
+    Zur Festlegung des Verteilungsmodells werden unterschiedliche Konzepte verwendet.
+
+    \begin{definition}
+        Sei \(\mathcal{P}\) ein Verteilungsmodell.
+        Kann jedes Element \(P \in \mathcal{P}\) eindeutig durch die Angabe eines Parameter(-vektors) \(\vartheta \in \Theta \subseteq \R^k\) identifiziert werden, so heißt das Verteilungsmodell \emph{parametrische Verteilungsannahme}.
+        Dies wird notiert als
+        \[
+            \mathcal{P} = \braces*{P_\vartheta : \vartheta \in \Theta} \quad \text{bzw. als} \quad P_\vartheta, \vartheta \in \Theta.
+        \]
+        Die Menge \(\Theta\) der möglichen Parameter heißt \emph{Parameterraum}.
+        Ist keine derartige Parametrisierung gegeben, wird das Modell als \emph{nichtparametrisches Verteilungsmodell} bezeichnet.
+    \end{definition}
+
+    \begin{example}
+        \begin{enumerate}
+            \item Ein zentrales Beispiel einer einparametrischen Familie diskreter Verteilungen sind Binomialverteilungen mit Parameterraum \(\Theta = \brackets*{0, 1}\):
+            \[
+                \mathcal{P} = \braces*{\bin\parentheses*{n, p} : p \in \brackets*{0, 1}}\text{ für ein festes }n \in \N.
+            \]
+            \item  Unter den stetigen Verteilungen spielt die Normalverteilung eine zentrale Rolle.
+            Da diese zwei Parameter besitzt, bestehen verschiedene Möglichkeiten zur Festlegung von Modellen.
+            Zur Spezifkation eines parametrischen Verteilungsmodells muss grundsätzlich festgelegt werden, welcher Parameter als bekannt bzw. unbekannt betrachtet wird.
+            Die Menge \(P\) wird dann entsprechend durch eine andere Parametermenge \(\Theta\) parametrisiert.
+            Die Beschreibung
+            \[
+                \mathcal{P} = \braces*{N\parentheses*{\mu, \sigma^2} : \mu \in \R, \sigma^2 > 0}
+            \]
+            entspricht der Voraussetzung, dass beide Parameter unbekannt sind, d.h. \(\Theta = \R \times \parentheses*{0, \infty}\).
+            Andere Festlegungen von \(\Theta\) führen zu anderen Modellen:
+            \begin{enumerate}[label=\alph*)]
+                \item \(\mu\) unbekannt: \(\mathcal{P} = \braces*{N\parentheses*{\mu, \sigma_0^2} : \mu \in \R}\) mit festem (bekanntem) \(\sigma_0^2 > 0\), sodass \(\Theta = \R\) oder \(\Theta = \R \times \braces*{\sigma_0^2}\),
+                \item \(\sigma^2\) unbekannt \(\mathcal{P} = \braces*{N\parentheses*{\mu_0, \sigma^2} : \sigma^2 > 0}\) mit festem (bekanntem) \(\mu_0 \in \R\), sodass \(\Theta = \parentheses*{0, \infty}\) oder \(\Theta = \braces*{\mu_0} \times \parentheses*{0, \infty}\).
+            \end{enumerate}
+            \item Ein nichtparametrisches Modell wird z.B. spezifiziert durch
+            \[
+                \mathcal{P} = \braces*{P : P\text{ hat eine stetige Verteilungsfunktion auf }\R}.
+            \]
+        \end{enumerate}
+    \end{example}
+
+    Ein Ziel der Inferenzstatistik ist es, Aussagen über die zugrundeliegende Verteilung \(P\) (bzw. den zugehörigen Parameter(-vektor) \(\vartheta\)) mittels der Stichprobe \(X_1, \ldots, X_n\) zu gewinnen.
+
+    \begin{example}
+        Die Wahrscheinlichkeit, dass eine zufällig ausgewählte Person eine bestimmte Eigenschaft besitzt, werde mit \(p \in \parentheses*{0, 1}\) angenommen, wobei \(p\) unbekannt sei.
+        Zur Gewinnung von Aussagen über den Wert von \(p\) werden \(10\) Personen zufällig ausgewählt und jede Person hinsichtlich der interessierenden Eigenschaft untersucht.
+        Es wird daher eine Stichprobe \(X_1, \ldots, X_{10}\) vom Umfang \(n = 10\) entnommen (aus der Gesamtpopulation aller Personen).
+        Jede Zufallsvariable \(X_i\) besitzt eine Binomialverteilung \(\bin\parentheses*{1, p}\) mit dem unbekannten Parameter \(p\).
+        Über diesen sollen nun Aussagen getrofen werden.
+        Ein Datensatz \(x_1, \ldots, x_n\) heißt dann Beobachtung und wird etwa zur Schätzung von \(p\) verwendet.
+    \end{example}
+
+    \begin{example}
+        Von einer Zufallsvariablen \(X\), die ein Merkmal beschreibt, wird im Modell angenommen, dass sie eine Normalverteilung \(N\parentheses*{\mu, \sigma^2}\) besitzt.
+        Die Parameter \(\mu\) und \(\sigma^2\) werden als unbekannt vorausgesetzt.
+        Mittels der Inferenzstatistik sollen basierend auf einer Stichprobe \(X_1, \ldots, X_n\) Aussagen über diese Größen hergeleitet werden.
+    \end{example}
+
+    In der Inferenzstatistik lassen sich drei wichtige Grundtypen von Verfahren angegeben, die für unterschiedliche Arten von Aussagen verwendet werden können:
+    \begin{itemize}
+        \item Punktschätzungen: Hierbei soll ein spezieller Wert, der für das betrachtete Merkmal charakteristisch ist, geschätzt werden (etwa eine mittlere Füllmenge oder die Toleranz bei der Fertigung eines Produkts).
+        In Beispiel 3 bedeutet dies, eine konkrete Vorschrift zur Schätzung von \(p\) anzugeben: z.B. \(\hat{p} = \frac{1}{10}\sum_{i = 1}^{10}X_i\).
+        \item  Intervallschätzungen: Da Punktschätzungen im Allgemeinen nur sehr ungenaue Prognosen liefern, werden oft Konfidenzintervalle angegeben.
+        Diese Bereiche werden so konstruiert, dass mit hoher Wahrscheinlichkeit der untersuchte (unbekannte) Parameter in dem angegebenen Bereich liegt.
+        In obigem Beispiel bedeutet dies etwa, ein Intervall \(\brackets*{\hat{u}, \hat{o}}\) anzugeben mit \(P\parentheses*{p \in \brackets*{\hat{u}, \hat{o}}} \ge 0,95\).
+        \item  Hypothesentests: In vielen Fällen sollen konkrete Hypothesen bzgl. des untersuchten Parameters untersucht werden.
+        Kennzeichnend für ihr Konstruktionsprinzip ist, dass richtige Hypothesen nur mit einer kleinen Wahrscheinlichkeit abgelehnt werden sollen.
+        In Beispiel 3 kann etwa die Hypothese ``Die Wahrscheinlichkeit \(p\), die interessierende Eigenschaft zu haben, ist kleiner als \(5\%\)'' untersucht werden.
+    \end{itemize}
+    Die obigen Fragestellungen werden im Folgenden für verschiedene Modellannahmen untersucht.
+    Dabei wird immer wieder auf Hilfsmittel aus der Wahrscheinlichkeitstheorie zurückgegrifen.
+
+
+    \section*{Stichprobenmodelle}
+
+    In den folgenden Ausführungen werden drei allgemeine Modelle mit unterschiedlicher Datensituation zugrunde gelegt.
+    \begin{enumerate}[label=(\roman*)]
+        \item \emph{Einstichprobenmodell}
+
+        Das folgende Modell stellt in gewissem Sinne die Standardsituation dar, an der die nachfolgenden Konzepte zunächst erläutert werden:
+        \[
+            X_1, \ldots, X_n \stackrel{\text{iid}}{\sim} P_\vartheta, \vartheta \in \Theta.
+        \]
+        \item \emph{Zweistichprobenmodelle}
+
+        Diese Modelle dienen der Modellierung von Situationen, in denen Vergleiche zweier Merkmale oder Vergleiche eines Merkmals (beispielsweise) zu zwei Zeitpunkten bzw in zwei Teilpopulationen durchgeführt werden.
+        Nachfolgend werden zwei Modelle unterschieden:
+        \begin{enumerate}[label=\alph*)]
+            \item \emph{Verbundene Sitchproben:} Die Stichprobe besteht aus Paaren \(\parentheses*{X_i, Y_i}, i = 1, \ldots, n\).
+            In der Regel stammt das zugehörige bivariate Merkmal von einer Versuchseinheit, an der zwei Merkmale gemessen werden.
+            Im Folgenden werden \(\parentheses*{X_1, Y_1}, \ldots, \parentheses*{X_n, Y_n}\) als stochastisch unabhängig angenommen, sodass die Stichprobenvariablen der Teilstichproben \(X_1, \ldots, X_n\) bzw. \(Y_1, \ldots, Y_n\) auch jeweils stochastisch unabhängig sind.
+            Die Zufallsvariablen \(X_i\) und \(Y_i\) sind aber im Allgemeinen stochastisch abhängig.
+            Anwendungen dieses Modells sind ``Vorher-Nachher-Vergleiche'' oder Vergleiche von Filialen eines Unternehmens, etc.:
+
+            \(\parentheses*{X_1, Y_1}, \ldots, \parentheses*{X_n, Y_n} \stackrel{\text{iid}}{\sim} P \in \mathcal{P}\), wobei \(\mathcal{P}\) eine Familie bivariater Verteilungen ist.
+            \item \emph{Unabhängige Stichproben:} Die Stichprobe besteht aus zwei Teilstichproben \(X_1, \ldots, X_{n_1}\) und \(Y_1, \ldots, Y_{n_2}\) mit Stichprobenumfängen \(n_1\) und \(n_2\).
+            Alle Stichprobenvariablen werden nachfolgend als gemeinsam stochastisch unabhängig betrachtet.
+            Eine wichtige Anwendung dieses Modells sind Messungen eines Merkmals in zwei (unabhängigen) Populationen, z.B. Vergleiche von weiblichen und männlichen Probanden, von zwei Maschinen \(A\) und \(B\), etc.:
+
+            \(X_1, \ldots, X_{n_1} \stackrel{\text{iid}}{\sim} P\) und \(Y_1, \ldots, Y_{n_2} \stackrel{\text{iid}}{\sim} Q\) seien stochastisch unabhängige Stichproben.
+        \end{enumerate}
+    \end{enumerate}
+
+
+    \section*{Punktschätzungen}
+
+    In diesem Abschnitt werden statistische Verfahren vorgestellt, die den ``wahren'' Wert eines Parameters bzw. die den Wert der (unbekannten) Verteilungsfunktion \(F\) an einer Stelle \(x \in \R\) schätzen.
+
+
+    \section*{Parameterschätzungen}
+
+    Nachfolgend werden verschiedene parametrische Verteilungsmodelle zugrundegelegt und Punktschätzungen für die zugehörigen Parameter betrachtet.
+    Sofern nichts anderes angegeben ist, wird vom Einstichprobenmodell ausgegangen:
+    \[
+        X_1, \ldots, X_n \stackrel{\text{iid}}{\sim} P_\vartheta, \vartheta \in \Theta.
+    \]
+    Gemäß Definition 1 ist eine beliebige Funktion \(T\parentheses*{X_1, \ldots, X_n}\) der Stichprobenvariablen \(X_1, \ldots, X_n\) in diesem Kontext eine Schätzung oder Schätzfunktion.
+    In der Statistik spielen die folgenden Größen eine zentrale Rolle.
+
+    \begin{definition}
+        Sei \(X_1, \ldots, X_n\) eine Stichprobe.
+        Dann heißen
+        \begin{enumerate}
+            \item \(\bar{X} = \frac{1}{n}\sum_{i = 1}^n X_i\) \emph{Stichprobenmittel},
+            \item \(\hat{\sigma}^2 = \frac{1}{n - 1}\sum_{i = 1}^n \parentheses*{X_i - \bar{X}}^2\) \emph{Stichprobenvarianz},
+            \item \(\hat{\sigma}_\mu^2 = \frac{1}{n}\sum_{i = 1}^n \parentheses*{X_i - \mu}^2\) die \emph{mittlere quadratische Abweichung von \(\mu\)},
+            \item \(S^2 = \frac{1}{n}\sum_{i = 1}^n \parentheses*{X_i - \bar{X}}^2\) die \emph{mittlere quadratische Abweichung}.
+        \end{enumerate}
+    \end{definition}
+
+    Es ist zu bemerken, dass Statistiken als Funktionen von Zufallsvariablen wiederum Zufallsvariablen sind.
+    Diese besitzen nach den Überlegungen aus der Wahrscheinlichkeitstheorie eine Verteilung, die Grundlage zur Bewertung der Schätzungen ist.
+
+    \begin{example}
+        Im Modell \(X_1, \ldots, X_n \stackrel{\text{iid}}{\sim} N\parentheses*{\mu, \sigma^2}\) mit \(\mu \in \R\) und \(\sigma^2 > 0\) gilt nach Beispiel 1 der zwölften Vorlesung und Beispiel 2 der vierzehnten Vorlesung:
+        \begin{enumerate}
+            \item das Stichprobenmittel ist normalverteilt: \(\bar{X} \sim N\parentheses*{\mu, \frac{\sigma^2}{n}}\).
+        \end{enumerate}
+        Weiterhin folgt:
+        \begin{enumerate}
+            \item[2)] die normierte Stichprobenvarianz hat eine \(\chi^2\)-Verteilung mit \(n - 1\) Freiheitsgraden:
+            \[
+                \frac{n - 1}{\sigma^2}\hat{\sigma}^2 \sim \chi^2\parentheses*{n - 1}.
+            \]
+        \end{enumerate}
+        Im Modell \(X_1, \ldots, X_n \stackrel{\text{iid}}{\sim} \bin\parentheses*{1, p}, p \in \brackets*{0, 1}\) besitzt das \(n\)-fache des Stichprobenmittels eine Binomialverteilung
+        \[
+            n\bar{X} = S_n = \sum_{j = 1}^n X_j \sim \bin\parentheses*{n, p}.
+        \]
+    \end{example}
+
+    \begin{definition}
+        Seien \(X_1, \ldots, X_n \stackrel{\text{iid}}{\sim} P_\vartheta, \vartheta \in \Theta\) und \(\gamma: \Theta \to \R\).
+        Jede Funktion
+        \[
+            T\parentheses*{X_1, \ldots, X_n}
+        \]
+        heißt \emph{Schätzfunktion} oder \emph{Punktschätzung} (je nach Interpretation für \(\vartheta\) oder den transformierten Parameter \(\gamma\parentheses*{\vartheta}\)).
+        Ist \(x_1, \ldots, x_n\) ein Stichprobenergebnis, so heißt \(T\parentheses*{x_1, \ldots, x_n}\) \emph{Schätzwert} für \(\vartheta\) (bzw. \(\gamma\parentheses*{\vartheta}\)).
+    \end{definition}
+
+    Schätzfunktionen oder auch (Punkt-)Schätzer für einen Parameter \(\vartheta\) werden meist durch ein Dach \(\hat{\cdot}\), eine Tilde \(\tilde{\cdot}\) o.ä. gekennzeichnet: \(\hat{\vartheta}, \tilde{\vartheta}\).
+
+    \begin{example}
+        Seien \(X_1, \ldots, X_n \stackrel{\text{iid}}{\sim} \bin\parentheses*{1, p}\) mit \(p \in \brackets*{0, 1}\).
+        Dann sind nach Definition 4 folgende Funktionen (nicht unbedingt gute oder sinnvolle) Punktschätzungen für die (unbekannte) Wahrscheinlichkeit \(p\):
+        \begin{enumerate}
+            \item \(\hat{p}_1 = \frac{1}{2}\) (es kann auch jede andere feste Zahl gewählt werden!),
+            \item \(\hat{p}_2 = X_1\),
+            \item \(\hat{p}_3 = X_1 \cdot X_n\),
+            \item \(\hat{p}_4 = \frac{1}{n}\sum_{i = 1}^n X_i\).
+        \end{enumerate}
+        Für eine Stichprobe vom Umfang \(n = 5\) wurden folgende Werte beobachtet:
+        \[
+            1, \quad 0, \quad 0, \quad 1, \quad 0.
+        \]
+        Die obigen Schätzer liefern für diese Stichprobe folgende, ``sehr'' verschiedene Schätzwerte:
+        \[
+            \hat{p}_1 = \frac{1}{2}, \quad \hat{p}_2 = 1, \quad \hat{p}_3 = 0, \quad \hat{p}_4 = \frac{2}{5}.
+        \]
+        Es besteht also offenbar Bedarf, Schätzfunktionen zu bewerten, d.h. deren Güte zu untersuchen.
+    \end{example}
+
+
+    \section*{Gütekriterien}
+
+    Obwohl \(\hat{p}_1, \ldots, \hat{p}_4\) in Beispiel 6 nach Defnition 4 Schätzfunktionen für \(p\) sind, scheint nicht jeder dieser Schätzer auch sinnvoll zu sein.
+    Zur Beurteilung der Qualität müssen daher Gütekriterien defniert werden.
+    Als Kenngrößen zur Bewertung von Schätzern werden der Erwartungswert als Lagemaß und die Varianz bzw. der mittlere quadratische Fehler als Streuungsmaß verwendet.
+\end{document}

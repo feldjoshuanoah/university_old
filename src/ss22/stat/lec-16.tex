@@ -1,0 +1,141 @@
+\documentclass{lecture}
+
+\institute{Institut für Statistik und Wirtschaftsmathematik}
+\title{Vorlesung 16}
+\author{Joshua Feld, 406718}
+\course{Statistik}
+\professor{Cramer}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \begin{lemma}
+        Seien \(X\) und \(Y\) Zufallsvariablen mit endlichen zweiten Momenten.
+        Dann gilt:
+        \begin{enumerate}
+            \item \(\Kov\parentheses*{X, Y} = E\parentheses*{XY} - EX \cdot EY\),
+            \item \(\Kov\parentheses*{X, X} = \Var X\),
+            \item \(\Kov\parentheses*{X, Y} = \Kov\parentheses*{Y, X}\).
+            \item \(\Kov\parentheses*{a + bX, c + dY} = bd\Kov\parentheses*{X, Y}, a, b, c, d \in \R\),
+            \item \(X, Y\text{ stochastisch unabhängig} \implies \Kov\parentheses*{X, Y} = 0.\)
+        \end{enumerate}
+        Allgemeiner gilt für Zufallsvariablen \(X_1, \ldots, X_m\) mit \(EX_i^2 < \infty, 1 \le i \le m\), \(Y_1, \ldots, Y_n\) mit \(EY_i^2 < \infty, 1 \le i \le n\), sowie \(a_1, \ldots, a_m, b_1, \ldots, b_n \in \R\):
+        \[
+            \Kov\parentheses*{\sum_{i = 1}^m a_i X_i, \sum_{j = 1}^n b_j Y_j} = \sum_{i = 1}^m \sum_{j = 1}^n a_i b_j\Kov\parentheses*{X_i, Y_j}.
+        \]
+    \end{lemma}
+
+    \begin{proof}
+        \begin{enumerate}
+            \item Wie im Beweis von Lemma 3, (ii) der fünfzehnten Vorlesung folgt:
+            \begin{align*}
+                \Kov\parentheses*{X, Y} &= E\parentheses*{\parentheses*{X - EX}\parentheses*{Y - EY}}\\
+                &= E\parentheses*{XY - XEY - YEX + EXEY}\\
+                &= E\parentheses*{XY} - EX \cdot EY.
+            \end{align*}
+            \item[(v)] \(X, Y\text{ stochastisch unabhängig} \implies E\parentheses*{XY} = EX \cdot EY \implies \Kov\parentheses*{X, Y} = 0\).
+        \end{enumerate}
+    \end{proof}
+
+    Im Fall der stochastischen Unabhängigkeit der Zufallsvariablen \(X\) und \(Y\) gilt also \(\Var\parentheses*{X + Y} = \Var X + \Var Y\).
+    In dieser Situation ist also (neben dem Erwartungswert) auch die Varianz additiv.
+    Diese Eigenschaft gilt auch für Zufallsvariablen \(X_1, \ldots, X_n\), sofern diese (paarweise) stochastisch unabhängig sind.
+    Diese Voraussetzung kann durch die schwächere Bedingung der Unkorreliertheit ersetzt werden.
+
+    \begin{definition}
+        \begin{enumerate}
+            \item Die Zufallsvariablen \(X\) und \(Y\) heißen \emph{unkorreliert}, falls \(\Kov\parentheses*{X, Y} = 0\).
+            \item Die Größe \(\Korr\parentheses*{X, Y} = \frac{\Kov\parentheses*{X, Y}}{\sqrt{\Var X}\sqrt{\Var Y}} \in \brackets*{-1, 1}\) heißt \emph{Korrelationskoeffizient}.
+            Sie wird mit \(\rho = \rho_{XY}\) bezeichnet.
+        \end{enumerate}
+    \end{definition}
+
+    Der Korrelationskoeffizient ist ein Maß für den linearen Zusammenhang der Zufallsvariablen \(X\) und \(Y\).
+    Die Extremfälle (völlige Abhängigkeit) sind mit \(X = a + bY, a, b \in \R\) für \(b < 0\) bzw. \(b > 0\) gegeben.
+
+    \begin{theorem}
+        Seien \(X_1, \ldots, X_n\) unkorrelierte Zufallsvariablen, d.h. \(\Kov\parentheses*{X_i, X_j} = 0 \forall i \ne j\).
+        Dann gilt
+        \[
+            \Var\parentheses*{\sum_{i = 1}^n X_i} = \sum_{i = 1}^n \Var\parentheses*{X_i}.
+        \]
+        Insbesondere gilt diese Summenformel, falls die Zufallsvariablen stochastisch unabhängig sind.
+    \end{theorem}
+
+    \begin{remark}
+        In der schließenden Statistik basieren Entscheidungen häufig auf dem arithmetischen Mittel \(\frac{1}{n}\sum_{i = 1}^n X_i\) von stochastisch unabhängigen und identisch verteilten Zufallsvariablen \(X_1, \ldots, X_n\).
+        Die Intuition sagt, dass eine einzelene Beobachtung eine ``unsicherere'' Information trägt als das arithmetische Mittel mehrerer Beobachtungen.
+        Die Varianz als Streuungsmaß spiegelt diese Vorstellung wider:
+        \[
+            \Var\parentheses*{\frac{1}{n}\sum_{i = 1}^n X_i} = \frac{1}{n^2}\sum_{i = 1}^n \Var X_i = \frac{1}{n}\Var X_1.
+        \]
+        Die Varianz nimmt also mit wachsendem Stichprobenumfang \(n\) ab und damit ``Genauigkeit'' zu.
+    \end{remark}
+
+    \begin{theorem}
+        Sei \(\parentheses*{X_1, X_2} \sim N_2\parentheses*{\mu_1, \mu_2, \sigma_1^2, \sigma_2^2, \rho}\) mit \(\mu_1, \mu_2 \in \R\), \(\sigma_1^2, \sigma_2^2 > 0\) sowie \(\rho \in \parentheses*{-1, 1}\).
+        Dann gilt:
+        \[
+            X_1, X_2\text{ stochastisch unabhängig} \iff X_1, X_2\text{ unkorreliert}.
+        \]
+    \end{theorem}
+
+    \begin{proof}
+        Nach Theorem 3 der vierzehnten Vorlesung genügt es \(\rho = \Korr\parentheses*{X_1, X_2}\) zu zeigen.
+        Unter Ausnutzung der Identität gilt
+        \begin{align*}
+            \Kov\parentheses*{X_1, X_2} &= E\parentheses*{X_1 - \mu_1}\parentheses*{X_2, \mu_2}\\
+            &= \int_{-\infty}^\infty \int_{-\infty}^\infty \parentheses*{x_1 - \mu_1}\parentheses*{x_2 - \mu_2}f^{X_1, X_2}\parentheses*{x_1, x_2}\d x_1\d x_2\\
+            &= \int_{-\infty}^\infty \parentheses*{x_2 - \mu_2}f^{X_2}\parentheses*{x_2}\parentheses*{\int_{-\infty}^\infty \parentheses*{x_1 - \mu_1}g\parentheses*{x_1, x_2}\d x_1}\d x_2.
+        \end{align*}
+        Da \(g\parentheses*{\cdot, x_2}\) für festes \(x_2 \in \R\) die Dichte einer \(N\parentheses*{\mu_1 + \frac{\sigma_1 \rho\parentheses*{x_2 - \mu_2}}{\sigma_2}, \parentheses*{1 - \rho^2}\sigma_1^2}\)-Verteilung ist, ist das Integral gleich deren Erwartungswert minus \(\mu_1\), d.h. gleich \(\frac{\sigma_1 \rho\parentheses*{x_2 - \mu_2}}{\sigma_2}\).
+        Damit ergibt sich
+        \begin{align*}
+            \Kov\parentheses*{X_1, X_2} &= \int_{-\infty}^\infty \parentheses*{x_2 - \mu_2} \cdot \frac{\sigma_1 \rho\parentheses*{x_2 - \mu_2}}{\sigma_2}f^{X_2}\parentheses*{x_2}\d x_2\\
+            &= \frac{\sigma_1 \rho}{\sigma_2}\int_{-\infty}^\infty \parentheses*{x_2 - \mu_2}^2 f^{X_2}\parentheses*{x_2}\d x_2\\
+            &= \frac{\sigma_1 \rho}{\sigma_2}\underbrace{\Var\parentheses*{X_2}}_{= \sigma_2^2}\\
+            &= \rho\sigma_1 \sigma_2.
+        \end{align*}
+        Damit folgt \(\Korr\parentheses*{X_1, X_2} = \frac{\Kov\parentheses*{X_1, X_2}}{\sqrt{\Var\parentheses*{X_1}\Var\parentheses*{X_2}}} = \frac{\rho\sigma_1 \sigma_2}{\sigma_1 \sigma_2} = \rho\).
+    \end{proof}
+
+
+    \section*{Ungleichungen}
+
+    Im Zusammenhang mit Momenten sind auch Ungleichungen wichtig.
+
+    \begin{theorem}
+        \begin{enumerate}
+            \item (Ugleichung von Jensen) Seien \(X\) eine Zufallsvariable und \(h: \R \to \R\) eine konvexe (konkave) Funktion, sodass \(E\parentheses*{h\parentheses*{X}}\) und \(EX\) endlich existieren.
+            Dann gilt
+            \[
+                E\parentheses*{h\parentheses*{X}} \stackrel{\parentheses*{\le}}{\ge} h\parentheses*{EX}.
+            \]
+            \item (Ugleichung von Markov) Seien \(X\) eine Zufallsvariable und \(g: \left[0, \infty\right) \to \left[0, \infty\right)\) monoton wachsend.
+            Dann gilt
+            \[
+                P\parentheses*{\absolute*{X} > \epsilon} \le P\parentheses*{\absolute*{X} \ge \epsilon} \le \frac{1}{g\parentheses*{\epsilon}}E\parentheses*{g\parentheses*{\absolute*{X}}} \quad \forall\epsilon > 0\text{ mit }g\parentheses*{\epsilon} > 0.
+            \]
+            \item (Ugleichung von Tschebyscheff) Seien \(X\) eine Zufallsvariable mit \(EX^2 < \infty\).
+            Dann gilt
+            \[
+                P\parentheses*{\absolute*{X - EX} \ge \epsilon} \le \frac{\Var X}{\epsilon^2} \quad \forall\epsilon > 0.
+            \]
+        \end{enumerate}
+    \end{theorem}
+
+    \begin{proof}
+        \begin{enumerate}
+            \item[(ii)] Im diskreten Fall gilt
+            \begin{align*}
+                E\parentheses*{g\parentheses*{\absolute*{X}}} &= \sum_{x \in \R}g\parentheses*{\absolute*{x}}P^X\parentheses*{x}\\
+                &= \sum_{\absolute*{x} \ge \epsilon}g\parentheses*{\absolute*{x}}P^X\parentheses*{x} + \sum_{\absolute*{x} < \epsilon}g\parentheses*{\absolute*{x}}P^X\\
+                &\ge g\parentheses*{\epsilon}\sum_{\absolute*{x} \ge \epsilon}P^X\parentheses*{x} = g\parentheses*{\epsilon}P\parentheses*{\absolute*{X} \ge \epsilon}.
+            \end{align*}
+            \item[(iii)] Mit \(g\parentheses*{t} = t^2\) resultiert aus der Anwendung von (ii) auf die Zufallsvariable \(Y = X - EX\) die Ungleichung von Tschebyscheff.
+        \end{enumerate}
+    \end{proof}
+\end{document}

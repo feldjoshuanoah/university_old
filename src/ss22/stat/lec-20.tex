@@ -1,0 +1,222 @@
+\documentclass{lecture}
+
+\institute{Institut für Statistik und Wirtschaftsmathematik}
+\title{Vorlesung 20}
+\author{Joshua Feld, 406718}
+\course{Statistik}
+\professor{Cramer}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+    
+    \section*{Schätzungen bei Normalverteilung}
+    
+    In dieser Vorlesung werden nur Normalverteilungsmodelle betrachtet, die in der Praxis breite Verwendung finden.
+    Dabei werden folgende Situationen unterschieden:
+    \begin{align}
+        X_1, \ldots, X_n &\stackrel{\text{iid}}{\sim} N\parentheses*{\mu, \sigma^2}\text{ mit }\mu \in \R\text{ unbekannt und }\sigma^2 > 0\text{ bekannt},\label{eq:1}\\
+        X_1, \ldots, X_n &\stackrel{\text{iid}}{\sim} N\parentheses*{\mu, \sigma^2}\text{ mit }\mu \in \R\text{ bekannt und }\sigma^2 > 0\text{ unbekannt},\label{eq:2}\\
+        X_1, \ldots, X_n &\stackrel{\text{iid}}{\sim} N\parentheses*{\mu, \sigma^2}\text{ mit }\mu \in \R\text{ unbekannt und }\sigma^2 > 0\text{ unbekannt}.\label{eq:3}
+    \end{align}
+    
+    
+    \section*{Punktschätzung}
+    
+    Das folgende Theorem enthält die Maximum-Likelihood-Schätzer für die obigen Normalverteilungsmodelle.
+    
+    \begin{theorem}
+        \begin{enumerate}
+            \item Der Maximum-Likelihood-Schätzer für \(\mu\) in \eqref{eq:1} ist gegeben durch \(\hat{\mu} = \bar{X}\).
+            \item Der Maximum-Likelihood-Schätzer für \(\sigma^2\) in \eqref{eq:2} ist gegeben durch \(\hat{\sigma}_\mu^2 = \frac{1}{n}\sum_{i = 1}^n \parentheses*{X_i - \mu}^2\).
+            \item Der Maximum-Likelihood-Schätzer für \(\parentheses*{\mu, \sigma^2}\) in \eqref{eq:3} ist gegeben durch \(\parentheses*{\hat{\mu}, \tilde{\sigma}^2}\) mit
+            \[
+                \hat{\mu} = \bar{X}, \quad \tilde{\sigma}^2 = S^2 = \frac{1}{n}\sum_{i = 1}^n \parentheses*{X_i - \bar{X}}^2.
+            \]
+        \end{enumerate}
+    \end{theorem}
+    
+    \begin{proof}
+        Im Folgenden werden nur (i) und (iii) bewiesen.
+        \(x_1, \ldots, x_n \in \R\) sei ein Stichprobenergebnis.
+        Sei \(X_1, \ldots, X_n \stackrel{\text{iid}}{\sim} N\parentheses*{\mu, \sigma_0^2}, \mu \in \R\) mit \(\sigma_0^2 > 0\) bekannt.
+        Dann ist die Likelihoodfunktion gegeben durch
+        \[
+            L\parentheses*{\mu} = \frac{1}{\parentheses*{\sqrt{2\pi}}^n \sigma_0^n}\exp\parentheses*{-\frac{1}{2\sigma_0^2}\sum_{i = 1}^n \parentheses*{x_i - \mu}^2}.
+        \]
+        Aus der \(\log\)-Likelihoodfunktion \(l\parentheses*{\mu} = -n\ln\parentheses*{\sqrt{2\pi}\sigma_0} - \frac{1}{2\sigma_0^2}\sum_{i = 1}^n \parentheses*{x_i - \mu}^2\) resultiert nach dem Verschiebungssatz die Darstellung
+        \[
+            l\parentheses*{u} = -n\ln\parentheses*{\sqrt{2\pi}\sigma_0} - \frac{1}{2\sigma_0^2}\sum_{i = 1}^n \parentheses*{x_i - \bar{x}}^2 - \frac{n}{2\sigma_0^2}\parentheses*{\mu - \bar{x}}^2 = l\parentheses*{\bar{x}} - \frac{n}{2\sigma_0^2}\parentheses*{\mu - \bar{x}}^2.
+        \]
+        Für \(\mu \in \R\) ist \(l\parentheses*{\mu}\) maximal für \(\mu = \bar{x}\), sodass \(\hat{\mu} = \bar{X}\) Maximum-Likelihood-Schätzer für \(\mu\) ist.
+        Sei \(X_1, \ldots, X_n \stackrel{\text{iid}}{\sim} N\parentheses*{\mu, \sigma^2}, \mu \in \R, \sigma^2 > 0\).
+        Dann ist die Likelihoodfunktion gegeben durch
+        \[
+            L\parentheses*{\mu, \sigma} = \frac{1}{\parentheses*{\sqrt{2\pi}}^n \sigma^n}\exp\parentheses*{-\frac{1}{2\sigma^2}\sum_{i = 1}^n \parentheses*{x_i - \mu}^2}.
+        \]
+        Aus der \(\log\)-Likelihoodfunktion \(l\parentheses*{\mu, \sigma} = -n\ln\parentheses*{\sqrt{2\pi}} - n\ln\sigma - \frac{1}{2\sigma_0^2}\sum_{i = 1}^n \parentheses*{x_i - \mu}^2\) resultiert nach dem Verschiebungssatz die Darstellung
+        \[
+            l\parentheses*{\mu, \sigma} = -n\ln\parentheses*{\sqrt{2\pi}} - n\ln\parentheses*{\sigma} - \frac{n}{2\sigma^2}s^2 - \frac{n}{2\sigma^2}\parentheses*{\mu - \bar{x}}^2.
+        \]
+        Dieser Wert kann für jedes \(\sigma > 0\) nach oben abgeschätzt werden durch \(h\parentheses*{\sigma} = -n\ln\parentheses*{\sqrt{2\pi}} - n\ln\parentheses*{\sigma} - \frac{n}{2\sigma^2}s^2\), d.h.
+        \[
+            l\parentheses*{\mu, \sigma} \le h\parentheses*{\sigma},
+        \]
+        mit Gleichheit genau dann, wenn \(\mu = \bar{x}\).
+        Ableiten von \(h\) bzgl. \(\sigma\) ergibt
+        \[
+            h'\parentheses*{\sigma} = -\frac{n}{\sigma} + \frac{ns^2}{\sigma^3},
+        \]
+        sodass \(\sigma^2 = s^2\) der einzige Kandidat für eine lokale Maximalstelle ist.
+        Die Untersuchung des Monotonieverhaltens von \(h\) liefert, dass \(\sigma^2 = s^2\) das eindeutige Maximum von \(h\) und wegen
+        \[
+            l\parentheses*{\mu, \sigma} \le h\parentheses*{\sigma} \le h\parentheses*{s}
+        \]
+        auch das eindeutige (globale) Maximum von \(l\) liefert.
+        Somit sind die genannten Schätzer die Maximum-Likelihood-Schätzer.
+    \end{proof}
+    
+    Die in Theorem 1 hergeleiteten Maximum-Likelihood-Schätzer haben schöne Eigenschaften.
+    Beispielsweise sind sie (bis auf \(\tilde{\sigma}^2 = S^2\)) erwartungstreu für \(\mu\) bzw. \(\sigma^2\).
+    Das Beispiel zeigt auch, dass die Stichprobenvarianz eine erwartungstreue Schätzung für \(\sigma^2\) ist.
+    Dieser Schätzer wird \(\tilde{\sigma}^2\) daher meist vorgezogen.
+    Eine weitere wichtige Eigenschaft von \(\hat{\mu}\) und \(\hat{\sigma}^2\) ist ihre stochastische Unabhängigkeit.
+    
+    \begin{theorem}
+        Sei \(X_1, \ldots, X_n \stackrel{\text{iid}}{\sim} N\parentheses*{\mu, \sigma^2}, \mu \in \R, \sigma^2 > 0\).
+        Die Maximum-Likelihood-Schätzer \(\hat{\mu}, \tilde{\sigma}^2\) bzw. das Stichprobenmittel \(\hat{\mu} = \bar{X}\) und die Stichprobenvarianz \(\hat{\sigma}^2 = \frac{1}{n - 1}\sum_{i = 1}^n \parentheses*{X_i - \bar{X}}^2\) sind stochastisch unabhängig.
+    \end{theorem}
+    
+    
+    \section*{Konfidenzintervalle}
+    
+    Basierend auf einer Stichprobe \(X_1, \ldots, X_n \stackrel{\text{iid}}{\sim} N\parentheses*{\mu, \sigma^2}\) werden \(\parentheses*{1 - \alpha}\)-Konfidenzintervalle für die Parameter \(\mu\) und \(\sigma^2\) angegeben.
+    Als Punktschätzer werden hierbei das Stichprobenmittel \(\bar{X} = \frac{1}{n}\sum_{i = 1}^n X_i\) und die Stichprobenvarianz \(\hat{\sigma}^2 = \frac{1}{n - 1}\sum_{i = 1}^n \parentheses*{X_i -\bar{X}}^2\) verwendet.
+    Bei der Konstruktuion der Konfidenzintervalle wird jeweils berücksichtigt, welche der Parameter als bekannt bzw. unbekannt angenommen werden.
+    
+    \begin{theorem}
+        Seien \(\alpha \in \parentheses*{0, 1}\), \(u_\beta\) das \(\beta\)-Quantil der Standardnormalverteilung und \(X_1, \ldots, X_n \stackrel{\text{iid}}{\sim} N\parentheses*{\mu, \sigma_0^2}, \mu \in \R\) mit \(\sigma_0^2 > 0\) wie in Modell \eqref{eq:1}.
+        Dann sind \(\parentheses*{1 - \alpha}\)-Konfidenzintervalle für \(\mu\) gegeben durch:
+        \begin{enumerate}
+            \item Zweiseitiges Konfidenzintervall: \(\brackets*{\bar{X} - u_{1 - \frac{\alpha}{2}}\frac{\sigma_0}{\sqrt{n}}, \bar{X} + u_{1 - \frac{\alpha}{2}}\frac{\sigma_0}{\sqrt{n}}}\),
+            \item Einseitiges, unteres Konfidenzintervall: \(\left(-\infty, \bar{X} + u_{1 - \alpha}\frac{\sigma_0}{\sqrt{n}}\right]\),
+            \item Einseitiges, oberes Konfidenzintervall: \(\left[\bar{X} - u_{1 - \alpha}\frac{\sigma_0}{\sqrt{n}}, \infty\right)\).
+        \end{enumerate}
+    \end{theorem}
+    
+    \begin{proof}
+        Zum Nachweis wird die Eigenschaft \(\bar{X} \sim N\parentheses*{\mu, \frac{\sigma_0^2}{n}}\) benutzt.
+    \end{proof}
+
+    Das in Theorem 3 aufgeführte zweiseitige Konfidenzintervall kann zur Versuchsplanung im folgenden Sinn genutzt werden.
+    Liegt die Vertrauenswahrscheinlichkeit \(1 - \alpha\) fest, so kann vor einer Erhebung der Daten ein Stichprobenumfang \(n\) festgelegt werden, dass das zweiseitige Konfidenzintervall eine vorgegebene Länge \(\mathcal{L}_0\) nicht überschreitet.
+
+    \begin{theorem}
+        Seien \(\alpha \in \parentheses*{0, 1}\) und \(\mathcal{L}_0 > 0\).
+        Dann hat das zweiseitige Konfidenzintervall aus Theorem 3 höchstens die Länge \(\mathcal{L}_0\), falls der Stichprobenumfang \(n\) die folgende Ungleichung erfüllt:
+        \[
+            n \ge \frac{4u_{1 - \frac{\alpha}{2}}^2 \sigma_0^2}{\mathcal{L}_0^2}.
+        \]
+        Der erforderliche Mindeststichprobenumfang ist daher durch die kleinste natürliche Zahl gegeben, die größer oder gleich der rechten Seite der Ungleichung ist.
+    \end{theorem}
+
+    \begin{proof}
+        Die Länge des zweiseitigen Intervalls ist gegeben durch
+        \[
+            \hat{o} - \hat{u} = \bar{X} + u_{1 - \frac{\alpha}{2}}\frac{\sigma_0}{\sqrt{n}} - \parentheses*{\bar{X} - u_{1 - \frac{\alpha}{2}}\frac{\sigma_0}{\sqrt{n}}} = 2u_{1 - \frac{\alpha}{2}}\frac{\sigma_0}{\sqrt{n}},
+        \]
+        sodass die resultierende Bedingung lautet:
+        \[
+            2u_{1 - \frac{\alpha}{2}}\frac{\sigma_0}{\sqrt{n}} \le \mathcal{L}_0 \iff 2u_{1 - \frac{\alpha}{2}}\frac{\sigma_0}{\mathcal{L}_0} \le \sqrt{n} \iff 4u_{1 - \frac{\alpha}{2}}^2 \frac{\sigma_0^2}{\mathcal{L}_0^2} \le n.
+        \]
+    \end{proof}
+
+    Durch eine geeignete ``Versuchsplanung'' kann also die Güte des Ergebnisses beeinflusst werden.
+
+    \begin{theorem}
+        Seien \(\alpha \in \parentheses*{0, 1}\), \(t_\beta\paretheses*{n - 1}\) das \(\beta\)-Quantil der \(t\parentheses*{n - 1}\)-Verteilung und \(X_1, \ldots, X_n \stackrel{\text{iid}}{\sim} N\parentheses*{\mu, \sigma_0^2}, \mu \in \R, \sigma_0^2 > 0\) wie in Modell \eqref{eq:3}.
+        Dann sind \(\parentheses*{1 - \alpha}\)-Konfidenzintervalle für \(\mu\) gegeben durch:
+        \begin{enumerate}
+            \item Zweiseitiges Konfidenzintervall: \(\brackets*{\bar{X} - t_{1 - \frac{\alpha}{2}}\parentheses*{n - 1}\frac{\hat{\sigma}}{\sqrt{n}}, \bar{X} + t_{1 - \frac{\alpha}{2}}\parentheses*{n - 1}\frac{\hat{\sigma}}{\sqrt{n}}}\),
+            \item Einseitiges, unteres Konfidenzintervall: \(\left(-\infty, \bar{X} + t_{1 - \frac{\alpha}{2}}\parentheses*{n - 1}\frac{\hat{\sigma}}{\sqrt{n}}\right]\),
+            \item Einseitiges, oberes Konfidenzintervall: \(\left[\bar{X} - t_{1 - \frac{\alpha}{2}}\parentheses*{n - 1}\frac{\hat{\sigma}}{\sqrt{n}}, \infty\right)\).
+        \end{enumerate}
+    \end{theorem}
+
+    Die obigen Konfidenzintervalle werden analog zu den Konfidenzintervallen aus Theorem 3 mit \(\hat{\sigma}\) anstelle von \(\sigma\) konstruiert.
+    Die Quantile der Standardnormalverteilung werden durch die entsprechenden Quantile der \(t\parentheses*{n - 1}\)-Verteilung ersetzt.
+    Die Aussagen beruhen auf der Verteilungseigenschaft
+    \[
+        T = \sqrt{n}\frac{\bar{X} - \mu}{\hat{\sigma}} \sim t\parentheses*{n - 1}.
+    \]
+    Für dem Parameter \(\sigma^2\) lassen sich ebenfalls ein- bzw. zweiseitige Konfidenzintervalle bestimmen.
+    In völliger Analogie zur obigen Vorgehensweise erhält man folgende Intervallschätzungen. Nach Beispiel 5 der siebzehnten Vorlesung werden die Quantile der \(\chi^2\)-Verteilung mit \(n - 1\) Freiheitsgraden verwendet.
+
+    \begin{theorem}
+        Seien \(\alpha \in \parentheses*{0, 1}\), \(\chi_\beta^2\parentheses*{n - 1}\) das \(\beta\)-Quantil der \(\chi^2\parentheses*{n - 1}\)-Verteilung und \(X_1, \ldots, X_n \stackrel{\text{iid}}{\sim} N\parentheses*{\mu, \sigma_0^2}, \mu \in \R, \sigma_0^2 > 0\) wie in Modell \eqref{eq:3}.
+        Dann sind \(\parentheses*{1 - \alpha}\)-Konfidenzintervalle für \(\mu\) gegeben durch:
+        \begin{enumerate}
+            \item Zweiseitiges Konfidenzintervall: \(\brackets*{\frac{n - 1}{\chi_{1 - \frac{\alpha}{2}}^2\parentheses*{n - 1}}\hat{\sigma}^2, \frac{n - 1}{\chi_{\frac{\alpha}{2}}^2\parentheses*{n - 1}}\hat{\sigma}^2}\),
+            \item Einseitiges, unteres Konfidenzintervall: \(\left(-\infty, \frac{n - 1}{\chi_{\frac{\alpha}{2}}^2\parentheses*{n - 1}}\hat{\sigma}^2\right]\),
+            \item Einseitiges, oberes Konfidenzintervall: \(\left[\frac{n - 1}{\chi_{1 - \frac{\alpha}{2}}^2\parentheses*{n - 1}}\hat{\sigma}^2, \infty\right)\).
+        \end{enumerate}
+    \end{theorem}
+
+    Konfidenzintervalle für \(\sigma^2\) im Modell \eqref{eq:2} erhält man, indem in den Intervallen aus Theorem 6 die Schätzung \(\parentheses*{n - 1}\hat{\sigma}^2\) durch die Statistik \(n\hat{\sigma}_{\mu_0}^2 = \sum_{i = 1}^n \parentheses*{X_i - \mu_0}^2\) ersetzt wird und bei den Quantilen die Anzahl der Freiheitsgrade um \(1\) erhöht wird, also \(\chi_\beta^2\parentheses*{n - 1}\) jeweils durch \(\chi_\beta^2\parentheses*{n}\) ersetzt wird.
+
+    \begin{theorem}
+        Seien \(\alpha \in \parentheses*{0, 1}\), \(\chi_\beta^2\parentheses*{n}\) das \(\beta\)-Quantil der \(\chi^2\parentheses*{n}\)-Verteilung und \(X_1, \ldots, X_n \stackrel{\text{iid}}{\sim} N\parentheses*{\mu, \sigma_0^2}, \sigma^2 > 0\) mit \(\mu_0 \in \R\) bekannt wie in Modell \eqref{eq:2}.
+        Dann sind \(\parentheses*{1 - \alpha}\)-Konfidenzintervalle für \(\sigma^2\) gegeben durch:
+        \begin{enumerate}
+            \item Zweiseitiges Konfidenzintervall: \(\brackets*{\frac{n}{\chi_{1 - \frac{\alpha}{2}}^2\parentheses*{n}}\hat{\sigma}_{\mu_0}^2, \frac{n}{\chi_{\frac{\alpha}{2}}^2\parentheses*{n}}\hat{\sigma}_{\mu_0}^2}\),
+            \item Einseitiges, unteres Konfidenzintervall: \(\left(-\infty, \frac{n}{\chi_{\frac{\alpha}{2}}^2\parentheses*{n}}\hat{\sigma}_{\mu_0}^2\right]\),
+            \item Einseitiges, oberes Konfidenzintervall: \(\left[\frac{n}{\chi_{1 - \frac{\alpha}{2}}^2\parentheses*{n}}\hat{\sigma}_{\mu_0}^2, \infty\right)\).
+        \end{enumerate}
+    \end{theorem}
+
+    \begin{theorem}
+        Für \(\sigma\) gewinnt man geeignete Konfidenzintervalle durch Ziehen der Quadratwurzel aus den entsprechenden Intervallgrenzen \(\hat{u}\) bzw. \(\hat{o}\).
+    \end{theorem}
+
+
+    \section*{Konfidenzintervall für die Differenz \(\delta = \mu_1 - \mu_2\) der Erwartungswerte zweier Normalverteilungen bei unbekannter (gleicher) Varianz \(\sigma^2\)}
+
+    In diesem Abschnitt wird eine Statistik vorgestellt, mit der zwei normalverteilte, stochastisch unabhängige Stichproben miteinander hinsichtlich ihrer Mittelwerte verglichen werden können.
+    Eine derartige Vorgehensweise ist dann von Interesse, wenn man sich für Unterschiede in den Erwartungswerten zweier Teilgruppen (z.B. Männer -- Frauen, Produkte zweier (unabhängiger) Anlagen, etc.) interessiert.
+    Das betrachtete Modell ist eine Variante des Zweistichprobenmodells mit normalverteilten Stichprobenvariablen, wobei die Varianz \(\sigma^2\) der Stichprobenvariablen in beiden Populationen als gleich unterstellt wird.
+    Dies ist eine wesentliche Annahme für die Konstruktion der Konfidenzintervalle in Theorem 8.
+
+    \(X_1, \ldots, X_{n_1} \stackrel{\text{iid}}{\sim} N\parentheses*{\mu_1, \sigma^2}\) und \(Y_1, \ldots, Y_{n_2} \stackrel{\text{iid}}{\sim} N\parentheses*{\mu_2, \sigma^2}\) seien stochastisch unabhängige Stichproben mit \(n_1, n_2 \ge 2\).
+    Die Parameter \(\mu_1, \mu_2 \in \R\) und \(\sigma^2 > 0\) seien unbekannt.
+
+    \begin{theorem}
+        Sei \(\alpha \in \parentheses*{0, 1}\).
+        Ein zweiseitiges \(\parentheses*{1 - \alpha}\)-Konfidenzintervall \(\brackets*{\hat{u}, \hat{o}}\) im gegebenen Modell für die Differenz der Erwartungswerte \(\delta = \mu_1 - \mu_2\) ist gegeben durch
+        \[
+            \brackets*{\hat{\Delta} - t_{1 - \frac{\alpha}{2}}\parentheses*{n_1 + n_2 - 2}\hat{\sigma}_{\text{pool}} \cdot \sqrt{\frac{1}{n_1} + \frac{1}{n_2}}, \hat{\Delta} + t_{1 - \frac{\alpha}{2}}\parentheses*{n_1 + n_2 - 2}\hat{\sigma}_{\text{pool}} \cdot \sqrt{\frac{1}{n_1} + \frac{1}{n_2}}},
+        \]
+        wobei \(\hat{\Delta} = \bar{X} - \bar{Y}\) eine Punktschätzung für die Differenz der Erwartungswerte \(\delta\),
+        \[
+            \hat{\sigma}_{\text{pool}}^2 = \frac{1}{n_1 + n_2 - 2}\parentheses*{\sum_{i = 1}^{n_1}\parentheses*{X_i - \bar{X}}^2 + \sum_{j = 1}^{n_2}\parentheses*{Y_j - \bar{Y}}^2} = \frac{n_1 - 1}{n_1 + n_2 - 2}\hat{\sigma}_1^2 + \frac{n_2 - 1}{n_1 + n_2 - 2}\hat{\sigma}_2^2
+        \]
+        eine kombinierte Varianzschätzung mit den Stichprobenvarianzen \(\hat{\sigma}_1^2\) und \(\hat{\sigma}_2^2\) der entsprechenden Stichproben sowie \(t_\beta\parentheses*{n_1 + n_2 - 2}\) das \(\beta\)-Quantil der \(t\parentheses*{n_1 + n_2 - 2}\)-Verteilung sind.
+        Einseitige Konfidenzintervalle ergeben sich unter Verwendung derselben Größen als
+        \[
+            \left(-\infty, \hat{\Delta} + t_{1 - \alpha}\parentheses*{n_1 + n_2 - 2}\hat{\sigma}_{\text{pool}} \cdot \sqrt{\frac{1}{n_1} + \frac{1}{n_2}}\right], \quad \left[\hat{\Delta} - t_{1 - \frac{\alpha}{2}}\parentheses*{n_1 + n_2 - 2}\hat{\sigma}_{\text{pool}} \cdot \sqrt{\frac{1}{n_1} + \frac{1}{n_2}}, \infty\right)
+        \]
+    \end{theorem}
+
+    Die obigen Aussagen beruhen auf der Eigenschaft
+    \[
+        \parentheses*{\sqrt{\frac{1}{n_1} + \frac{1}{n_2}}}^{-1}\frac{\hat{\Delta} - \parentheses*{\mu_1 - \mu_2}}{\hat{\sigma}_{\text{pool}}} \sim t\parentheses*{n_1 + n_2 - 2}.
+    \]
+    Zu beachten ist, dass das vorgestellte Konfidenzintervall auf der Annahme beruht, dass die Varianzen in den Stichproben identisch sind.
+    Auf diese Annahme kann verzichtet werden, wenn die Varianzen \(\sigma_1^2\) und \(\sigma_2^2\) als gegeben unterstellt werden.
+    Gilt \(X_1, \ldots, X_{n_1} \stackrel{\text{iid}}{\sim} N\parentheses*{\mu_1, \sigma_1^2}, Y_1, \ldots, Y_{n_2} \stackrel{\text{iid}}{\sim} N\parentheses*{\mu_2, \sigma_2^2}\), so können unter Verwendung der Statistik
+    \[
+        \parentheses*{\sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}}}^{-1}\parentheses*{\hat{\Delta} - \parentheses*{\mu_1 - \mu_2}} \sim N\parentheses*{0, 1}
+    \]
+    entsprechende Konfidenzintervalle konstruiert werden.
+\end{document}

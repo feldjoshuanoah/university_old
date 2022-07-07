@@ -1,0 +1,237 @@
+\documentclass{lecture}
+
+\institute{Institut für Statistik und Wirtschaftsmathematik}
+\title{Vorlesung 18}
+\author{Joshua Feld, 406718}
+\course{Statistik}
+\professor{Cramer}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+    
+    \section*{Erwartungstreue}
+
+    Ein wichtiges Kriterium ist die Erwartungstreue eines Schätzers \(\hat{\vartheta}\).
+    
+    \begin{definition}
+        Sei \(X_1, \ldots, X_n \stackrel{\text{iid}}{\sim} P_\vartheta, \vartheta \in \Theta\) ein parametrisches Verteilungsmodell.
+        Ein Schätzer \(\hat{\vartheta}\) heißt \emph{erwartungstreu} (oder \emph{unverzerrt}) für den Parameter \(\vartheta\), falls
+        \[
+            E_\vartheta \hat{\vartheta} = \vartheta \quad \forall \vartheta \in \Theta.
+        \]
+    \end{definition}
+    
+    Der Index am Erwartungswertsymbol \(E_\vartheta\) zeigt an, dass der Erwartungswert jeweils bzgl. der Verteilung \(P_\vartheta\) gebildet wird.
+    Entsprechende Notationen \(\Var_\vartheta\) etc. werden nachfolgend verwendet.
+    
+    Da der untersuchte Parameter \(\vartheta\) nicht bekannt ist, soll ein ``vernünftiger'' Schätzer für \(\vartheta\) zumindest im Mittel den richtigen Wert liefern.
+    Damit der Schätzer \(\hat{\vartheta}\) berechenbar ist, darf \(\hat{\vartheta}\) natürlich nicht vom unbekannten Parameter \(\vartheta\) abhängen!
+
+    \begin{example}
+        Für die Schätzer aus Beispiel 6 der letzten Vorlesung ergibt sich mit \(p \in \brackets*{0, 1}\):
+        \[
+            E_p \hat{p}_1 = 0,5, \quad E_p \hat{p}_2 = p, \quad E_p \hat{p}_3 = p^2, \quad E_p \hat{p}_4 = p.
+        \]
+        Damit sind die Schätzer \(\hat{p}_2\) und \(\hat{p}_4\) erwartungstreu.
+        Die Schätzer \(\hat{p}_1\) und \(\hat{p}_3\) erweisen sich als nicht erwartungstreu, da sie nicht für einen beliebigen Wert \(p \in \brackets*{0, 1}\) im Mittel diesen Wert liefern.
+        \(\hat{p}_3\) ist allerdings erwartungstreu für \(p^2\).
+    \end{example}
+
+    Der Begriff der Erwartungstreue wird nun an den in Definition 3 der letzten Vorlesung eingeführten Statistiken erläutert.
+
+    \begin{example}
+        Seien \(X_1, \ldots X_n \stackrel{\text{iid}}{\sim} P\), wobei \(\mu = EX_1\) und \(\sigma^2 = \Var X_1\) endlich existieren.
+        \begin{enumerate}
+            \item Das Stichprobenmittel ist eine erwartungstreue Schätzung für \(\mu\), denn
+            \[
+                E_\mu\parentheses*{\bar{X}} = E_\mu\parentheses*{\frac{1}{n}\sum_{i = 1}^n X_i} = \frac{1}{n}\sum_{i = 1}^n E_\mu X_i = \frac{1}{n}\sum_{i = 1}^n \mu = \mu.
+            \]
+            \item Die mittlere quadratische Abweichung von \(\mu\), i.e. \(\hat{\sigma}_\mu^2 = \frac{1}{n}\sum_{i = 1}^n \parentheses*{X_i - \mu}^2\), ist erwartungstreu für \(\sigma^2\). Unter den getroffenen Annahmen gilt
+            \[
+                E_{\sigma^2}\hat{\sigma}_\mu^2 = E_{\sigma^2}\parentheses*{\frac{1}{n}\sum_{i = 1}^n \parentheses*{X_i - \mu}^2} = \frac{1}{n}\sum_{i = 1}^n E_{\sigma^2}\parentheses*{X_i - \mu}^2 = \frac{1}{n}\sum_{i = 1}^n \Var_{\sigma^2}X_i = \sigma^2.
+            \]
+            Da der Schätzer \(\hat{\sigma}_\mu^2\) vom Parameter \(\mu\) abhängt ist dieser im Modell als bekannt anzunehmen.
+            \item Sei \(n \ge 2\).
+            Die mittlere quadratische Abweichung \(S^2 = \frac{1}{n}\sum_{i = 1}^n \parentheses*{X_i - \bar{X}}^2\) ist hingegen nicht erwartungstreu.
+            Zunächst werde angenommen, dass \(\mu = EX_i = 0\) gilt.
+            Dies impliziert insbesondere \(E\bar{X} = 0\).
+            Der Verschiebungssatz liefert
+            \[
+                \sum_{i = 1}^n \parentheses*{X_i - \bar{X}}^2 = \sum_{i = 1}^n X_i^2 - n\parentheses*{\bar{X}}^2,
+            \]
+            sodass
+            \[
+                E\parentheses*{\sum_{i = 1}^n \parentheses*{X_i - \bar{X}}^2} = \sum_{i = 1}^n EX_i^2 - nE\parentheses*{\bar{X}}^2 = \sum_{i = 1}^n \Var X_i - n\Var\bar{X} = \parentheses*{n - 1}\sigma^2.
+            \]
+            Im letzten Schritt wurde benutzt, dass wegen der Unabhängigkeit der Stichprobenvariablen die Varianzformel aus Theorem 2 der sechzehnten Vorlesung anwendbar ist und damit nach Bemerkung 1 selbiger Vorlesung folgt:
+            \[
+                \Var\bar{X} = \Var\parentheses*{\frac{1}{n}\sum_{i = 1}^n X_i} = \frac{1}{n^2}\sum_{i = 1}^n \Var X_i = \frac{\sigma^2}{n}.
+            \]
+            Daher ergibt sich
+            \[
+                ES^2 = \frac{n - 1}{n}\sigma^2,
+            \]
+            sodass \(S^2\) nicht erwartungstreu ist (der Faktor \(\frac{n - 1}{n}\) ist stets kleiner als \(1\)).
+            Da der Faktor für \(n \to \infty\) gegen \(1\) konvergiert, gilt
+            \[
+                \lim_{n \to \infty}ES^2 = \lim_{n \to \infty}\frac{n - 1}{n}\sigma^2 = \sigma^2
+            \]
+            für alle \(\sigma^2 > 0\).
+            Diese Eigenschaft wird als asymptotische Erwartungstreue bezeichnet.
+
+            Gilt allgemein \(E_\mu X_i = \mu \in \R\), so resultiert das Ergebnis durch die Betrachtung der Zufallsvariablen \(Y_i = X_i - \mu\) mit \(EY_i = 0, 1 \le i \le n\).
+            Es gilt
+            \[
+                \sum_{i = 1}^n \parentheses*{X_i - \bar{X}}^2 = \sum_{i = 1}^n \parentheses*{X_i - \mu - \parentheses*{\bar{X} - \mu}}^2 = \sum_{i = 1}^n \parentheses*{Y_i - \bar{Y}}^2,
+            \]
+            d.h. die quadratische Abweichung ist invariant gegen Verschiebungen.
+            \item In 3) wurde gezeigt, dass die mittlere quadratische Abweichung keine erwartungstreue Schätzung für \(\sigma^2\) ist.
+            Dies kann jedoch durch eine leichte Modifikation des Schätzers erreicht werden.
+            Die Stichprobenvarianz kann geschrieben werden als
+            \[
+                \hat{\sigma}^2 = \frac{n}{n - 1}S^2,
+            \]
+            sodass \(E\hat{\sigma}^2 = \frac{n}{n - 1}ES^2 = \sigma^2\) für alle \(\sigma^2 > 0\).
+            Die Stichprobenvarianz ist damit also erwartungsgetreu.
+            Dies ist der Grund, warum sie in vielen statistischen Anwendungen der mittleren quadratischen Abweichung vorgezogen wird.
+        \end{enumerate}
+    \end{example}
+
+    Aus Beispiel 2, 4) kann folgende Regel abgeleitet werden.
+
+    \begin{theorem}
+        Seien \(X_1, \ldots, X_n \stackrel{\text{iid}}{\sim} P_\vartheta, \vartheta \in \Theta\) und \(\tilde{\vartheta} = \tilde{\vartheta}\parentheses*{X_1, \ldots, X_n}\) ein Schätzer für \(\vartheta\) mit
+        \[
+            E_\vartheta \tilde{\vartheta} = a_n + b_n\vartheta \quad \forall \vartheta \in \Theta,
+        \]
+        wobei \(a_n, b_n \in \R, b_n \ne 0\) bekannte, von \(\vartheta\) unabhängige Werte sind.
+        Dann ist durch
+        \[
+            \hat{\vartheta} = \frac{\tilde{\vartheta} - a_n}{b_n}
+        \]
+        eine erwartungstreue Schätzung für \(\vartheta\) gegeben.
+    \end{theorem}
+
+
+    \section*{Mittlerer quadratischer Fehler}
+
+    Die Erwartungstreue eines Schätzers ist \emph{ein} Kriterium zur Bewertung der Güte einer Schätzfunktion.
+    Als alleiniges Kriterium reicht es im Allgemeinen nicht aus, da es die Abweichung eines Schätzers vom interessierenden Parameter nicht in Betracht zieht.
+    Aus diesem Grund wird als weiteres Kriterium die quadratische Abweichung bzgl. des zu schätzenden Parameters \(\vartheta\) eingeführt.
+
+    \begin{definition}
+        Der \emph{mittlere quadratische Fehler} eines Schätzers \(\hat{\vartheta}\) bzgl. des Parameters \(\vartheta\) ist definiert durch
+        \[
+            \MSE_\vartheta\parentheses*{\hat{\vartheta}} = E_\vartheta\parentheses*{\hat{\vartheta} - \vartheta}^2, \quad \vartheta \in \Theta.
+        \]
+    \end{definition}
+
+    Ist der Schätzer erwartungstreu, so ist der mittlere quadratische Fehler gleich der Varianz des Schätzers.
+
+    \begin{theorem}
+        Sei \(\hat{\vartheta}\) eine Schätzung für \(\vartheta\).
+        Dann gilt
+        \[
+            \MSE_\vartheta\parentheses*{\hat{\vartheta}} = \Var_\vartheta\parentheses*{\hat{\vartheta}} + \parentheses*{E_\vartheta \hat{\vartheta} - \vartheta}^2.
+        \]
+        Der Term \(E_\vartheta \hat{\vartheta} - \vartheta\) heißt Verzerrung oder Bias des Schätzers.
+        Ist \(\hat{\vartheta}\) erwartungstreu, so gilt \(\MSE_\vartheta\parentheses*{\hat{\vartheta}} = \Var_\vartheta\parentheses*{\hat{\vartheta}}\).
+    \end{theorem}
+
+    \begin{proof}
+        Die Darstellung als Summe von Varianz und quadratischer Abweichung des Erwartungswerts vom Parameter folgt sofort aus dem Verschiebungssatz.
+        Für erwartungstreue Schätzfunktionen gilt \(E_\vartheta \hat{\vartheta} = \vartheta\) für beliebiges \(\vartheta \in \Theta\), sodass in diesem Fall die Verzerrung Null ist.
+    \end{proof}
+
+    \begin{remark}
+        Schränkt man sich in einem konkreten Modell auf erwartungstreue Schätzfunktionen ein, so sind insbesondere Schätzfunktionen mit minimaler Varianz von Interesse.
+        Die Varianz dient dann als Gütemaß, das die Streuung der Schätzung beschreibt.
+    \end{remark}
+
+    \begin{example}
+        In Beispiel 1 sind die Schätzer \(\hat{p}_2\) und \(\hat{p}_4\) erwartungstreu.
+        Da \(\hat{p}_2\) nur die Werte \(0\) oder \(1\) liefern kann, ist seine Qualität zu bezweifeln.
+        Der Vergleich der Varianzen unterstreicht dies:
+        \[
+            \Var\hat{p}_2 = p\parentheses*{1 - p}, \quad \Var\hat{p}_4 = \frac{p\parentheses*{1 - p}}{n}.
+        \]
+        Daher ist die Varianz von \(\hat{p}_4\) für \(n \ge 2\) immer kleiner als die Varianz von \(\hat{p}_2\).
+        Außerdem wird die Streuung des Schätzers \(\hat{p}_4\) mit wachsendem Stichprobenumfang kleiner, sodass \(\hat{p}_4\) zu bevorzugen ist.
+        Es kann sogar gezeigt werden, dass die Schätzfunktion \(\hat{p}_4\) für eine Stichprobe \(X_1, \ldots, X_n \stackrel{\text{iid}}{\sim} \bin\parentheses*{1, p}\) unter allen erwartungstreuen Schätzern diejenige mit kleinster Varianz ist.
+    \end{example}
+
+    \begin{example}
+        Für das Stichprobenmittel \(\hat{X}\) ergibt sich unter den Voraussetzung von Beispiel 2 die Varianz
+        \[
+            \Var_\mu\parentheses*{\bar{X}} = \frac{\sigma^2}{n},
+        \]
+        d.h. mit wachsendem Stichprobenumfang sinkt die Varianz.
+        Dies zeigt, dass größere Stichprobenumfänge eine höhere ``Präzision'' der Schätzfunktion ergeben.
+    \end{example}
+
+    Die Varianz eignet sich daher zum direkten Vergleich erwartungstreuer Schätzfunktionen.
+    Die Varianzschätzungen \(S^2\) und \(\hat{\sigma}^2\) in Beispiel 2 können mit dem mittleren quadratischen Fehler verglichen werden.
+
+    \begin{example}
+        Im Modell \(X_1, \ldots X_n \stackrel{\text{iid}}{\sim} N\parentheses*{\mu, \sigma^2}\) ist die Varianz des für \(\sigma^2\) erwartungstreuen Schätzers \(\hat{\sigma}^2\) gegeben durch \(\Var\parentheses*{\hat{\sigma}^2} = \frac{2}{n - 1}\sigma^4\).
+        Für \(\alpha > 0\) sei eine Familie von Schätzern definiert durch \(\hat{\sigma}_\alpha^2 = \alpha\hat{\sigma}^2\).
+        Dann gilt \(E\hat{\sigma}_\alpha^2 = \alpha\sigma^2\), sodass
+        \begin{align*}
+            \MSE_{\sigma^2}\parentheses*{\hat{\sigma}_\alpha^2} &= \Var\parentheses*{\hat{\sigma}_\alpha^2} + \parentheses*{E\hat{\sigma}_\alpha^2 - \sigma^2}^2\\
+            &= \alpha^2 \Var\parentheses*{\hat{\sigma}^2} + \parentheses*{\alpha\sigma^2 - \sigma^2}^2\\
+            &= \frac{2\alpha^2}{n - 1}\sigma^4 + \parentheses*{\alpha - 1}^2 \sigma^4\\
+            &= \parentheses*{2\alpha^2 + \parentheses*{n - 1}\parentheses*{\alpha - 1}^2}\frac{\sigma^4}{n - 1}.
+        \end{align*}
+        Der Schätzer \(\hat{\sigma}_\alpha^2\) mit minimalem Wert von \(2\alpha^2 + \parentheses*{n - 1}\parentheses*{\alpha - 1}^2\) hat also den kleinsten mittleren quadratischen Fehler.
+        Eine einfache Rechnung zeigt, dass das optimale \(\alpha\) durch
+        \[
+            \alpha^* = \frac{n - 1}{n + 1}
+        \]
+        gegeben ist.
+        Der (nicht erwartungstreue) Schätzer mit dem kleinsten mittleren quadratischen Fehler ist daher
+        \[
+            \hat{\sigma}_*^2 = \frac{n - 1}{n + 1}\hat{\sigma}^2 = \frac{1}{n + 1}\sum_{i = 1}^n \parentheses*{X_i - \bar{X}}^2.
+        \]
+        Der mittlere quadratische Fehler ist \(\MSE_{\sigma^2}\parentheses*{\hat{\sigma}_*^2} = \frac{2}{n + 1}\sigma^4\).
+    \end{example}
+
+
+    \section*{Schätzung der Verteilungsfunktion}
+
+    In diesem Abschnitt wird ein nichtparametrisches Verteilungsmodell unterstellt:
+    \[
+        X_1, \ldots, X_n \stackrel{\text{iid}}{\sim}F\text{ mit unbekannter Verteilungsfunktion }F.
+    \]
+    Da keinerlei Einschränkungen an die Verteilungsfunktion \(F\) der Stichprobenvariablen vorausgesetzt werden, kann jedes Wahrscheinlichkeitsmaß \(P\) in Betracht gezogen werden.
+    Ziel ist es, die zu \(P\) gehörige (unbekannte) Verteilungsfunktion \(F\) basierend auf der Stichprobe \(X_1, \ldots, X_n\) zu schätzen.
+    Dazu wird ``punktweise'' vorgegangen, d.h. für festes \(t \in \R\) wird eine Punktschätzung für die Wahrscheinlichkeit
+    \[
+        F\parentheses*{t} = P\parentheses*{X_1 \le t}
+    \]
+    bestimmt.
+    Es ist naheliegend, die bereits in der beschreibenden Statistik verwendete empirische Verteilungsfunktion \(\hat{F}_n\) zu nutzen:
+    \[
+        \hat{F}_n\parentheses*{t} = \frac{1}{n}\sum_{i = 1}^n \mathbb{I}_{\left(-\infty, t\right]}\parentheses*{X_i}, \quad t \in \R.
+    \]
+    Der Summand \(\mathcal{I}_i\parentheses*{t} = \mathbb{I}_{\left(-\infty, t\right]}\parentheses*{X_i}\) ist eine Zufallsvariable, die angibt, ob die Zufallsvariable \(X_i\) kleiner oder gleich \(t\) ist, und die gemäß Definition C 1.8 binomialverteilt ist.
+    Wegen \(E\mathcal{I}_i\parentheses*{t} = F\parentheses*{t}\) gilt \(\mathcal{I}_i\parentheses*{t} \sim \bin\parentheses*{1, F\parentheses*{t}}\).
+    Da die Zufallsvariablen \(X_1, \ldots, X_n\) nach Voraussetzung stochastisch unabhängig sind, gilt dies auch für \(\mathcal{I}_1\parentheses*{t}, \ldots, \mathcal{I}_n\parentheses*{t}\) mit festem \(t \in \R\), sodass nach Beispiel 6 der elften Vorlesung
+    \[
+        n\hat{F}_n\parentheses*{t} = \sum_{i = 1}^n \mathbb{I}_{\left(-\infty, t\right]}\parentheses*{X_i} = \sum_{i = 1}^n \mathcal{I}_n\parentheses*{t} \sim \bin\parentheses*{n, F\parentheses*{t}}, \quad t \in \R.
+    \]
+    Aus diesen Überlegungen resultieren mit den Ergebnissen aus der vorherigen Vorlesung folgende Eigenschaften.
+
+    \begin{theorem}
+        Sei \(\hat{F}_n\) die empirische Verteilungsfunktion.
+        Dann gilt für festes \(t \in \R\):
+        \[
+            E\hat{F}_n\parentheses*{t} = F\parentheses*{t}, \quad \Var\hat{F}_n\parentheses*{t} = \frac{F\parentheses*{t}\parentheses*{1 - F\parentheses*{t}}}{n},
+        \]
+        d.h. \(\hat{F}_n\parentheses*{t}\) ist eine erwartungstreue Schätzung für \(F\parentheses*{t}\).
+        \(\parentheses*{\hat{F}_n\parentheses*{t}}_n\) definiert eine stark konsistente Folge von Schätzfunktionen (punktweise in \(t\)).
+        Eine sinnvolle Schätzung für die Funktion \(F\) ist damit die empirische Verteilungsfunktion \(\hat{F}_n\).
+    \end{theorem}
+\end{document}
