@@ -156,13 +156,13 @@
     \end{remark}
 
     \begin{definition}
-        Seien \(\Omega = \braces*{\omega_1, \omega_2, \omega_3, \ldots}\) ein endlicher oder abzählbar unendlicher Grundraum und \(\mathfrak{U} = \Pot\parentheses*{\Omega}\) die Potenzmenge von \(\Omega\) (also die Menge aller Ereignisse über \(\Omega\)).
+        Seien \(\Omega = \braces*{\omega_1, \omega_2, \omega_3, \ldots}\) ein endlicher oder abzählbar unendlicher Grundraum und \(\mathfrak{A} = \Pot\parentheses*{\Omega}\) die Potenzmenge von \(\Omega\) (also die Menge aller Ereignisse über \(\Omega\)).
         Ferner sei \(p: \Omega \to \brackets*{0, 1}\) eine Abbildung mit \(\sum_{\omega \in \Omega}p\parentheses*{\omega} = 1\).
         Die durch
         \[
-            P\parentheses*{A} = \sum_{\omega \in A}p\parentheses*{\omega}, \quad A \in \mathfrak{U},
+            P\parentheses*{A} = \sum_{\omega \in A}p\parentheses*{\omega}, \quad A \in \mathfrak{A},
         \]
-        definierte Abbildung \(P: \mathfrak{U} \to \brackets*{0, 1}, A \mapsto P\parentheses*{A}\), die jedem Ereignis \(A\) eine Wahrscheinlichkeit \(P\parentheses*{A}\) zuordnet, heißt \emph{diskretes Wahrscheinlichkeitsmaß} oder \emph{diskrete Wahrscheinlichkeitsverteilung} auf \(\mathfrak{U}\) (oder über \(\Omega\)).
+        definierte Abbildung \(P: \mathfrak{A} \to \brackets*{0, 1}, A \mapsto P\parentheses*{A}\), die jedem Ereignis \(A\) eine Wahrscheinlichkeit \(P\parentheses*{A}\) zuordnet, heißt \emph{diskretes Wahrscheinlichkeitsmaß} oder \emph{diskrete Wahrscheinlichkeitsverteilung} auf \(\mathfrak{A}\) (oder über \(\Omega\)).
         Die Abbildung \(p\) heißt \emph{Zähldichte}.
 
         Für \(\omega \in \Omega\) heißt \(p\parentheses*{\omega} = P\parentheses*{\braces*{\omega}}\) \emph{Elementarwahrscheinlichkeit} des Elementarereignisses \(\braces*{\omega}\); als Kurzschreibweise wird \(P\parentheses*{\omega} = P\parentheses*{\braces*{\omega}}\) verwendet.
@@ -171,7 +171,7 @@
     \begin{remark}
         Eine diskrete Wahrscheinlichkeitsverteilung \(P\) besitzt folgende Eigenschaften:
         \begin{enumerate}
-            \item \(0 \le P\parentheses*{A} \le 1\) für jedes Ereignis \(A \in \mathfrak{U}\),
+            \item \(0 \le P\parentheses*{A} \le 1\) für jedes Ereignis \(A \in \mathfrak{A}\),
             \item \(P\parentheses*{\Omega} = 1\),
             \item \(P\) ist \(\sigma\)-additiv, d.h. für alle paarweise disjunkten Ereignisse \(A_i, i \in \N\) gilt
             \[
@@ -184,7 +184,7 @@
     Diese Eigenschaften heißen auch Kolmogorov-Axiome.
 
     \begin{definition}
-        Seien \(\Omega = \braces*{\omega_1, \omega_2, \ldots}\) ein endlicher oder abzählbar unendlicher Grundraum, \(\mathfrak{U} = \Pot\parentheses*{\Omega}\) und \(P\) ein diskretes Wahrscheinlichkeitsmaß auf \(\mathfrak{U}\).
+        Seien \(\Omega = \braces*{\omega_1, \omega_2, \ldots}\) ein endlicher oder abzählbar unendlicher Grundraum, \(\mathfrak{A} = \Pot\parentheses*{\Omega}\) und \(P\) ein diskretes Wahrscheinlichkeitsmaß auf \(\mathfrak{A}\).
         Das Paar \(\parentheses*{\Omega, P}\) wird \emph{diskreter Wahrscheinlichkeitsraum} genannt.
         Ist der Grundraum endlich, d.h. \(\Omega = \braces*{\omega_1, \ldots, \omega_n}\), so wird \(\parentheses*{\Omega, P}\) als \emph{endlicher diskreter Wahrscheinlichkeitsraum} bezeichnet.
     \end{definition}

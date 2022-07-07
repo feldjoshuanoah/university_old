@@ -15,7 +15,7 @@
     In stochastischen Modellen benötigt man häufig Folgen von Ereignissen und deren Eigenschaften.
 
     \begin{definition}
-        Seien \(\mathfrak{U}\) eine \(\sigma\)-Algebra über \(\Omega \ne \emptyset\) und \(\parentheses*{A_n}_{n \in N} \subseteq \mathfrak{U}\).
+        Seien \(\mathfrak{A}\) eine \(\sigma\)-Algebra über \(\Omega \ne \emptyset\) und \(\parentheses*{A_n}_{n \in N} \subseteq \mathfrak{A}\).
         \[
             \parentheses*{A_n}_n\text{ heißt}\begin{cases}
                 \text{\emph{isoton} (monoton wachsend)}, & \text{falls }A_n \subseteq A_{n + 1} \forall n \in \N,\\
@@ -40,9 +40,9 @@
     \end{definition}
 
     \begin{remark}
-        Mit \(\parentheses*{A_n}_n \subseteq \mathfrak{U}\) sind der limes superior und der limes inferior selbst wieder Ereignisse aus \(\mathfrak{U}\), d.h.
+        Mit \(\parentheses*{A_n}_n \subseteq \mathfrak{A}\) sind der limes superior und der limes inferior selbst wieder Ereignisse aus \(\mathfrak{A}\), d.h.
         \[
-            \limsup_{n \to \infty}A_n, \liminf_{n \to \infty}A_n \in \mathfrak{U}
+            \limsup_{n \to \infty}A_n, \liminf_{n \to \infty}A_n \in \mathfrak{A}
         \]
         und es gilt
         \begin{align*}
@@ -55,7 +55,7 @@
     Für Ereignisfolgen erhält man folgende Eigenschaften.
 
     \begin{lemma}
-        Seien \(\parentheses*{\Omega, \mathfrak{U}, P}\) ein Wahrscheinlichkeitsraum und \(\parentheses*{A_n}_n \subseteq \mathfrak{U}\).
+        Seien \(\parentheses*{\Omega, \mathfrak{A}, P}\) ein Wahrscheinlichkeitsraum und \(\parentheses*{A_n}_n \subseteq \mathfrak{A}\).
         Dann gilt:
         \begin{enumerate}
             \item \(P\parentheses*{\bigcup_{n = 1}^\infty A_n} = P\parentheses*{\lim_{n \to \infty}A_n} = \lim_{n \to \infty}P\parentheses*{A_n}\), falls die Ereignisfolge \(\parentheses*{A_n}_n\) isoton ist (Stetigkeit von \(P\) von unten),
@@ -103,7 +103,7 @@
     Ist dies nicht der Fall, lässt sich die Wahrscheinlichkeit auf die Wahrscheinlichkeiten aller Schnittereignisse zurückführen.
 
     \begin{lemma}
-        Für Ereignisse \(\parentheses*{A_n}_{n \in \N}\) in einem Wahrscheinlichkeitsraum \(\parentheses*{\Omega, \mathfrak{U}, P}\) gilt:
+        Für Ereignisse \(\parentheses*{A_n}_{n \in \N}\) in einem Wahrscheinlichkeitsraum \(\parentheses*{\Omega, \mathfrak{A}, P}\) gilt:
         \begin{align*}
             P\parentheses*{\bigcup_{k = 1}^n A_k} = &\sum_{k = 1}^n P\parentheses*{A_k} - \sum_{1 \le i_1 < i_2 \le n} P\parentheses*{A_{i_1} \cap A_{i_2}}\\
             &+ \sum_{1 \le i_1 < i_2 < i_3 \le n}P\parentheses*{A_{i_1} \cap A_{i_2} \cap A_{i_3}}\\
@@ -120,7 +120,7 @@
 
     \begin{remark}
         Aus der Sylvester-Poincaré-Siebformel werden sogenannte Bonferroni-Ungleichungen gewonnen.
-        Seien \(A_1, \ldots, A_n\) Ereignisse aus \(\mathfrak{U}\) im Wahrscheinlichkeitsraum \(\parentheses*{\Omega, \mathfrak{U}, P}\).
+        Seien \(A_1, \ldots, A_n\) Ereignisse aus \(\mathfrak{A}\) im Wahrscheinlichkeitsraum \(\parentheses*{\Omega, \mathfrak{A}, P}\).
         Dann gilt
         \[
             \sum_{k = 1}^n P\parentheses*{A_k} - \sum_{1 \le i_1 < i_2 \le n}P\parentheses*{A_{i_1} \cap A_{i_2}} \le P\parentheses*{\bigcup_{k = 1}^n A_k} \le \sum_{k = 1}^n P\parentheses*{A_k}.
@@ -133,8 +133,8 @@
 
     Das Konzept der bedingten Wahrscheinlichkeit dient der Beschreibung des Einflusses von Vor- oder Zusatzinformationen bzw. deren Einbeziehung in ein stochastisches Modell.
 
-    Für \(A \in \mathfrak{U}\) ist \(P\parentheses*{A}\) die Wahrscheinlichkeit des Eintretens von Ereignis \(A\).
-    Nun sei bekannt oder gefordert, dass Ereignis \(B \in \mathfrak{U}\) eintritt.
+    Für \(A \in \mathfrak{A}\) ist \(P\parentheses*{A}\) die Wahrscheinlichkeit des Eintretens von Ereignis \(A\).
+    Nun sei bekannt oder gefordert, dass Ereignis \(B \in \mathfrak{A}\) eintritt.
     Welchen Einfluss hat diese Information auf die Wahrscheinlichkeit des Eintretens von \(A\)?
 
     \begin{center}
@@ -144,8 +144,8 @@
             \midrule
             \(\Omega\) & Grundraum, Ergebnisraum\\
             \(\omega\) & (mögliches) Ergebnis\\
-            \(A \in \mathfrak{U}\) & Ereignis\\
-            \(\mathfrak{U}\) & Menge der (möglichen) Ereignisse\\
+            \(A \in \mathfrak{A}\) & Ereignis\\
+            \(\mathfrak{A}\) & Menge der (möglichen) Ereignisse\\
             \(\Omega\) & sicheres Ereignis\\
             \(\emptyset\) & unmögliches Ereignis\\
             \(\omega \in A\) & Ereignis \(A\) tritt ein\\
@@ -198,23 +198,23 @@
     \end{example}
 
     \begin{definition}
-        Sei \(\parentheses*{\Omega, \mathfrak{U}, P}\) ein Wahrscheinlichkeitsraum.
-        Für jedes \(B \in \mathfrak{U}\) mit \(P\parentheses*{B} > 0\) wird durch
+        Sei \(\parentheses*{\Omega, \mathfrak{A}, P}\) ein Wahrscheinlichkeitsraum.
+        Für jedes \(B \in \mathfrak{A}\) mit \(P\parentheses*{B} > 0\) wird durch
         \[
-            P\parentheses*{A \mid B} = \frac{P\parentheses*{A \cap B}}{P\parentheses*{B}}, \quad A \in \mathfrak{U},
+            P\parentheses*{A \mid B} = \frac{P\parentheses*{A \cap B}}{P\parentheses*{B}}, \quad A \in \mathfrak{A},
         \]
-        eine Wahrscheinlichkeitsverteilung \(P\parentheses*{\cdot \mid B}\) auf \(\mathfrak{U}\) definiert, die sogenannte \emph{bedingte Verteilung} unter (der Hypothese) \(B\).
+        eine Wahrscheinlichkeitsverteilung \(P\parentheses*{\cdot \mid B}\) auf \(\mathfrak{A}\) definiert, die sogenannte \emph{bedingte Verteilung} unter (der Hypothese) \(B\).
         \(P\parentheses*{A \mid B}\) heißt \emph{(elementar) bedingte Wahrscheinlichkeit} von \(A\) unter \(B\). 
     \end{definition}
 
-    Als Funktion von \(A\) bildet \(P\parentheses*{A \mid B}\) wiederum eine Wahrscheinlichkeitsverteilung und \(\parentheses*{\Omega, \mathfrak{U}, P\parentheses*{\cdot \mid B}}\) ist ein Wahrscheinlichkeitsraum.
-    Wegen \(P\parentheses*{A \mid B} = P\parentheses*{A \cap B \mid B}\) ist auch \(\parentheses*{B, \braces*{A \cap B : A \in \mathfrak{U}}, P\parentheses*{\cdot \mid B}}\) ein Wahrscheinlichkeitsraum über dem (eingeschränkten) Grundraum \(B \subseteq \Omega\).
-    Die Menge \(\braces*{A \cap B : A \in \mathfrak{U}}\) ist eine \(\sigma\)-Algebra über \(B\).
+    Als Funktion von \(A\) bildet \(P\parentheses*{A \mid B}\) wiederum eine Wahrscheinlichkeitsverteilung und \(\parentheses*{\Omega, \mathfrak{A}, P\parentheses*{\cdot \mid B}}\) ist ein Wahrscheinlichkeitsraum.
+    Wegen \(P\parentheses*{A \mid B} = P\parentheses*{A \cap B \mid B}\) ist auch \(\parentheses*{B, \braces*{A \cap B : A \in \mathfrak{A}}, P\parentheses*{\cdot \mid B}}\) ein Wahrscheinlichkeitsraum über dem (eingeschränkten) Grundraum \(B \subseteq \Omega\).
+    Die Menge \(\braces*{A \cap B : A \in \mathfrak{A}}\) ist eine \(\sigma\)-Algebra über \(B\).
 
     Für das Arbeiten mit bedingten Wahrscheinlichkeiten sind die nachfolgenden Eigenschaften und Begriffe wesentlich.
 
     \begin{lemma}
-        Seien \(\parentheses*{\Omega, \mathfrak{U}, P}\) ein Wahrscheinlichkeitsraum und \(A, B \in \mathfrak{U}\) mit \(P\parentheses*{A} > 0, P\parentheses*{B} > 0\) sowie \(A_1, \ldots, A_n \in \mathfrak{U}\) mit \(P\parentheses*{\bigcap_{i = 1}^{n - 1}A_i} > 0\).
+        Seien \(\parentheses*{\Omega, \mathfrak{A}, P}\) ein Wahrscheinlichkeitsraum und \(A, B \in \mathfrak{A}\) mit \(P\parentheses*{A} > 0, P\parentheses*{B} > 0\) sowie \(A_1, \ldots, A_n \in \mathfrak{A}\) mit \(P\parentheses*{\bigcap_{i = 1}^{n - 1}A_i} > 0\).
         Dann gilt:
         \begin{enumerate}
             \item \(P\parentheses*{A \mid B} = P\parentheses*{B \mid A} \cdot \frac{P\parentheses*{A}}{P\parentheses*{B}}\),
@@ -234,7 +234,7 @@
     \end{proof}
 
     \begin{lemma}
-        Seien \(\parentheses*{\Omega, \mathfrak{U}, P}\) ein Wahrscheinlichkeitsraum und \(A \in \mathfrak{U}, \parentheses*{B_n}_n \subseteq \mathfrak{U}\), \(B_n\) paarweise disjunkt mit \(A \subseteq \bigcup_{n = 1}^\infty B_n\).
+        Seien \(\parentheses*{\Omega, \mathfrak{A}, P}\) ein Wahrscheinlichkeitsraum und \(A \in \mathfrak{A}, \parentheses*{B_n}_n \subseteq \mathfrak{A}\), \(B_n\) paarweise disjunkt mit \(A \subseteq \bigcup_{n = 1}^\infty B_n\).
         Dann gilt:
         \[
             P\parentheses*{A} = \sum_{n = 1}^\infty P\parentheses*{A \cap B_n} = \sum_{n = 1}^\infty P\parentheses*{A \mid B_n} \cdot P\parentheses*{B_n}.
@@ -252,7 +252,7 @@
     \end{proof}
 
     \begin{lemma}
-        Seien \(\parentheses*{\Omega, \mathfrak{U}, P}\) ein Wahrscheinlichkeitsraum und \(A \in \mathfrak{U}, \parentheses*{B_n}_n \subseteq \mathfrak{U}, B_1, B_2, \ldots\) paarweise disjunkt, \(A \subseteq \cup_{n = 1}^\infty B_n\) mit \(P\parentheses*{A} > 0\).
+        Seien \(\parentheses*{\Omega, \mathfrak{A}, P}\) ein Wahrscheinlichkeitsraum und \(A \in \mathfrak{A}, \parentheses*{B_n}_n \subseteq \mathfrak{A}, B_1, B_2, \ldots\) paarweise disjunkt, \(A \subseteq \cup_{n = 1}^\infty B_n\) mit \(P\parentheses*{A} > 0\).
         Dann gilt für jedes \(k \in \N\)
         \[
             P\parentheses*{B_k \mid A} = \frac{P\parentheses*{B_k} \cdot P\parentheses*{A \mid B_k}}{\sum_{n = 1}^\infty P\parentheses*{A \mid B_n} \cdot P\parentheses*{B_n}}.
@@ -289,7 +289,7 @@
     Da diese Beziehung auch für den Fall \(P\parentheses*{B} = 0\) verwendet werden kann, wird die stochastische Unabhängigkeit in dieser Weise definiert.
 
     \begin{definition}
-        Seien \(\parentheses*{\Omega, \mathfrak{U}, P}\) ein Wahrscheinlichkeitsraum und \(A, B \in \mathfrak{U}\).
+        Seien \(\parentheses*{\Omega, \mathfrak{A}, P}\) ein Wahrscheinlichkeitsraum und \(A, B \in \mathfrak{A}\).
         Die Ereignisse \(A\) und \(B\) heißen \emph{stochastisch unabhängig}, falls gilt:
         \[
             P\parentheses*{A \cap B} = P\parentheses*{A} \cdot P\parentheses*{B}.
@@ -305,7 +305,7 @@
     \end{example}
 
     \begin{lemma}
-        Für Ereignisse \(A\) und \(B\) in einem Wahrscheinlichkeitsraum \(\parentheses*{\Omega, \mathfrak{U}, P}\) gelten folgende Eigenschaften:
+        Für Ereignisse \(A\) und \(B\) in einem Wahrscheinlichkeitsraum \(\parentheses*{\Omega, \mathfrak{A}, P}\) gelten folgende Eigenschaften:
         \begin{enumerate}
             \item Sind \(A\) und \(B\) stochastisch unabhängig, dann sind auch die Ereignisse
             \[
@@ -316,14 +316,14 @@
             \[
                 A\text{ und }B\text{ sind stochastisch unabhängig} \iff P\parentheses*{A \mid B} = P\parentheses*{A}.
             \]
-            \item Ist \(P\parentheses*{A} \in \braces*{0, 1}\), so gilt für alle Ereignisse \(B \in \mathfrak{U}\): \(A\) und \(B\) sind stochastisch unabhängig.
+            \item Ist \(P\parentheses*{A} \in \braces*{0, 1}\), so gilt für alle Ereignisse \(B \in \mathfrak{A}\): \(A\) und \(B\) sind stochastisch unabhängig.
         \end{enumerate}
     \end{lemma}
 
     Als Erweiterung des obigen Unabhängigkeitsbegriffs wird die stochastische Unabhängigkeit einer Familie von Ereignissen definiert.
 
     \begin{definition}
-        Seien \(I\) eine beliebige Indexmenge und \(A_i, i \in I\) Ereignisse in einem Wahrscheinlichkeitsraum \(\parentheses*{\Omega, \mathfrak{U}, P}\).
+        Seien \(I\) eine beliebige Indexmenge und \(A_i, i \in I\) Ereignisse in einem Wahrscheinlichkeitsraum \(\parentheses*{\Omega, \mathfrak{A}, P}\).
         Dann heißen diese Ereignisse
         \begin{enumerate}
             \item \emph{paarweise stochastisch unabhängig}, falls

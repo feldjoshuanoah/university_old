@@ -14,32 +14,32 @@
 
     Nun wird in Erweiterung von Beispiel 2 der zehnten Vorlesung allgemein beschrieben, wie man die Hintereinanderausführung ``unabhängiger'' Versuche in einem stochastischen Modell beschreibt.
 
-    Gegeben seien die Modelle \(\parentheses*{\Omega_i, \mathfrak{U}_i, P_i}, 1 \le i \le n\), z.B. Ziehen mit Zurücklegen aus Urnen, Würfelexperimente, usw.
+    Gegeben seien die Modelle \(\parentheses*{\Omega_i, \mathfrak{A}_i, P_i}, 1 \le i \le n\), z.B. Ziehen mit Zurücklegen aus Urnen, Würfelexperimente, usw.
     Ziel ist die Spezifizierung eines Modells für ein Experiment, das aus der unabhängigen Hintereinanderausführung der Teilexperimente besteht (z.B. \(n\)-maliges Ziehen, \(n\)-maliger Würfelwurf, Kombinationen davon, usw.).
-    Dann wird ein Wahrscheinlichkeitsraum \(\parentheses*{\Omega, \mathfrak{U}, P}\) eingeführt mit dem Grundraum
+    Dann wird ein Wahrscheinlichkeitsraum \(\parentheses*{\Omega, \mathfrak{A}, P}\) eingeführt mit dem Grundraum
     \[
         \Omega = \braces*{\parentheses*{\omega_1, \ldots, \omega_n} : \omega_i \in \Omega_i, 1 \le i \le n} = \bigtimes_{i = 1}^n \Omega_i.
     \]
     Die Mengen \(\Omega_i\) müssen dabei nicht identisch sein.
 
     \begin{definition}
-        Für diskrete Wahrscheinlichkeitsräume \(\parentheses*{\Omega_i, \mathfrak{U}_i, P_i}, 1 \le i \le n\) heißt \(\parentheses*{\Omega, \mathfrak{U}, P}\) mit
+        Für diskrete Wahrscheinlichkeitsräume \(\parentheses*{\Omega_i, \mathfrak{A}_i, P_i}, 1 \le i \le n\) heißt \(\parentheses*{\Omega, \mathfrak{A}, P}\) mit
         \[
             \Omega = \bigtimes_{i = 1}^n \Omega_i = \braces*{\parentheses*{\omega_1, \ldots, \omega_n} : \omega_i \in \Omega_i, 1 \le i \le n},
         \]
-        \(\mathfrak{U}\) Potenzmenge von \(\Omega\) und \(P\) definiert durch die Zähldichte
+        \(\mathfrak{A}\) Potenzmenge von \(\Omega\) und \(P\) definiert durch die Zähldichte
         \[
             P\parentheses*{\braces*{\omega}} = \prod_{i = 1}^n P_i\parentheses*{\braces*{\omega_i}}, \quad \omega = \parentheses*{\omega_1, \ldots, \omega_n} \in \Omega,
         \]
-        \emph{Produkt} der Wahrscheinlichkeitsräume \(\parentheses*{\Omega_i, \mathfrak{U}_i, P_i}, 1 \le i \le n\).
+        \emph{Produkt} der Wahrscheinlichkeitsräume \(\parentheses*{\Omega_i, \mathfrak{A}_i, P_i}, 1 \le i \le n\).
         Der mit
         \[
-            \parentheses*{\Omega, \mathfrak{U}, P} = \bigotimes_{i = 1}^n \parentheses*{\Omega_i, \mathfrak{U}_i, P_i} 
+            \parentheses*{\Omega, \mathfrak{A}, P} = \bigotimes_{i = 1}^n \parentheses*{\Omega_i, \mathfrak{A}_i, P_i} 
         \]
         bezeichnete Wahrscheinlichkeitsraum heißt \emph{Produktraum}.
     \end{definition}
 
-    Damit steht alternativ zur ersten Beschreibung eines ``dreifachen Würfelwurfs'' durch den Grundraum \(\Omega = \braces*{\parentheses*{\omega_1, \omega_2, \omega_3} : \omega_i \in \braces*{1, \ldots, 6}, i \in \braces*{1, 2, 3}}\) und die Zähldichte \(p\parentheses*{\omega_1, \omega_2, \omega_3} = \frac{1}{6^3}\) für jedes \(\parentheses*{\omega_1, \omega_2, \omega_3} \in \Omega\) (Laplace-Raum) nun das ``elegantere'' Modell \(\bigotimes_{i = 1}^3 \parentheses*{\Omega_i, \mathfrak{U}_i, P_i}\) zur Verfügung mit \(\Omega_1 = \Omega_2 = \Omega_3 = \braces*{1, \ldots, 6}\) und \(P_1 = P_2 = P_3\) als Laplace-Verteilungen auf \(\braces*{1, \ldots, 6}\).
+    Damit steht alternativ zur ersten Beschreibung eines ``dreifachen Würfelwurfs'' durch den Grundraum \(\Omega = \braces*{\parentheses*{\omega_1, \omega_2, \omega_3} : \omega_i \in \braces*{1, \ldots, 6}, i \in \braces*{1, 2, 3}}\) und die Zähldichte \(p\parentheses*{\omega_1, \omega_2, \omega_3} = \frac{1}{6^3}\) für jedes \(\parentheses*{\omega_1, \omega_2, \omega_3} \in \Omega\) (Laplace-Raum) nun das ``elegantere'' Modell \(\bigotimes_{i = 1}^3 \parentheses*{\Omega_i, \mathfrak{A}_i, P_i}\) zur Verfügung mit \(\Omega_1 = \Omega_2 = \Omega_3 = \braces*{1, \ldots, 6}\) und \(P_1 = P_2 = P_3\) als Laplace-Verteilungen auf \(\braces*{1, \ldots, 6}\).
 
     \begin{example}
         Bezeichnet im Beispiel 2 der letzten Vorlesung \(E_k = \braces*{\omega \in \Omega : \sum_{i = 1}^n \omega_i = k}, k \in \braces*{0, \ldots, n}\) das Ereignis, in \(n\) Versuchen genau \(k\)-mal Ergebnis \(1\) zu erhalten, so ist
@@ -58,7 +58,7 @@
 
     \section*{Zufallsvariablen und Wahrscheinlichkeitsmaße}
 
-    Zufallsvorgänge werden beschrieben durch einen Wahrscheinlichkeitsraum \(\parentheses*{\Omega, \mathfrak{U}, P}\), wobei der Ausgang des Vorgangs ein Element \(\omega\) von \(\Omega\) ist.
+    Zufallsvorgänge werden beschrieben durch einen Wahrscheinlichkeitsraum \(\parentheses*{\Omega, \mathfrak{A}, P}\), wobei der Ausgang des Vorgangs ein Element \(\omega\) von \(\Omega\) ist.
     Dabei ist häufg nicht \(\omega \in \Omega\) selbst als Ergebnis von Interesse, sondern ein Funktionswert \(X\parentheses*{\omega}\), wobei \(X\) eine Funktion auf \(\Omega\) ist.
 
     \begin{example}
@@ -104,25 +104,25 @@
     \end{example}
 
     \begin{definition}
-        Sei \(\parentheses*{\Omega, \mathfrak{U}, P}\) ein Wahrscheinlichkeitsraum.
+        Sei \(\parentheses*{\Omega, \mathfrak{A}, P}\) ein Wahrscheinlichkeitsraum.
         Eine Abbildung \(X: \Omega \to \R^n\) heißt \emph{Zufallsvariable} (falls \(n = 1\)) oder \emph{Zufallsvektor} (falls \(n \ge 2\)).
     \end{definition}
 
     \begin{lemma}
-        Seien \(\parentheses*{\Omega, \mathfrak{U}, P}\) ein Wahrscheinlichkeitsraum, \(X: \Omega \to \R\) und \(\mathcal{B}\) die Borelsche \(\sigma\)-Algebra über \(\R\).
+        Seien \(\parentheses*{\Omega, \mathfrak{A}, P}\) ein Wahrscheinlichkeitsraum, \(X: \Omega \to \R\) und \(\mathcal{B}\) die Borelsche \(\sigma\)-Algebra über \(\R\).
         Dann definiert
         \[
             P^X: \mathcal{B} \to \brackets*{0, 1}\text{ mit }P^X\parentheses*{A} = P\parentheses*{\braces*{\omega \in \Omega : X\parentheses*{\omega} \in A}}, \quad A \in \mathcal{B},
         \]
         eine Wahrscheinlichkeitsverteilung über \(\R\) bzw. über \(X\parentheses*{\Omega} = \braces*{X\parentheses*{\omega} : \omega \in \Omega}\).
         Statt \(P^X\parentheses*{A}\) schreibt man auch \(P\parentheses*{X \in A}\) oder \(P\parentheses*{X = x}\), falls \(A = \braces*{x}, x \in \R\).
-        Ist \(\parentheses*{\Omega, \mathfrak{U}, P}\) ein diskreter Wahrscheinlichkeitsraum, so ist \(P^X\) eine diskrete Wahrscheinlichkeitsverteilung über \(X\parentheses*{\Omega}\) bzw. über \(\R\).
+        Ist \(\parentheses*{\Omega, \mathfrak{A}, P}\) ein diskreter Wahrscheinlichkeitsraum, so ist \(P^X\) eine diskrete Wahrscheinlichkeitsverteilung über \(X\parentheses*{\Omega}\) bzw. über \(\R\).
     \end{lemma}
 
-    Wird also ein interessierendes Merkmal in einem stochastischen Modell durch eine Zufallsvariable oder einen Zufallsvektor \(X\) beschrieben, so betrachtet man nur noch die Verteilung \(P^X\) ohne Rückgriff auf die explizite Gestalt des zugrundeliegenden Wahrscheinlichkeitsraums \(\parentheses*{\Omega, \mathfrak{U}, P}\).
+    Wird also ein interessierendes Merkmal in einem stochastischen Modell durch eine Zufallsvariable oder einen Zufallsvektor \(X\) beschrieben, so betrachtet man nur noch die Verteilung \(P^X\) ohne Rückgriff auf die explizite Gestalt des zugrundeliegenden Wahrscheinlichkeitsraums \(\parentheses*{\Omega, \mathfrak{A}, P}\).
 
     \begin{definition}
-        Seien \(\parentheses*{\Omega, \mathfrak{U}, P}\) ein Wahrscheinlichkeitsraum und \(X: \Omega \to \R\) eine Zufallsvariable.
+        Seien \(\parentheses*{\Omega, \mathfrak{A}, P}\) ein Wahrscheinlichkeitsraum und \(X: \Omega \to \R\) eine Zufallsvariable.
         Die Wahrscheinlichkeitsverteilung \(P^X\) definiert durch
         \[
             P^X\parentheses*{A} = P\parentheses*{\braces*{\omega \in \Omega : X\parentheses*{\omega} \in A}}, \quad A \in \mathcal{B},
@@ -154,7 +154,7 @@
     \end{example}
 
     \begin{definition}
-        Seien \(\Omega \ne \emptyset\), \(\parentheses*{\Omega, \mathfrak{U}, P}\) ein Wahrscheinlichkeitsraum und \(A \in \mathfrak{U}\).
+        Seien \(\Omega \ne \emptyset\), \(\parentheses*{\Omega, \mathfrak{A}, P}\) ein Wahrscheinlichkeitsraum und \(A \in \mathfrak{A}\).
         Die Funktion \(\mathcal{I}_A: \Omega \to \R\) definiert durch
         \[
             \mathcal{I}_A\parentheses*{\omega} = \begin{cases}
@@ -166,7 +166,7 @@
     \end{definition}
 
     \begin{remark}
-        Für jedes feste \(A \in \mathfrak{U}\) ist \(\mathcal{I}_A\) eine Zufallsvariable, und es gilt \(\mathcal{I}_A \sim \bin\parentheses*{1, p}\) mit \(p = P\parentheses*{A}\), denn
+        Für jedes feste \(A \in \mathfrak{A}\) ist \(\mathcal{I}_A\) eine Zufallsvariable, und es gilt \(\mathcal{I}_A \sim \bin\parentheses*{1, p}\) mit \(p = P\parentheses*{A}\), denn
         \begin{align*}
             P\parentheses*{\mathcal{I}_A = 0} &= P\parentheses*{\braces*{\omega \in \Omega : \mathcal{I}_A\parentheses*{\omega} = 0}} = P\parentheses*{A^c} = 1 - p,\\
             P\parentheses*{\mathcal{I}_A = 1} &= P\parentheses*{\braces*{\omega \in \Omega : \mathcal{I}_A\parentheses*{\omega} = 1}} = P\parentheses*{A} = p.
@@ -183,22 +183,22 @@
 
     \section*{Stochastische Unabhängigkeit von Zufallsvariablen}
 
-    Eine Zufallsvariable ist eine Abbildung von einem Wahrscheinlichkeitsraum \(\parentheses*{\Omega, \mathfrak{U}, P}\) in einen (anderen) Wahrscheinlichkeitsraum \(\parentheses*{\Omega', \mathfrak{U}', P^X}\).
+    Eine Zufallsvariable ist eine Abbildung von einem Wahrscheinlichkeitsraum \(\parentheses*{\Omega, \mathfrak{A}, P}\) in einen (anderen) Wahrscheinlichkeitsraum \(\parentheses*{\Omega', \mathfrak{A}', P^X}\).
     In Erweiterung des Begriffs der Unabhängigkeit von Ereignissen wird die Unabhängigkeit von Zufallsvariablen definiert.
 
     \begin{definition}
-        Seien \(I\) eine Indexmenge und \(X_i: \parentheses*{\Omega, \mathfrak{U}, P} \to \parentheses*{\Omega_i, \mathfrak{U}_i, P^{X_i}}, i \in I\) Zufallsvariablen.
+        Seien \(I\) eine Indexmenge und \(X_i: \parentheses*{\Omega, \mathfrak{A}, P} \to \parentheses*{\Omega_i, \mathfrak{A}_i, P^{X_i}}, i \in I\) Zufallsvariablen.
         Die Zufallsvariablen \(X_i, i \in I\) heißen \emph{stochastisch unabhängig}, falls
         \[
-            P\parentheses*{\bigcap_{i \in J}\braces*{X_i \in A_i}} = \prod_{i \in J}P\parentheses*{X_i \in A_i} \quad \forall J \subseteq I, \absolute*{J} < \infty\text{ und }\forall A_i \in \mathfrak{U}_i, i \in J.
+            P\parentheses*{\bigcap_{i \in J}\braces*{X_i \in A_i}} = \prod_{i \in J}P\parentheses*{X_i \in A_i} \quad \forall J \subseteq I, \absolute*{J} < \infty\text{ und }\forall A_i \in \mathfrak{A}_i, i \in J.
         \]
     \end{definition}
 
-    Die Bedingung in Definition 5 entspricht der stochastischen Unabhängigkeit der Ereignisse \(\parentheses*{\braces*{X_i \in A_i}}_{i \in I}\) für jede Wahr der Ereignisse \(A_i \in \mathfrak{U}_i, i \in I\) und führt damit auf Definition 3 der neunten Vorlesung.
+    Die Bedingung in Definition 5 entspricht der stochastischen Unabhängigkeit der Ereignisse \(\parentheses*{\braces*{X_i \in A_i}}_{i \in I}\) für jede Wahr der Ereignisse \(A_i \in \mathfrak{A}_i, i \in I\) und führt damit auf Definition 3 der neunten Vorlesung.
     Aus dieser eher unhandlichen Definition können vergleichsweise einfache Kriterien für die stochastische unabhängigkeit von Zufallsvariablen abgeleitet werden.
 
     \begin{lemma}
-        Sei \(\parentheses*{\Omega, \mathfrak{U}, P}\) ein diskreter Wahrscheinlichkeitsraum.
+        Sei \(\parentheses*{\Omega, \mathfrak{A}, P}\) ein diskreter Wahrscheinlichkeitsraum.
         Dann gilt: \(X_i, i \in I\) sind stochastisch unabhängig genau dann, wenn
         \[
             P\parentheses*{X_j = x_j, j \in J} = \prod_{j \in J}P\parentheses*{X_j = x_j} \quad \forall x_j \in X_j\parentheses*{\Omega} \forall j \in J \forall J \subseteq I, \absolute*{J} < \infty.

@@ -23,31 +23,31 @@
     Ist der Grundraum \(\Omega\) eine überabzählbare Teilmenge der reellen Zahlen, dann muss aus mathematischen Gründen auch die Potenzmenge als ``Vorrat'' von Ereignissen durch ein anderes Mengensystem ersetzt werden; die geeignete Struktur ist die sogenannte \(\sigma\)-Algebra.
 
     \begin{definition}
-        Seien \(\Omega \ne \emptyset\) und \(\mathfrak{U} \subseteq \Pot\parentheses*{\Omega}\) ein System von Teilmengen von \(\Omega\).
-        \(\mathfrak{U}\) heißt \emph{\(\sigma\)-Algebra} von Ereignissen über \(\Omega\), falls gilt:
+        Seien \(\Omega \ne \emptyset\) und \(\mathfrak{A} \subseteq \Pot\parentheses*{\Omega}\) ein System von Teilmengen von \(\Omega\).
+        \(\mathfrak{A}\) heißt \emph{\(\sigma\)-Algebra} von Ereignissen über \(\Omega\), falls gilt:
         \begin{enumerate}
-            \item \(\Omega \in \mathfrak{U}\),
-            \item \(A \in \mathfrak{U} \implies A^c \in \mathfrak{U}\) für jedes \(A \in \mathfrak{U}\),
-            \item für jede Folge \(A_1, A_2, \ldots\) von Mengen aus \(\mathfrak{U}\) gilt: \(\bigcup_{n = 1}^\infty A_n \in \mathfrak{U}\).
+            \item \(\Omega \in \mathfrak{A}\),
+            \item \(A \in \mathfrak{A} \implies A^c \in \mathfrak{A}\) für jedes \(A \in \mathfrak{A}\),
+            \item für jede Folge \(A_1, A_2, \ldots\) von Mengen aus \(\mathfrak{A}\) gilt: \(\bigcup_{n = 1}^\infty A_n \in \mathfrak{A}\).
         \end{enumerate}
     \end{definition}
 
     Eine \(\sigma\)-Algebra ist ein System von Teilmengen von \(\Omega\), das abgeschlossen ist gegenüber der Bildung von Komplementen und abzählbaren Vereinigungen.
-    Als Elementarereignis bezeichnet man in diesem Zusammenhang eine Menge aus \(\mathfrak{U}\), die keine echte Vereinigung anderer Ereignisse (Mengen aus \(\mathfrak{U}\)) ist.
-    Aus der Definition einer \(\sigma\)-Algebra folgt sofort, dass \(\emptyset \in \mathfrak{U}\) und für jede Folge \(A_1, A_2, \ldots\) von Mengen aus \(\mathfrak{U}\) gilt: \(\bigcap_{n = 1}^\infty A_n \in \mathfrak{U}\).
+    Als Elementarereignis bezeichnet man in diesem Zusammenhang eine Menge aus \(\mathfrak{A}\), die keine echte Vereinigung anderer Ereignisse (Mengen aus \(\mathfrak{A}\)) ist.
+    Aus der Definition einer \(\sigma\)-Algebra folgt sofort, dass \(\emptyset \in \mathfrak{A}\) und für jede Folge \(A_1, A_2, \ldots\) von Mengen aus \(\mathfrak{A}\) gilt: \(\bigcap_{n = 1}^\infty A_n \in \mathfrak{A}\).
     Die Potenzmenge \(\Pot\parentheses*{\Omega}\) einer nicht-leeren Menge \(\Omega\) ist stets eine \(\sigma\)-Algebra.
     Basierend auf einer \(\sigma\)-Algebra wird der Begriff eines allgemeinen Wahrscheinlichkeitsraums eingeführt.
 
     \begin{definition}
-        Sei \(\mathfrak{U}\) eine \(\sigma\)-Algebra über \(\Omega \ne \emptyset\).
-        Eine Abbildung \(P: \mathfrak{U} \to \brackets*{0, 1}\) mit
+        Sei \(\mathfrak{A}\) eine \(\sigma\)-Algebra über \(\Omega \ne \emptyset\).
+        Eine Abbildung \(P: \mathfrak{A} \to \brackets*{0, 1}\) mit
         \begin{enumerate}
-            \item \(P\parentheses*{A} \ge 0 \quad \forall A \in \mathfrak{U}\),
+            \item \(P\parentheses*{A} \ge 0 \quad \forall A \in \mathfrak{A}\),
             \item \(P\parentheses*{\Omega} = 1\) und
-            \item \(P\parentheses*{\bigcup_{n = 1}^\infty A_n} = \sum_{n = 1}^\infty P\parentheses*{A_n}\) für jede Wahl paarweise disjunkter Mengen aus \(\mathfrak{U}\) (\(\sigma\)-Additivität)
+            \item \(P\parentheses*{\bigcup_{n = 1}^\infty A_n} = \sum_{n = 1}^\infty P\parentheses*{A_n}\) für jede Wahl paarweise disjunkter Mengen aus \(\mathfrak{A}\) (\(\sigma\)-Additivität)
         \end{enumerate}
-        heißt \emph{Wahrscheinlichkeitsverteilung} oder \emph{Wahrscheinlichkeitsmaß} auf \(\Omega\) bzw. \(\parentheses*{\Omega, \mathfrak{U}}\).
-        \(\parentheses*{\Omega, \mathfrak{U}, P}\) heißt \emph{Wahrscheinlichkeitsraum}, \(\parentheses*{\Omega, \mathfrak{U}}\) heißt \emph{messbarer Raum} oder \emph{Messraum}.
+        heißt \emph{Wahrscheinlichkeitsverteilung} oder \emph{Wahrscheinlichkeitsmaß} auf \(\Omega\) bzw. \(\parentheses*{\Omega, \mathfrak{A}}\).
+        \(\parentheses*{\Omega, \mathfrak{A}, P}\) heißt \emph{Wahrscheinlichkeitsraum}, \(\parentheses*{\Omega, \mathfrak{A}}\) heißt \emph{messbarer Raum} oder \emph{Messraum}.
     \end{definition}
 
     Aus den Eigenschaften (ii) und (iii) in Definition 2 folgt unmittelbar \(P\parentheses*{\emptyset} = 0\).
