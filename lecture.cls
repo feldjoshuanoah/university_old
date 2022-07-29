@@ -24,6 +24,7 @@
 \AtBeginEnvironment{example}{\setlist[enumerate]{label={\arabic*)}}}
 \AtBeginEnvironment{theorem}{\setlist[enumerate]{label={(\roman*)}}}
 \AtBeginEnvironment{lemma}{\setlist[enumerate]{label={(\roman*)}}}
+\AtBeginEnvironment{lemma}{\setlist[enumerate,2]{label={\alph*)}}}
 \AtBeginEnvironment{problem}{\setlist[enumerate]{label={\alph*)}}}
 \AtBeginEnvironment{remark}{\setlist[enumerate]{label={\alph*)}}}
 \AtBeginEnvironment{calcrule}{\setlist[enumerate]{label={(\roman*)}}}
