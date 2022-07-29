@@ -42,8 +42,92 @@
     
     \subsection*{Lösung}
     \begin{enumerate}
-        \item
-        \item
+        \item Das eindimensionale Problem
+        \[
+            -f''\parentheses*{x} = \mu f\parentheses*{x}, \quad f\parentheses*{0} = f\parentheses*{L} = 0
+        \]
+        behandeln wir im Folgenden mit einer Fallunterscheidung nach dem Vorzeichen von \(\mu\).
+        \begin{itemize}
+            \item Fall 1: \(\mu = 0\): Also ist \(f''\parentheses*{x} = 0\) und damit \(f\parentheses*{x} = ax + b\).
+            Die Randbedingungen implizieren \(f\parentheses*{x} = 0\).
+            Damit gibt es keine Eigenfunktionen.
+            \item Fall 2: \(\mu < 0\): Sei \(\mu = -c^2\) mit \(c \ne 0\).
+            Die Gleichung
+            \[
+                f''\parentheses*{x} = c^2 f\parentheses*{x}
+            \]
+            ist eine gewöhnliche DGL mit Lösung
+            \[
+                f\parentheses*{x} = ae^{cx} + be^{-cx}.
+            \]
+            Aus den Randbedingungen bestimmen wir die Koeffizienten \(a\) und \(b\):
+            \begin{align*}
+                0 = f\parentheses*{0} &= a + b,\\
+                0 = f\parentheses*{L} &= ae^{cL} + be^{-cL}\\
+                \implies a = b &= 0.
+            \end{align*}
+            Damit gibt es keine Eigenfunktion.
+            \item Fall 3: \(\mu > 0\): Sei \(\mu = c^2\) mit \(c \ne 0\).
+            Die Gleichung
+            \[
+                f''\parentheses*{x} = -c^2 f\parentheses*{x}
+            \]
+            ist eine gewöhnliche DGL mit Lösung
+            \[
+                f\parentheses*{x} = a\sin\parentheses*{cx} + b\cos\parentheses*{cx}.
+            \]
+            Aus den Randbedingungen bestimmen wir die Koeffizienten \(a\) und \(b\):
+            \begin{align*}
+                0 = f\parentheses*{0} &= a\sin\parentheses*{0} + b\cos\parentheses*{0} = b,\\
+                0 = f\parentheses*{L} &= a\sin\parentheses*{cL}.
+            \end{align*}
+            Damit wir eine Eigenfunktion erhalten, muss \(a \ne 0\) sein.
+            Um die Randbedingungen bei \(x = L\) erfüllen zu können, muss
+            \[
+                c = \frac{n\pi}{L}, \quad n \in \N
+            \]
+            gelten.
+            Damit gilt für die Eigenwerte \(\mu_n = \parentheses*{\frac{n\pi}{L}}^2, n \in \N\) und für die zugehörigen Eigenfunktionen
+            \[
+                f_n\parentheses*{x} = k\sin\parentheses*{\frac{n\pi}{L}x}, \quad n \in \N, k \in \R \setminus \braces*{0}.
+            \]
+        \end{itemize}
+        \item Für das zweidimensionale Problem
+        \[
+            -\Delta u\parentheses*{x, y} = \lambda u\parentheses*{x, y}
+        \]
+        mit dem Produktansatz \(u\parentheses*{x, y} = v\parentheses*{x}w\parentheses*{y}\) lautet die Gleichung
+        \[
+            -w\parentheses*{y}\partial_x^2 v\parentheses*{x} - v\parentheses*{x}\partial_y^2 w\parentheses*{y} = \lambda v\parentheses*{x}w\parentheses*{y}.
+        \]
+        Falls die rechte Seite von \(0\) verschieden ist, ist dies äquivalent zu
+        \[
+            -\frac{\partial_x^2 v\parentheses*{x}}{v\parentheses*{x}} - \frac{\partial_y^2 w\parentheses*{y}}{w\parentheses*{y}} = \lambda.
+        \]
+        Da die rechte Seite konstant ist und die Summanden jeweils einzeln nur von \(x\) bzw. \(y\) abhängen, ist die linke Seite unabhängig von \(x\) bzw. \(y\).
+        Daraus folgt
+        \[
+            -\partial_x^2 v\parentheses*{x} = \lambda_x v\parentheses*{x}, \quad -\partial_y^2 w\parentheses*{y} = \lambda_y w\parentheses*{y}
+        \]
+        mit \(\lambda_x, \lambda_y \in \R\) konstant.
+        Aus Teil a) wissen wir, dass mögliche Werte \(\lambda_x\) bzw. \(\lambda_y\) gegeben sind durch
+        \[
+            \lambda_x = \parentheses*{\frac{n\pi}{L_x}}^2, \quad \lambda_y = \parentheses*{\frac{m\pi}{L_y}}^2, \quad n, m \in \N
+        \]
+        und damit gilt für die zugehörigen Eigenfunktionen
+        \[
+            v_n\parentheses*{x} = a\sin\parentheses*{\frac{n\pi}{L_x}x}, \quad w_m\parentheses*{y} = b\sin\parentheses*{\frac{m\pi}{L_y}y}, \quad n, m \in \N, a, b \in \R \setminus \braces*{0}.
+        \]
+        Damit sind mögliche Eigenwerte gegeben zu
+        \[
+            \lambda = \lambda_x + \lambda_y = \parentheses*{\frac{n\pi}{L_x}}^2 + \parentheses*{\frac{m\pi}{L_y}}^2, \quad n, m \in \N
+        \]
+        mit Eigenfunktionen
+        \[
+            u_{nm}\parentheses*{x, y} = a\sin\parentheses*{\frac{n\pi}{L_x}x}\sin\parentheses*{\frac{m\pi}{L_y}y}, \quad n, m \in \N, a \in \R \setminus \braces*{0}.
+        \]
+        Den kleinsten Eigenwert erhält man für \(n = m = 1\), unabhängig davon, wie das Verhältnis \(\frac{L_x}{L_y}\) ist.
+        Die Anordnung der übrigen Eigenwerte hängt von diesem Verhältnis ab.
     \end{enumerate}
 
 
@@ -74,8 +158,46 @@
     
     \subsection*{Lösung}
     \begin{enumerate}
-        \item
-        \item
-        \item
+        \item Beachte, dass \(\Delta\phi_{j, k} = -\pi^2 \parentheses*{j^2 + k^2}\phi_{j, k}\) gilt.
+        Daher sind \(\phi_{j, k}\) die Eigenfunktionen von \(\Delta\).
+        Die Eigenwerte sind hierbei \(\lambda_{j, k} = -\pi^2 \parentheses*{j^2 + k^2}\).
+        \item Die Basisfunktionen \(\phi_{j, k}\) sind orthogonal und unabhängig auf \(\Omega\) aber nicht normiert.
+        So können wir die Funktion \(f\parentheses*{x, y}\) als eine lineare Kombination von \(\phi_{j, k}\) eindeutig darstellen:
+        \[
+            f\parentheses*{x, y} = \frac{1}{2}\cos\parentheses*{0 \cdot \pi x}\sin\parentheses*{4\pi y} - \frac{1}{2}\cos\parentheses*{4\pi x}\sin\parentheses*{10\pi y} = \frac{1}{2}\phi_{0, 4} - \frac{1}{2}\phi_{4, 10} = \sum_{j, k}\alpha_{j, k}\phi_{j, k}
+        \]
+        mit
+        \[
+            \alpha_{j, k} = \begin{cases}
+                \frac{1}{2}, & \text{falls }\parentheses*{j, k} = \parentheses*{0, 4},\\
+                -\frac{1}{2}, & \text{falls }\parentheses*{j, k} = \parentheses*{4, 10},\\
+                0, & \text{sonst}.
+            \end{cases}
+        \]
+        \item Wir suchen nach einer Lösung in der Form
+        \[
+            u\parentheses*{t, x, y} = \sum_{j, k}\beta_{j, k}\parentheses*{t}\phi_{j, k}\parentheses*{x, y},
+        \]
+        sodass die PDE sich zu
+        \[
+            \sum_{k, j}\parentheses*{\beta_{j, k}'\parentheses*{t} - \lambda_{j, k}\beta_{j, k} - \alpha_{j, k}}\phi_{j, k} = 0
+        \]
+        vereinfacht, und für alle \(k, j\) erhalten wir
+        \[
+            \beta_{j, k}'\parentheses*{t} - \lambda_{j, k}\beta_{j, k} - \alpha_{j, k} = 0.
+        \]
+        Die Lösung davin ist bekannt:
+        \[
+            \beta_{j, k}\parentheses*{t} = C_{j, k}\exp\parentheses*{\lambda_{j, k}t} - \frac{\alpha_{j, k}}{\lambda_{j, k}}.
+        \]
+        Weil \(u\parentheses*{0, x, y} = 0\) gilt, folgt \(\beta_{j, k}\parentheses*{0} = 0\) oder \(C_{j, k} = \frac{\alpha_{j, k}}{\lambda_{j, k}}\).
+        Daher gilt
+        \[
+            \beta_{j, k}\parentheses*{t} = \frac{\alpha_{j, k}}{\lambda_{j, k}}\parentheses*{\exp\parentheses*{\lambda_{j, k}t} - 1}.
+        \]
+        Zusammenfassend lautet die Lösung
+        \[
+            u\parentheses*{t, x, y} = -\frac{1}{32\pi^2}\parentheses*{e^{-16\pi^2 t} - 1}\sin\parentheses*{4\pi y} + \frac{1}{232\pi^2}\parentheses*{e^{-116\pi^2 t} - 1}\cos\parentheses*{4\pi x}\sin\parentheses*{10\pi y}.
+        \]
     \end{enumerate}
 \end{document}

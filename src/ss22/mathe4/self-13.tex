@@ -1,0 +1,270 @@
+\documentclass{exercise}
+
+\institute{Applied and Computational Mathematics}
+\title{Selbstrechenübung 13}
+\author{Joshua Feld, 406718}
+\course{Mathematische Grundlagen IV}
+\professor{Torrilhon \& Berkels}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \section*{Aufgabe 1}
+    
+    \begin{problem}
+        Es sei \(f \in L^1\parentheses*{\R^n}\).
+        \begin{enumerate}
+            \item Zeigen Sie, dass für \(\lambda \in \R, \lambda > 0\) und \(h\parentheses*{x} = f\parentheses*{\lambda x}\) für die Fouriertransformierte
+            \[
+                \hat{h}\parentheses*{\xi} = \lambda^{-n}\hat{f}\parentheses*{\lambda^{-1}\xi}
+            \]
+            folgt.
+            \item Sei \(A\) ein invertierbarer linearer Operator auf \(\R^n\) und \(g\parentheses*{x} = f\parentheses*{Ax}\).
+            Wie hängt die Fouriertransformierte \(\hat{g}\parentheses*{\xi}\) von \(\hat{f}\parentheses*{\xi}\) ab?
+
+            \emph{Hinweis: b) verallgemeinert a).}
+            \item Folgern Sie mithilfe von b), dass für ein radialsymmetrisches \(f\parentheses*{x}\) auch die Fouriertransformierte \(\hat{f}\parentheses*{\xi}\) radialsymmetrisch ist.
+
+            \emph{Hinweis: \(f\parentheses*{x}\text{ ist radialsymmetrisch} \iff f\parentheses*{x} = f\parentheses*{Ax}\text{ für alle Rotationen }A\).}
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item Für \(\lambda > 0\) und \(h\parentheses*{x} = f\parentheses*{\lambda x}, x \in \R^n\) folgt
+        \[
+            \hat{h}\parentheses*{\xi} = \int_{\R^n}h\parentheses*{x}e^{-i\angles*{x, \xi}}\d x = \int_{\R^n}f\parentheses*{\lambda x}e^{-i\angles*{x, \delta}}\d x.
+        \]
+        Substituiert man jetzt \(y = \lambda x\), so gilt
+        \[
+            y = \lambda x = \lambda Ix \implies \det\parentheses*{\frac{\d x}{\d y}} = \det\parentheses*{\parentheses*{\lambda I}^{-1}} = \det\parentheses*{\frac{1}{\lambda}I} = \lambda^{-n}.
+        \]
+        Außerdem gilt
+        \[
+            \hat{h}\parentheses*{\xi} = \int_{\R^n}\lambda^{-n}f\parentheses*{y}e^{-i\angles*{\frac{y}{\lambda}, \xi}}\d y = \lambda^{-n}\int_{\R^n}f\parentheses*{y}e^{-i\angles*{y, \frac{\xi}{\lambda}}}\d y = \lambda^{-n}\hat{f}\parentheses*{\frac{\xi}{\lambda}}.
+        \]
+        \item Sei \(A\) ein invertierbarer linearer Operator auf \(\R^n\) und \(g\parentheses*{x} = f\parentheses*{Ax}\).
+        Es gilt
+        \[
+            \hat{g}\parentheses*{\xi} = \int_{\R^n}g\parentheses*{x}e^{-i\angles*{x, \xi}}\d x = \int_{\R^n}f\parentheses*{Ax}e^{-i\angles*{x, \xi}}\d x.
+        \]
+        Mit \(y = Ax\) und \(\det\parentheses*{\frac{\d x}{\d y}} = \det\parentheses*{A^{-1}}\) folgt jetzt
+        \begin{align*}
+            \hat{g}\parentheses*{\xi} &= \int_{\R^n}f\parentheses*{y}e^{-i\angles{A^{-1}y, \xi}}\det\parentheses*{A^{-1}}\d y\\
+            &= \det\parentheses*{A^{-1}}\int_{\R^n}f\parentheses*{y}e^{-i\angles*{y, A^{-T}\xi}}\d y\\
+            &= \det\parentheses*{A^{-1}}\hat{f}\parentheses*{A^{-T}\xi}.
+        \end{align*}
+        \item Ist \(f\) radialsymmetrisch, so gilt für jede Rotation \(A\)
+        \[
+            f\parentheses*{x} = f\parentheses*{Ax}.
+        \]
+        Rotationsmatrizen \(A\) haben die Eigenschaften
+        \begin{enumerate}
+            \item \(A^{-1} = A^T\), bzw. \(AA^T = I\),
+            \item \(\det\parentheses*{A^{-1}} = \det\parentheses*{A} = 1\).
+        \end{enumerate}
+        Aus Teil b) folgt für die Fouriertransformierte sofort
+        \[
+            \hat{f}\parentheses*{\xi} = \det\parentheses*{A^{-1}}\hat{f}\parentheses*{A^{-T}\xi} = \hat{f}\parentheses*{A\xi},
+        \]
+        da \(A^{-T} = A\).
+        Folglich ist für ein radialsymmetrisch \(f\) die Fouriertransformierte \(\hat{f}\) auch radialsymmetrisch.
+    \end{enumerate}
+
+
+    \section*{Aufgabe 2}
+    
+    \begin{problem}
+        Gegeben sei das Anfangswertproblem
+        \begin{align*}
+            \partial_t u\parentheses*{t, x} &= \partial_{xx}u\parentheses*{t, x} - u\parentheses*{t, x}, \quad t > 0, x \in \R,\\
+            u\parentheses*{0, x} = u_0\parentheses*{x} &= \exp\parentheses*{-\frac{x^2}{2}}, \quad x \in \R.
+        \end{align*}
+        \begin{enumerate}
+            \item Es sei
+            \[
+                \hat{u}\parentheses*{t, \xi} := \int_\R u\parentheses*{t, x}\exp\parentheses*{-ix\xi}\d x
+            \]
+            die Fouriertransformierte von \(u\parentheses*{t, x}\) bzgl. \(x\).
+            Rechnen Sie nach, dass
+            \[
+                \hat{u}_t = -\xi^2 \hat{u} - \hat{u}.
+            \]
+            \item Bestimmen Sie eine Lösung des Anfangswertproblems.
+
+            \emph{Hinweis: \(\int\exp\parentheses*{-x^2}\d x = \sqrt{\pi}\).}
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item Da \(\partial_t u = \partial_{xx}u - u\), ist
+        \begin{align*}
+            \mathcal{F}\parentheses*{\partial_t u} &= \mathcal{F}\parentheses+{-u + \delta_{xx}u}\parentheses*{\xi}\\
+            &= -\mathcal{F}\parentheses*{u}\parentheses*{\xi} + \mathcal{F}\parentheses*{\partial_{xx}u}\parentheses*{\xi}\\
+            &= -\hat{u}\parentheses*{\xi} + \int_\R \frac{\partial u_x}{\partial x}e^{-ix\xi}\d x\\
+            &= -\hat{u}\parentheses*{\xi} + \int_{B_R\parentheses*{0}}\frac{\partial u_x}{\partial x}e^{-ix\xi}\d x\\
+            &= -\hat{u}\parentheses*{\xi} - \int_{B_R\parentheses*{0}}u_x\frac{\partial}{\partial x}e^{-ix\xi}\d x\\
+            &= -\hat{u}\parentheses*{\xi} + i\xi\int_{B_R\parentheses*{0}}u_x e^{-ix\xi}\d x\\
+            &= -\hat{u}\parentheses*{\xi} + i\xi\int_\R u_x e^{-ix\xi}\d x\\
+            &= -\hat{u}\parentheses*{\xi} + i\xi\int_{B_R\parentheses*{0}}\frac{\partial u}{\partial x}e^{-ix\xi}\d x\\
+            &= -\hat{u}\parentheses*{\xi} - i\xi\int_{B_R\parentheses*{0}}u\frac{\partial}{\partial x}e^{-ix\xi}\d x\\
+            &= -\hat{u}\parentheses*{\xi} + i^2 \xi^2 \int_{B_R\parentheses*{0}}ue^{-ix\xi}\d x\\
+            &= -\hat{u}\parentheses*{\xi} + i^2 \xi^2 \int_\R ue^{-ix\xi}\d x\\
+            &= -\hat{u}\parentheses*{\xi} - \xi^2 \hat{u}\parentheses*{\xi}.
+        \end{align*}
+        \item Aus Teil a)
+        \[
+            \hat{u}_t  -\xi^2 \hat{u} - \hat{u},
+        \]
+        bildet eine gewöhnliche DGL für \(\hat{u}\parentheses*{\xi}\).
+        Die Lösung dieser DGL lautet
+        \[
+            \hat{u}\parentheses*{\xi} = C\exp\parentheses*{\parentheses*{-1 - \xi^2}t} \quad \forall C \in \R.
+        \]
+        Der Anfangswert \(u\parentheses*{0, x} = \exp\parentheses*{-\frac{x^2}{2}}\) muss noch transformiert werden
+        \begin{align*}
+            \hat{u}\parentheses*{0, \xi} &= \int\exp\parentheses*{-\frac{x^2}{2}}\exp\parentheses*{-ix\xi}\d x\\
+            &= \int\exp\parentheses*{-\parentheses*{\frac{x^2}{2} + ix\xi} - \parentheses*{\frac{i\xi}{\sqrt{2}}}^2 + \parentheses*{\frac{i\xi}{\sqrt{2}}}^2}\d x\\
+            &= \int\exp\parentheses*{-\parentheses*{\frac{x + i\xi}{\sqrt{2}}}^2 - \frac{\xi^2}{2}}\d x.
+        \end{align*}
+        Bei der Substitution
+        \[
+            u = \frac{x + i\xi}{\sqrt{2}}, \quad \d u = \frac{\d x}{\sqrt{2}}
+        \]
+        erhält man weiter
+        \begin{align*}
+            \hat{u}\parentheses*{0, \xi} &= \int\exp\parentheses*{-\parentheses*{\frac{x + i\xi}{\sqrt{2}}}^2 - \frac{\xi^2}{2}}\d x\\
+            &= \int\exp\parentheses*{-u^2 - \frac{\xi^2}{2}}\sqrt{2}\d u\\
+            &= \sqrt{2}\exp\parentheses*{-\frac{\xi^2}{2}}\int\exp\parentheses*{-u^2}\d u\\
+            &= \sqrt{2\pi}\exp\parentheses*{-\frac{\xi^2}{2}}.
+        \end{align*}
+        Durch Einsetzen des Anfangswertes ergibt sich
+        \[
+            \hat{u}\parentheses*{0, \xi} = C\exp\parentheses*{\parentheses*{-1 - \xi^2} \cdot 0} = C \stackrel{!}{=} \sqrt{2\pi}\exp\parentheses*{-\frac{\xi^2}{2}}.
+        \]
+        Daher
+        \[
+            \hat{u}\parentheses*{t, \xi} = \sqrt{2\pi}\exp\parentheses*{-\frac{\xi^2}{2}}\exp\parentheses*{\parentheses*{-1 - \xi^2}t}.
+        \]
+        Eine Rücktransformation liefert
+        \begin{align*}
+            u\parentheses*{t, x} &= \frac{1}{2\pi}\int_\R \hat{u}\parentheses*{t, \xi}\exp\parentheses*{-ix\xi}\d\xi\\
+            &= \frac{1}{2\pi}\int_\R \sqrt{2\pi}\exp\parentheses*{-t\parentheses*{1 + \xi^2} - \frac{\xi^2}{2}}\exp\parentheses*{-ix\xi}\d\xi\\
+            &= \frac{1}{\sqrt{2\pi}}\exp\parentheses*{-t}\int_\R \exp\parentheses*{-t\xi^2 - \frac{\xi^2}{2} - ix\xi}\d\xi.
+        \end{align*}
+        Mit quadratischer Ergänzung von \(\parentheses*{\frac{ix}{2\sqrt{t + \frac{1}{2}}}}^2\) im Exponenten ergibt sich
+        \[
+            u\parentheses*{t, x} = \frac{1}{\sqrt{2\pi}}\exp\parentheses*{-t}\int_\R \exp\parentheses*{-\parentheses*{\sqrt{t + \frac{1}{2}}\xi - \frac{ix}{2\sqrt{t + \frac{1}{2}}}}^2 - \frac{x^2}{4 \cdot \parentheses*{t + \frac{1}{2}}}}\d\xi.
+        \]
+        Mit der Substitution
+        \[
+            y = \sqrt{1 + \frac{1}{2}}\xi - \frac{ix}{2\sqrt{t + \frac{1}{2}}}, \quad \frac{\d y}{\d\xi} = \sqrt{t + \frac{1}{2}}
+        \]
+        ergibt sich
+        \[
+            u\parentheses*{t, x} = \frac{1}{\sqrt{2}}\exp\parentheses*{-t}\exp\parentheses*{-\frac{x^2}{4 \cdot \parentheses*{t + \frac{1}{2}}}}\frac{1}{\sqrt{t + \frac{1}{2}}}.
+        \]
+    \end{enumerate}
+
+
+    \section*{Aufgabe 3}
+    
+    \begin{problem}
+        Gegeben sei das lineare Gleichungssystem \(Ax = b\) mit
+        \[
+            A = \begin{pmatrix}
+                3 & -1 & 0\\
+                -1 & 3 & -1\\
+                0 & -1 & 3
+            \end{pmatrix}, \quad b = \begin{pmatrix}
+                0\\
+                -3\\
+                -2
+            \end{pmatrix}.
+        \]
+        Das lineare Gleichungssystem hat die Lösung \(x = \parentheses*{-\frac{11}{21}, -\frac{33}{21}, -\frac{25}{21}}^T\).
+        \begin{enumerate}
+            \item Überprüfen Sie, ob das Jacobi-Verfahren und das Gauß-Seidel-Verfahren zur Lösung des Gleichungssystems \(Ax = b\) für alle Startvektoren \(x^0 \in \R^3\) konvergiert.
+            \item Führen Sie jeweils \emph{einen Schritt} des Jacobi-Verfahrens und des Gauß-Seidel-Verfahrens mit dem Startvektor \(x^0 = \parentheses*{1, 0, 0}^T\) durch.
+            \item Welches Ergebnis erhalten Sie, wenn Sie ausgehend von \(x^0 = \parentheses*{1, 0, 0}^T\) \emph{drei Schritte} des CG-Verfahrens durchführen (Begründung)?
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item Da die Matrix \(A\) irreduzibel und (strikt) diagonaldominant ist, konvergieren sowohl das Jacobi- als auch das Gauß-Seidel-Verfahren.
+        \item \(A\) lässt sich zerlegen in \(D - L - R\) mit
+        \[
+            D = \begin{pmatrix}
+                3 & 0 & 0\\
+                0 & 3 & 0\\
+                0 & 0 & 3
+            \end{pmatrix}, \quad L = R^T = \begin{pmatrix}
+                0 & 0 & 0\\
+                1 & 0 & 0\\
+                0 & 1 & 0
+            \end{pmatrix}.
+        \]
+        Das Residuum für den Startvektor \(x^0\) beträgt
+        \[
+            r^0 = Ax^0 - b = \parentheses*{3, 2, 2}^T.
+        \]
+        \begin{itemize}
+            \item Jacobi-Verfahren:
+            \begin{align*}
+                x^1 &= x^0 - D^{-1}\parentheses*{Ax^0 - b}\\
+                &= x^0 - D^{-1}r^0\\
+                &= \begin{pmatrix}
+                    1\\
+                    0\\
+                    0
+                \end{pmatrix} - \begin{pmatrix}
+                    \frac{1}{3} & 0 & 0\\
+                    0 & \frac{1}{3} & 0\\
+                    0 & 0 & \frac{1}{3}
+                \end{pmatrix}\begin{pmatrix}
+                    3\\
+                    2\\
+                    2
+                \end{pmatrix} = \begin{pmatrix}
+                    0\\
+                    -\frac{2}{3}\\
+                    -\frac{2}{3}
+                \end{pmatrix}.
+            \end{align*}
+            \item Gauß-Seidel-Verfahren:
+            \[
+                x^1 = x^0 - \parentheses*{D - L}^{-1}\parentheses*{Ax^0 - b} = x^0 - \parentheses*{D - L}^{-1}r^0.
+            \]
+            Pro Iterationsschritt ist hier also das Gleichungssystem \(\parentheses*{D - L}v = r^0\), bzw.
+            \[
+                \begin{pmatrix}
+                    \frac{1}{3} & 0 & 0\\
+                    0 & \frac{1}{3} & 0\\
+                    0 & 0 & \frac{1}{3}
+                \end{pmatrix}\begin{pmatrix}
+                    v_1\\
+                    v_2\\
+                    v_3
+                \end{pmatrix} = \begin{pmatrix}
+                    3\\
+                    2\\
+                    2
+                \end{pmatrix}
+            \]
+            zu lösen.
+            Die Lösung ist \(v = \parentheses*{1, 1, 1}^T\) und folglich
+            \[
+                x^1 = x^0 - v = \parentheses*{0, -1, -1}^T.
+            \]
+        \end{itemize}
+        \item Da das CG-Verfahren endlich ist und für ein lineares Gleichungssystem der Dimension \(n\) spätestens nach \(n\) Schritten (bis auf Rundungsfehler) die exakte Lösung liefert, erhält man nach drei Schritten
+        \[
+            x^3 = \parentheses*{-\frac{11}{21}, -\frac{33}{21}, -\frac{25}{21}}^T.
+        \]
+    \end{enumerate}
+\end{document}

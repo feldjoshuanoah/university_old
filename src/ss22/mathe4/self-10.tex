@@ -1,0 +1,148 @@
+\documentclass{exercise}
+
+\institute{Applied and Computational Mathematics}
+\title{Selbstechenübung 10}
+\author{Joshua Feld, 406718}
+\course{Mathematische Grundlagen IV}
+\professor{Torrilhon \& Berkels}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \section*{Aufgabe 1}
+
+    \begin{problem}
+        Die Randwertaufgabe
+        \[
+            \parentheses*{\parentheses*{1 + x}^3 y'}' + \sin\parentheses*{x}y = 0, \quad y\parentheses*{0} = y\parentheses*{1} = 1
+        \]
+        soll unter Verwendung von Differenzenverfahren mit Gitterabstand \(h = \frac{1}{n}\) gelöst werden.
+        \begin{enumerate}
+            \item Formen Sie die Differentialgleichung durch Ausdifferenzieren um.
+            Bestimmen Sie eine Diskretisierung mit Differenzenformeln \emph{zweiter} Ordnung.
+            Ist die erhaltene Matrix symmetrisch?
+            \item Diskretisieren Sie die Differentialgleichung durch wiederholtes Anwenden von Differenzenformeln \emph{zweiter} Ordnung mit \emph{halbierter} Schrittweite.
+            Zeigen Sie, dass diese Diskretisierung eine symmetrische Matrix liefert.
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item Ausdifferenzieren liefert
+        \[
+            3 \cdot \parentheses*{1 + x}^2 y' + \parentheses*{1 + x}^3 y'' + \sin\parentheses*{x}y = 0
+        \]
+        und damit lautet die Diskretisierung
+        \[
+            3h\parentheses*{1 + x_i}^2 \parentheses*{y_{i + 1} - y_{i - 1}} + 2 \cdot \parentheses*{1 + x_i}^3 \parentheses*{y_{i + 1} - 2y_i + y_{i - 1}} + 2h^2 \sin\parentheses*{x_i}y_i = 0.
+        \]
+        Schreibt man abkürzend
+        \[
+            d_i := 2h^2 \sin\parentheses*{x_i} - 4 \cdot \parentheses*{1 + x_i}^3, \quad a_i := 2 \cdot \parentheses*{1 + x_i}^3, \quad b_i := 3h\parentheses*{1 + x_i}^2,
+        \]
+        so hat die Matrix der Dimension \(\parentheses*{n - 1} \times \parentheses*{n - 1}\) die Form wie im Folgenden
+        \[
+            A_h = \begin{pmatrix}
+                d_1 & a_1 + b_1 & 0 & \cdots & 0\\
+                a_2 - b_2 & d_2 & a_2 + b_2 & \ddots & \vdots\\
+                0 & \ddots & \ddots & \ddots & 0\\
+                \vdots & \ddots & a_{n - 2} - b_{n - 2} & d_{n - 2} & a_{n - 2} + b_{n - 2}\\
+                0 & \cdots & 0 & a_{n - 1} - b_{n - 1} & d_{n - 1}
+            \end{pmatrix}_{\parentheses*{n - 1} \times \parentheses*{n - 1}}.
+        \]
+        Diese Matrix ist für allgemeines \(h\) \emph{nicht} symmetrisch.
+        \item Zunächst diskretisieren wir die äußere Ableitung mit Schrittweite \(\frac{h}{2}\).
+        Sei \(m := \parentheses*{1 + x}^3 y'\), dann gilt mit der Taylorentwicklung für \(m\parentheses*{x \pm \frac{h}{2}}\)
+        \begin{align*}
+            m\parentheses*{x + \frac{h}{2}} &= m\parentheses*{x} + \frac{h}{2}m'\parentheses*{x} + \frac{h}{8}m''\parentheses*{x} + \mathcal{O}\parentheses*{h^3},\\
+            m\parentheses*{x - \frac{h}{2}} &= m\parentheses*{x} - \frac{h}{2}m'\parentheses*{x} + \frac{h}{8}m''\parentheses*{x} + \mathcal{O}\parentheses*{h^3}.
+        \end{align*}
+        Dann gilt
+        \[
+            \frac{1}{h}\parentheses*{m\parentheses*{x + \frac{h}{2}} - m\parentheses*{x - \frac{h}{2}}} = m'\parentheses*{x} + \mathcal{O}\parentheses*{h^2},
+        \]
+        oder wir schreiben abkürzend
+        \[
+            m'\parentheses*{x} \approx \frac{1}{h}\parentheses*{m_{i + \frac{1}{2}} - m_{i - \frac{1}{2}}}
+        \]
+        und so bekommen wir
+        \[
+            \parentheses*{1 + x_{i + \frac{1}{2}}}^3 y_{i + \frac{1}{2}}' - \parentheses*{1 + x_{i - \frac{1}{2}}}^3 y_{i - \frac{1}{2}}' + h^2\sin\parentheses*{x_i}y_i = 0.
+        \]
+        Diskretisierung der Terme \(y_{i \pm \frac{1}{2}}'\) liefert dann
+        \[
+            \parentheses*{1 + x_{i + \frac{1}{2}}}^3 \parentheses*{y_{i + 1} - y_i} - \parentheses*{1 + x_{i - \frac{1}{2}}}^3 \parentheses*{y_i - y_{i - 1}} + h^2\sin\parentheses*{x_i}y_i = 0.
+        \]
+        Mit den Abkürzungen
+        \[
+            d_i := h^2 \sin\parentheses*{x_i} - \parentheses*{1 + x_{i + \frac{1}{2}}}^3 - \parentheses*{1 + x_{i - \frac{1}{2}}}^3, \quad a_i := \parentheses*{1 + x_{i + \frac{1}{2}}}^3
+        \]
+        ergibt sich für die Matrix
+        \[
+            A_h = \begin{pmatrix}
+                d_1 & a_1 & 0 & \cdots & 0\\
+                a_1 & d_2 & a_2 & \ddots & \vdots\\
+                0 & \ddots & \ddots & \ddots & 0\\
+                \vdots & \ddots & a_{n - 2} & d_{n - 2} & a_{n - 1}\\
+                0 & \cdots & 0 & a_{n - 1} & d_{n - 1}
+            \end{pmatrix}_{\parentheses*{n - 1} \times \parentheses*{n - 1}}.
+        \]
+        Diese Matrix ist für alle \(h\) symmetrisch.
+    \end{enumerate}
+    
+    
+    \section*{Aufgabe 2}
+    
+    \begin{problem}
+        Berechnen Sie die distributionelle Ableitung folgender Distributionen:
+        \begin{enumerate}
+            \item \(T_{H_{x_0}}\phi := \angles*{H_{x_0}, \phi}\), wobei \(H_{x_0}\parentheses*{x} := \begin{cases}
+                0, & \text{falls }x < x_0,\\
+                1, & \text{falls }x \ge x_0
+            \end{cases}\) die verschobene Heaviside-Funktion ist.
+            \item \(T_{\sgn} \phi := \angles*{\sgn, \phi}\), wobei \(\sgn\parentheses*{x} := \begin{cases}
+                1, & \text{falls }x > 0,\\
+                0, & \text{falls }x = 0,\\
+                -1, & \text{falls }x < 0
+            \end{cases}\)
+            die Signum-Funktion ist.
+            \item Reguläre Distribution \(T_f\) der Funktion \(f\parentheses*{x} := \parentheses*{1 - x^2}\chi_{\brackets*{-1, 1}}\).
+            Berechnen Sie von dieser Distribution auch die \emph{zweite} Ableitung.
+        \end{enumerate}
+    \end{problem}
+
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item Per Definition gilt
+        \[
+            \angles*{T_{H_{x_0}}', \phi} = -\angles*{T_{H_{x_0}}, \phi'} = -\int_\R H_{x_0}\parentheses*{x}\phi'\parentheses*{x}\d x = -\int_{x_0}^\infty \phi'\parentheses*{x}\d x = \brackets*{-\phi\parentheses*{x}}_{x_0}^R = \phi\parentheses*{x_0},
+        \]
+        für hinreichend großes \(R > 0\) mit \(\supp\parentheses*{\phi} \subset \brackets*{-R, R}\).
+        \item Es ist
+        \[
+            \angles*{T_{\sgn}', \phi} = -\angles*{T_{\sgn}, \phi'} = -\int_\R \sgn\parentheses*{x}\phi'\parentheses*{x}\d x = \int_{-\infty}^0 \phi'\parentheses*{x}\d x - \int_0^\infty \phi'\parentheses*{x}\d x = 2\phi\parentheses*{0}.
+        \]
+        \item Man beachte, dass \(f\parentheses*{x}\) nur stückweise stetig differenzierbar ist.
+        Wir berechnen die erste Ableitung
+        \begin{align*}
+            \angles*{T_f', \phi} &= -\angles*{T_f, \phi'}\\
+            &= -\int_\R f\parentheses*{x}\phi'\parentheses*{x}\d x\\
+            &= -\int_{-1}^1 \parentheses*{1 - x^2}\phi'\parentheses*{x}\d x\\
+            &= -\underbrace{\brackets*{\parentheses*{1 - x^2}\phi\parentheses*{x}}_{-1}^1}_{= 0} + \int_{-1}^1 -2x\phi\parentheses*{x}\d x\\
+            &= -2\int_\R x\chi_{\brackets*{-1, 1}}\parentheses*{x}\phi\parentheses*{x}\d x\\
+            &= \parentheses*{-2T_{\cdot \chi_{\brackets*{-1, 1}}\parentheses*{\cdot}}, \phi}
+        \end{align*}
+        und die zweite Ableitung
+        \begin{align*}
+            \angles*{T_f'', \phi} &= -\angles*{T_f', \phi'}\\
+            &= \angles*{2T_{\cdot\chi_{\brackets*{-1, 1}}\parentheses*{\cdot}}, \phi'}\\
+            &= \int_{-1}^1 2x\phi'\parentheses*{x}\d x\\
+            &= \brackets*{2x\phi\parentheses*{x}}_{-1}^1 - 2\int_{-1}^1 \phi\parentheses*{x}\d x\\
+            &= 2 \cdot \parentheses*{\phi\parentheses*{1} + \phi\parentheses*{-1}} + \int_\R \parentheses*{-2_{\chi_{\brackets*{-1, 1}}}\parentheses*{x}}\phi\parentheses*{x}\d x\\
+            &= \angles*{2 \cdot \parentheses*{\delta\parentheses*{\cdot - 1} + \delta\parentheses*{\cdot + 1} - T_{\chi_{\brackets*{-1, 1}}}}, \phi}.
+        \end{align*}
+    \end{enumerate}
+\end{document}

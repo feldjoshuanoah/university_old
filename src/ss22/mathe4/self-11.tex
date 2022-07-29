@@ -1,0 +1,162 @@
+\documentclass{exercise}
+
+\institute{Applied and Computational Mathematics}
+\title{Selbstechenübung 10}
+\author{Joshua Feld, 406718}
+\course{Mathematische Grundlagen IV}
+\professor{Torrilhon \& Berkels}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \section*{Aufgabe 1}
+    
+    \begin{problem}
+        Bestimmen Sie die distributionelle Ableitung der folgenden Distributionen für \(\phi \in \mathcal{D}\parentheses*{\R}\):
+        \begin{enumerate}
+            \item \(T_f \phi = \angles*{f, \phi}\), wobei \(f\parentheses*{x} := \begin{cases}
+                0, & \text{falls }x < 0,\\
+                x + 1, & \text{falls }x \ge 0,
+            \end{cases}\)
+            \item \(T_g \phi = -\phi\parentheses*{-1} + 2\phi\parentheses*{0} - \phi\parentheses*{1}\).
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item Für die distributionelle Ableitung \(T_f'\) gilt
+        \begin{align*}
+            T_f'\phi &= \angles*{f', \phi}\\
+            &= -\angles*{f, \phi'}\\
+            &= -T_f \phi'\\
+            &= -\int_\R f\parentheses*{x}\phi'\parentheses*{x}\d x\\
+            &= -\int_0^\infty \parentheses*{x + 1}\phi'\parentheses*{x}\d x\\
+            &= -\int_0^\infty \phi'\parentheses*{x}\d x - \int_0^\infty x\phi'\parentheses*{x}\d x\\
+            &= \brackets*{-\phi\parentheses*{x}}_0^\infty - \int_0^\infty x\phi'\parentheses*{x}\d x\\
+            &= \phi\parentheses*{0} - \int_0^\infty x\phi'\parentheses*{x}\d x\\
+            &= \phi\parentheses*{0} - \parentheses*{\brackets*{x\phi\parentheses*{x}}_0^\infty - \int_0^\infty \phi\parentheses*{x}\d x}\\
+            &= \phi\parentheses*{0} - 0 + \int_\R H\parentheses*{x}\phi\parentheses*{x}\d x\\
+            &= \angles*{\delta_0, \phi} + \angles*{H, \phi},
+        \end{align*}
+        mit der Heaviside-Funktion \(H\parentheses*{x}\).
+        \item Für die distributionelle Ableitung \(T_g'\) gilt
+        \[
+            T_g \phi = -\phi\parentheses*{-1} + 2\phi\parentheses*{0} - \phi\parentheses*{1} \implies g\parentheses*{x} = -\delta_{-1} + 2\delta_0 - \delta_1
+        \]
+        und damit folgt
+        \[
+            T_g'\phi = -T_g \phi' = \phi'\parentheses*{-1} - 2\phi'\parentheses*{0} + \phi'\parentheses*{1} = \angles*{\delta_{-1}, \phi'} - 2\angles*{\delta_0, \phi'} + \angles*{\delta_1, \phi'} = \angles*{\delta_{-1} - 2\delta_0 + \delta_1, \phi'}.
+        \]
+    \end{enumerate}
+
+
+    \section*{Aufgabe 2}
+    
+    \begin{problem}
+        Zeigen Sie, dass für \(a \in \R\)
+        \[
+            E\parentheses*{x} := e^{-ax}H\parentheses*{x}, \quad x \in \R
+        \]
+        mit der Heaviside-Funktion
+        \[
+            H\parentheses*{x} := \begin{cases}
+                1, & \text{falls }x > 0,\\
+                0, & \text{falls }x \le 0
+            \end{cases}
+        \]
+        eine Fundamentallösung für den Differentialoperator \(\mathcal{L}\) mit
+        \[
+            \mathcal{L}u := \frac{\d}{\d x}u + au
+        \]
+        ist.
+    \end{problem}
+    
+    \subsection*{Lösung}
+    Die Funktion \(E\) ist eine Fundamentallösung der Operator \(\mathcal{L}\), wenn
+    \[
+        \mathcal{L}E = \delta,
+    \]
+    wobei \(\delta\) die Dirac-Distribution ist, i.e. im Sinne von distributionelle Ableitung.
+    Nun lautet die gegebene Funktion \(E\parentheses*{x}\) wie im Folgenden
+    \[
+        E\parentheses*{x} = e^{-ax}H\parentheses*{x}
+    \]
+    und sei \(\varphi\parentheses*{x} \in \mathcal{D}\parentheses*{\R}\) eine Testfunktion erhalten wir
+    \begin{align*}
+        T_E'\parentheses*{\varphi} &= \angles*{E', \varphi}\\
+        &= -\angles*{E, \varphi'}\\
+        &= -\int_{-\infty}^\infty e^{-ax}H\parentheses*{x}\varphi'\parentheses*{x}\d x\\
+        &= -\int_0^\infty e^{-ax}\varphi'\parentheses*{x}\d x\\
+        &= -\parentheses*{\brackets*{e^{-ax}\varphi\parentheses*{x}}_0^\infty + \int_0^\infty ae^{-ax}\varphi\parentheses*{x}\d x}\\
+        &= -\parentheses*{\lim_{b \to \infty}e^{-b}\varphi\parentheses*{b} - \varphi\parentheses*{0} + \int_{-\infty}^\infty ae^{-ax}H\parentheses*{x}\varphi\parentheses*{x}\d x}\\
+        &= \angles*{\delta_0, \varphi} - \angles*{ae^{-ax}H, \varphi}.
+    \end{align*}
+    Daher gilt
+    \[
+        E'\parentheses*{x} = \delta\parentheses*{x} - ae^{-ax}H\parentheses*{x}, \quad \text{in }\mathcal{D}''
+    \]
+    und
+    \[
+        \mathcal{L}E = \frac{\d}{\d x}E + aE = \delta\parentheses*{x} - ae^{-ax}H\parentheses*{x} + ae^{-ax}H\parentheses*{x} = \delta.
+    \]
+
+
+    \section*{Aufgabe 3}
+    
+    \begin{problem}
+        Gegeben sei die eindimensionale Wärmeleitungsgleichung
+        \begin{equation}\label{eq:1}
+            \partial_t u\parentheses*{x, t} = \partial_x^2 u\parentheses*{x, t}, \quad t > 0, x \in \brackets*{0, 1}
+        \end{equation}
+        mit den Anfangswerten \(u\parentheses*{x, 0} = u_0\parentheses*{x}\) und den Randwerten \(u\parentheses*{0, t} = u\parentheses*{1, t} = 0\).
+        Außerdem sei das Gitter \(0 = x_0, \ldots, x_n = 1\) mit \(x_{j + 1} - x_j = h_x, 0 \le j \le n - 1\) gegeben.
+        \begin{enumerate}
+            \item Diskretisieren Sie die Ortsableitung in Gleichung \eqref{eq:1} unter der Annahme \(y_j\parentheses*{t} \approx u\parentheses*{x_j, t}\), um ein System gewöhnlicher Differentialgleichungen \(y' = Ay\) zu erhalten.
+            \item Formulieren Sie die Trapezregel und das implizite Euler-Verfahren (jeweils mit konstanter Schrittweite \(h_t\)) zur Lösung des Systems aus Teil a).
+            Welches Verfahren würden Sie hinsichtlich der Konsistenzordnung bevorzugen?
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item Wir nutzen zentrale Differenzen um die Ortsableitung zu approximieren:
+        \[
+            \partial_x^2 u\parentheses*{x_j, t} \approx \partial_x\parentheses*{\frac{u\parentheses*{x_j + \frac{h_x}{2}, t} - u\parentheses*{x_j - \frac{h_x}{2}, t}}{h_x}} \approx \frac{u\parentheses*{x_{j + 1}, t} - 2u\parentheses*{x_j, t} + u\parentheses*{x_{j - 1}, t}}{h_x^2}.
+        \]
+        Damit ergibt sich unter Ausnutzung der Annahme aus Teil a)
+        \[
+            y_j' = \frac{1}{h_x^2}\parentheses*{y_{j + 1} - 2y_j + y_{j - 1}}.
+        \]
+        Mit \(y := \parentheses*{y_1, \ldots, y_{n - 1}}\) schreiben wir \(y' = Ay\), wobei
+        \[
+            A = -\frac{1}{h_x^2}\begin{pmatrix}
+                2 & -1 & 0 & \cdots & 0\\
+                -1 & 2 & -1 & \ddots & \vdots\\
+                0 & \ddots & \ddots & \ddots & 0\\
+                \vdots & \ddots & -1 & 2 & -1\\
+                0 & \cdots & 0 & -1 & 2
+            \end{pmatrix}.
+        \]
+        \item Bezeichne \(y^i := y\parentheses*{t_i}\).
+        Die Trapezregel hier angewandt ergibt
+        \[
+            y^{i + 1} = y^i + \frac{h_t}{2}\parentheses*{Ay^i + Ay^{i + 1}} \iff y^{i + 1} = y^i + \frac{h_t}{2}A\parentheses*{y^i + y^{i + 1}},
+        \]
+        also
+        \[
+            \parentheses*{I - \frac{h_t}{2}A}y^{i + 1} = \parentheses*{I + \frac{h_t}{2}A}y^i.
+        \]
+        Hingegen lautet das implizite Euler-Verfahren
+        \[
+            y^{i + 1} = y^i + h_t\parentheses*{Ay^{i + 1}},
+        \]
+        also
+        \[
+            \parentheses*{I - h_t A}y^{i + 1} = y^i.
+        \]
+        Da die Trapezregel Konsistenzordnung \(2\), das Euler-Verfahren aber nur Ordnung \(1\) besitzt, würden wir in diesem Falle die Trapezregel bevorzugen.
+    \end{enumerate}
+\end{document}

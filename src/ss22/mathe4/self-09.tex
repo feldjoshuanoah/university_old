@@ -44,9 +44,118 @@
     
     \subsection*{Lösung}
     \begin{enumerate}
-        \item
-        \item
-        \item
+        \item Sei \(h = \frac{1}{n}\) und \(x_i = ih\) für \(i = 0, \ldots, n\).
+        Weiter sei \(u_i = u\parentheses*{x_i}\).
+        Dann gilt für \(i = 2, \ldots, n - 2\)
+        \begin{align*}
+            -\frac{u_{i + 1} - 2u_i + u_{i - 1}}{h^2} + 7 \cdot \frac{u_{i + 1} - u_i}{h} &= f\parentheses*{ih}\\
+            \implies \frac{1}{h^2}\parentheses*{\parentheses*{-1 + 7h}u_{i + 1} + \parentheses*{2 - 7h}u_i - u_{i - 1}} &= f\parentheses*{ih}.
+        \end{align*}
+        Da \(u_0 = u\parentheses*{0} = 0\) und \(u_n = u\parentheses*{1} = 0\), gilt für \(i = 1\) bzw. \(i = n - 1\)
+        \begin{align*}
+            \frac{1}{h^2}\parentheses*{\parentheses*{-1 + 7h}u_2 + \parentheses*{2 - 7h}u_1} &= f\parentheses*{h},\\
+            \frac{1}{h^2}\parentheses*{\parentheses*{2 - 7h}u_{n - 1} - u_{n - 2}} &= f\parentheses*{\parentheses*{n - 1}h}.
+        \end{align*}
+        Insgesamt erhalten wir das Gleichungssystem \(A_h u_h = b_h\) mit
+        \[
+            A_h = \frac{1}{h^2}\begin{pmatrix}
+                2 - 7h & -1 + 7h\\
+                -1 & 2 - 7h & -1 + 7h\\
+                & \ddots & \ddots & \ddots\\
+                & & -1 & 2 - 7h & -1 + 7h\\
+                & & & -1 & 2 - 7h
+            \end{pmatrix}, \quad b_h = \begin{pmatrix}
+                f\parentheses*{h}\\
+                f\parentheses*{2h}\\
+                \vdots\\
+                f\parentheses*{\parentheses*{n - 2}h}\\
+                f\parentheses*{\parentheses*{n - 1}h}
+            \end{pmatrix}, \quad u_h = \begin{pmatrix}
+                u_1\\
+                u_2\\
+                \vdots\\
+                u_{n - 2}\\
+                u_{n - 1}
+            \end{pmatrix}.
+        \]
+        \item Für Diagonaldominanz müssen die folgenden Bedingungen gelten:
+        \begin{align}
+            \absolute*{2 - 7h} &\ge \absolute*{1 - 7h},\label{eq:1}\\
+            \absolute*{2 - 7h} &\ge 1 + \absolute*{1 - 7h},\label{eq:2}\\
+            \absolute*{2 - 7h} &\ge 1.\label{eq:3}
+        \end{align}
+        Diese drei Ungleichungen können wir nun unabhängig voneinander lösen.
+        
+        Wir betrachten zunächst Ungleichung \eqref{eq:1}. Sei zunächst \(h \in \parentheses*{0, \frac{1}{7}}\), dann gilt
+        \[
+            2 - 7h \ge 1 - 7h \implies 2 \ge 1,
+        \]
+        was stets gilt.
+        Sei nun \(h \in \parentheses*{\frac{1}{7}, \frac{2}{7}}\).
+        Dies liefert
+        \[
+            2 - 7h \ge 7h - 1 \implies h \in \parentheses*{\frac{1}{7}, \frac{3}{14}}.
+        \]
+        Zuletzt sei \(h \in \parentheses*{\frac{2}{7}, \infty}\), womit folgt
+        \[
+            7h - 2 \ge 7h - 1 \implies -2 \ge -1,
+        \]
+        was niemals gelten kann.
+        Somit ergibt sich für \eqref{eq:1}
+        \[
+            h \in \parentheses*{0, \frac{3}{14}}.
+        \]
+
+        Nun zu Ungleichung \eqref{eq:2}: Sei zunächst wieder \(h \in \parentheses*{0, \frac{1}{7}}\), dann gilt
+        \[
+            2 - 7h \ge 2 - 7h \implies h \in \parentheses*{0, \frac{1}{7}}.
+        \]
+        Sei nun \(h \in \parentheses*{\frac{1}{7}, \frac{2}{7}}\).
+        Dies liefert
+        \[
+            2 - 7h \ge 7h \implies h \in \parentheses*{0, \frac{1}{7}},
+        \]
+        was nicht in der gegebenen Spanne liegt.
+        Zuletzt sei \(h \in \parentheses*{\frac{2}{7}, \infty}\), womit folgt
+        \[
+            7h - 2 \ge 7h,
+        \]
+        was niemals gelten kann.
+        Somit ergibt sich für \eqref{eq:2}
+        \[
+            h \in \parentheses*{0, \frac{1}{7}}.
+        \]
+
+        Führen wir die selben Schritte für \eqref{eq:3} durch, so erhalten wir
+        \[
+            h \in \parentheses*{0, \frac{1}{7}} \cup \parentheses*{\frac{3}{7}, \infty}.
+        \]
+        Das finale Ergebnis ist die Schnittmenge der Ergebnisse für \eqref{eq:1} - \eqref{eq:3}, also
+        \[
+            h \in \parentheses*{0, \frac{1}{7}}.
+        \]
+        \item Wird für die Approximation von \(u'\parentheses*{x_i}\) anstatt der Downwind-Diskretisierung, die Upwind-Diskretisierung
+        \[
+            u'\parentheses*{x_i} \approx \frac{u\parentheses*{x_i} - u\parentheses*{x_{i - 1}}}{h}
+        \]
+        benutzt, so erhalten wir die Matrix
+        \[
+            A_h = \frac{1}{h^2}\begin{pmatrix}
+                2 + 7h & -1\\
+                -1 - 7h & 2 + 7h & -1\\
+                & \ddots & \ddots & \ddots\\
+                & & -1 - 7h & 2 + 7h & -1\\
+                & & & -1 - 7h & 2 + 7h
+            \end{pmatrix}.
+        \]
+        Mit dieser Diskretisierung ist \(A_h\) eine schwach diagonaldominante Matrix, da
+        \[
+            \sum_{j \ne i}\absolute*{a_{i, j}} \le 2 + 7h = a_{i, i}, \quad i = 1, \ldots, n - 1.
+        \]
+        Für strikte Diagonaldominanz ergibt sich das Folgende für die erste Zeile der Matrix:
+        \[
+            \sum_{j \ne 1}\absolute*{a_{1, j}} = 1 < 2 + 7h.
+        \]
     \end{enumerate}
 
 
@@ -72,4 +181,16 @@
     \end{problem}
     
     \subsection*{Lösung}
+    Es ist
+    \[
+        \lim_{\alpha \to 0}T_{f_\alpha}\parentheses*{\phi} = \delta\parentheses*{\phi} = \phi\parentheses*{0}
+    \]
+    für \(\phi \in \mathcal{D}\) zu zeigen.
+    Es ist
+    \begin{align*}
+        \absolute*{\phi\parentheses*{0} - T_{f_\alpha}\parentheses*{\phi}} &= \absolute*{\phi\parentheses*{0} - \int_{\R^n}f_\alpha\parentheses*{x}\phi\parentheses*{x}\d x}\\
+        &= \absolute*{\int_{\R^n}f_\alpha\parentheses*{x}\parentheses*{\phi\parentheses*{0} - \phi\parentheses*{x}}\d x}\\
+        &\le \norm*{\phi\parentheses*{0} - \phi}_{\infty, B_\alpha\parentheses*{0}}\underbrace{\int_{\R^n}f_\alpha\parentheses*{x}\d x}_{= 1} \xrightarrow{\alpha \to 0^+} 0,
+    \end{align*}
+    da \(\phi\) stetig ist.
 \end{document}

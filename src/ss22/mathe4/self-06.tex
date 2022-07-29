@@ -26,6 +26,7 @@
             u\parentheses*{0, t} = 0, \quad t \ge 0.
         \end{align*}
         Dabei sind \(g\) und \(h\) glatte Funktionen auf \(\left[0, \infty\right)\) und \(g\parentheses*{0} = h\parentheses*{0} = 0\).
+        
         Zeigen Sie, dass die d'Alembert'sche Formel
         \[
             u\parentheses*{t, x} = \frac{1}{2}\parentheses*{g\parentheses*{x + ct} + g\parentheses*{x - ct}} + \frac{1}{2c}\int_{x - ct}^{x + ct}h\parentheses*{\xi}\d\xi
@@ -34,6 +35,51 @@
     \end{problem}
     
     \subsection*{Lösung}
+    Aus der Vorlesung wissen wir, dass die Lösung der Wellengleichung \(u_{tt} = c^2 u_{xx}\) auf ganz \(\R\) mit den Anfangs- bzw. Randwertbedingungen
+    \[
+        u\parentheses*{x, 0} = G\parentheses*{x}, \quad \frac{\partial u}{\partial t}\parentheses*{x, 0} = H\parentheses*{x}
+    \]
+    für \(x \in \R\) über die d'Alembert'sche Formel
+    \[
+        u\parentheses*{t, x} = \frac{1}{2}\parentheses*{G\parentheses*{x + ct} + G\parentheses*{x - ct}} + \frac{1}{2c}\int_{x - ct}^{x + ct}H\parentheses*{\xi}\d\xi
+    \]
+    bestimmt werden kann.
+    Dieses \(u\) ist also eine Lösung der Wellengleichung auf ganz \(\R\), also auch auf der positiven Halbebene.
+    Damit \(u\) auch eine Lösung unseres Problems ist, bleibt zu zeigen, dass für
+    \[
+        G\parentheses*{x} = \begin{cases}
+            g\parentheses*{x}, & \text{falls }x > 0,\\
+            0, & \text{falls }x = 0,\\
+            -g\parentheses*{-x}, & \text{falls }x < 0,
+        \end{cases} \quad H\parentheses*{x} = \begin{cases}
+            h\parentheses*{x}, & \text{falls }x > 0,\\
+            0, & \text{falls }x = 0,\\
+            -h\parentheses*{-x}, & \text{falls }x < 0,
+        \end{cases}
+    \]
+    die Funktion \(u\) die Rand- und Anfangsbedingungen erfüllt.
+    Für \(x \ge 0\) ist
+    \[
+        u\parentheses*{x, 0} = \frac{1}{2}\parentheses*{G\parentheses*{x} + G\parentheses*{x}} + \frac{1}{2c}\int_x^x H\parentheses*{\xi}\d\xi = G\parentheses*{x} = g\parentheses*{x}.
+    \]
+    Weiterhin ist für \(x \ge 0\) und \(t > 0\)
+    \begin{align*}
+        \frac{\partial}{\partial t}u\parentheses*{x, t} &= \frac{1}{2}\parentheses*{cG'\parentheses*{x + ct} - cG'\parentheses*{x - ct}} + \frac{1}{2c}\frac{\partial}{\partial t}\int_{x - ct}^{x + ct}H\parentheses*{\xi}\d\xi\\
+        &= \frac{c}{2}\parentheses*{G'\parentheses*{x + ct} - G'\parentheses*{x - ct}} + \frac{1}{2}\parentheses*{H\parentheses*{x + ct} + H\parentheses*{x - ct}}
+    \end{align*}
+    bzw.
+    \[
+        \frac{\partial}{\partial t}u\parentheses*{x, 0} = \frac{c}{2}\parentheses*{G'\parentheses*{x} - G'\parentheses*{x}} + \frac{1}{2}\parentheses*{H\parentheses*{x} + H\parentheses*{x}} = H\parentheses*{x} = h\parentheses*{x},
+    \]
+    wobei wir benutzt haben, dass
+    \[
+        \frac{\d}{\d t}\int_a^{a + t}h\parentheses*{x}\d x = h\parentheses*{a + t}
+    \]
+    ist, was leicht mithilfe von Differenzenquotienten gezeigt werden kann.
+    Für \(x = 0\) gilt
+    \[
+        u\parentheses*{0, t} = \frac{1}{2}\underbrace{\parentheses*{G\parentheses*{ct} + G\parentheses*{-ct}}}_{= 0\text{, da }G\text{ ungerade}} + \frac{1}{2c}\underbrace{\int_{-ct}^{ct}H\parentheses*{\xi}\d\xi}_{= 0\text{, da }H\text{ ungerade}} = 0.
+    \]
 
 
     \section*{Aufgabe 2}
@@ -55,12 +101,54 @@
     \end{problem}
     
     \subsection*{Lösung}
+    \begin{enumerate}
+        \item Die Charakteristiken dieses Problems sind
+        \[
+            \parentheses*{t'\parentheses*{s}, x'\parentheses*{s}} = \parentheses*{1, t^\alpha\parentheses*{s}} \quad \text{und} \quad \parentheses*{t\parentheses*{0}, x\parentheses*{0}} = \parentheses*{0, x_0},
+        \]
+        also
+        \[
+            t\parentheses*{s} = s\text{ und }x'\parentheses*{s} = s^\alpha \implies x\parentheses*{s} = x_0 + \frac{s^{\alpha + 1}}{\alpha + 1}.
+        \]
+        Wir nutzen den Ansatz
+        \[
+            z\parentheses*{s} = u\parentheses*{t\parentheses*{s}, x\parentheses*{s}}
+        \]
+        mit \(z'\parentheses*{s} = 0\) und \(z\parentheses*{0} = x_0^2 + 1\).
+        Daraus folgt dann
+        \[
+            z\parentheses*{s} = x_0^2 + 1.
+        \]
+        Mit \(t = s\) und \(x_0 = x - \frac{s^{\alpha + 1}}{\alpha + 1}\) erhalten wir die Lösung
+        \[
+            u\parentheses*{t, x} = 1 + \parentheses*{x - \frac{t^{\alpha + 1}}{\alpha + 1}}^2.
+        \]
+        \item Die Charakteristiken dieses Problems sind
+        \[
+            \parentheses*{t'\parentheses*{s}, x'\parentheses*{s}} = \parentheses*{1, x\parentheses*{s}} \quad \text{und} \quad \parentheses*{t\parentheses*{0}, x\parentheses*{0}} = \parentheses*{0, x_0},
+        \]
+        also
+        \[
+            \parentheses*{t\parentheses*{s}, x\parentheses*{s}} = \parentheses*{s, x_0 e^s}.
+        \]
+        Wir Lösen nun das Anfangswertproblem
+        \[
+            z'\parentheses*{s} = x\parentheses*{s}^2 = x_0^2 e^{2s}, \quad z\parentheses*{0} = x_0
+        \]
+        mithilfe von Trennung der Variablen:
+        \[
+            \underbrace{\int_{x_0}^z 1\d\xi}_{= z - x_0} = \int_0^s x_0^2 e^{2\xi}\d\xi = \frac{x_0^2}{2}\brackets*{e^{2\xi}}_0^s = \frac{x_0^2}{2}\parentheses*{e^{2s} - 1} \implies z\parentheses*{s} = \frac{x_0^2}{2}\parentheses*{e^{2s} - 1} + x_0.
+        \]
+        Mit \(x_0 = xe^{-s}\) und \(t = s\) folgt
+        \[
+            u\parentheses*{t, x} = \frac{x^2}{2}e^{-2t}\parentheses*{e^{2t} - 1} + xe^{-t} = xe^{-t} + \frac{x^2}{2}\parentheses*{1 - e^{-2t}}.
+        \]
+    \end{enumerate}
 
 
     \section*{Aufgabe 3}
     
     \begin{problem}
-        Wir verwenden folgende Definitionen:
         \begin{itemize}
             \item Eine Matrix \(A = \parentheses*{a_{ij}} \in \R^{n \times n}\) heißt \emph{\(L\)-Matrix}, falls gilt:
             \begin{align*}
@@ -129,4 +217,19 @@
     \end{problem}
     
     \subsection*{Lösung}
+    \begin{center}
+        \begin{tabular}{lcccccc}
+            \toprule
+            & \(A_1\) & \(A_2\) & \(A_3\) & \(A_4\) & \(A_5\) & \(A_6\)\\
+            \midrule
+            \(L\)-Matrix & \(\times\) & \(\) & \(\times\) & \(\) & \(\) & \(\times\)\\
+            diagonaldominant & \(\) & \(\) & \(\) & \(\) & \(\times\) & \(\times\)\\
+            strikt diagonaldominant & \(\times\) & \(\) & \(\) & \(\) & \(\) & \(\)\\
+            reduzibel & \(\times\) & \(\) & \(\times\) & \(\times\) & \(\times\) & \(\)\\
+            irreduzibel & \(\) & \(\times\) & \(\) & \(\) & \(\) & \(\times\)\\
+            irreduzibel diagonaldominant & \(\) & \(\) & \(\) & \(\) & \(\) & \(\times\)\\
+            \(M\)-Matrix & \(\) & \(\) & \(\) & \(\) & \(\) & \(\times\)\\
+            \bottomrule
+        \end{tabular}
+    \end{center}
 \end{document}
