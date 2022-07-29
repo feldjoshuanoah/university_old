@@ -1,0 +1,299 @@
+\documentclass{exercise}
+
+\institute{Applied and Computational Mathematics}
+\title{Hausaufgabenübung 10}
+\author{Joshua Feld, 406718}
+\course{Mathematische Grundlagen IV}
+\professor{Torrilhon \& Berkels}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \section*{Aufgabe 1}
+    
+    \begin{problem}
+        Zeigen Sie, dass
+        \[
+            \gamma: \R^2 \setminus \braces*{0} \to \R, x \mapsto \gamma\parentheses*{x} = -\frac{1}{2\pi}\ln\absolute*{x}
+        \]
+        eine Fundamentallösung der Laplace-Gleichung \(-\Delta\gamma = \delta\) in \(\R^2\) ist.
+    \end{problem}
+    
+    \subsection*{Lösung}
+    Für den Nachweis ist
+    \[
+        \angles*{\gamma, -\Delta\phi} = \angles*{\delta, \phi} = \phi\parentheses*{0} \quad \forall \phi \in \mathcal{D}
+    \]
+    zu zeigen.
+    Sei also \(\phi \in \mathcal{D}\parentheses*{\R^2}\) beliebig mit \(\supp\phi \subset B_R\parentheses*{0}\), dann ist (analog zur Vorlesung) mit \(\Omega_\varepsilon := B_R\parentheses*{0} \setminus B_\varepsilon\parentheses*{0}\) und dem Gaußschen Divergenzsatz
+    \begin{align*}
+        \int_{\R^2}\gamma\parentheses*{x}\Delta\phi\parentheses*{x}\d x &= \lim_{\varepsilon \to 0^+}\int_{\Omega_\varepsilon}\gamma\parentheses*{x}\Delta\phi\parentheses*{x}\d x\\
+        &= \lim_{\varepsilon \to 0^+}\int_{\partial B_x\parentheses*{0}}\parentheses*{\phi\parentheses*{x} - \phi\parentheses*{0}}\frac{\partial\gamma}{\partial n}\d\sigma + \phi\parentheses*{0}\int_{\partial B_\varepsilon\parentheses*{0}}\frac{\partial\gamma}{\partial n}\d\sigma - \int_{\partial B_\varepsilon\parentheses*{0}}\gamma\frac{\partial\phi}{\partial n}\d\sigma,
+    \end{align*}
+    wobei wegen der Wahl von \(R\) das Randintegral über \(\partial B_R\parentheses*{0}\) verschwindet.
+    Für die Normalenableitung von \(\gamma\) gilt
+    \[
+        \frac{\partial\gamma}{\partial n}\parentheses*{x} = \nabla\gamma\parentheses*{x} \cdot n = -\frac{x}{2\pi\absolute*{x}^2} \cdot \frac{x}{\absolute*{x}} = -\frac{1}{2\pi\absolute*{x}},
+    \]
+    Daraus folgt
+    \[
+        \int_{\partial B_\varepsilon\parentheses*{0}}\frac{\partial\gamma}{\partial n}\d\sigma = -\frac{1}{2\pi}\int_{\partial B_\varepsilon\parentheses*{0}}\frac{1}{\varepsilon}\d\sigma = -\frac{1}{2\pi}\frac{1}{\varepsilon}\underbrace{\omega_2}_{= 2\pi}\varepsilon = -1
+    \]
+    und damit ergibt sich
+    \[
+        \lim_{\varepsilon \to 0^+}\int_{\partial B_\varepsilon\parentheses*{0}}\parentheses*{\phi\parentheses*{x} - \phi\parentheses*{0}}\frac{\partial\gamma}{\partial n}\d\sigma \le \lim_{\varepsilon \to 0^+}\max_{\absolute*{x} = \varepsilon}\absolute*{\phi\parentheses*{x} - \phi\parentheses*{0}}\int_{\partial B_\varepsilon\parentheses*{0}}\absolute*{\frac{\partial\gamma}{\partial n}}\d\sigma = 0.
+    \]
+    Zusätzlich gilt für den letzten Summanden
+    \[
+        \absolute*{\int_{\partial B_\varepsilon\parentheses*{0}}\gamma\frac{\partial\phi}{\partial n}\d\sigma} \le \underbrace{\max_{x \in \overline{B_R\parentheses*{0}}}\absolute*{\nabla\phi}}_{=: M}\absolute*{n}\int_{\partial B_\varepsilon\parentheses*{0}}\absolute*{\gamma}\d\sigma = M\frac{1}{2\pi}\ln\parentheses*{\varepsilon}\underbrace{\int_{\partial B_\varepsilon\parentheses*{0}}\d\sigma}_{= w_2 \varepsilon = 2\pi\varepsilon} = M\ln\parentheses*{\varepsilon}\varepsilon \xrightarrow{\varepsilon \to 0^+} 0.
+    \]
+    Zusammengefasst erhalten wir
+    \[
+        \int_{\R^2}\gamma\parentheses*{x}\Delta\phi\parentheses*{x}\d x = -\phi\parentheses*{0}.
+    \]
+
+
+    \section*{Aufgabe 2}
+    
+    \begin{problem}
+        In der Vorlesung wurde die Lösung für die inhomogene Wärmeleitungsgleichung vorgestellt.
+        Wir betrachten hier nun die Lösung für die homogene Wärmeleitungsgleichung mit Anfangswert:
+        \begin{align*}
+            u_t - u_{xx} &= 0, \quad t > 0, x \in \R,\\
+            u\parentheses*{0, x} &= g\parentheses*{x}, \quad x \in \R.
+        \end{align*}
+        Auch dieses Problem lässt sich durch eine Faltung lösen:
+        \begin{equation}\label{eq:1}
+            u\parentheses*{t, x} = \frac{1}{\parentheses*{4\pi t}^{\frac{n}{2}}}\int_{\R^n}\exp\parentheses*{-\frac{\absolute*{x - y}^2}{4t}}g\parentheses*{y}\d y.
+        \end{equation}
+        \begin{enumerate}
+            \item Bestimmen Sie die Lösung des Anfangswertproblems unter Nutzung von \eqref{eq:1} für
+            \[
+                g\parentheses*{x} = \exp\parentheses*{-x^2}.
+            \]
+            \emph{Hinweis: Verwenden Sie, dass gilt: \(\int_\R \exp\parentheses*{-\frac{x^2}{2}}\d x = \sqrt{2\pi}\).}
+            \item Zeigen Sie, dass die Lösung von a) das Anfangswertproblem löst.
+
+            \emph{Hinweis: Sie können \(u\parentheses*{t, x} = \frac{1}{\sqrt{1 + 4t}}\exp\parentheses*{-\frac{x^2}{1 + 4t}}\) als Lösung von a) nutzen.}
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item Für unser Problem ist \(n = 1\) und somit \(\absolute*{x - y}^2 = \parentheses*{x - y}^2\), sowie \(g\parentheses*{y} = \exp\parentheses*{-y}\).
+        Die Lösung erhalten wir folglich über
+        \[
+            u\parentheses*{t, x} = \frac{1}{\sqrt{4\pi t}}\int_\R \exp\parentheses*{-\frac{\parentheses*{x - y}^2}{4t}}\exp\parentheses*{-y^2}\d y = \frac{1}{\sqrt{4\pi t}}\int_\R \exp\parentheses*{-\frac{\parentheses*{x - y}^2}{4t} - y^2}\d y.
+        \]
+        Wir betrachten jetzt den Exponenten
+        \begin{align*}
+            -\frac{\parentheses*{x - y}^2}{4t} - y^2 &= -\frac{1}{4t}\parentheses*{x^2 - 2xy + \parentheses*{1 + 4t}y^2}\\
+            &= -\frac{1 + 4t}{4t} \cdot \parentheses*{-2 \cdot \frac{x}{1 + 4t}y + y^2 + \frac{x^2}{\parentheses*{1 + 4t}^2} - \frac{x^2}{\parentheses*{1 + 4t}^2}} - \frac{x^2}{4t}\\
+            &= -\frac{1 + 4t}{4t}\parentheses*{y - \frac{x}{1 + 4t}}^2 + \frac{x^2}{\parentheses*{1 + 4t} \cdot 4t} - \frac{x^2}{4t}\\
+            &= -\frac{1}{2}\parentheses*{\sqrt{\frac{1 + 4t}{2t}}\parentheses*{y - \frac{x}{1 + 4t}}}^2 - \frac{x^2}{1 + 4t}.
+        \end{align*}
+        Dies ergibt also für unser Integral
+        \[
+            u\parentheses*{t, x} = \frac{1}{\sqrt{4\pi t}}\int_\R \exp\parentheses*{-\frac{1}{2}\parentheses*{\sqrt{\frac{1 + 4t}{2t}}\parentheses*{y - \frac{x}{1 + 4t}}}^2}\exp\parentheses*{-\frac{x^2}{1 + 4t}}\d y.
+        \]
+        Um den Hinweis verwenden zu können, substituieren wir
+        \[
+            z = \sqrt{\frac{1 + 4t}{2t}}\parentheses*{y - \frac{x}{1 + 4t}}
+        \]
+        und somit ist
+        \[
+            \d y = \sqrt{\frac{2t}{1 + 4t}}\d z.
+        \]
+        Man erhält also
+        \begin{align*}
+            u\parentheses*{t, x} &= \frac{1}{\sqrt{4\pi t}}\int_\R \exp\parentheses*{-\frac{z^2}{2}}\exp\parentheses*{-\frac{x^2}{1 + 4t}}\sqrt{\frac{2t}{1 + 4t}}\d z\\
+            &= \frac{1}{\sqrt{4\pi t}}\sqrt{\frac{2t}{1 + 4t}}\exp\parentheses*{-\frac{x^2}{1 + 4t}}\sqrt{2\pi}\\
+            &= \frac{1}{\sqrt{1 + 4t}}\exp\parentheses*{-\frac{x^2}{1 + 4t}}.
+        \end{align*}
+        \item Die Ableitungen von \(u\parentheses*{t, x}\) sind wie folgt gegeben:
+        \begin{align*}
+            u_t\parentheses*{t, x} &= -\frac{2}{\parentheses*{1 + 4t}^{\frac{3}{2}}}\exp\parentheses*{-\frac{x^2}{1 + 4t}} + \frac{4x^2}{\parentheses*{1 + 4t}^{\frac{5}{2}}}\exp\parentheses*{-\frac{x^2}{1 + 4t}},\\
+            u_x\parentheses*{t, x} &= -\frac{2}{\parentheses*{1 + 4t}^{\frac{3}{2}}}\exp\parentheses*{-\frac{x^2}{1 + 4t}},\\
+            u_{xx}\parentheses*{t, x} &= -\frac{2}{\parentheses*{1 + 4t}^{\frac{3}{2}}}\exp\parentheses*{-\frac{x^2}{1 + 4t}} + \frac{4x^2}{\parentheses*{1 + 4t}^{\frac{5}{2}}}\exp\parentheses*{-\frac{x^2}{1 + 4t}}.
+        \end{align*}
+        Wir sehen \(u_t = u_{xx}\).
+        Damit ist \(u\parentheses*{t, x}\) eine Lösung des Anfangswertproblems mit dem gegebenen Anfangswert.
+    \end{enumerate}
+
+
+    \section*{Aufgabe 3}
+    
+    \begin{problem}
+        Gegeben sei die eindimensionale Wärmeleitungsgleichung für ein festes \(\alpha > 0\)
+        \begin{equation}\label{eq:2}
+            \partial_t u\parentheses*{x, t} = \alpha\partial_{xx}u\parentheses*{x, t} + q\parentheses*{x, t}, \quad t > 0, x \in \brackets*{0, 1}
+        \end{equation}
+        mit den Anfangswerten \(u\parentheses*{x, 0} = u_0\parentheses*{x}\) und den Randwerten \(u\parentheses*{0, t} = u\parentheses*{1, t} = 0\).
+        \begin{enumerate}
+            \item Diskretisieren Sie die Ortsableitung in Gleichung \eqref{eq:2} auf einem äquidistanten Gitter mit finiten Differenzen (zweiter Ordnung), um ein System gewöhnlicher Differentialgleichungen der Form \(y'\parentheses*{t} = Ay\parentheses*{t} + b\parentheses*{t}\) und \(y\parentheses*{0} = y_0\) zu erhalten.
+            \item Formulieren Sie das implizite und das explizite Euler-Verfahren und bilden Sie den Mittelwert der beiden Verfahren.
+            Welches Verfahren erhalten Sie?
+            \item Zeigen Sie explizit, dass das Crank-Nicolson-Verfahren auf der Trapezregel basiert:
+            \[
+                \int_a^b f\parentheses*{x}\d x \approx \parentheses*{b - a}\frac{f\parentheses*{a} + f\parentheses*{b}}{2}.
+            \]
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item Wir definieren das Gitter durch \(0 = x_0, \ldots, x_n = 1\) mit
+        \[
+            x_{j + 1} - x_j = h, \quad 0 \le j \le n - 1
+        \]
+        und nutzen zentrale Differenzen um die Ortsableitung zu approximieren:
+        \[
+            \partial_{xx}u\parentheses*{x_j, t} \approx \partial_x\parentheses*{\frac{u\parentheses*{x_j + \frac{h}{2}, t} - u\parentheses*{x_j - \frac{h}{2}, t}}{h}} \approx \frac{u\parentheses*{x_{j + 1}, t} - 2u\parentheses*{x_j, t} + u\parentheses*{x_{j - 1}, t}}{h^2}.
+        \]
+        Unter der Annahme \(y_j\parentheses*{t} \approx u\parentheses*{x_j, t}\) ergibt sich
+        \[
+            y_j'\parentheses*{t} = \frac{\alpha}{h^2}\parentheses*{y_{j + 1}\parentheses*{t} - 2y_j\parentheses*{t} + y_{j - 1}\parentheses*{t}} + q\parentheses*{x_j, t}.
+        \]
+        Mit \(y := \parentheses*{y_1, \ldots, y_{n - 1}}\) schreiben wir \(y' = Ay + b\parentheses*{t}\), wobei
+        \[
+            A = -\frac{\alpha}{h_x^2}\begin{pmatrix}
+                2 & -1 & 0 & \cdots & 0\\
+                -1 & 2 & -1 & \ddots & \vdots\\
+                0 & \ddots & \ddots & \ddots & 0\\
+                \vdots & \ddots & -1 & 2 & -1\\
+                0 & \cdots & 0 & -1 & 2
+            \end{pmatrix} \quad \text{und} \quad b = \begin{pmatrix}
+                q\parentheses*{x_1, t}\\
+                \vdots\\
+                q\parentheses*{x_{n - 1}, t}
+            \end{pmatrix}.
+        \]
+        Der Anfangswert ist
+        \[
+            y_i\parentheses*{0} = u_0\parentheses*{x_i}, \quad i = 1, \ldots, n - 1.
+        \]
+        \item Bezeichne
+        \[
+            y^i := y\parentheses*{t_i}\text{ und }b^i := b\parentheses*{t_i} \quad \text{mit} \quad t_i = ih_t, i = 0, 1, \ldots
+        \]
+        Das explizite Euler-Verfahren hier angewandt ergibt
+        \[
+            y^{i + 1} = y^i + h_t\parentheses*{Ay^i + b^i}.
+        \]
+        Hingegen lautet das implizite Euler-Verfahren
+        \[
+            y^{i + 1} = y^i + h_t\parentheses*{Ay^{i + 1} + b^{i + 1}}.
+        \]
+        Somit ist der Mittelwert der Verfahren gegeben durch
+        \[
+            y^{i + 1} = y^i + \frac{h_t}{2}\parentheses*{Ay^i + Ay^{i + 1} + b^i + b^{i + 1}} = y^i + \frac{h_t}{2}A\parentheses*{y^i + y^{i + 1}} + \frac{h_t}{2}\parentheses*{b^i + b^{i + 1}}.
+        \]
+        Wir erhalten das Crank-Nicolson-Verfahren.
+        \item Das System gewöhnlicher Differentialgleichungen
+        \[
+            y'\parentheses*{t} = Ay\parentheses*{t} + b\parentheses*{t}
+        \]
+        hat die Lösung
+        \[
+            y\parentheses*{t} = \int_0^t \parentheses*{Ay\parentheses*{s} + b\parentheses*{s}}\d s + y_0,
+        \]
+        wobei \(y\parentheses*{0} = y_0\) (der Wert ist durch \(u_0\parentheses*{x}\) gegeben).
+        Wir wenden nun die Trapezregel an:
+        \begin{align*}
+            y\parentheses*{t_{i + 1}} &= \int_0^{t_{i + 1}}\parentheses*{Ay\parentheses*{s} + b\parentheses*{s}}\d s + y_0\\
+            &= \int_0^{t_i}\parentheses*{Ay\parentheses*{s} + b\parentheses*{s}}\d s + y_0 + \int_{t_i}^{t_{i + 1}}\parentheses*{Ay\parentheses*{s} + b\parentheses*{s}}\d s\\
+            &= y\parentheses*{t_i} + \int_{t_i}^{t_{i + 1}}\parentheses*{Ay\parentheses*{s} + b\parentheses*{s}}\d s\\
+            &\approx y\parentheses*{t_i} + \frac{h_t}{2}\parentheses*{Ay\parentheses*{t_i} + b\parentheses*{t_i} + Ay\parentheses*{t_{i + 1}} + b\parentheses*{t_{i + 1}}}.
+        \end{align*}
+    \end{enumerate}
+
+
+    \section*{Aufgabe 4}
+    
+    \begin{problem}
+        Zur Lösung von
+        \[
+            \begin{pmatrix}
+                1 & -a\\
+                -a & 1
+            \end{pmatrix}x = b, \quad x, b \in \R^2
+        \]
+        sei das folgende Interationsverfahren angesetzt:
+        \[
+            \begin{pmatrix}
+                1 & 0\\
+                -\omega a & 1
+            \end{pmatrix}x^k = \begin{pmatrix}
+                1 - \omega & \omega a\\
+                0 & 1 - \omega
+            \end{pmatrix}x^{k - 1} + \omega b, \quad \omega \in \R.
+        \]
+        \begin{enumerate}
+            \item Zeigen Sie, dass dies ein lineares Verfahren ist.
+            Hierzu müssen Sie insbesondere die Matrix \(C\) bestimmen.
+            \item Für welche \(a \in \R\) ist diese Methode mit \(\omega = 1\) konvergent?
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item Hier folgt
+        \begin{align*}
+            x^k &= \begin{pmatrix}
+                1 & 0\\
+                -\omega a & 1
+            \end{pmatrix}^{-1}\begin{pmatrix}
+                1 - \omega & \omega a\\
+                0 & 1 - \omega
+            \end{pmatrix}x^{k - 1} + \omega\begin{pmatrix}
+                1 & 0\\
+                -\omega a & 1
+            \end{pmatrix}^{-1}b\\
+            &= \begin{pmatrix}
+                1 & 0\\
+                \omega a & 1
+            \end{pmatrix}\begin{pmatrix}
+                1 - \omega & \omega a\\
+                0 & 1 - \omega
+            \end{pmatrix}x^{k - 1} + \omega\begin{pmatrix}
+                1 & 0\\
+                \omega a & 1
+            \end{pmatrix}b\\
+            &= \begin{pmatrix}
+                1 - \omega & \omega a\\
+                \omega a - \omega^2 a & \omega^2 a^2 + 1 - \omega
+            \end{pmatrix}x^{k - 1} + \begin{pmatrix}
+                \omega & 0\\
+                \omega^2 a & \omega
+            \end{pmatrix}b \stackrel{!}{=} \parentheses*{I - CA}x^{k - 1} + Cb
+        \end{align*}
+        mit der Matrix
+        \[
+            C = \begin{pmatrix}
+                \omega & 0\\
+                \omega^2 a & \omega
+            \end{pmatrix}.
+        \]
+        Dann folgt im Sinne der Vorlesung lineares Verfahren.
+        \item Sei \(\omega = 1\).
+        Dann folgt die Integrationsmatrix
+        \[
+            I - CA = \begin{pmatrix}
+                0 & a\\
+                0 & a^2
+            \end{pmatrix}.
+        \]
+        Diese hat die Eigenwerte von \(0\) und \(a^2\).
+        Um diese Methode mit \(\omega = 1\) konvergent zu werden, muss der Spektralradius der Iterationsmatrix \(I - CA\) kleiner als \(1\) sein, i.e. \(\rho\parentheses*{I - CA} < 1\) wie im Folgenden
+        \[
+            a^2 < 1 \iff \absolute*{a} < 1.
+        \]
+        Schließlich folgt
+        \[
+            -1 < a < 1.
+        \]
+    \end{enumerate}
+\end{document}

@@ -1,0 +1,363 @@
+\documentclass{exercise}
+
+\institute{Applied and Computational Mathematics}
+\title{Hausaufgabenübung 12}
+\author{Joshua Feld, 406718}
+\course{Mathematische Grundlagen IV}
+\professor{Torrilhon \& Berkels}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \section*{Aufgabe 1}
+    
+    \begin{problem}
+        Bestimmen Sie die distributionelle Ableitung der folgenden Distribution:
+        \[
+            T_f \phi := \angles*{f, \phi},
+        \]
+        wobei \(\phi \in \mathcal{D}\) und
+        \[
+            f\parentheses*{x} := \begin{cases}
+                1 + x + x^2, & \text{falls }x \ge 0,\\
+                0, & \text{falls }x < 0.
+            \end{cases}
+        \]
+    \end{problem}
+    
+    \subsection*{Lösung}
+    Für die distributionelle Ableitung \(T_f'\) gilt wie im Folgenden
+    \begin{align*}
+        T_f'\phi &= -T_f \phi'\\
+        &= -\int_\R f\parentheses*{x}\phi'\parentheses*{x}\d x\\
+        &= -\int_0^\infty \parentheses*{1 + x + x^2}\phi'\parentheses*{x}\d x\\
+        &= -\int_0^\infty \phi'\parentheses*{x}\d x - \int_0^\infty x\phi'\parentheses*{x}\d x - \int_0^\infty x^2 \phi'\parentheses*{x}\d x\\
+        &= -\brackets*{\phi\parentheses*{x}}_0^\infty - \int_0^\infty x\phi'\parentheses*{x}\d x - \int_0^\infty x^2 \phi'\parentheses*{x}\d x\\
+        &= \phi\parentheses*{0} - \int_0^\infty x\phi'\parentheses*{x}\d x - \int_0^\infty x^2 \phi'\parentheses*{x}\d x\\
+        &= \phi\parentheses*{0} - \brackets*{x\phi\parentheses*{x}}_0^\infty + \int_0^\infty \phi\parentheses*{x}\d x - \brackets*{x^2 \phi\parentheses*{x}}_0^\infty + \int_0^\infty 2x\phi\parentheses*{x}\d x\\
+        &= \phi\parentheses*{0} - 0 + \int_\R H\parentheses*{x}\phi\parentheses*{x}\d x - 0 + \int_\R 2xH\parentheses*{x}\phi\parentheses*{x}\d x\\
+        &= \angles*{\delta, \phi} + \angles*{H, \phi} + \angles*{2xH, \phi}
+    \end{align*}
+    mit der Heaviside-Funktion \(H\parentheses*{x}\).
+    Daher gilt
+    \[
+        T_f'\phi = \angles*{\delta + H + 2xH, \phi} \quad \forall\phi \in \mathcal{D}\parentheses*{\R}.
+    \]
+
+
+    \section*{Aufgabe 2}
+    
+    \begin{problem}
+        Zeigen Sei, dass sich die Fouriertransformierte einer \emph{geraden} Funktion \(g\parentheses*{x}\) auch über
+        \[
+            \hat{g}\parentheses*{\xi} = 2\int_0^\infty g\parentheses*{x}\cos\parentheses*{x\xi}\d x
+        \]
+        bestimmen lässt, und geben Sie einen ähnlichen Ausdruck für die Fouriertransformierte \(\hat{u}\parentheses*{\xi}\) einer \emph{ungeraden} Funktion \(u\parentheses*{x}\) an.
+    \end{problem}
+    
+    \subsection*{Lösung}
+    Für eine beliebige Funktion \(f\parentheses*{x}\) ist
+    \begin{align*}
+        \hat{f}\parentheses*{\xi} &= \int_{-\infty}^\infty f\parentheses*{x}e^{-i\xi x}\d x\\
+        &= \int_{-\infty}^0 f\parentheses*{x}e^{-i\xi x}\d x + \int_0^\infty f\parentheses*{x}e^{-i\xi x}\d x\\
+        &= \int_{-\infty}^0 f\parentheses*{x}\cos\parentheses*{x\xi}\d x + \int_0^\infty f\parentheses*{x}\cos\parentheses*{x\xi}\d x - i\int_{-\infty}^0 f\parentheses*{x}\sin\parentheses*{x\xi}\d x - i\int_0^\infty f\parentheses*{x}\sin\parentheses*{x\xi}\d x.
+    \end{align*}
+    Ist \(f\) gerade, d.h. \(f\parentheses*{x} = g\parentheses*{x}\) mit \(g\parentheses*{-x} = g\parentheses*{x}\), so ist
+    \begin{align*}
+        \int_{-\infty}^0 g\parentheses*{x}\cos\parentheses*{x\xi}\d x &= \int_0^\infty g\parentheses*{x}\cos\parentheses*{x\xi}\d x,\\
+        \int_{-\infty}^0 g\parentheses*{x}\sin\parentheses*{x\xi}\d x &= -\int_0^\infty g\parentheses*{x}\sin\parentheses*{x\xi}\d x
+    \end{align*}
+    und somit
+    \[
+        \hat{g}\parentheses*{\xi} = 2\int_0^\infty g\parentheses*{x}\cos\parentheses*{x\xi}\d x.
+    \]
+    Ist \(f\) ungerade, also \(f\parentheses*{x} = u\parentheses*{x}\) mit \(u\parentheses*{-x} = -u\parentheses*{x}\), so ist
+    \begin{align*}
+        \int_{-\infty}^0 u\parentheses*{x}\cos\parentheses*{x\xi}\d x &= -\int_0^\infty u\parentheses*{x}\cos\parentheses*{x\xi}\d x,\\
+        \int_{-\infty}^0 u\parentheses*{x}\sin\parentheses*{x\xi}\d x &= \int_0^\infty u\parentheses*{x}\sin\parentheses*{x\xi}\d x
+    \end{align*}
+    und somit
+    \[
+        \hat{u}\parentheses*{\xi} = -2i\int_0^\infty g\parentheses*{x}\sin\parentheses*{x\xi}\d x.
+    \]
+
+
+    \section*{Aufgabe 3}
+    
+    \begin{problem}
+        Sei die Matrix
+        \[
+            A = \begin{pmatrix}
+                1 & 0 & \cdots & 0\\
+                -1 & \ddots & \ddots & \vdots\\
+                \vdots & \ddots & \ddots & 0\\
+                -1 & \cdots & -1 & 1
+            \end{pmatrix}
+        \]
+        und \(G_J\) die Iterationsmatrix des Jacobi-Verfahrens angewendet auf \(A\).
+        \begin{enumerate}
+            \item Zeigen Sie, dass \(\rho\parentheses*{G_J} = 0\) gilt.
+            \item Für \(v^0 := \parentheses*{1, \ldots, 1}^T \in \R^n\) sei \(v^{k + 1} = G_J v^k\) für \(k \ge 0\).
+            Zeigen Sie, dass für \(k \ge n\)
+            \[
+                \norm*{v^k}_\infty = 0
+            \]
+            gilt.
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    Die Iterationsmatrix ist \(G_J = \parentheses*{I - D^{-1}A}\), wobei
+    \[
+        D = \diag\parentheses*{A} = I \implies G_J = \begin{pmatrix}
+            0 & \cdots & \cdots & 0\\
+            1 & \ddots & & \vdots\\
+            \vdots & \ddots & \ddots & \vdots\\
+            1 & \cdots & 1 & 0
+        \end{pmatrix}.
+    \]
+    \begin{enumerate}
+        \item Die Eigenwerte ergeben sich zu
+        \[
+            \det\parentheses*{\lambda I - G_J} = \det\begin{pmatrix}
+                \lambda & & & \emptyset\\
+                -1 & \ddots & &\\
+                \vdots & \ddots & \ddots &\\
+                -1 & \cdots & -1 & \lambda
+            \end{pmatrix} = \lambda^n.
+        \]
+        \(\lambda = 0\) ist also ein \(n\)-facher Eigenwert und folglich ist \(\rho\parentheses*{G_J} = 0\).
+        \item Wir zeigen zunächst über Induktion, dass für \(0 < k \le n - 1\)
+        \[
+            v_j^k = 0
+        \]
+        für \(j = 1, \ldots, k\) gilt.
+        \begin{itemize}
+            \item Induktionsanfang: \(v^1 = G_J \cdot v^0 = \parentheses*{0, 1, \ldots, n - 1}^T\).
+            \item Induktionsvoraussetzung: Es gilt \(v_j^{k - 1} = 0\) für \(j = 1, \ldots, k - 1\).
+            \item Induktionsschritt: \(k - 1 \mapsto k\)
+            \[
+                v^{k - 1} = \begin{pmatrix}
+                    0\\
+                    \vdots\\
+                    0\\
+                    v_k^{k - 1}\\
+                    \vdots\\
+                    v_n^{k - 1}
+                \end{pmatrix} \implies v^k = G_J v^{k - 1} = \begin{pmatrix}
+                    0\\
+                    \vdots\\
+                    0\\
+                    v_k^{k - 1}\\
+                    \vdots\\
+                    v_k^{k - 1} + \cdots + v_n^{k - 1}
+                \end{pmatrix}.
+            \]
+        \end{itemize}
+        Für \(k = n\) folgt
+        \[
+            v^n = G_J v^{n - 1} = G_J \begin{pmatrix}
+                0\\
+                \vdots\\
+                0\\
+                v_n^{n - 1}
+            \end{pmatrix} = 0.
+        \]
+        Somit gilt \(v^k = 0\) für \(k \ge n\) und folglich auch
+        \[
+            \norm*{v^k}_\infty = 0.
+        \]
+    \end{enumerate}
+    
+    
+    \section*{Aufgabe 4}
+    
+    \begin{problem}
+        Gegeben seien die Matrizen
+        \[
+            A_1 = \begin{pmatrix}
+                2 & -1 & 1\\
+                1 & -4 & -2\\
+                1 & 2 & 3
+            \end{pmatrix} \quad \text{und} \quad A_2 = \begin{pmatrix}
+                1 & 1 & 1\\
+                1 & -\frac{1}{2} & \frac{1}{2}\\
+                1 & \frac{1}{2} & -\frac{1}{2}
+            \end{pmatrix}
+        \]
+        \begin{enumerate}
+            \item Überprüfen Sie, ob das Jacobi- und das Gauß-Seidel-Verfahren zur Lösung der Gleichungssysteme \(A_i x = b\) mit \(b \in \R^3\), für jeden Startvektor konvergieren.
+            \item Führen Sie mit den Startvektor
+            \[
+                x^{\parentheses*{0}} = \parentheses*{1, 0, 0}^T
+            \]
+            jeweils \emph{zwei Schritte} des Jacobi- und Gauß-Seidel-Verfahrens für das Gleichungssystem \(A_1 x = b\) mit
+            \[
+                b = \parentheses*{3, 5, -1}^T
+            \]
+            durch.
+            Vergleichen Sie Ihre Ergebnisse mit der exakten Lösung des Gleichungssystems.
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item Die Matrix \(A_1\) ist irreduzibel diagonaldominant.
+        Damit sind das Jacobi- und das Gauß-Seidel-Verfahren für \(A_1 x = b\) konvergent.
+        Für \(A_2\) prüfen wir die Eigenwerte: Dafür zerlegen wir die Matrix
+        \[
+            A_2 = D - L - U
+        \]
+        in eine Diagonalmatrix \(D\), eine untere Dreiecksmatrix \(E\) und eine obere Dreiecksmatrix \(F\), mit
+        \[
+            D = \begin{pmatrix}
+                1 & 0 & 0\\
+                0 & -\frac{1}{2} & 0\\
+                0 & 0 & -\frac{1}{2}
+            \end{pmatrix}, \quad L = -\begin{pmatrix}
+                0 & 0 & 0\\
+                1 & 0 & 0\\
+                1 & \frac{1}{2} & 0
+            \end{pmatrix}, \quad U = -\begin{pmatrix}
+                0 & 1 & 1\\
+                0 & 0 & \frac{1}{2}\\
+                0 & 0 & 0
+            \end{pmatrix}.
+        \]
+        Für das Jacobi-Verfahren sind die Eigenwerte von \(I - D^{-1}A_2\) zu prüfen:
+        \[
+            \det\parentheses*{\lambda I - \parentheses*{I - D^{-1}A_2}} = \det\begin{pmatrix}
+                \lambda & 1 & 1\\
+                -2 & \lambda & -1\\
+                -2 & -1 & \lambda
+            \end{pmatrix} = \lambda^3 + 3\lambda + 4.
+        \]
+        Ein Eigenwert ist also \(-1\) und das Jacobi-Verfahren konvergiert \emph{nicht} für jeden Startvektor.
+        
+        Für das Gauß-Seidel-Verfahren sind die Eigenwerte von \(I - \parentheses*{D - L}^{-1}A_2\) zu prüfen:
+        \[
+            \det\parentheses*{\lambda I - \parentheses*[I - \parentheses*{D - L}^{-1}A_2} = \det\parentheses*{\lambda I - \begin{pmatrix}
+                0 & -1 & -1\\
+                0 & -2 & -1\\
+                0 & -4 & -3
+            \end{pmatrix}} = \lambda\parentheses*{\lambda + 2}\parentheses*{\lambda + 3} - 4\lambda = \lambda\parentheses*{\lambda^2 + 5\lambda + 2}.
+        \]
+        Ein Eigenwert ist damit kleiner als \(-\frac{5}{2}\) und das Gauß-Seidel-Verfahren konvergiert \emph{nicht} für jeden Startvektor.
+        \item Zunächst zerlegen wir die Matrix \(A_1\) in eine Diagonalmatrix \(D\), eine untere Dreiecksmatrix \(L\) und eine obere Dreiecksmatrix \(U\), i.e. \(A_1 = D - L - U\) mit
+        \[
+            D = \begin{pmatrix}
+                2 & 0 & 0\\
+                0 & -4 & 0\\
+                0 & 0 & 3
+            \end{pmatrix}, \quad L = -\begin{pmatrix}
+                0 & 0 & 0\\
+                1 & 0 & 0\\
+                1 & 2 & 0
+            \end{pmatrix}, \quad U = \begin{pmatrix}
+                0 & 1 & -1\\
+                0 & 0 & 2\\
+                0 & 0 & 0
+            \end{pmatrix}.
+        \]
+        \begin{itemize}
+            \item Jacobi-Verfahren:
+            \[
+                Dx^{\parentheses*{k + 1}} = \parentheses*{L + U}x^{\parentheses*{k}} + b,
+            \]
+            für \(b = \parentheses*{3, 5, -1}^T\) und \(x^{\parentheses*{0}} = \parentheses*{1, 0, 0}^T\).
+            Damit folgt
+            \[
+                Dx^{\parentheses*{1}} = \begin{pmatrix}
+                    0 & 1 & -1\\
+                    -1 & 0 & 2\\
+                    -1 & -2 & 0
+                \end{pmatrix}\begin{pmatrix}
+                    1\\
+                    0\\
+                    0
+                \end{pmatrix} + \begin{pmatrix}
+                    3\\
+                    5\\
+                    -1
+                \end{pmatrix} = \begin{pmatrix}
+                    3\\
+                    4\\
+                    -2
+                \end{pmatrix},
+            \]
+            was
+            \[
+                x^{\parentheses*{1}} = \begin{pmatrix}
+                    \frac{3}{2}\\
+                    -1\\
+                    -\frac{2}{3}
+                \end{pmatrix}
+            \]
+            zur Folge hat.
+            Analog berechnen wir
+            \[
+                x^{\parentheses*{2}} = \begin{pmatrix}
+                    1,333\\
+                    -0,542\\
+                    -0,167
+                \end{pmatrix}.
+            \]
+            \item Gauß-Seidel-Verfahren:
+            \[
+                \parentheses*{D - L}x^{\parentheses*{k + 1}} = Ux^{\parentheses*{k}} + b,
+            \]
+            also
+            \[
+                \parentheses*{D - L}x^{\parentheses*{1}} = \begin{pmatrix}
+                    0 & 1 & -1\\
+                    0 & 0 & 2\\
+                    0 & 0 & 0
+                \end{pmatrix}\begin{pmatrix}
+                    1\\
+                    0\\
+                    0
+                \end{pmatrix} + \begin{pmatrix}
+                    3\\
+                    5\\
+                    -1
+                \end{pmatrix} = \begin{pmatrix}
+                    3\\
+                    5\\
+                    -1
+                \end{pmatrix}.
+            \]
+            Daher
+            \[
+                x^{\parentheses*{1}} = \parentheses*{D - L}^{-1}\begin{pmatrix}
+                    3\\
+                    5\\
+                    -1
+                \end{pmatrix} = \begin{pmatrix}
+                    \frac{1}{2} & 0 & 0\\
+                    \frac{1}{8} & -\frac{1}{4} & 0\\
+                    -\frac{1}{4} & \frac{1}{6} & \frac{1}{3}
+                \end{pmatrix}\begin{pmatrix}
+                    3\\
+                    5\\
+                    -1
+                \end{pmatrix} = \begin{pmatrix}
+                    \frac{3}{2}\\
+                    -\frac{7}{8}\\
+                    -\frac{1}{4}
+                \end{pmatrix}.
+            \]
+            Analog berechnen wir
+            \[
+                x^{\parentheses*{2}} = \begin{pmatrix}
+                    1,188\\
+                    -0,828\\
+                    -0,177
+                \end{pmatrix}.
+            \]
+            Die exakte Lösung ist \(x^* = \parentheses*{1, -1, 0}^T\), daher ist das Gauß-Seidel-Verfahren nach zwei Schritten etwas näher an der exakten Lösung \(x^*\).
+        \end{itemize}
+    \end{enumerate}
+\end{document}

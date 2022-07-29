@@ -1,0 +1,429 @@
+\documentclass{exercise}
+
+\institute{Applied and Computational Mathematics}
+\title{Hausaufgabenübung 9}
+\author{Joshua Feld, 406718}
+\course{Mathematische Grundlagen IV}
+\professor{Torrilhon \& Berkels}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \section*{Aufgabe 1}
+    
+    \begin{problem}
+        Gegeben sei das Problem
+        \begin{align*}
+            \partial_t u &= \partial_x^2 u + q_0, \quad x \in \parentheses*{0, L}, t > 0,\\
+            u\parentheses*{0, t} = u\parentheses*{L, t} &= 0,\\
+            u\parentheses*{x, 0} &= 0
+        \end{align*}
+        mit konstantem Quellterm \(q_0\).
+        \begin{enumerate}
+            \item Berechnen Sie die Lösung \(u\parentheses*{x, t}\).
+            \item Berechnen Sie die stationäre Lösung \(\lim_{t \to \infty}u\parentheses*{x, t} = u_\infty\parentheses*{x}\).
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item Die zum Problem gehörenden Eigenfunktionen und Eigenwerte erfüllen
+        \[
+            -\Delta\phi = \lambda\phi, \quad \phi\parentheses*{0} = \phi\parentheses*{L} = 0
+        \]
+        und laut Normierung damit
+        \[
+            \phi_k\parentheses*{x} = \sqrt{\frac{2}{L}}\sin\parentheses*{\frac{k\pi}{L}x}, \quad \lambda_k = \parentheses*{\frac{k\pi}{L}}^2.
+        \]
+        In der Gleichung für \(u\parentheses*{x, t}\) tritt die Quelle
+        \[
+            q\parentheses*{x, t} = q_0
+        \]
+        auf, die in den Eigenfunktionen entwickelt wird:
+        \[
+            q_0\parentheses*{x} = \sum_{k = 1}^\infty \beta_k \phi_k\parentheses*{x},
+        \]
+        mit
+        \[
+            \beta_k = \int_0^L q_0\phi_k\d x = q_0\frac{L}{k\pi}\sqrt{\frac{2}{L}}\parentheses*{1 - \cos\parentheses*{k\pi}} = \begin{cases}
+                \frac{2q_0\sqrt{2L}}{k\pi}, & \text{falls }k\text{ ungerade},\\
+                0, & \text{sonst}.
+            \end{cases}
+        \]
+        Für die Lösung \(u\parentheses*{x, t}\) wird nun der Ansatz
+        \[
+            u\parentheses*{x, t} = \sum_{k = 1}^\infty \alpha_k\parentheses*{t}\phi_k\parentheses*{x}
+        \]
+        verwendet, wobei \(\alpha_k\) zeitabhängig ist, weil \(u\parentheses*{x, t}\) zeitabhängig ist.
+        Beim Einsetzen muss darauf geachtet werden, dass die Zeitableitung auf \(\alpha_k\parentheses*{t}\) wirkt.
+        Wir erhalten
+        \begin{align*}
+            \sum_{k = 1}^\infty \parentheses*{\partial_t \alpha_k\parentheses*{t}\phi_k\parentheses*{x} - \alpha_k\parentheses*{t}\partial_x^2 \phi_k\parentheses*{x}} &= \sum_{k = 1}^\infty \parentheses*{\alpha_k'\parentheses*{t}\phi_k\parentheses*{x} + \alpha_k\parentheses*{t}\lambda_k \phi_k\parentheses*{x} - \beta_k \phi_k\parentheses*{x}}\\
+            &= \sum_{k = 1}^\infty \parentheses*{\alpha_k'\parentheses*{t} + \alpha_k\parentheses*{t} - \beta_k}\phi_k\parentheses*{x} = 0.
+        \end{align*}
+        Da die Eigenfunktionen orthonormal sind, muss für \(k > 1\) die gewöhnliche Differentialgleichung
+        \[
+            \alpha_k'\parentheses*{t} + \alpha_k\parentheses*{t}\lambda_k - \beta_k = 0
+        \]
+        gelten.
+        Die allgemeine Lösung lautet
+        \[
+            \alpha_k\parentheses*{t} = \frac{\beta_k}{\lambda_k} + C_k e^{-\lambda_k t}.
+        \]
+        Die Konstante \(C_k\) wird durch die Anfangsbedingung für \(\alpha_k\parentheses*{0}\) bestimmt.
+        Dazu muss die Anfangsbedingung für \(u\parentheses*{x, t}\) entwickelt werden.
+        Hier ist dies allerdings ganz einfach möglich:
+        \[
+            u\parentheses*{x, 0} = \sum_{k = 1}^\infty \alpha_k\parentheses*{0}\phi_k\parentheses*{x} \stackrel{!}{=} 0.
+        \]
+        Also muss gelten: \(\alpha_k\parentheses*{0} = 0\).
+        Also folgt \(C_k = -\frac{\beta_k}{\lambda_k}\).
+        Die Lösung \(u\) lautet ingsgesamt
+        \[
+            u\parentheses*{x, t} = \sum_{k = 1}^\infty \frac{\beta_k}{\lambda_k}\parentheses*{1 - e^{-\lambda_k t}}\sqrt{\frac{2}{L}}\sin\parentheses*{\frac{k\pi}{L}x} = \sum_{\substack{k = 1,\\k\text{ ungerade}}}^\infty 4q_0 L^2 \frac{1 - e^{-\lambda_k t}}{k^3 \pi^3}\sin\parentheses*{\frac{k\pi}{L}x}.
+        \]
+        \item Im Fall \(t \to \infty\) geht der Term mit der Exponentialfunktion gegen \(0\):
+        \[
+            u_\infty\parentheses*{x} = \sum_{\substack{k = 1,\\k\text{ ungerade}}}^\infty \frac{4q_0 L^2}{k^3 \pi^3}\sin\parentheses*{\frac{k\pi}{L}x}.
+        \]
+        Alternativ kann die stationäre Lösung auch direkt aus der Gleichung mit \(\frac{\partial}{\partial t} \to 0\) bestimmt werden.
+        Zu Lösen ist nun
+        \[
+            \partial_x^2 u + q_0 = 0.
+        \]
+        Zweimaliges Integrieren gibt
+        \[
+            u_\infty\parentheses*{x} = -\frac{q_0}{2}x^2 + C_2 x + C_1.
+        \]
+        Die Konstanten ergeben sich aus den Randbedingungen:
+        \begin{align*}
+            u_\infty\parentheses*{0} = 0 &\implies C_1 = 0,\\
+            u_\infty\parentheses*{L} = 0 &\implies C_2 = \frac{q_0 L}{2}.
+        \end{align*}
+        Also gilt
+        \[
+            u_\infty\parentheses*{x} = \frac{q_0}{2}x\parentheses*{L - x}.
+        \]
+        Eine Entwicklung dieser Funktion ergibt gerade die obige Summendarstellung.
+    \end{enumerate}
+
+
+    \section*{Aufgabe 2}
+    
+    \begin{problem}
+        Lösen Sie das Problem
+        \begin{align*}
+            \partial_t u &= \partial_x^2 u, \quad x \in \parentheses*{0, L}, t > 0,\\
+            u\parentheses*{0, t} &= 0,\\
+            u\parentheses*{L, t} &= ate^{-at},\\
+            u\parentheses*{x, 0} &= u_0 x\parentheses*{L - x},
+        \end{align*}
+        mit Konstanten \(a\) und \(u_0\).
+
+        \emph{Hinweis: Folgen Sie dem in der Vorlesung vorgestellten Weg.}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    Die Randbedingungen müsen homogenisiert werden. Dazu basteln wir eine Hilfsfunktion \(r\parentheses*{x, t}\), für die die Randbedingungen erfüllt und transformieren
+    \[
+        u\parentheses*{x, t} \to v\parentheses*{x, t} + r\parentheses*{x, t}.
+    \]
+    Bei praktisch allen Problemen, die wir betrachten kommt als Hilfsfunktion eine lineare oder konstante Funktion in Frage, da für diese \(\partial_x^2 r = 0\) gilt.
+    Für die Aufgabe bietet sich
+    \[
+        r\parentheses*{x, t} = \frac{x}{L}ate^{-at}
+    \]
+    an, denn \(r\parentheses*{0, t} = 0\) und \(r\parentheses*{L, t} = ate^{-at}\).
+    Wir definieren
+    \[
+        u\parentheses*{x, t} = v\parentheses*{x, t} + \frac{x}{L}ate^{-at} \iff v\parentheses*{x, t} = u\parentheses*{x, t} - \frac{x}{L}ate^{-at}
+    \]
+    und von nun an ist \(v\) die gesuchte Funktion.
+    Einsetzen in die Gleichung und Anfangs- und Randbedingungen ergibt eine partielle Differentialgleichung für \(v\), nämlich
+    \[
+        \partial_t\parentheses*{v + \frac{x}{L}ate^{-at}} = \partial_x^2\parentheses*{v + \frac{x}{L}ate^{-at}},
+    \]
+    also gilt
+    \[
+        \partial_t v - \partial_x^2 v = -\frac{x}{L}\parentheses*{1 - at}ae^{-at}
+    \]
+    mit
+    \[
+        v\parentheses*{0, t} = v\parentheses*{L, t} = 0, \quad v\parentheses*{x, 0} = u_0 x\parentheses*{L - x}.
+    \]
+    Die Randbedingungen sind jetzt homogen.
+    Die Eigenfunktionen \(\phi_k\) müssen folgendes Problem lösen:
+    \[
+        -\partial_x^2 \phi_k = \lambda_k \phi_k, \quad \phi\parentheses*{0} = \phi\parentheses*{L} = 0.
+    \]
+    Die Eigenfunktionen und Eigenwerte lauten nun
+    \[
+        \phi_k\parentheses*{x} = \sqrt{\frac{2}{L}}\sin\parentheses*{\frac{k\pi}{L}x}, \quad \lambda_k = \parentheses*{\frac{k\pi}{L}}^2.
+    \]
+    In der Gleichung für \(v\) tritt eine Art Quellterm auf, die durch die Homogenisierung entstand:
+    \[
+        q\parentheses*{x, t} = -\frac{x}{L}\parentheses*{1 - at}ae^{-at}.
+    \]
+    In Eigenfunktionen entwickelt erhalten wir
+    \[
+        q\parentheses*{x, t} = \sum_{k = 1}^\infty \beta_k\parentheses*{t}\sqrt{\frac{2}{L}}\sin\parentheses*{\frac{k\pi}{L}x}
+    \]
+    mit
+    \begin{align*}
+        \beta_k\parentheses*{t} = \int_0^L -\frac{x}{L}\parentheses*{1 - at}ae^{-at}\sqrt{\frac{2}{L}}\sin\parentheses*{\frac{k\pi}{L}x}\d x\\
+        &= -\parentheses*{1 - at}ae^{-at}\sqrt{\frac{2}{L}}\int_0^L \frac{x}{L}\sin\parentheses*{\frac{k\pi}{L}x}\d x\\
+        &= -\parentheses*{1 - at}ae^{-at}\sqrt{\frac{2}{L}}\frac{L}{k\pi}\parentheses*{-1}^k\\
+        &= \parentheses*{-1}^k \frac{\sqrt{2L}}{k\pi}\parentheses*{1 - at}ae^{-at}.
+    \end{align*}
+    Für die Lösung \(v\parentheses*{x, t}\) wird nun der Ansatz
+    \[
+        v\parentheses*{x, t} = \sum_{k = 1}^\infty \alpha_k\parentheses*{t}\phi_k\parentheses*{x}
+    \]
+    gemacht.
+    Durch Einsetzen ergibt sich
+    \begin{align*}
+        \sum_{k = 1}^\infty \parentheses*{\partial_t \alpha\parentheses*{t}\phi_k\parentheses*{x} - \alpha_k\parentheses*{t}\partial_x^2 \phi_k\parentheses*{x} - \beta_k\parentheses*{t}\phi_k\parentheses*{x}} &= 0\\
+        \iff \sum_{k = 1}^\infty \parentheses*{\alpha'\parentheses*{t}\phi_k\parentheses*{x} - \alpha_k\parentheses*{t}\lambda_k \phi_k\parentheses*{x} - \beta_k\parentheses*{t}\phi_k\parentheses*{x}} &= 0\\
+        \iff \sum_{k = 1}^\infty \parentheses*{\alpha'\parentheses*{t} - \alpha_k\parentheses*{t}\lambda_k - \beta_k\parentheses*{t}} &= 0.
+    \end{align*}
+    Da die Eigenfunktionen orthogonal sind, muss für \(k > 0\) gelten:
+    \[
+        \alpha'\parentheses*{t} - \alpha_k\parentheses*{t}\lambda_k - \beta_k\parentheses*{t} = 0.
+    \]
+    Die allgemeine Lösung lautet
+    \[
+        \alpha_k\parentheses*{t} = \alpha_k\parentheses*{0}e^{-\lambda_k t} + \int_0^t e^{-\lambda_k\parentheses*{t - \tau}}\beta_k\parentheses*{\tau}\d\tau.
+    \]
+    Das Integral können wir weiter ausrechnen:
+    \begin{align*}
+        \int_0^t e^{-\lambda_k\parentheses*{t - \tau}}\beta_k\parentheses*{\tau}\d\tau &= e^{-\lambda_k t}\int_0^t e^{\lambda_k \tau}\parentheses*{-1}^k \frac{\sqrt{2L}}{k\pi}\parentheses*{1 - a\tau}ae^{-a\tau}\d\tau\\
+        &= e^{-\lambda_k t}\parentheses*{-1}^k \frac{\sqrt{2L}}{k\pi}a\int_0^t e^{\lambda_k \tau}\parentheses*{1 - a\tau}e^{-a\tau}\d\tau\\
+        &= e^{-\lambda_k t}\parentheses*{-1}^k \frac{\sqrt{2L}}{k\pi}a\parentheses*{\int_0^t e^{\lambda_k \tau}e^{-a\tau}\d\tau - a\int_0^t \tau e^{\lambda_k \tau}e^{-a\tau}\d\tau}\\
+        &= e^{-\lambda_k t}\parentheses*{-1}^k \frac{\sqrt{2L}}{k\pi}a\frac{\parentheses*{\lambda_k - \parentheses*{\lambda_k - a}at}e^{\lambda_k - at} - \lambda_k}{\parentheses*{\lambda_k - a}^2}\\
+        &= \parentheses*{-1}^k \frac{\sqrt{2L}}{k\pi}a\frac{\sqrt{2L}}{k\pi}a\frac{\parentheses*{\lambda_k - \parentheses*{\lambda_k - a}at}e^{-at} - \lambda_k e^{-\lambda_k t}}{\parentheses*{\lambda_k - a}^2}.
+    \end{align*}
+    Es bleibt die Anfangsbedingung für \(\alpha_k\parentheses*{0}\) zu bestimmen.
+    Dazu muss die Anfangsbedingung für \(v\parentheses*{x, t}\) entwickelt werden:
+    \[
+        v\parentheses*{x, 0} = \sum_{i = 1}^k \alpha_k\parentheses*{0}\phi_k\parentheses*{x} \stackrel{!}{=} u_0 x\parentheses*{L - x}
+    \]
+    mit
+    \[
+        \alpha_k\parentheses*{0} = \int_0^L u_0 x\parentheses*{L - x}\sqrt{\frac{2}{L}}\sin\parentheses*{\frac{k\pi}{L}x}\d x = \begin{cases}
+            u_0 \sqrt{2L}\frac{4L^2}{k^3 \pi^3}, & \text{falls }k\text{ ungerade},\\
+            0, & \text{falls }k\text{ gerade}.
+        \end{cases}
+    \]
+    Die Lösung \(v\parentheses*{x, t}\) lautet insgesamt
+    \begin{align*}
+        v\parentheses*{x, t} &= \sum_{k = 1}^\infty \alpha_k\parentheses*{t}\phi_k\parentheses*{x}\\
+        &= \sum_{\substack{k = 1,\\k\text{ ungerade}}}^\infty \frac{8u_0 L^2}{k^3 \pi^3}e^{-\lambda_k t}\sin\parentheses*{\frac{k\pi}{L}x} + \sum_{k = 1}^\infty \parentheses*{-1}^k \frac{2a}{k\pi}\frac{\parentheses*{\lambda_k - \parentheses*{\lambda_k - a}at}e^{-at} - \lambda_k e^{-\lambda_k t}}{\parentheses*{\lambda_k - a}^2}\sin\parentheses*{\frac{k\pi}{L}x}
+    \end{align*}
+    und die Lösung für \(u\parentheses*{x, t}\) folgt aus
+    \[
+        u\parentheses*{x, t} = v\parentheses*{x, t} + \frac{x}{L}ate^{-at}.
+    \]
+
+
+    \section*{Aufgabe 3}
+    
+    \begin{problem}
+        Bestimmen Sie die Koeffizienten \(a\), \(b\) und \(c\), sodass die finite Differenz
+        \[
+            af\parentheses*{x} + bf\parentheses*{x + h} + cf\parentheses*{x + 2h} \approx f'\parentheses*{x}
+        \]
+        die erste Ableitung von \(f\) an der Stelle \(x\) mit möglichst hoher Ordnung approximiert.
+        Bestimmen Sie die Konsistenzordnung.
+    \end{problem}
+    
+    \subsection*{Lösung}
+    Wir betrachten die Taylorentwicklungen für \(f\parentheses*{x + h}\) und \(f\parentheses*{x + 2h}\) wie im Folgenden:
+    \begin{align*}
+        f\parentheses*{x} &= f\parentheses*{x},\\
+        f\parentheses*{x + h} &\approx f\parentheses*{x} + f'\parentheses*{x} \cdot h + f''\parentheses*{x} \cdot \frac{h^2}{2} + f'''\parentheses*{x} \cdot \frac{h^3}{6},\\
+        f\parentheses*{x + 2h} &\approx f\parentheses*{x} + f'\parentheses*{x} \cdot 2h + f''\parentheses*{x} \cdot 2h^2 + f'''\parentheses*{x} \cdot \frac{4h^3}{3}.
+    \end{align*}
+    Daraus erhalten wir folgende Gleichungssystem für die Koeffizienten \(a\), \(b\) und \(c\):
+    \begin{itemize}
+        \item \(f\parentheses*{x}\)-Term: \(a + b + c = 0\),
+        \item \(f'\parentheses*{x}\)-Term: \(hb + 2hc = 1\),
+        \item \(f''\parentheses*{x}\)-Term: \(\frac{h^2}{2}b + 2h^2 c = 0\).
+    \end{itemize}
+    Wir multiplizieren die zweite Zeile mit \(\frac{1}{h}\), die dritte mit \(\frac{2}{h^2}\) und erhalten folgendes Gleichungssystem:
+    \[
+        \begin{pmatrix}
+            1 & 1 & 1\\
+            0 & 1 & 2\\
+            0 & 1 & 4
+        \end{pmatrix}\begin{pmatrix}
+            a\\
+            b\\
+            c
+        \end{pmatrix} = \begin{pmatrix}
+            0\\
+            \frac{1}{h}\\
+            0
+        \end{pmatrix}.
+    \]
+    Das Gauß'sche Eliminationsverfahren lautet
+    \begin{align*}
+        \begin{pmatrix}
+            1 & 1 & 1\\
+            0 & 1 & 2\\
+            0 & 1 & 4
+        \end{pmatrix}\begin{pmatrix}
+            a\\
+            b\\
+            c
+        \end{pmatrix} = \begin{pmatrix}
+            0\\
+            \frac{1}{h}\\
+            0
+        \end{pmatrix} &\xrightarrow{\text{Eli. 2. Splt.}} \begin{pmatrix}
+            1 & 1 & 1\\
+            0 & 1 & 2\\
+            0 & 0 & 2
+        \end{pmatrix}\begin{pmatrix}
+            a\\
+            b\\
+            c
+        \end{pmatrix} = \begin{pmatrix}
+            0\\
+            \frac{1}{h}\\
+            -\frac{1}{h}
+        \end{pmatrix}\\
+        &\xrightarrow{\text{Eli. 3. Splt.}} \begin{pmatrix}
+            1 & 1 & 0\\
+            0 & 1 & 0\\
+            0 & 0 & 2
+        \end{pmatrix}\begin{pmatrix}
+            a\\
+            b\\
+            c
+        \end{pmatrix} = \begin{pmatrix}
+            \frac{1}{2h}\\
+            \frac{2}{h}\\
+            -\frac{1}{h}
+        \end{pmatrix}\\
+        &\xrightarrow{\text{Eli. 2. Splt.}} \begin{pmatrix}
+            1 & 0 & 0\\
+            0 & 1 & 0\\
+            0 & 0 & 2
+        \end{pmatrix}\begin{pmatrix}
+            a\\
+            b\\
+            c
+        \end{pmatrix} = \begin{pmatrix}
+            -\frac{3}{2h}\\
+            \frac{2}{h}\\
+            -\frac{1}{h}
+        \end{pmatrix} \iff \begin{pmatrix}
+            a\\
+            b\\
+            c
+        \end{pmatrix} = \begin{pmatrix}
+            -\frac{3}{2h}\\
+            \frac{4}{2h}\\
+            -\frac{1}{2h}
+        \end{pmatrix}.
+    \end{align*}
+    Verwenden wir diese Koeffizienten zusammen mit den Taylor-Entwicklungen von \(f\parentheses*{x + h}\) und \(f\parentheses*{x + 2h}\), so erhält man:
+    \[
+        af\parentheses*{x} + bf\parentheses*{x + h} + cf\parentheses*{x + 2h} \approx f'\parentheses*{x} + f'''\parentheses*{x}\parentheses*{\frac{4}{2h} \cdot \frac{h^3}{6} - \frac{1}{2h} \cdot \frac{4h^3}{3}} = f'\parentheses*{x} - \frac{h^2}{3}f'''\parentheses*{x}.
+    \]
+    Damit ist die Konsistenzordnung \(2\).
+
+
+    \section*{Aufgabe 4}
+    
+    \begin{problem}
+        Gegeben ist das Konvektions-Diffusionsproblem: Gesucht ist \(u \in C^2\parentheses*{0, 1}\) mit
+        \begin{align*}
+            -u''\parentheses*{x} + 10u'\parentheses*{x} + u\parentheses*{x} &= f\parentheses*{x}, \quad x \in \parentheses*{0, 1},\\
+            u\parentheses*{0} = u\parentheses*{1} &= 0.
+        \end{align*}
+        Dieses Problem soll mithilfe einer finite Differenzen Methode auf einem regelmäßgien Gitter der Schrittweite \(h\) und den Gitterpunkten \(0 = x_0 < x_1 < \cdots < x_n = 1\) approximiert und in ein lineares Gleichungssystem der Form \(A_h u_h = b_h\) überführt werden.
+        Dazu sollen die Differenzenquotienten
+        \begin{align*}
+            u'\parentheses*{x_i} &\approx \frac{u\parentheses*{x_{i + 1}} - u\parentheses*{x_{i - 1}}}{2h},\\
+            u''\parentheses*{x_i} &\approx \frac{u\parentheses*{x_{i + 1}} - 2u\parentheses*{x_i} + u\parentheses*{x_{i - 1}}}{h^2}
+        \end{align*}
+        benutzt werden.
+        \begin{enumerate}
+            \item Bestimmen Sie \(A_h\) und \(b_h\).
+            \item Geben Sie eine Bedingung an, unter der \(A_h\) diagonaldominant ist.
+            \item Wie müsste das Problem diskretisiert werden, um ohne Zusatzbedingung eine diagonaldominante Matrix \(A_h\) zu erhalten?
+            Wie sähe die Matrix aus?
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item Sei \(h = \frac{1}{n}\) und \(x_i = ih\) für \(i = 0, \ldots, n\).
+        Weiter sei \(u_i = u\parentheses*{x_i}\).
+        Dann gilt für \(i = 2, \ldots, n - 2\)
+        \begin{align*}
+            -\frac{u_{i + 1} - 2u_i + u_{i - 1}}{h^2} + 10 \cdot \frac{u_{i + 1} - u_{i - 1}}{2h} + u_i &= f\parentheses*{ih}\\
+            \implies \frac{1}{2h^2}\parentheses*{\parentheses*{-2 + 10h}u_{i + 1} + \parentheses*{4 + 2h^2}u_i + \parentheses*{-2 - 10h}u_{i - 1}} &= f\parentheses*{ih}.
+        \end{align*}
+        Da \(u_0 = u\parentheses*{0} = 0\) und \(u_n = u\parentheses*{1} = 0\) gilt für \(i = 1\) bzw. \(i = n - 1\)
+        \begin{align*}
+            \frac{1}{2h^2}\parentheses*{\parentheses*{-2 + 10h}u_{2} + \parentheses*{4 + 2h^2}u_1} &= f\parentheses*{h},\\
+            \frac{1}{2h^2}\parentheses*{\parentheses*{4 + 2h^2}u_{n - 1} + \parentheses*{-2 - 10h}u_{n - 2}} &= f\parentheses*{\parentheses*{n - 1}h}.
+        \end{align*}
+        Insgesamt erhalten wir das Gleichungssystem \(A_h u_h = b_h\) mit
+        \[
+            A_h = \frac{1}{h^2}\begin{pmatrix}
+                2 + h^2 & -1 + 5h\\
+                -1 - 5h & 2 + h^2 & -1 + 5h\\
+                & \ddots & \ddots & \ddots\\
+                & & -1 - 5h & 2 + h^2 & -1 + 5h\\
+                & & & -1 - 5h & 2 + h^2
+            \end{pmatrix}
+        \]
+        und
+        \[
+            b_h = \begin{pmatrix}
+                f\parentheses*{h}\\
+                f\parentheses*{2h}\\
+                \vdots\\
+                f\parentheses*{\parentheses*{n - 2}h}\\
+                f\parentheses*{\parentheses*{n - 1}h}
+            \end{pmatrix}, \quad u_h = \begin{pmatrix}
+                u_1\\
+                u_2\\
+                \vdots
+                u_{n - 2}\\
+                u_{n - 1}
+            \end{pmatrix}.
+        \]
+        \item Für \(h \le \frac{1}{5}\) gilt
+        \begin{align*}
+            \absolute*{-1 + 5h} \le 2 &< 2 + h^2\\
+            \absolute*{-1 - 5h} + \absolute*{-1 + 5h} = 1 + 5h + 1 - 5h = 2 &< 2 + h^2\\
+            \absolute*{-1 - 5h} \le 2 &< 2 + h^2.
+        \end{align*}
+        Damit gilt \(\sum_{j \ne i}\absolute*{a_{i, j}} < a_{i, i}\) für \(i = 1, \ldots, n - 1\) und \(A_h\) ist diagonaldominant.
+        \item Wird für die Approximation von \(u'\parentheses*{x_i}\) anstatt der zentralen Differenzen, die Upwind-Diskretisierung
+        \[
+            u'\parentheses*{x_i} \approx \frac{u\parentheses*{x_i} - u\parentheses*{x_{i - 1}}}{h}
+        \]
+        benutzt, so erhalten wir die Matrix
+        \[
+            A_h = \frac{1}{h^2}\begin{pmatrix}
+                2 + 10h + 2h^2 & -1\\
+                -1 - 10h & 2 + 10h + 4h^2 & -1\\
+                & \ddots & \ddots & \ddots\\
+                & & -1 - 10h & 2 + 10h + 2h^2 & -1\\
+                & & & -1 - 10h & 2 + 10h + h^2
+            \end{pmatrix}.
+        \]
+        Mit dieser Diskretisierung ist \(A_h\) eine diagonaldominante Matrix, da
+        \[
+            \sum_{j \ne i}\absolute*{a_{i, j}} \le 2 + 10h < 2 + 10h + 4h^2 = a_{i, i}, \quad i = 1, \ldots, n - 1.
+        \]
+    \end{enumerate}
+\end{document}

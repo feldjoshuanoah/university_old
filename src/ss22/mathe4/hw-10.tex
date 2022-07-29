@@ -1,0 +1,257 @@
+\documentclass{exercise}
+
+\institute{Applied and Computational Mathematics}
+\title{Hausaufgabenübung 10}
+\author{Joshua Feld, 406718}
+\course{Mathematische Grundlagen IV}
+\professor{Torrilhon \& Berkels}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \section*{Aufgabe 1}
+    
+    \begin{problem}
+        Gegeben sei folgende Approximation von \(f''\parentheses*{x}\) für ausreichend glattes \(f\):
+        \[
+            f''\parentheses*{x} \approx \frac{2}{h_1 + h_2}\parentheses*{\frac{f\parentheses*{x + h_2} - f\parentheses*{x}}{h_2} - \frac{f\parentheses*{x} - f\parentheses*{x - h_1}}{h_1}}.
+        \]
+        Bestimmen sie die Approximationsordnung.
+    \end{problem}
+    
+    \subsection*{Lösung}
+    Wir betrachten die Taylorentwicklungen für
+    \begin{itemize}
+        \item \(f\parentheses*{x + h_2}\):
+        \[
+            f\parentheses*{x + h_2} = f\parentheses*{x} + h_2 f'\parentheses*{x} + \frac{h_2^2}{2}f''\parentheses*{x} + \frac{h_2^3}{6}f'''\parentheses*{x} + \frac{h_2^4}{24}f^{\parentheses*{4}}\parentheses*{x} + \mathcal{O}\parentheses*{h_2^5},
+        \]
+        womit gilt
+        \begin{align*}
+            \frac{f\parentheses*{x + h_2} - f\parentheses*{x}}{h_2} &= \frac{1}{h_2}\parentheses*{h_2 f'\parentheses*{x} + \frac{h_2^2}{2}f''\parentheses*{x} + \frac{h_2^3}{6}f'''\parentheses*{x} + \frac{h_2^4}{24}f^{\parentheses*{4}}\parentheses*{x} + \mathcal{O}\parentheses*{h_2^5}}\\
+            &= f'\parentheses*{x} + \frac{h_2}{2}f''\parentheses*{x} + \frac{h_2^2}{6}f'''\parentheses*{x} + \frac{h_2^3}{24}f^{\parentheses*{4}}\parentheses*{x} + \mathcal{O}\parentheses*{h_2^4}.
+        \end{align*}
+        \item \(f\parentheses*{x - h_1}\):
+        \[
+            f\parentheses*{x - h_1} = f\parentheses*{x} + h_1 f'\parentheses*{x} + \frac{h_1^2}{2}f''\parentheses*{x} + \frac{h_1^3}{6}f'''\parentheses*{x} + \frac{h_1^4}{24}f^{\parentheses*{4}}\parentheses*{x} + \mathcal{O}\parentheses*{h_1^5},
+        \]
+        womit gilt
+        \begin{align*}
+            \frac{f\parentheses*{x + h_1} - f\parentheses*{x}}{h_1} &= \frac{1}{h_1}\parentheses*{h_1 f'\parentheses*{x} + \frac{h_1^2}{2}f''\parentheses*{x} + \frac{h_1^3}{6}f'''\parentheses*{x} + \frac{h_1^4}{24}f^{\parentheses*{4}}\parentheses*{x} + \mathcal{O}\parentheses*{h_1^5}}\\
+            &= f'\parentheses*{x} + \frac{h_1}{2}f''\parentheses*{x} + \frac{h_1^2}{6}f'''\parentheses*{x} + \frac{h_1^3}{24}f^{\parentheses*{4}}\parentheses*{x} + \mathcal{O}\parentheses*{h_1^4}.
+        \end{align*}
+    \end{itemize}
+    Damit folgt
+    \begin{align*}
+        &\frac{2}{h_1 + h_2}\parentheses*{\frac{f\parentheses*{x + h_2} - f\parentheses*{x}}{h_2} - \frac{f\parentheses*{x} - f\parentheses*{x - h_1}}{h_1}}\\
+        &= \frac{2}{h_1 + h_2}\parentheses*{f'\parentheses*{x} + \frac{h_2}{2}f''\parentheses*{x} + \frac{h_2^2}{6}f'''\parentheses*{x} + \frac{h_2^3}{24}f^{\parentheses*{4}}\parentheses*{x} + \mathcal{O}\parentheses*{h_2^4} - \parentheses*{f'\parentheses*{x} + \frac{h_1}{2}f''\parentheses*{x} + \frac{h_1^2}{6}f'''\parentheses*{x} + \frac{h_1^3}{24}f^{\parentheses*{4}}\parentheses*{x} + \mathcal{O}\parentheses*{h_1^4}}}\\
+        &= \frac{2}{h_1 + h_2}\parentheses*{\frac{h_1 + h_2}{2}f''\parentheses*{x} + \frac{h_2^2 - h_1^2}{6}f'''\parentheses*{x} + \mathcal{O}\parentheses*{h_1^3 + h_2^3}}.
+    \end{align*}
+    Für \(h_1 = h_2\) folgt 2. Ordnung.
+    Für \(h_1 \ne h_2\) folgt 1. Ordnung.
+    
+    
+    \section*{Aufgabe 2}
+    
+    \begin{problem}
+        Gegeben sei die folgende Differentialgleichung
+        \[
+            u''\parentheses*{x} - u'\parentheses*{x} + u\parentheses*{x} = 2x - 1 - x^2, \quad x \in \Omega = \parentheses*{0, 1}
+        \]
+        mit den gemischten Randbedingungen
+        \[
+            u\parentheses*{1} = 0, \quad u'\parentheses*{0} = 0.
+        \]
+        Diskretisieren Sie das Randwertproblem mittels den finiten Differenzen
+        \begin{align*}
+            u''\parentheses*{x} &\approx \frac{u\parentheses*{x + h} - 2u\parentheses*{x} + u\parentheses*{x - h}}{h^2},\\
+            u'\parentheses*{x} &\approx \frac{u\parentheses*{x + h} - u\parentheses*{x - h}}{2h},
+        \end{align*}
+        auf einem gleichmäßigen Gitter mit Schrittweite \(h = \frac{1}{N}\) und Gitterpunkten
+        \[
+            x_n = nh, \quad n = 0, \ldots, N.
+        \]
+        Approximieren Sie die Ableitung am linken Randpunkt mithilfe eines zusätzlichen \emph{fiktiven} Punktes außerhalb des Gebiets, den Sie hinterher wieder geeignet entfernen.
+        \begin{enumerate}
+            \item Geben Sie das resultierende lineare Gleichungssystem \(A_h u_h = b_h\) an.
+            \item Die exakte Lösung des Randwertproblems lautet \(u\parentheses*{x} = 1 - x^2\).
+            Bestimmen Sie den Konsistenzfehler der finitien Differenzen Methode bzgl. der \(\infty\)-Norm.
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item Wir schreiben \(u_n = u\parentheses*{x_n}\) und \(x_n = nh, m = 0, \ldots, N - 1\).
+        Dann schreibt sich die diskretisierte Gleichung wie im Folgenden
+        \[
+            \frac{u_{n + 1} - 2u_n + u_{n - 1}}{h^2} - \frac{u_{n + 1} - u_{n - 1}}{2h} + u_n = 2x_n - 1 - x_n^2,
+        \]
+        erstmal nur für \(n = 1, \ldots, N - 1\).
+        Nach Unbekannten sortiert ergibt das
+        \[
+            \parentheses*{2 + h}u_{n - 1} + \parentheses*{2h^2 - 4}u_n + \parentheses*{2 - h}u_{n + 1} = 2h^2 \parentheses*{2nh - 1 - \parentheses*{nh}^2}.
+        \]
+        Am linken Rand erzeugen wir einen \emph{fiktiven} Punkt \(u_{-1}\) und dann gilt
+        \[
+            u'\parentheses*{0} = 0 \implies \frac{u_1 - u_{-1}}{2h} = 0 \implies u_1 = u_{-1}
+        \]
+        und somit erhalten wir als erste Gleichung, i.e. wenn \(n = 0\), wie im Folgenden
+        \[
+            \parentheses*{2h^2 - 4}u_0 + 4u_1 = -2h^2.
+        \]
+        Am rechten Rand folgt aus \(u\parentheses*{1} = 0\), dass \(u_N = 0\) gelten muss, und somit ist die letzte Gleichung mit \(n = N - 1\)
+        \[
+            \parentheses*{2 + h}u_{N - 2} + \parentheses*{2h^2 - 4}u_{N - 1} = 2h^2 \cdot \parentheses*{2 \cdot \parentheses*{1 - h} - 1 - \parentheses*{1 - h}^2}.
+        \]
+        Das Gleichungssystem ist somit
+        \[
+            A_h = \begin{pmatrix}
+                2h^2 - 4 & 4 & 0 & \cdots & 0\\
+                2 + h & 2h^2 - 4 & 2 - h & \ddots & \vdots\\
+                0 & 2 + h & 2h^2 - 4 & 2 - h & 0\\
+                \vdots & \ddots & \ddots & \ddots & \ddots\\
+                0 & \cdots & 0 & 2 + h & 2h^2 - 4
+            \end{pmatrix}_{N \times N},
+        \]
+        \[
+            u_h = \begin{pmatrix}
+                u_0\\
+                \vdots\\
+                u_{N - 1}
+            \end{pmatrix}_{N \times 1}, \quad b_h = 2h^2 \begin{pmatrix}
+                -1\\
+                2h - 1 - h^2\\
+                4h - 1 - \parentheses*{2h}^2\\
+                \vdots\\
+                2\parentheses*{N - 1}h - 1 - \parentheses*{\parentheses*{N - 1}h}^2
+            \end{pmatrix}_{N \times 1}.
+        \]
+        \item Da für die ersten beiden Ableitungen gemäß Taylorentwicklungsformel gilt, dass
+        \begin{align*}
+            u_h''\parentheses*{x} &= \frac{u\parentheses*{x + h} - 2u\parentheses*{x} + u\parentheses*{x - h}}{h^2} + \mathcal{O}\parentheses*{h^2} \cdot u^{\parentheses*{4}}\parentheses*{x},\\
+            u_h'\parentheses*{x} &= \frac{u\parentheses*{x + h} - u\parentheses*{x - h}}{2h} + \mathcal{O}\parentheses*{h^2} \cdot u^{\parentheses*{3}}\parentheses*{x},\\
+            u_h\parentheses*{x} &= u\parentheses*{x}
+        \end{align*}
+        und weiterhin die exakte Lösung unendlich oft differenzierbar ist mit
+        \[
+            u^{\parentheses*{n}} = 0 \quad \forall n \in \R, n > 2,
+        \]
+        wird die Lösung mit diesem finite Differenzen Schema exakt approximiert, d.h. die Differenz zwischen \(u_h\) und \(u\) ist \(0\) in jedem Punkt.
+        Sei
+        \[
+            f\parentheses*{x} = u''\parentheses*{x} - u'\parentheses*{x} + u\parentheses*{x},
+        \]
+        also
+        \[
+            f\parentheses*{x} = 2x - 1 - x^2.
+        \]
+        Für den Konsistenzfehler erhalten wir somit
+        \begin{align*}
+            \norm*{\left.\parentheses*{A_h u}\right|_{\Omega_h} - \left.f\right|_{\Omega_h}}_\infty &= \max_{x \in \Omega_h}\absolute*{\parentheses*{u_h''\parentheses*{x} - u_h'\parentheses*{x} + u_h\parentheses*{x}} - \parentheses*{u''\parentheses*{x} - u'\parentheses*{x} + u\parentheses*{x}}}\\
+            &\le \max_{x \in \Omega_h}\absolute*{u_h''\parentheses*{x} - u''\parentheses*{x}} + \max_{x \in \Omega_h}\absolute*{u_h'\parentheses*{x} - u'\parentheses*{x}} + \max_{x \in \Omega_h}\absolute*{u_h\parentheses*{x} - u\parentheses*{x}}\\
+            &\le \mathcal{O}\parentheses*{h^2}\absolute*{u^{\parentheses*{4}}\parentheses*{x}}_\infty + \mathcal{O}\parentheses*{h^2}\absolute*{u^{\parentheses*{3}}\parentheses*{x}}_\infty + 0\\
+            &\le 0.
+        \end{align*}
+        Jede Norm ist nicht negativ und damit erhalten wir den Konsistenzfehler
+        \[
+            \norm*{\left.\parentheses*{A_h u}\right|_{\Omega_h} - \left.f\right|_{\Omega_h}}_\infty = 0.
+        \]
+    \end{enumerate}
+    
+    
+    \section*{Aufgabe 3}
+    
+    \begin{problem}
+        Es bezeichne \(\delta\) die Dirac'sche Deltadistribution.
+        Berechnen Sie
+        \begin{enumerate}
+            \item \(\delta'\parentheses*{\phi}\),
+            \item \(\parentheses*{x\delta'}\parentheses*{\phi}\)
+        \end{enumerate}
+        für beliebiges \(\phi \in \mathcal{D}\parentheses*{\R}\).
+    \end{problem}
+    
+    \subsection*{Lösung}
+    Für alle \(\phi \in \mathcal{D}\parentheses*{\R}\) gilt
+    \begin{enumerate}
+        \item
+        \[
+            \delta'\parentheses*{\phi} = \angles*{\delta', \phi} = -\angles*{\delta, \phi'} = -\phi'\parentheses*{0}.
+        \]
+        \item
+        \[
+            \parentheses*{x\delta'}\parentheses*{\phi} = \angles*{x\delta', \phi} = \angles*{\delta', x\phi} = -\angles*{\delta, \parentheses*{x\phi}'} = -\angles*{\delta, \phi + x\phi'} = -\phi\parentheses*{0}.
+        \]
+    \end{enumerate}
+    
+    
+    \section*{Aufgabe 4}
+    
+    \begin{problem}
+        \begin{enumerate}
+            \item Berechnen Sie die ersten zwei distributionellen Ableitungen der Funktion
+            \[
+                f: \R \to \R, x \mapsto f\parentheses*{x} = \absolute*{x}.
+            \]
+            \item Zeigen Sie, dass
+            \[
+                G\parentheses*{x} = -\frac{1}{2}\absolute*{x}
+            \]
+            eine Fundamentallösung der Differentialgleichung
+            \[
+                -\frac{\d^2}{\d x^2}u\parentheses*{x} = f\parentheses*{x}, \quad x \in \R
+            \]
+            ist, d.h. es gilt im distributionellen Sinne
+            \[
+                -\frac{\d^2}{\d x^2}G = \delta.
+            \]
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item Es ist eine Distribution \(f'\parentheses*{x}\) zu bestimmen, so dass gilt
+        \[
+            \int_\R f\parentheses*{x}\phi'\parentheses*{x}\d x = -\int_\R f'\parentheses*{x}\phi\parentheses*{x}\d x \quad \forall\phi \in C_0^\infty\parentheses*{\R}.
+        \]
+        Für die erste Ableitung gilt
+        \begin{align*}
+            \int_\R f\parentheses*{x}\phi'\parentheses*{x}\d x &= \int_{-\infty}^0 -x\phi'\parentheses*{x}\d x + \int_0^\infty x\phi'\parentheses*{x}\d x\\
+            &= \brackets*{-x\phi\parentheses*{x}}_{-\infty}^0 - \int_{-\infty}^0 -\phi\parentheses*{x}\d x + \brackets*{x\phi\parentheses*{x}}_0^\infty - \int_0^\infty \phi\parentheses*{x}\d x\\
+            &= -\int_\R f'\parentheses*{x}\phi\parentheses*{x}\d x
+        \end{align*}
+        mit
+        \[
+            f'\parentheses*{x} = \begin{cases}
+                -1, & \text{falls }x \le 0,\\
+                1, & \text{sonst}.
+            \end{cases}
+        \]
+        Für die zweite Ableitung gilt
+        \begin{align*}
+            \int_\R f'\parentheses*{x}\phi'\parentheses*{x}\d x &= \int_{-\infty}^0 -\phi'\parentheses*{x}\d x + \int_0^\infty \phi'\parentheses*{x}\d x\\
+            &= \brackets*{-\phi\parentheses*{x}}_{-\infty}^0 + \brackets*{\phi\parentheses*{x}}_0^\infty\\
+            &= -\int_\R f''\parentheses*{x}\phi\parentheses*{x}\d x
+        \end{align*}
+        mit
+        \[
+            f''\parentheses*{x} = 2\delta\parentheses*{x}.
+        \]
+        \item Es muss gezeigt werden, dass
+        \[
+            \int_\R -G''\parentheses*{x}\phi\parentheses*{x}\d x = \int_\R -G\parentheses*{x}\phi''\parentheses*{x}\d x = \int_\R \delta\parentheses*{x}\phi\parentheses*{x}\d x = \phi\parentheses*{0}
+        \]
+        für alle \(\phi \in C_0^\infty\parentheses*{\R}\) gilt.
+        Für \(G\parentheses*{x} = -\frac{1}{2}\absolute*{x}\) folgt
+        \begin{align*}
+            \int_\R -G\parentheses*{x}\phi''\parentheses*{x}\d x &= \int_\R \frac{1}{2}\absolute*{x}\phi''\parentheses*{x}\d x\\
+            &= \int_{-\infty}^0 -\frac{1}{2}x\phi''\parentheses*{x}\d x + \int_0^\infty \frac{1}{2}x\phi''\parentheses*{x}\d x\\
+            &= \underbrace{\brackets*{-\frac{1}{2}x\phi'\parentheses*{x}}_{-\infty}^0}_{= 0} + \int_{-\infty}^0 \frac{1}{2}\phi'\parentheses*{x}\d x + \underbrace{\brackets*{\frac{1}{2}x\phi'\parentheses*{x}}_0^\infty}_{= 0} - \int_0^\infty \frac{1}{2}\phi'\parentheses*{x}\d x\\
+            &= \brackets*{\frac{1}{2}\phi\parentheses*{x}}_{-\infty}^0 + \brackets*{-\frac{1}{2}\phi\parentheses*{x}}_0^\infty\\
+            &= \phi\parentheses*{0}.
+        \end{align*}
+    \end{enumerate}
+\end{document}

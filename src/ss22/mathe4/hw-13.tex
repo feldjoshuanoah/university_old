@@ -1,0 +1,413 @@
+\documentclass{exercise}
+
+\institute{Applied and Computational Mathematics}
+\title{Hausaufgabenübung 13}
+\author{Joshua Feld, 406718}
+\course{Mathematische Grundlagen IV}
+\professor{Torrilhon \& Berkels}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \section*{Aufgabe 1}
+    
+    \begin{problem}
+        Sei \(f \in S\parentheses*{\R}\) eine ungerade Funktion, d.h. \(f\parentheses*{x} = -f\parentheses*{-x}\) für alle \(x \in \R\).
+        Die Sinustransformierte von \(f\parentheses*{x}\) ist definiert durch
+        \[
+            \mathcal{F}_s\parentheses*{f\parentheses*{x}}\parentheses*{\xi} := \sqrt{\frac{2}{\pi}}\int_0^\infty f\parentheses*{x}\sin\parentheses*{x\xi}\d x.
+        \]
+        Weiterhin bezeichnen
+        \[
+            \mathcal{F}\parentheses*{f\parentheses*{x}}\parentheses*{\xi} := \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty f\parentheses*{x}e^{-ix\xi}\d x
+        \]
+        die Fouriertransformierte und
+        \[
+            \mathcal{F}^{-1}\parentheses*{g\parentheses*{x}}\parentheses*{\xi} := \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty g\parentheses*{x}e^{ix\xi}\d x
+        \]
+        die inverse Fouriertransformierte.
+        \begin{enumerate}
+            \item Zeigen Sie den Zusammenhang
+            \[
+                \mathcal{F}\parentheses*{f\parentheses*{x}} = -i\mathcal{F}_s\parentheses*{f\parentheses*{x}}.
+            \]
+            \item Benutzen Sie das Ergebnis aus a) um die Parseval-Gleichung
+            \[
+                \int_0^\infty \absolute*{f\parentheses*{x}}^2 \d x = \int_0^\infty \absolute*{\mathcal{F}_s\parentheses*{f\parentheses*{x}}\parentheses*{\xi}}^2 \d\xi
+            \]
+            zu zeigen.
+            \item Finden Sie einen Zusammenhang zwischen der Sinus- und der inversen Fouriertransformation, und zeigen Sie
+            \[
+                f\parentheses*{x} = \mathcal{F}_s\parentheses*{\mathcal{F}_s\parentheses*{f\parentheses*{x}}}.
+            \]
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item Wir berechnen folgende Integrale mit \(f\parentheses*{x} = -f\parentheses*{-x}\)
+        \begin{align*}
+            \int_{-\infty}^\infty f\parentheses*{x}\sin\parentheses*{x\xi}\d x &= 2\int_0^\infty f\parentheses*{x}\sin\parentheses*{x\xi}\d x = \sqrt{2\pi}\mathcal{F}_s\parentheses*{f\parentheses*{x}}\parentheses*{\xi},\\
+            \int_{-\infty}^\infty f\parentheses*{x}\cos\parentheses*{x\xi}\d x &= 0,
+        \end{align*}
+        um die Relation zwischen der Sinustransformierten und der Fourier-Transformation herzustellen:
+        \begin{align*}
+            \mathcal{F}\parentheses*{f\parentheses*{x}}\parentheses*{\xi} &= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty f\parentheses*{x}\exp\parentheses*{-i\xi x}\d x\\
+            &= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty f\parentheses*{x}\parentheses*{\cos\parentheses*{x\xi} - i\sin\parentheses*{x\xi}}\d x\\
+            &= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty f\parentheses*{x}\parentheses*{-i\sin\parentheses*{x\xi}}\\
+            &= -i\mathcal{F}_s\parentheses*{f\parentheses*{x}}\parentheses*{\xi}.
+        \end{align*}
+        \item Wir benutzen die Parsevalsche Formel für die Fouriertransformierte, um zu zeigen, dass
+        \begin{align*}
+            \int_0^\infty \absolute*{f\parentheses*{x}}^2 \d x &= \frac{1}{2}\int_{-\infty}^\infty \absolute*{f\parentheses*{x}}^2 \d x\\
+            &= \frac{1}{2}\int_{-\infty}^\infty \absolute*{\mathcal{F}\parentheses*{f\parentheses*{x}}\parentheses*{\xi}}^2 \d\xi\\
+            &= \frac{1}{2}\int_{-\infty}^\infty \absolute*{-i\mathcal{F}_s\parentheses*{f\parentheses*{x}}\parentheses*{\xi}}^2 \d\xi\\
+            &= \int_0^\infty \absolute*{\mathcal{F}\parentheses*{f\parentheses*{x}}\parentheses*{\xi}}^2 \d\xi.
+        \end{align*}
+        \item Analog zu a) gilt die folgende Beziehung zwischen der Sinus- und der inversen Fourier-Transformation
+        \[
+            \mathcal{F}^{-1}\parentheses*{f\parentheses*{x}}\parentheses*{\xi} = i\mathcal{F}_s\parentheses*{f\parentheses*{x}}\parentheses*{\xi}.
+        \]
+        Wir folgern mithilfe des Fourierschen Umkehrsatzes
+        \[
+            f\parentheses*{x} = \mathcal{F}^{-1}\parentheses*{\mathcal{F}\parentheses*{f\parentheses*{x}}} = \mathcal{F}^{-1}\parentheses*{-i\mathcal{F}_s\parentheses*{f\parentheses*{x}}} = i\mathcal{F}_s\parentheses*{-i\mathcal{F}_s\parentheses*{f\parentheses*{x}}} = \mathcal{F}_s\parentheses*{\mathcal{F}_s\parentheses*{f\parentheses*{x}}}.
+        \]
+    \end{enumerate}
+
+
+    \section*{Aufgabe 2}
+    
+    \begin{problem}
+        Gegeben sei das Anfangswertproblem der inhomogenen Wärmeleitungsgleichung
+        \begin{align}
+            u_t\parentheses*{t, x} - \Delta u\parentheses*{t, x} &= f\parentheses*{t, x}, \quad t > 0, x \in \R, \label{eq:1}\\
+            u\parentheses*{0, x} &= 0, \quad x \in \R. \nonumber
+        \end{align}
+        \begin{enumerate}
+            \item Zeigen Sie, dass die Fourier-Transformation von \(f\parentheses*{x} = \exp\parentheses*{-x^2}\) bzgl. \(x\) lautet:
+            \[
+                \mathcal{F}\parentheses*{f\parentheses*{x}}\parentheses*{\xi} = \sqrt{\pi}\exp\parentheses*{-\frac{\xi^2}{4}}.
+            \]
+            \emph{Hinweis: Sie dürfen \(\int_\R \exp\parentheses*{-x^2}\d x = \sqrt{\pi}\) verwenden.}
+            \item Beweisen Sie, dass die Fouriertransformierte bzgl. \(x\) von \(g\parentheses*{x} = \exp\parentheses*{-\frac{x^2}{4\parentheses*{t - s}}}\) für \(t > s\) durch
+            \[
+                \mathcal{F}\parentheses*{g\parentheses*{x}}\parentheses*{\xi} = \sqrt{4\pi\parentheses*{t - s}}\exp\parentheses*{\parentheses*{s - t}\xi^2}
+            \]
+            gegeben ist.
+            \item Leiten Sie eine gewöhnliche Differentialgleichung für
+            \[
+                \hat{u}\parentheses*{t, \xi} = \mathcal{F}\parentheses*{u\parentheses*{t, x}}\parentheses*{\xi}
+            \]
+            hier, indem Sie die Fourier-Transformation bzgl. \(x\) auf \eqref{eq:1} anwenden.
+            Lösen Sie diese Differentialgleichung für \(\hat{u}\parentheses*{t, \xi}\).
+            \item Zeigen Sie, dass die Lösung des ursprünglichen Problems \eqref{eq:1} wie folgt lautet:
+            \[
+                u\parentheses*{t, x} = \int_0^t \int_\R \frac{1}{\sqrt{4\pi\parentheses*{t - s}}}\exp\parentheses*{-\frac{\parentheses*{x - y}^2}{4\parentheses*{t - s}}}f\parentheses*{s, y}\d y\d s.
+            \]
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item Definiert man \(\hat{f}\parentheses*{\xi} := \mathcal{F}\parentheses*{f\parentheses*{x}}\parentheses*{\xi}\), so gilt
+        \begin{align*}
+            \frac{\d}{\d\xi}\hat{f}\parentheses*{\xi} &= \mathcal{F}\parentheses*{-ixf\parentheses*{x}}\parentheses*{\xi}\\
+            &= i\mathcal{F}\parentheses*{-xf\parentheses*{x}}\parentheses*{\xi}\\
+            &= \frac{i}{2}\mathcal{F}\parentheses*{-2x\exp\parentheses*{-x^2}}\parentheses*{\xi}\\
+            &= \frac{i}{2}\mathcal{F}\parentheses*{\frac{\d}{\d x}\exp\parentheses*{-x^2}}\parentheses*{\xi}\\
+            &= \frac{i}{2}i\xi\mathcal{F}\parentheses*{f\parentheses*{x}}\parentheses*{\xi}\\
+            &= -\frac{\xi}{2}\hat{f}\parentheses*{\xi}.
+        \end{align*}
+        Dises ODE besitzt die Lösung
+        \[
+            \hat{f}\parentheses*{\xi} = \hat{f}\parentheses*{0}\exp\parentheses*{-\frac{\xi^2}{4}},
+        \]
+        mit
+        \[
+            \hat{f}\parentheses*{0} = \int_\R \exp\parentheses*{-x}\d x = \sqrt{\pi}.
+        \]
+        Daher ist
+        \[
+            \hat{f}\parentheses*{\xi} = \sqrt{\pi}\exp\parentheses*{-\frac{\xi^2}{4}}.
+        \]
+        \item Für \(g\parentheses*{x} = \exp\parentheses*{-\frac{x^2}{4\parentheses*{t - s}}}\) und \(\alpha := \sqrt{4\parentheses*{t - s}}, t > s\) erhält man
+        \begin{align*}
+            \mathcal{F}\parentheses*{g\parentheses*{x}}\parentheses*{\xi} &= \int_\R \exp\parentheses*{-\frac{x^2}{4\parentheses*{t - s}}}\exp\parentheses*{-ix\xi}\d x\\
+            &= \int_\R \exp\parentheses*{-\parentheses*{\frac{x}{\alpha}}^2}\exp\parentheses*{-i\frac{x}{\alpha}\alpha\xi}\d x\\
+            &= \alpha\int_\R \exp\parentheses*{-y^2}\exp\parentheses*{-iy\alpha\xi}\d y.
+        \end{align*}
+        Daher ist
+        \[
+            \mathcal{F}\parentheses*{g\parentheses*{x}}\parentheses*{\xi} = \alpha\mathcal{F}\parentheses*{f\parentheses*{x}}\parentheses*{\alpha\xi} = \alpha\sqrt{\pi}\exp\parentheses*{-\frac{\xi^2 \alpha^2}{4}} = \sqrt{4\parentheses*{t - s}\pi}\exp\parentheses*{-\parentheses*{t - s}\xi^2}.
+        \]
+        \item Wendet man die Fourier-Transformation auf \eqref{eq:1} an, so folgt
+        \begin{align*}
+            \partial_t\hat{u}\parentheses*{t, \xi} + \xi^2 \hat{u}\parentheses*{t, \xi} &= \hat{f}\parentheses*{t, \xi},\\
+            \hat{u}\parentheses*{0, \xi} &= 0.
+        \end{align*}
+        Es handelt sich hierbei um eine \emph{inhomogene} gewöhnliche DGL 1. Ordnung, die
+        \[
+            \hat{u}_h\parentheses*{t, \xi} = C\exp\parentheses*{-t\xi^2}
+        \]
+        als Lösung der \emph{homogenen} Gleichnug besitzt.
+        Variation der Konstanten führt auf den Ansatz
+        \[
+            \hat{u}\parentheses*{t, \xi} = C\parentheses*{t}\exp\parentheses*{-t\xi^2}
+        \]
+        in DGL
+        \[
+            C'\parentheses*{t}\exp\parentheses*{-t\xi^2} \underbrace{- C\parentheses*{t}\xi^2 \exp\parentheses*{-t\xi^2} + \xi^2 C\parentheses*{t}\exp\parentheses*{-t\xi^2}}_{= 0} = \hat{f}\parentheses*{t, \xi}.
+        \]
+        Daher ist
+        \[
+            C\parentheses*{t} = \int_0^t \hat{f}\parentheses*{s, \xi}\exp\parentheses*{s\xi^2}\d s + K, \quad K \in \R.
+        \]
+        Aufgrund des Anfangswerts \(0 = \hat{u}\parentheses*{0, \xi} = K\) erhält man insgesamt
+        \begin{align*}
+            \hat{u}\parentheses*{t, \xi} &= \int_0^t \hat{f}\parentheses*{s, \xi}\exp\parentheses*{\parentheses*{s - t}\xi^2}\d s\\
+            &= \int_0^t \frac{\hat{f}\parentheses*{s, \xi}\mathcal{F}\parentheses*{\exp\parentheses*{-\frac{x^2}{4\parentheses*{t - s}}}}\parentheses*{\xi}}{\sqrt{4\pi\parentheses*{t - s}}}\d s\\
+            &= \int_0^t \frac{\mathcal{F}\parentheses*{f\parentheses*{s, x}\exp\parentheses*{-\frac{x^2}{4\parentheses*{t - s}}}}\parentheses*{\xi}}{\sqrt{4\pi\parentheses*{t - s}}}\d s.
+        \end{align*}
+        \item Eine Rücktransformation liefert die Lösung \(u\parentheses*{t, x}\) wie im Folgenden
+        \begin{align*}
+            u\parentheses*{t, x} &= \mathcal{F}^{-1}\parentheses*{\hat{u}\parentheses*{t, \xi}}\parentheses*{x}\\
+            &= \int_0^t \frac{\parentheses*{f\parentheses*{s, x}\exp\parentheses*{-\frac{x^2}{4\parentheses*{t - s}}}}\parentheses*{x}}{\sqrt{4\pi\parentheses*{t - s}}}\d s\\
+            &= \int_0^t \frac{1}{\sqrt{4\pi\parentheses*{t - s}}}\int_\R \exp\parentheses*{-\frac{\parentheses*{x - y}^2}{4\parentheses*{t - s}}}f\parentheses*{s, y}\d y\d s.
+        \end{align*}
+    \end{enumerate}
+
+
+    \section*{Aufgabe 3}
+    
+    \begin{problem}
+        Gegeben seien die symmetrisch positiv definite Matrix \(A\) und der Vektor \(b\):
+        \[
+            A = \begin{pmatrix}
+                1 & 2 & 1\\
+                2 & 5 & 2\\
+                1 & 2 & 2
+            \end{pmatrix} \quad \text{und} \quad b = \begin{pmatrix}
+                1\\
+                1\\
+                1
+            \end{pmatrix}.
+        \]
+        \begin{enumerate}
+            \item Zur Lösung des Gleichungssystems \(Ax = b\) führen Sie \emph{zwei Schritte} des CG-Verfahrens mit dem Startvektor \(x_0 = \parentheses*{1, 0, 0}^T\) durch.
+            \item Schätzen Sie ab, wie viele Schritte notwendig sind, um eine Genauigkeit des Verfahrens kleiner als \(10^{-8}\) zu erreichen.
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item Startwerte: \(x_0 = \begin{pmatrix}
+            1\\
+            0\\
+            0
+        \end{pmatrix}\) und \(d_0 = r_0 = b - Ax_0 = \begin{pmatrix}
+            0\\
+            -1\\
+            0
+        \end{pmatrix}\).
+        \begin{enumerate}
+            \item \(x_1\) mit \(k = 0\):
+            \begin{align*}
+                \alpha_0 &= \frac{r_0^T r_0}{d_0^T Ad_0} = \frac{1}{5},\\
+                x_1 &= x_0 + \alpha_0 d_0 = \begin{pmatrix}
+                    1\\
+                    -\frac{1}{5}\\
+                    0
+                \end{pmatrix},\\
+                r_1 &= r_0 - \alpha_0 Ad_0 = \begin{pmatrix}
+                    \frac{2}{5}\\
+                    0\\
+                    \frac{2}{5}
+                \end{pmatrix},\\
+                \beta_1 &= \frac{r_1^T r_1}{r_0^T r_0} = 0,32,\\
+                d_1 &= r_1 + \beta_1 d_0 = \begin{pmatrix}
+                    \frac{2}{5}\\
+                    -0,32\\
+                    \frac{2}{5}
+                \end{pmatrix}.
+            \end{align*}
+            \item \(x_2\) mit \(k = 1\):
+            \[
+                \alpha_1 = 1,11, \quad x_2 = \begin{pmatrix}
+                    1,44\\
+                    -0,55\\
+                    0,44
+                \end{pmatrix}, \quad r_2 = \begin{pmatrix}
+                    0,22\\
+                    0\\
+                    -0,22
+                \end{pmatrix}, \quad \beta_2 = 3,3058, \quad d_2 = \begin{pmatrix}
+                    1,5423\\
+                    -1,0579\\
+                    1,1023
+                \end{pmatrix}.
+            \]
+            (Die Werte für \(\beta_2\) und \(d_2\) werden erst im dritten Schritt verwendet und müssen an dieser Stelle deswegen nicht unbedingt bestimmt werden.)
+        \end{enumerate}
+        \item Da das CG-Verfahren endlich ist und für ein lineares Gleichungssystem der Dimension \(n\) spätestens nach \(n\) Schritten (bis auf Rundungsfehler) die exakte Lösung liefert, erhält man nach drei Schritten die exakte Lösung.
+    \end{enumerate}
+
+
+    \section*{Aufgabe 4}
+    
+    \begin{problem}
+        Gegeben sei das lineare Gleichungssystem \(Ax = b\) mit
+        \[
+            A = \begin{pmatrix}
+                1 & -2\\
+                1 & -4
+            \end{pmatrix}, \quad b = \begin{pmatrix}
+                10\\
+                -1
+            \end{pmatrix}.
+        \]
+        \begin{enumerate}
+            \item Führen Sie jeweils \emph{einen Schritt} des Jacobi-Verfahrens und Gauß-Seidel-Verfahrens mit den Startvektor \(x^0 = \parentheses*{1, 1}^T\) durch.
+            \item Das SOR-Verfahren lässt sich in Matrix-Darstellung wie folgt formulieren
+            \[
+                x^{k + 1} = x^k - \omega D^{-1}\parentheses*{-Lx^{k + 1} + \parentheses*{D - U}x^k - b},
+            \]
+            wobei \(D\) (Diagonal Matrix), \(L\) (Lower Matrix) und \(U\) (Upper Matrix) genau wie beim Gauß-Seidel-Verfahren definiert sind.
+            Im Unterschied zum Gauß-Seidel-Verfahren wird die Korrektur mit einem Relaxationsparameter \(\omega > 0\) multipliziert.
+
+            Führen Sie \emph{einen Schritt} des SOR-Verfahrens mit Relaxationsparameter \(\omega = 1,5\) mit dem Startwert \(x^0 = \parentheses*{1, 1}^T\) durch.
+            \item Zeigen Sie die Konvergenz des SOR-Verfahrens mit Relaxationsparameter \(\omega = 1,5\).
+            \item Vergleichen Sie die Lösungen mit der wahren Lösung des Gleichungssystems.
+            Welches Verfahren hat den kleinsten bzw. größten Fehler in der \(1\)-Norm?
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item \(A\) lässt sich zerlegen in \(D - L - U\) mit \(A = D - L - U\) wie folgt
+        \[
+            D = \begin{pmatrix}
+                1 & 0\\
+                0 & -4
+            \end{pmatrix}, \quad L = \begin{pmatrix}
+                0 & 0\\
+                -1 & 0
+            \end{pmatrix}, \quad U = \begin{pmatrix}
+                0 & 2\\
+                0 & 0
+            \end{pmatrix}.
+        \]
+        Das Residuum für den Startvektor \(x^0\) beträgt \(r^0 = Ax^0 - b = \parentheses*{-11, 2}^T\).
+        \begin{itemize}
+            \item Jacobi-Verfahren:
+            \[
+                x^1 = x^0 - D^{-1}\parentheses*{Ax^0 - b} = x^0 - D^{-1}r^0 = \begin{pmatrix}
+                    1\\
+                    1
+                \end{pmatrix} - \begin{pmatrix}
+                    1 & 0\\
+                    0 & -\frac{1}{4}
+                \end{pmatrix}\begin{pmatrix}
+                    -11\\
+                    -2
+                \end{pmatrix} = \begin{pmatrix}
+                    12\\
+                    \frac{1}{2}
+                \end{pmatrix}.
+            \]
+            \item Gauß-Seidel-Verfahren:
+            \[
+                x^1 = x^0 - \parentheses*{D - L}^{-1}\parentheses*{Ax^0 - b} = x^0 - \parentheses*{D - L}^{-1}r^0.
+            \]
+            Pro Iterationsschritt ist hier das Gleichungssystem \(\parentheses*{D - L}v = r^0\), bzw.
+            \[
+                \begin{pmatrix}
+                    1 & 0\\
+                    1 & -4
+                \end{pmatrix}\begin{pmatrix}
+                    v_1\\
+                    v_2
+                \end{pmatrix} = \begin{pmatrix}
+                    -11\\
+                    -2
+                \end{pmatrix}
+            \]
+            zu lösen.
+            Die Lösung ist \(v = \parentheses*{-11, -\frac{9}{4}}^T\) und folglich
+            \[
+                x^1 = x^0 - v = \parentheses*{12, \frac{13}{4}}^T.
+            \]
+            \item SOR-Verfahren:
+            \[
+                x^1 = \parentheses*{I - \parentheses*{\omega^{-1}D - L}^{-1}A}x^0 + \parentheses*{\omega^-1 D - L}^{-1}b = \begin{pmatrix}
+                    \frac{35}{2}\\
+                    \frac{103}{16}
+                \end{pmatrix}.
+            \]
+        \end{itemize}
+        \item Die Eigenwerte der Iterationsmatrix mit \(\omega = 1,5\)
+        \[
+            M_\omega = I - \parentheses*{\omega^{-1}D - L}^{-1}A = \begin{pmatrix}
+                -\frac{1}{2} & 3\\
+                -\frac{3}{16} & \frac{5}{8}
+            \end{pmatrix}
+        \]
+        sind
+        \[
+            \lambda_{1, 2} = \frac{1}{16} \pm \frac{3\sqrt{7}}{16}i
+        \]
+        und damit
+        \[
+            \rho\parentheses*{M_\omega} = \frac{1}{2} < 1.
+        \]
+        Daher konvergiert das SOR-Verfahren.
+        \item Die Lösung des linearen Gleichungssystems ist \(\begin{pmatrix}
+            21\\
+            \frac{11}{2}
+        \end{pmatrix}\).
+        \begin{itemize}
+            \item Der Fehler im Jacobi-Verfahren ist somit
+            \[
+                \norm*{\begin{pmatrix}
+                    12\\
+                    \frac{1}{2}
+                \end{pmatrix} - \begin{pmatrix}
+                    21\\
+                    \frac{11}{2}
+                \end{pmatrix}}_1 = \norm*{\begin{pmatrix}
+                    -9\\
+                    -5
+                \end{pmatrix}}_1 = 9 + 5 = 14.
+            \]
+            \item Der Fehler im Gauß-Seidel-Verfahren ist
+            \[
+                \norm*{\begin{pmatrix}
+                    12\\
+                    \frac{13}{4}
+                \end{pmatrix} - \begin{pmatrix}
+                    21\\
+                    \frac{11}{2}
+                \end{pmatrix}}_1 = \norm*{\begin{pmatrix}
+                    -9\\
+                    -\frac{9}{4}
+                \end{pmatrix}}_1 = 9 + \frac{9}{4} = 11,25.
+            \]
+            \item Der Fehler im SOR-Verfahren ist
+            \[
+                \norm*{\begin{pmatrix}
+                    \frac{35}{2}\\
+                    \frac{103}{16}
+                \end{pmatrix} - \begin{pmatrix}
+                    21\\
+                    \frac{11}{2}
+                \end{pmatrix}}_1 = \norm*{\begin{pmatrix}
+                    -\frac{7}{2}\\
+                    \frac{15}{16}
+                \end{pmatrix}}_1 = \frac{7}{2} + \frac{15}{16} = \frac{71}{16} = 4,4375.
+            \]
+        \end{itemize}
+        Somit ist der Fehler in der \(1\)-Norm für das SOR-Verfahren am kleinsten und für das Jacobi-Verfahren am größten.
+    \end{enumerate}
+\end{document}
