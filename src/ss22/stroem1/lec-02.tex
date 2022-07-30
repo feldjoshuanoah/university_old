@@ -1,0 +1,108 @@
+\documentclass{lecture}
+
+\institute{Lehrstuhl für Strömungslehre und Aerodynamisches Institut}
+\title{Vorlesung 2}
+\author{Joshua Feld, 406718}
+\course{Strömungsmechanik I}
+\professor{Schröder}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \section*{Kinematik der Fluide}
+
+    Im Folgenden werden wir den Ablauf -- das Wie -- der Bewegung untersuchen, ohne dabei deren Ursachen -- das Warum -- zu hinterfragen.
+    Zunächst erläutern wir zwei allgemeine Darstellungen, die zur Analyse strömungsmechanischer Probleme verwendet werden.
+
+
+    \subsection*{Eulersche und Lagrangesche Strömungsbeschreibung}
+
+    In der Lagrangeschen Darstellung verfolgt man die Bewegung der einzelnen Fluidpartikel und bestimmt daraus die Änderungen der Fluideigenschaften, die mit diesen Teilchen verbunden wird.
+    Das heißt die Fluidpartikel sind ``markiert'' und ihre Eigenschaften werden während ihrer Bewegung bestimmt.
+
+    Zur Beschreibung werden als unabhängige Variable die Zeit \(t\) ind der Ortsvektor zum Zeitpunkt \(t = 0\) herangezogen
+    \[
+        \vec{r}_0 = x_0 \vec{i} + y_0 \vec{j} + z_0 \vec{k}.
+    \]
+    Damit kann jede Strömungsvariable \(F\) als \(F\parentheses*{\vec{r}_0, t}\) ausgedrückt werden, wobei die Lage des Teilchens, das zum Zeitpunkt \(t = 0\) bei \(\vec{r}_0\) war, durch \(\vec{r}\parentheses*{\vec{r}_0, t}\) ausgedrückt wird.
+
+    In der Eulerschen Beschreibung wird das Feldkonzept verwendet. Zu einem gewissen Zeitpunkt kann jede Fluideigenschaft wie Dichte, Druck, Geschwindigkeit oder Beschleunigung als Funktion der räumlichen Koordinaten \(x, y, z\) dargestellt werden.
+    Da sich diese Größen nicht nur mit dem Ort, sondern auch mit der Zeit ändern, ist eine Strömungsvariable vollständig durch \(F\parentheses*{\vec{r}, t}\), wobei \(\vec{r} = x\vec{i} + y\vec{j} + z\vec{k}\) ist, beschrieben.
+    Das bedeutet zum Beispiel, dass das Geschwindigkeitsfeld \(\vec{v}\) bekannt ist, wenn die Komponentenfunktionen \(u\parentheses*{x, y, z, t}\), \(u\parentheses*{x, y, z, t}\) und \(u\parentheses*{x, y, z, t}\) von
+    \[
+        \vec{v} = u\vec{i} + v\vec{j} + w\vec{k}
+    \]
+    ermittelt worden sind.
+
+    Im Allgemeinen wird in der Fluidmechanik sowohl in experimentellen als auch in numerischen und analytischen Untersuchungen die Eulersche Beschreibung angewendet.
+    Die Lagrange-Methode ist vorwiegend von Interesse, wenn Eigenschaften bestimmter einzelner Fluidteilchen analysiert werden sollen.
+    Im Rahmen der Mehrphasenströmungen werden bei numerischen Untersuchungen häufig Lagrange-Ansätze oder Kombinationen der Euler- und Lagrange-Methode verwendet.
+
+
+    \subsection*{Stationäre und instationäre Strömungen}
+
+    Strömungen können u.a. in stationäre und instationäre Strömungen eingeteilt werden.
+    Ist die Geschwindigkeit in festen Punkten des Strömungsfeldes unabhängig von der Zeit, spricht man von stationärer Strömung, ist sie zeitlich veränderlich veränderlich, nennt man sie instationär.
+
+    Start- und Anfahrvorgänge sind Beispiele für instationäre Strömungen.
+    Sind die Randbedingungen unabhängig von der Zeit, stellt sich nach längerer Zeit asymptotisch eine stationäre Strömung ein.
+    Für die meisten technischen Anwendungen ist die Betrachtung stationärer Strömungen ausreichend.
+    In vielen Strömungen laufen Änderungen zeitlich so langsam ab, dass sie als quasistionär -- ``wie stationär'' -- angesehen werden können.
+    Aufgrund von Formänderungen können auch in stationären Strömungen Beschleunigungen  auftreten, d.h. lediglich die lokale -- zeitlich bedingte -- Beschleunigung entfällt, während die durch geometrische Änderungen hervorgerufene Beschleunigung erhalten bleibt.
+
+
+    \subsection*{Stromlinie, Bahnlinie, Rauchlinie}
+
+    Zu einer bestimmten Zeit existiert in jedem Punkt des Strömungsfeldes ein Geschwindigkeitsvektor mit einer definierten Richtung.
+    Die Kurven, die im gesamten Strömungsfeld tangential zu diesem Richtungsfeld verlaufen, werden Stromlinien genannt.
+    Dieses Stromlinienmuster ändert sich mit der Zeit, sofern die Strömung instationär ist.
+    Es sei \(\d\vec{s} = \d x\vec{i} + \d y\vec{j} + \d z\vec{k}\) ein Bogenlängenelement einer Stromlinie und \(\vec{v} = u\vec{i} + v\vec{j} + w\vec{k}\) der lokale Geschwindigkeitsvektor.
+    Dann gilt nach Definition entlang einer Stromlinie
+    \begin{equation}\label{eq:1}
+        \frac{\d x}{u} = \frac{\d y}{v} = \frac{\d z}{w}.
+    \end{equation}
+    Sind die Geschwindigkeitskomponenten in Abhängigkeit von der Zeit bekannt, kann man durch Integration obiger Gleichung die Gleichung der Stromlinie berechnen.
+    Gleichung \eqref{eq:1} kann auch als Kreuzprodukt \(\vec{v} \times \d\vec{s} = \vec{0}\) geschrieben werden.
+    Alle Stromlinien, die zu einer gewissen Zeit durch eine geschlossene Kurve \(C\) gehen, bilden eine Stromröhre.
+    Da der Geschwindigkeitsvektor immer tangential zur Mantelfläche der Stromröhre liegt, kann kein Fluid über die Oberfläche der Stromröhre treten.
+    Eine Stromröhre mit infinitesimal kleinem Querschnitt wird Stromfaden genannt.
+
+    Die Bahnlinie ist die Trajektorie eines speziellen individuellen Fluidpartikels in einem gewissen Zeitintervall.
+    In stationärer Strömung sind Bahnlinie und Stromlinie identisch, das gilt jedoch nicht in instationärer Strömung.
+
+    Dazu betrachten wir die Bewegung eines Objektes durch ein ruhendes Fluid.
+    Für einen festen -- nicht mitbewegten -- Beobachter ändert sich das Muster des Strömungsfeldes mit der Zeit, so dass er eine instationäre Strömung wahrnimmt.
+    Die Stromlinien vor und hinter dem Körper sind im Wesentlichen nach vorne gerichtet, solange sich der Körper in diese Richtung bewegt.
+    Die Stromlinien auf den Seiten verlaufen mit einer lateralen Orientierung.
+    Somit ist die Bahnlinie zunächst nach außen gerichtet und orientiert sich, nachdem der Körper vorbeigeströmt ist, wieder nach vorne.
+
+    Stromlinien und Bahnlinien können experimentell sichtbar gemacht werden, indem Aluminiumspäne oder ein anderes reflektierendes Material auf die Fluidoberfläche gestreut wird und während des Strömungsvorgangs angestrahlt wird.
+    Ist die gesamte Oberfläche des Fluids mit reflektierenden Partikeln bedeckt, wird eine Photographie mit sehr kurzer Belichtungszeit gemacht, auf der viele kurze ``Blitzstreifen'' zu erkennen sind.
+    Verbindet man diese Streifen durch glatte Kurven, erhält man das momentane Stromlinienbild.
+    Gibt man dagegen nur wenige Partikel zur Strömungsvisualisierung auf die Fluidoberfläche und macht eine Aufnahme der Strömung mit einer langen Belichtungszeit, verdeutlicht die Photographie die Bahnlinien der wenigen Teilchen auf der Oberfläche.
+    Stromlinien haben keinen Knick und schneiden sich niemals, da anderenfalls verschiedene Geschwindigkeiten in einem Punkt herrschen müssten.
+    Eine Ausnahme bildet der Staupunkt eines umströmten Körpers, in dem die Geschwindigkeit den Wert Null aufweist.
+
+    Die Rauchlinie ist eine weitere Methode, die Strömung zu visualisieren.
+    Sie ist als der momentane Ort der Fluidpartikel definiert, die zu einer vorigen Zeit denselben festen räumlichen Punkt passiert haben.
+    Wird an einer bestimmten Stelle des Strömungsfeldes über ein gewisses Zeitintervall z.B. Farbe eingegeben, entsteht eine derartige Rauchlinie.
+
+    In stationären Strömungen fallen Stromlinien, Bahnlinien und Rauchlinien zusammen.
+
+
+    \subsection*{Bezugssystem}
+
+    Abhängig vom Bezugssystem kann eine Strömung stationär oder instationär sein.
+    Dies wird anhand der folgenden Betrachtung deutlich.
+    Ein Körper bewegt sich mit einer konstanten Geschwindigkeit \(\vec{v}_\infty\) durch ein ruhendes Fluid von rechts nach links.
+
+    Für einen festen Beobachter strömt der Körper vorbei, die lokalen Strömungscharakteristika ändern sich für diesen Beobachter mit der Zeit, so dass er eine instationäre Strömung wahrnimmt.
+    Ist der Beobachter jedoch mit dem Körper verbunden, d.h. bewegt er sich mit diesem mit, sieht er permanent das gleiche Strömungsmuster; für ihn ist die Strömung stationär.
+
+    Das stationäre Strömungsfeld ergibt sich aus dem instationären, indem man dem letzteren die negative Geschwindigkeit des Körpers \(-\vec{v}_\infty\) überlagert.
+    Dadurch hält der Körper an, während das den Körper umgebende Fluid mit einer Geschwindigkeit \(\vec{v}_\infty\) im Unendlichen nach rechts strömt.
+    Somit kann jeder Geschwindigkeitsvektor \(\vec{u}\) des mitbewegten Bezugssystems bestimmt werden, indem zu dem zugehörigen Geschwindigkeitsvektor \(\vec{u}\) im festen Bezugssystem der Geschwindigkeitsvektor \(\vec{v}_\infty\) addiert wird.
+\end{document}

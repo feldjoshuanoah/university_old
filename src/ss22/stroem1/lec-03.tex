@@ -1,0 +1,76 @@
+\documentclass{lecture}
+
+\institute{Lehrstuhl für Strömungslehre und Aerodynamisches Institut}
+\title{Vorlesung 3}
+\author{Joshua Feld, 406718}
+\course{Strömungsmechanik I}
+\professor{Schröder}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \section*{Grundgleichungen strömender Fluide}
+
+    Es werden die Erhaltungsgleichungen der Mechanik strömender Fluide vorgestellt.
+    Dies sind im Wesentlichen die Bilanzgleichungen für die Masse, den Impuls und die Energie.
+    Bevor wir uns jedoch mit deren Herleitung befassen, gehen wir auf die Begriffe Kontrollvolumen und Kontrollsystem ein, die im Reynoldsschen Transporttheorem in Zusammenhang gebracht werden, das wiederum für die integrale Darstellung der Erhaltungsgleichungen wesentlich ist.
+
+
+    \subsection*{Kontrollvolumen und Kontrollsystem}
+
+    Die fundamentalen physikalischen Gesetze wie die Erhaltung der Masse, die Newtonschen Bewegungsgleichungen und die Gesetze der Thermodynamik, die das Verhalten eines Fluids beschreiben, können auf verschiedene Arten zur Analyse eines Strömungsvorgangs herangezogen werden.
+    Sie können u.a. auf ein Kontrollsystem oder ein Kontrollvolumen angewendet werden.
+
+    Ein Kontrollsystem ist eine Sammlung eines Stoffes bestimmter, gleichbleibender Identität, d.h. es werden immer dieselben Fluidteilchen oder Atome, die sich bewegen und mit der Umgebung in Wechselwirkung treten, betrachtet.
+    Im Gegensatz dazu ist ein Kontrollvolumen ein festgelegtes Volumen im Raum, das vom Fluid durchströmt wird.
+    Es ist eine geometrische Größe, sie ist unabhängig von der Masse.
+
+    Ein Kontrollsystem ist eine spezifische, identifizierbare Größe einer Substanz.
+    Es kann eine relativ große Masse aufweisen, wie z.B. die gesamte Luft der Erdatmosphäre, oder es kann infinitesimal klein sein, ein einziges Fluidteilchen.
+    In jedem Fall sind die Elemente des Kontrollsystems markiert -- tatsächlich oder gedanklich --, so dass sie permanent zu identifizieren sind.
+
+    In der Fluidmechanik ist es häufig äußerst schwierig, eine bestimmte gekennzeichnete Substanz kontinuierlich zu verfolgen.
+    Darüber hinaus ist man stärker daran interessiert, die Kräfte, die vor der Strömung auf einen Propeller, ein Flugzeug oder ein Auto ausgeübt werden, zu bestimmen, als Informationen bezüglich der Veränderungen des Systems zu gewinnen, während es vorbeiströmt.
+    Deshalb wendet man meistens die Analyse auf der Basis des Kontrollvolumens an.
+    Man definiert ein Volumen, das das Objekt umfasst, welches mit der Strömung in Wechselwirkung steht, und analysiert die Strömung innerhalb, außerhalb und durch das Volumen.
+    Das Kontrollvolumen kann ruhen oder sich bewegen, deformierbare oder feste Grenzen aufweisen.
+    Das Kontrollvolumen ist eine rein geometrische Größe, es ist unabhängig vom strömenden Fluid.
+
+    Sämtliche Grundgesetze der Strömungsmechanik beziehen sich in ihrer ursprünglichen Formel auf ein Kontrollsystem.
+    So lauten z.B. die Gesetze der Erhaltung der Masse und des Impulses, die Masse eines Systems bleibt konstant, die zeitliche Änderung des Impulses eines Systems ist gleich der Summe aller Kräfte auf das System.
+    In diesen Aussagen tritt das Kontrollsystem, nicht das Kontrollvolumen auf.
+    Um die Erhaltungsgleichungen auf ein Kontrollsystem anzuwenden, sind die Gesetze geeignet umzuformulieren.
+    Dazu wird auf das Reynoldssche Transporttheorem zurückgegriffen, welches einen Zusammenhang zwischen der System- und der Volumenbetrachtung herstellt.
+
+
+    \subsection*{Das Reynoldssche Transporttheorem}
+
+    Gegeben sei folgendes Kontrollvolumen in einem Rohr.
+    Es wird angenommen, dass \(v_1\) und \(v_2\) normal zu den Oberflächen stehen und konstant über den Querschnitt verteilt sind.
+    Das Volumen \(II\) tritt in der Zeit von \(t\) nach \(\Delta t\) aus dem Kontrollvolumen aus, das Volumen \(I\) strömt ein und \(KV\) bezeichnet das ursprüngliche Kontrollvolumen.
+    Zum Zeitpunkt \(t\) besteht das System aus dem Fluid in \(KV\), bei \(t + \Delta t\) besteht das System aus \(\parentheses*{KV - I} + II\), wobei das Kontrollvolumen konstant bleibt.
+
+    \(B\) sei eine beliebige Größe des Systems (z.B. die Masse \(m\)).
+    Dann gilt
+    \[
+        B_{\text{sys}}\parentheses*{t} = B_{KV}\parentheses*{t},
+    \]
+    da System und Fluid im Kontrollvolumen übereinstimmen.
+    Weiterhin ist
+    \[
+        B_{\text{sys}}\parentheses*{t + \Delta t} = B_{KV}\parentheses*{t + \Delta t} - B_I\parentheses*{t + \Delta t} + B_{II}\parentheses*{t + \Delta t},
+    \]
+    bzw. die zeitliche Änderung von \(B\) ist
+    \[
+        \frac{\Delta B_{\text{sys}}}{\Delta t} = \frac{B_{\text{sys}}\parentheses*{t + \Delta t} - B_{\text{sys}}\parentheses*{t}}{\Delta t} = \frac{B_{KV}\parentheses*{t + \Delta t} - B_{KV}\parentheses*{t}}{\Delta t} - \frac{B_I\parentheses*{t + \Delta t}}{\Delta t} + \frac{B_{II}\parentheses*{t + \Delta t}}{\Delta t}.
+    \]
+    Für \(\Delta t \to 0\) erhält man die zeitliche Änderungsrate der Größe \(B\) für das System \(\frac{\d B_{\text{sys}}}{\d t}\); sie stellt die zeitliche Änderungsrate der sich mit dem System bewegenden Größe \(B\) dar:
+    \begin{equation}\label{eq:1}
+        \frac{\d B_{\text{sys}}}{\d t} = \lim_{\Delta t \to 0}\parentheses*{\frac{\Delta B_{\text{sys}}}{\Delta t}} = \frac{\partial B_{KV}}{\partial t} + \dot{B}_{\text{out}} - \dot{B}_{\text{in}}.
+    \end{equation}
+    Gleichung \eqref{eq:1} gibt einen Zusammenhang zwischen der zeitlichen Änderungsrate von \(B\) für das System und der für das Kontrollvolumen an.
+    Diese Betrachtung werden wir im Folgenden verallgemeinern.
+\end{document}
