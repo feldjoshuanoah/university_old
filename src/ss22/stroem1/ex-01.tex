@@ -1,0 +1,89 @@
+\documentclass{exercise}
+
+\institute{Lehrstuhl für Strömungslehre und Aerodynamisches Institut}
+\title{Übung 1}
+\author{Joshua Feld, 406718}
+\course{Strömungsmechanik I}
+\professor{Schröder}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \section*{Aufgabe 1}
+    
+    \begin{problem}
+        In zwei übereinandergeschichteten Flüssigkeiten schwebt ein Würfel.
+        Bestimmen Sie die Höhe \(h\).
+        \begin{center}
+            \begin{tikzpicture}
+                \draw (0,0) -- (5,0);
+                \draw (0,1.5) -- (5,1.5);
+                \draw (0,3) -- (5,3);
+                \draw[fill=white] (2,1) rectangle (3,2) node[pos=.5] {\(\rho_K\)};
+                \draw[<->|] (1.75,1.5) -- (1.75,2) node[midway,left] {\(h\)};
+                \draw[|<->|] (2,.75) -- (3,.75) node[midway,below] {\(a\)};
+                \node at (4,2.25) {\(\rho_1\)};
+                \node at (4,.75) {\(\rho_2\)};
+                \draw[->] (5.5,2) -- (5.5,1) node[midway,right] {\(g\)};
+            \end{tikzpicture}
+        \end{center}
+        Gegeben: \(\rho_1\), \(\rho_2\), \(\rho_K\), \(a\)
+    \end{problem}
+    
+    \subsection*{Lösung}
+    Der Körper schwebt in den beiden Flüssigkeiten, d.h. es existiert ein Kräftegleichgewicht zwischen Auftriebs- und Gewichtkraft:
+    \begin{equation}\label{eq:1}
+        F_A = G.
+    \end{equation}
+    Es gilt
+    \[
+        F_A = \rho_1 ha^2 g + \rho_2\parentheses*{a - h}a^2 g
+    \]
+    und
+    \[
+        G = \rho_K a^3 g.
+    \]
+    Setzen wir dies in \eqref{eq:1} ein, so erhalten wir
+    \[
+        h = \frac{\rho_2 - \rho_K}{\rho_2 - \rho_1}a = 6,67 \cdot 10^{-2}\sis{\meter}.
+    \]
+
+
+    \section*{Aufgabe 2}
+    
+    \begin{problem}
+        Eine unten offene Boje der Masse \(m_B\), die mit einem Seil am Boden eines Sees befestigt ist, ragt mit einem Drittel ihrer Höhe aus dem Wasser, wenn das Seil nicht gespannt ist.
+        Durch steigenden Wasserstand wird die Boje unter die Wasseroberfläche gezogen und sinkt bei der Eintauchtiefe \(H\) zu Boden.
+        Bestimmen Sie \(H\).
+
+        Gegeben: \(m_B\), \(p_a\), \(\rho_W\), \(h\), \(g\), \(\rho_L \ll \rho_W\)
+
+        \emph{Hinweis: Nehmen Sie an, dass die Temperatur im Inneren der Boje konstant ist und die eingeschlossene Luft als ideales Gas betrachtet werden kann. Das Gewicht des Seiles ist zu vernachlässigen.}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    Sei \(\tau\) das Volumen der Boje und \(\tau_H\) das eingeschlossene Volumen der Luft.
+    In beiden Situationen existiert ein Kräftegleichgewicht
+    \[
+        gm_B = \frac{1}{3}\tau g\rho_W, \quad gm_B = \tau_H g\rho_W.
+    \]
+    Aus Gleichsetzen der beiden Gleichgewichtsbedingungen folgt direkt
+    \[
+        \tau_H = \frac{1}{3}\tau.
+    \]
+    Da die eingeschlossene Luftmasse konstant ist, folgt
+    \[
+        \frac{2}{3}\tau\rho_{L_0} = \tau_H\rho_{LH} = \frac{1}{3}\tau\rho_{LH} \iff 2\rho_{L_0} = \rho_{LH}.
+    \]
+    Das ideale Gasgesetz liefert
+    \[
+        2\frac{p_a + \frac{1}{3}\rho_W gh}{R_L T_L} = \frac{p_a + \rho_W g\parentheses*{H + \frac{1}{3}h}}{R_L T_L}
+    \]
+    und wir erhalten schlussendlich durch Umformen
+    \[
+        H = \frac{p_a}{\rho_W g} + \frac{1}{3}h.
+    \]
+\end{document}

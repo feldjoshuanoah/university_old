@@ -1,0 +1,148 @@
+\documentclass{exercise}
+
+\institute{Lehrstuhl für Strömungslehre und Aerodynamisches Institut}
+\title{Selbstrechenübung 3}
+\author{Joshua Feld, 406718}
+\course{Strömungsmechanik I}
+\professor{Schröder}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \section*{Aufgabe 1}
+    
+    \begin{problem}
+        Ein großes Becken ist mit einem großen geschlossenen Behälter verbunden.
+        Der Einlass ist gut gerundet.
+        Die Verbindung besteht aus einem gekrümmten Rohr.
+        Jedes Teilstück des Rohres mit der Länge \(l\) hat einen Rohrreibungskoeffizienten \(\lambda\).
+        Das Rohr dreht sich mit konstanter Winkelgeschwindigkeit \(\omega\).
+        Bei der Winkelgeschwindigkeit \(\omega_0\) ist der Massenstrom gerade Null.
+        \begin{enumerate}
+            \item Berechnen Sie den Druck \(p_i\) im Behälter.
+            \item Berechnen Sie den Volumenstrom \(\dot{Q}\) durch das Rohr für \(\omega = 2\omega_0\).
+            \item Skizzieren Sie die mechanischen Energieanteile für eine Stromlinie, beginnend an der Oberfläche.
+        \end{enumerate}
+        Gegeben: \(l, g, d, \rho, \omega_0, p_a, \lambda\)
+        
+        \emph{Hinweis: \(\frac{\partial p}{\partial r} = \rho\omega^2 r\).}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item Bernoullische Gleichung mit Strömungsverlusten und Energiezufuhr:
+        \[
+            \rho\frac{v_1^2}{2} + \rho gh_1 + p_1 + \Delta p = \rho\int_1^2 \frac{\partial v}{\partial t}\d s + \rho\frac{v_2^2}{2} + \rho gh_2 + p_2 + \Delta p_v.
+        \]
+        Für \(\omega_0\) soll \(\dot{m} = 0\) gelten mit \(\dot{m} = \rho Av \implies v = 0\).
+        Nun können die Bernoullischen Gleichungen aufgestellt werden, wobei zusätzlich von einer stationären Strömung ausgegangen wird.
+        
+        Bernoulli von \(1\) nach \(5\) (entspricht der Anwendung der hydrostatischen Grundgleichung):
+        \[
+            p_5 = p_a + 4\rho gl.
+        \]
+        Bernoulli von \(5\) nach \(6\):
+        \[
+            p_6 = p_5 + \frac{1}{2}\rho\parentheses*{\omega_0 l}^2.
+        \]
+        Insgesamt ergibt sich also
+        \[
+            p_i = p_6 = p_a + 4\rho gl + \frac{1}{2}\rho\parentheses*{\omega_0 l}^2.
+        \]
+        Die Addition des Terms \(\frac{1}{2}\rho\parentheses*{\omega_0 l}^2\) auf der Stromaufseite entspricht der Energiezufuhr durch die Rotation und ergibt sich aus der Integration des Hinweises vom Zustand \(5\) nach \(6\).
+        \item Bernoulli von \(1\) nach \(6\):
+        \[
+            p_a + 4\rho gl + \frac{1}{2}\rho \cdot \parentheses*{2\omega_0 l}^2 = \frac{1}{2}\rho v_6^2 + p_i + \frac{1}{2}\rho\parentheses*{v_{2^*}^2 \lambda\frac{l}{2d} + v_{3^*}^2 \lambda\frac{l}{4d} + v_6^2 \lambda\frac{2l}{d}}.
+        \]
+        Da der Behälter laut Aufgabenstellung groß ist, kann angenommen werden, dass sich der Druck \(p_i\) im Behälter durch das einströmende Wasser nicht ändert.
+        Somit kann \(p_i\) aus Aufgabenteil a) eingesetzt werden:
+        \begin{align*}
+            p_a + 4\rho gl + \frac{1}{2}\rho \cdot \parentheses*{2\omega_0 l}^2 &= \frac{1}{2}\rho v_6^2 + p_a + 4\rho gl + \frac{1}{2}\rho\parentheses*{\omega_0 l}^2 + \frac{1}{2}\rho\parentheses*{v_{2^*}^2 \lambda\frac{l}{2d} + v_{3^*}^2 \lambda\frac{l}{4d} + v_6^2 \lambda\frac{2l}{d}}\\
+            \implies 0 &= -\frac{3}{2}\rho\omega_0^2 l^2 + \frac{1}{2}\rho v_6^2 + \frac{1}{2}\rho\parentheses*{v_{2^*}^2 \lambda\frac{l}{2d} + v_{3^*}^2 \lambda\frac{l}{4d} + v_6^2 \lambda\frac{2l}{d}}.
+        \end{align*}
+        Zur Bestimmung der Geschwindigkeiten wird die Kontinuitätsgleichung benutzt:
+        \[
+            v_{2^*}\pi d^2 = v_{3^*}\pi \cdot \parentheses*{2d}^2 = v_6 \pi\parentheses*{\frac{d}{2}}^2 \implies v_{2^*} = \frac{v_6}{4}, v_{3^*} = \frac{v_6}{16}.
+        \]
+        Einsetzen der Geschwindigkeiten ergibt
+        \[
+            0 = -\frac{3}{2}\rho\omega_0^2 l^2 + \frac{1}{2}\rho v_6^2 \parentheses*{1 + \lambda\frac{l}{d} \cdot \parentheses*{2 + \frac{1}{32} + \frac{1}{1024}}}.
+        \]
+        Somit folgt für die Ausströmgeschwindigkeit
+        \[
+            v_6 = \sqrt{\frac{3\omega_0^2 l^2}{1 + \lambda\frac{l}{d} \cdot \frac{2081}{1024}}}.
+        \]
+        Mit der Ausströmgeschwindigkeit lässt sich nun der gesuchte Volumenstrom bestimmen zu
+        \[
+            \dot{V} = \frac{\pi d^2}{4}v_6 = \frac{\pi d^2}{4}\sqrt{\frac{3\omega_0^2 l^2}{1 + \lambda\frac{l}{d} \cdot \frac{2081}{1024}}}.
+        \]
+    \end{enumerate}
+    
+    
+    \section*{Aufgabe 2}
+    
+    \begin{problem}
+        Aus einem großen (\(D \gg d_{1, 2}\)) Industrieofen strömt Abgas (\(\rho_G = \text{konst.}\)) stationär durch zwei Schornsteine mit den Durchmessern \(d_1\) und \(d_2\) in den Höhen \(h_1\) und \(h_2\) in die Atmosphäre.
+        In dem Ofen steht die durch den offenen Boden eintretende Luft (\(\rho_L = \text{konst.}, \rho_L > \rho_G\)) bis zur konstanten Höhe \(h_0\).
+        \begin{enumerate}
+            \item Bestimmen Sie das Verhältnis \(\frac{d_1}{d_2}\), bei dem die Volumenströme in den beiden Schornsteinen gleich groß sind.
+            \item Eine Drossel mit dem Drosselverlustbeiwert \(\zeta_{\text{Dr}}\) wird im Schornstein \(2\) eingebaut.
+            Bestimmen Sie für \(d_1 = d_2\) den Drosselverlustbeiwert \(\zeta_{\text{Dr}}\), der zu gleich großen Volumenströmen in den Schornsteinen führt.
+        \end{enumerate}
+        Gegeben: \(h_0, h_1, h_2\)
+        
+        \emph{Hinweis: Bis auf die Drosseldurchströmung ist die Strömung als reibungsfrei anzusehen.}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item Volumenströme sollen gleich groß sein, d.h.
+        \[
+            v_{G_1}\frac{\pi d_1^2}{4} = v_{G_2}\frac{\pi d_2^2}{4} \iff \frac{v_{G_1}}{v_{G_2}} = \frac{d_2^2}{d_1^2} \iff \frac{d_1}{d_2} = \sqrt{\frac{v_{G_2}}{v_{G_1}}}.
+        \]
+        Somit lässt sich das Verhältnis der Durchmesser durch das Verhältnis der Geschwindigkeiten ausdrücken, welche im Folgenden durch die hydrostatische Grundgleichung und Bernoullische Gleichung bestimmt werden.
+        
+        Bernoulli von \(0\) nach \(k\) (\(k \equiv \text{``Index des jeweiligen Schornsteins''}\)):
+        \[
+            p_{a_0} = p_{a_k} + \frac{1}{2}\rho_G v_{G_k}^2 + \rho_G g\parentheses*{h_k - h_0}, \quad k = 1, 2.
+        \]
+        Die Drücke können durch die Anwendung des hydrostatischen Grundgesetzes außerhalb des Ofens bestimmt werden.
+        Dies ist möglich, da der Ofen unten offen ist und oben am Austritt der Umgebungsdruck herrschen muss:
+        \[
+            p_{a_0} = p_{a_k} + \rho_L g\parentheses*{h_k - h_0}.
+        \]
+        Einsetzen ergibt für die beiden Geschwindigkeiten
+        \[
+            p_{a_k} + \rho_L g\parentheses*{h_k - h_0} = p_{a_k} + \frac{1}{2}\rho_G v_{G_k}^2 + \rho_G g\parentheses*{h_k - h_0} \iff v_{G_k} = \sqrt{2g\parentheses*{h_k - h_0}\parentheses*{\frac{\rho_L}{\rho_G} - 1}}.
+        \]
+        Einsetzen der Geschwindigkeiten in das Durchmesserverhältnis ergibt letztlich
+        \[
+            \frac{d_1}{d_2} = \sqrt[4]{\frac{h_2 - h_0}{h_1 - h_0}}.
+        \]
+        \item Bernoulli von \(0\) nach \(2\):
+        \[
+            p_{a_0} = p_{a_2} + \frac{1}{2}\rho_G v_{G_2}^2 \cdot \parentheses*{1 + \zeta_{\text{Dr}}} + \rho_G g\parentheses*{h_2 - h_0}.
+        \]
+        Aus den Voraussetzungen, dass die Durchmesser sowie Volumenströme beider Schornsteine gleich groß sein sollen, folgt, dass die Geschwindigkeiten gleich groß sein müssen.
+        Demnach kann \(v_{G_1}\) aus a) für \(v_{G_2}\) eingesetzt werden.
+        Außerdem ist \(p_{a_0}\) aus a) bekannt:
+        \begin{align*}
+            p_{a_0} &= p_{a_2} + \rho_L g\parentheses*{h_2 - h_0},\\
+            v_{G_2} = v_{G_1} &= \sqrt{2g\parentheses*{h_1 - h_0}\parentheses*{\frac{\rho_L}{\rho_G} - 1}}
+        \end{align*}
+        \[
+            \implies p_{a_2} + \rho_L g\parentheses*{h_2 - h_0} = p_{a_2} + \rho_G g\parentheses*{h_1 - h_0}\parentheses*{\frac{\rho_L}{\rho_G} - 1} \cdot \parentheses*{1 + \zeta_{\text{Dr}}} + \rho_G g\parentheses*{h_2 - h_0}.
+        \]
+        Weiteres Umformen ergibt schließlich die Lösung
+        \begin{align*}
+            g\parentheses*{\rho_L - \rho_G}\parentheses*{h_2 - h_0} &= \rho_G g\parentheses*{h_1 - h_0}\parentheses*{\frac{\rho_L}{\rho_G} - 1} \cdot \parentheses*{1 + \zeta_{\text{Dr}}}\\
+            \iff \parentheses*{\rho_L - \rho_G}\parentheses*{h_2 - h_0} &= \parentheses*{h_1 - h_0}\parentheses*{\rho_L - \rho_G} \cdot \parentheses*{1 + \zeta_{\text{Dr}}}\\
+            \iff \frac{h_2 - h_0}{h_1 - h_0} &= 1 + \zeta_{\text{Dr}}\\
+            \iff \frac{h_2 - h_0}{h_1 - h_0} - 1 &= \zeta_{\text{Dr}}\\
+            \iff \frac{h_2 - h_0 -\parentheses*{h_1 - h_0}}{h_1 - h_0} = \frac{h_2 - h_1}{h_1 - h_0} &= \zeta_{\text{Dr}}.
+        \end{align*}
+    \end{enumerate}
+\end{document}

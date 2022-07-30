@@ -1,0 +1,104 @@
+\documentclass{exercise}
+
+\institute{Lehrstuhl für Strömungslehre und Aerodynamisches Institut}
+\title{Selbstrechenübung 4}
+\author{Joshua Feld, 406718}
+\course{Strömungsmechanik I}
+\professor{Schröder}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \section*{Aufgabe 1}
+    
+    \begin{problem}
+        Der Wasserspiegel eines Obersees soll mithilfe einer Pumpe reguliert werden.
+        Bei andauernder Trockenheit kann über eine Pumpe Wasser (Volumenstrom \(\dot{V}\)) dem Untersee entnommen werden.
+        Dieses strömt dabei durch drei Rohrelemente der Länge \(L\) und dem Durchmesser \(D\).
+        Der Rohrreibungsbeiwert sei jeweils \(\lambda\).
+        \begin{enumerate}
+            \item Bestimmen Sie die erforderliche Pumpenleistung \(P\).
+            \item Ein Überlaufen des Sees kann durch Ablassen von Wasser durch einen Ablauf (links) verhindert werden.
+            Nach welcher Zeit \(\Delta T\) erreicht das ausströmende Wasser die Hälfte der stationären Endgeschwindigkeit, wenn die Klappe am Ende der Leitung plötzlich geöffnet wird?
+            Hierbei sei die Widerstandszahl am scharfkantigen Übergang von \(D_2\) auf \(D_3\) gegeben zu \(\zeta\).
+        \end{enumerate}
+        Gegeben: \(\dot{V}, \lambda, D_1, D_2, D_3 = 2D_2, L_1, L_2 \gg D_3, L_3 \gg D_3, h, H, \rho, g, p_a, \zeta\)
+    \end{problem}
+    
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item Es gilt
+        \begin{equation}\label{eq:1}
+            P = \dot{V}\Delta p, \quad \text{mit} \quad \Delta p = p_2 - p_1.
+        \end{equation}
+        Bernoulli von \(0\) nach \(1\):
+        \begin{equation}\label{eq:2}
+            p_a = p_1 + \frac{\rho}{2}v_1^2 \parentheses*{1 + 2\lambda\frac{L_1}{D_1}} + \rho gL_1 \iff p_1 = p_a - \frac{\rho}{2}v_1^2 \parentheses*{1 + 2\lambda\frac{L_1}{D_1}} - \rho gL_1,
+        \end{equation}
+        wobei \(v_1\) noch unbekannt ist.
+        Bernoulli von \(2\) nach \(3\):
+        \begin{equation}
+            p_2 + \frac{\rho}{2}v_2^2 = p_3 + \frac{\rho}{2}v_3^2 \parentheses*{1 + \lambda\frac{L_1}{D_1}} \iff p_2 = p_3 + \frac{\rho}{2}v_3^2 \parentheses*{1 + \lambda\frac{L_1}{D_1}} - \frac{\rho}{2}v_2^2,
+        \end{equation}
+        wobei \(v_2\), \(v_3\) und \(p_3\) noch unbekannt sind.
+        Nun verwenden wir die hydrostatische Grundgleichung zur Bestimmung von
+        \begin{equation}
+            p_3 = p_a + \rho gh.
+        \end{equation}
+        Aus der Kontinuitätsgleichung
+        \[
+            \dot{m} = \dot{m}_3 = \dot{m}_2 = \dot{m}_1 = \rho v_1 A_1 = \rho v_1 \frac{\pi}{4}D_1^2
+        \]
+        folgt mit \(\rho = \text{konst.}\) die unbekannte Geschwindigkeit
+        \[
+            \dot{V} = \frac{\dot{m}}{\rho} = v_1 \frac{\pi}{4}D_1^2 \iff v_1 = \frac{4\dot{V}}{\pi D_1^2}
+        \]
+        und, da sich die Punkte \(1\), \(2\) und \(3\) im selben Rohr befinden, gilt
+        \begin{equation}\label{eq:5}
+            v = v_3 = v_2 = v_1 = \frac{4\dot{V}}{\pi D_1^2}.
+        \end{equation}
+        Setzen wir nun die Gleichungen \eqref{eq:2} - \eqref{eq:5} in \eqref{eq:1} ein, so folgt
+        \[
+            P = \dot{V}\parentheses*{\rho g\parentheses*{h + L_1} + 8\rho\parentheses*{\frac{\dot{V}}{\pi D_1^2}}^2\parentheses*{1 + 3\lambda\frac{L_1}{D_1}}}.
+        \]
+        \item Bernoulli für instationäre Strömungen von \(4\) nach \(6\):
+        \begin{equation}\label{eq:6}
+            p_a + \rho gH = p_6 + \frac{\rho}{2}v_6^2 + \rho\int_4^6 \frac{\partial v}{\partial t}\d s + \Delta p_V
+        \end{equation}
+        Da bei \(t = 0\) der Auslauf des Trichters freigegeben wird, gilt \(p_6\parentheses*{t \ge 0} = p_a\).
+        Zwischen Punkt \(4\) und Punkt \(6\) existiert somit ein Druckverlust durch Rohrreibung (\(\Delta p_V\))
+        \begin{equation}\label{eq:7}
+            \Delta p_V = \frac{\rho}{2}v_5^2 \lambda\frac{L_2}{D_2} + \frac{\rho}{2}v_6^2 \lambda\frac{L_3}{D_3} + \frac{\rho}{2}v_5^2 \zeta.
+        \end{equation}
+        Aus der Kontinuitätsgleichung zwischen \(5\) und \(6\)
+        \[
+            \dot{m} = \rho\frac{\pi}{4}D_2^2 v_5 = \rho\frac{\pi}{4}D_3^2 v_6
+        \]
+        folgt mit \(D_3 = 2D_2\)
+        \[
+            v_5 = 4v_6,
+        \]
+        was wir in \eqref{eq:7} einsetzen und damit
+        \[
+            \Delta p_V = \frac{\rho}{2}v_6^2 \frac{\lambda}{D_2}\parentheses*{\frac{L_3}{2} + 16L_2} + \frac{\rho}{2}v_6^2 \cdot 16\zeta,
+        \]
+        wobei \(v_6\) nun die einzige unbekannte Variable ist.
+        Dies setzen wir nun wiederum in \eqref{eq:6} ein.
+        Für stationäres Ausströmen gilt \(\frac{\partial v}{\partial t} = 0\) und es folgt
+        \[
+            v_{6, \text{stat}} = \parentheses*{\frac{2gH}{1 + \frac{\lambda}{D_2}\parentheses*{\frac{L_3}{2} + 16L_2} + 16\zeta}}^{\frac{1}{2}}.
+        \]
+        Gesucht ist nun das Zeitintervall \(\Delta T\) nach dem \(v_5 = \frac{v_{6, \text{stat}}}\) gilt.
+        Für den instationären Term gilt
+        \[
+            \rho\int_4^6 \frac{\partial v}{\partial t}\d s = \rho\int_{L_2}\frac{\partial v_5}{\partial t}\d s + \rho\int_{L_3}\frac{\partial v_6}{\partial t}\d s = \rho\int_{L_2}\frac{4\d v_6}{\d t}\d s + \rho \int_{L_3}\frac{\d v_6}{\d t}\d s = \rho\parentheses*{4L_2 + L_3}\frac{\d v_6}{\d t}.
+        \]
+        Setzen wir dies nun in \eqref{eq:6} ein und formen nach den Integrationsvariablen um, so erhalten wir
+        \begin{align*}
+            p_a + \rho gH &= p_a + \frac{\rho}{2}v
+        \end{align*}
+    \end{enumerate}
+\end{document}
