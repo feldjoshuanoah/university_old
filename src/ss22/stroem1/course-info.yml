@@ -1,5 +1,7 @@
 name: Strömungsmechanik I
 professor: Schröder
 institute: Lehrstuhl für Strömungslehre und Aerodynamisches Institut
-prefixes: [lec]
+prefixes: [lec, ex, self]
 lec: [lecture, Vorlesung]
+ex: [exercise, Übung]
+self: [exercise, Selbstrechenübung]
