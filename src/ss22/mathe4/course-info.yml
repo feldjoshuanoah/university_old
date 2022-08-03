@@ -1,7 +1,8 @@
 name: Mathematische Grundlagen IV
 professor: Torrilhon \& Berkels
 institute: Applied and Computational Mathematics
-prefixes: [lec, hw, self]
+prefixes: [lec, hw, self, old]
 lec: [lecture, Vorlesung]
 hw: [exercise, Hausaufgabenübung]
 self: [exercise, Selbstrechenübung]
+old: [exercise, Altklausur]
