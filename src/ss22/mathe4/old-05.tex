@@ -1,0 +1,246 @@
+\documentclass{exercise}
+
+\institute{Applied and Computational Mathematics}
+\title{Altklausur 5}
+\author{Joshua Feld, 406718}
+\course{Mathematische Grundlagen IV}
+\professor{Torrilhon \& Berkels}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \section*{Aufgabe 1}
+    
+    \begin{problem}
+        Gegeben ist das PDE-System 1. Ordnung für \(U: \Omega \subset \R^2 \times \R^+ \to \R^3\)
+        \begin{align*}
+            \partial_t u_1 + 3\partial_{x_1}u_2 + 2\partial_{x_2}u_1 + \partial_{x_2}u_2 &= 0,\\
+            \partial_t u_2 + \partial_{x_1}u_2 + 3\partial_{x_2}u_2 &= 0,\\
+            \partial_t u_3 + 2\partial_{x_1}u_2 + 3\partial_{x_1}u_3 + 2\partial_{x_2}u_3 &= 0.
+        \end{align*}
+        Zeigen Sie, dass das System in der Form
+        \[
+            \partial_t U + \vecdiv F\parentheses*{U} = 0
+        \]
+        geschrieben werden kann und überprüfen Sie ob das System hyperbolisch ist.
+    \end{problem}
+    
+    \subsection*{Lösung}
+
+
+    \section*{Aufgabe 2}
+    
+    \begin{problem}
+        \begin{enumerate}
+            \item Bestimmen Sie die Lösungen des Randwertproblems
+            \[
+                -u''\parentheses*{x} = 1 \quad \forall x \in \parentheses*{0, 1},
+            \]
+            in Abhängigkeit von den Werten \(\alpha, \beta \in \R\) für jede der folgenden Randbedingungen
+            \begin{align}
+                u\parentheses*{0} = \alpha \quad &\text{und} \quad u\parentheses*{1} = \beta,\nonumber\\
+                u\parentheses*{0} = \alpha \quad &\text{und} \quad \frac{\partial u}{\partial n}\parentheses*{1} = \beta,\nonumber\\
+                \frac{\partial u}{\partial n}\parentheses*{0} = \alpha \quad &\text{und} \quad u\parentheses*{1} = \beta,\nonumber\\
+                \frac{\partial u}{\partial n}\parentheses*{0} = \alpha \quad &\text{und} \quad \frac{\partial u}{\partial n}\parentheses*{1} = \beta.\label{eq:1}
+            \end{align}
+            \item Das reine Neumann-Problem \eqref{eq:1} ist nicht für beliebige \(\alpha, \beta \in \R\) lösbar.
+            Wie lautet die Bedingung an \(\alpha\) und \(\beta\) damit eine Lösung existiert?
+            Ist die Lösung \(u\) dann eindeutig?
+            Begründen Sie Ihre Antwort.
+            \item Welche Bedingung muss eine Randfunktion \(g\) in dem Neumann-Problem der mehrdimensionalen Poisson-Gleichung
+            \begin{align*}
+                \Delta u &= f, \quad \text{in }\Omega \subset \R^n,\\
+                \frac{\partial u}{\partial n} &= g, \quad \text{auf }\partial\Omega
+            \end{align*}
+            für gegebenes \(f\) erfüllen?
+
+            \emph{Hinweis: \(\Delta\cdot = \vecdiv\parentheses*{\nabla\cdot}\).}
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item
+        \item
+        \item
+    \end{enumerate}
+
+
+    \section*{Aufgabe 3}
+    
+    \begin{problem}
+        \begin{enumerate}
+            \item Berechnen Sie die ersten zwei distributionellen Ableitungen der Funktion \(f: \R \to \R\) mit
+            \[
+                f\parentheses*{x} = \begin{cases}
+                    0, & \text{falls }x < 0,\\
+                    x, & \text{falls }0 \le x \le 1,\\
+                    1, & \text{falls }1 < x.
+                \end{cases}
+            \]
+            \item Welche Eigenschaft muss die distributionelle Ableitung der Dirac-Funktion erfüllen?
+            \item Zeigen Sie, dass die Funktion \(\gamma: \R^3 \setminus \braces*{0} \to \R\) mit
+            \[
+                \gamma\parentheses*{x} = -\frac{1}{4\pi}\frac{1}{r\parentheses*{x}}, \quad r\parentheses*{x} = \norm*{x}_2
+            \]
+            eine Fundamentallösung der dreidimensionalen Laplacegleichung
+            \[
+                -\Delta\gamma = \delta
+            \]
+            ist.
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item
+        \item
+        \item
+    \end{enumerate}
+
+
+    \section*{Aufgabe 4}
+    
+    \begin{problem}
+        Gegeben ist das Problem
+        \begin{align*}
+            \partial_t u\parentheses*{x, t} &= \partial_{xx}u\parentheses*{x, t} - u\parentheses*{x, t} + \sin\parentheses*{\pi x}, \quad x \in \parentheses*{0, 1}, t > 0,\\
+            u\parentheses*{0, t} &= 0, \quad t > 0,\\
+            u_x\parentheses*{1, t} &= 0, \quad t > 0,\\
+            u\parentheses*{x, 0} &= a, \quad x \in \parentheses*{0, 1},
+        \end{align*}
+        wobei \(a \in \R\), d.h. die Anfangsbedingung ist eine konstante Funktion.
+        \begin{enumerate}
+            \item Berechnen Sie die zugehörigen Eigenwerte und die normierten Eigenfunktionen.
+            \item Entwickeln Sie die Anfangsbedingung und den Quellterm in Eigenfunktionen.
+            \item Berechnen Sie die Lösung des Problems mit dem Eigenfunktionen-Ansatz.
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item
+        \item
+        \item
+    \end{enumerate}
+
+
+    \section*{Aufgabe 5}
+    
+    \begin{problem}
+        Bestimmen Sie zu den Daten
+        \begin{center}
+            \begin{tabular}{lcccc}
+                \toprule
+                \(x_k\) & \(0\) & \(\frac{\pi}{2}\) & \(\pi\) & \(\frac{3}{2}\pi\)\\
+                \midrule
+                \(f\parentheses*{x_k}\) & \(6\) & \(2 + 2i\) & \(2\) & \(2 - 2i\)\\
+            \end{tabular}
+        \end{center}
+        ein trigonometrisches Polynom der Form
+        \[
+            T_4\parentheses*{f; x} = \sum_{j = 0}^{n - 1}d_j\parentheses*{f}e^{ijx},
+        \]
+        das die Daten interpoliert, also die Bedingung
+        \[
+            T_4\parentheses*{f; x_k} = f\parentheses*{x_k}
+        \]
+        für \(k = 0, \ldots, 3\) erfüllt.
+    \end{problem}
+    
+    \subsection*{Lösung}
+
+
+    \section*{Aufgabe 6}
+    
+    \begin{problem}
+        Die erste Ableitung einer Funktion \(u\) an der Stelle \(\xi\) soll mithilfe der Differenzenformel, die die Funktionsauswertungen von \(u\) an den Stellen \(\xi\), \(\xi + h_1\) und \(\xi + h_1 + h_2\) benutzt, approximiert werden, d.h.
+        \[
+            u'\parentheses*{\xi} = au\parentheses*{\xi} + bu\parentheses*{\xi + h_1} + cu\parentheses*{\xi + h_1 + h_2} + R\parentheses*{u, h},
+        \]
+        wobei \(h = \max\parentheses*{h_1, h_2}\) und \(R\parentheses*{u, h} = \mathcal{O}\parentheses*{h^p}\) der Fehler der Differenzenformel ist.
+        Bestimmen Sie \(a, b, c\) so, dass \(p\) maximal wird.
+        Wie groß ist dieses?
+
+        \emph{Hinweis: Entwickeln Sie \(u\) um die Stelle \(\xi\).}
+    \end{problem}
+    
+    \subsection*{Lösung}
+
+
+    \section*{Aufgabe 7}
+    
+    \begin{problem}
+        Gegeben sei das lineare Gleichungssystem \(Ax = b\) mit
+        \[
+            A = \begin{pmatrix}
+                5 & 1 & 0\\
+                1 & 5 & -1\\
+                0 & -1 & 5
+            \end{pmatrix}, \quad b = \begin{pmatrix}
+                0\\
+                -3\\
+                -5
+            \end{pmatrix}
+        \]
+        mit Lösung
+        \[
+            x = \frac{1}{23}\begin{pmatrix}
+                4\\
+                -20\\
+                -27
+            \end{pmatrix}.
+        \]
+        \begin{enumerate}
+            \item Konvergieren das Jacobi- und Gauß-Seidel-Verfahren für jeden Startvektor \(x^0 \in \R^3\)?
+            \item Führen Sie einen Schritt mit dem Gauß-Seidel-Verfahren durch.
+            Verwenden Sie als Startvektor \(x^0 = \parentheses*{1, 0, 0}^T\).
+            \item Zeigen Sie, dass die Voraussetzungen zur Anwendung des CG-Verfahrens gegeben sind und führen Sie einen Schritt mit dem CG-Verfahren durch.
+            Verwenden Sie als Startvektor \(x^0 = \parentheses*{0, -1, -1}^T\).
+            \item Welches Ergebnis erhält man nach drei Schritten mit dem CG-Verfahren?
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item
+        \item
+        \item
+        \item
+    \end{enumerate}
+
+
+    \section*{Aufgabe 8}
+    
+    \begin{problem}
+        Gegeben sei die gewöhnliche Differentialgleichung
+        \begin{align*}
+            -u''\parentheses*{x} + c\parentheses*{x}u\parentheses*{x} &= f\parentheses*{x}, \quad x \in \parentheses*{0, 1},\\
+            u\parentheses*{0} &= 1,\\
+            u\parentheses*{1} &= 0,
+        \end{align*}
+        wobei \(c, f: \brackets*{0, 1} \to \R\) stetig sind mit
+        \[
+            c\parentheses*{x} > 0, \quad x \in \brackets*{0, 1}.
+        \]
+        \begin{enumerate}
+            \item Nehmen Sie eine finite Differenzen Diskretisierung für diese Differentialgleichung vor, wobei das Intervall \(\brackets*{0, 1}\) äquidistant in vier Teilintervalle zerlegt werden soll, und stellen Sie das diskrete System in der Form
+            \[
+                A_h u_h = f_h
+            \]
+            auf.
+            \item Zeigen Sie, dass die Matrix \(A_h\) symmetrisch und positiv definit (es genügt zu zeigen, dass die Eigenwerte positiv sind) ist.
+
+            \emph{Hinweis: Gerschgorin-Kreise.}
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item
+        \item
+    \end{enumerate}
+\end{document}

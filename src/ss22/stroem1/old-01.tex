@@ -1,0 +1,302 @@
+\documentclass{exercise}
+
+\institute{Lehrstuhl für Strömungslehre und Aerodynamisches Institut}
+\title{Altklausur 1}
+\author{Joshua Feld, 406718}
+\course{Strömungsmechanik I}
+\professor{Schröder}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \section*{Aufgabe 1}
+
+    \begin{problem}
+        Ein autonomes Unterseeboot erzeugt Auftrieb durch einen externen Ballon.
+        Der Hauptkörper des U-Boots hat das Volumen \(V_U\).
+        Das Gesamtsystem bestehend aus Hauptkörper, Ballon und mitgeführter Luft hat die Masse \(m\).
+        Zu Beginn einer Tauchfahrt ist der externe Ballon teilweise mit Luft gefüllt.
+        \begin{enumerate}
+            \item Bestimmen Sie das Volumen des Ballons \(V_0\), damit das U-Boot an der Wasseroberfläche gerade nicht versinkt.
+            Der Ballon soll hierbei gerade vollständig von Wasser umgeben sein.
+        \end{enumerate}
+        Das U-Boot beginnt nun mit seiner Tauchfahrt.
+        Nach einer Weile ist es in der Tiefe \(H\) angekommen.
+        \begin{enumerate}
+            \item[b)] Bestimmen Sie das Volumen des Auftriebsballons, wenn sich die Masse und Temperatur der Luft im Ballon während der Tauchfahrt nicht geändert haben.
+            \item[c)] Bestimmen Sie die Masse der Luft, die mindestens zur bereits im Ballon vorhandenen Luft in den Ballon gepumpt werden muss, damit das U-Boot wieder steigen kann.
+        \end{enumerate}
+        Gegeben: \(m, V_U, \rho_w, g, p_a, H, \rho_L\parentheses*{z = 0}\)
+
+        \emph{Hinweis:
+        \begin{itemize}
+            \item Die Druckänderung über die Ballonhöhe ist vernachlässigbar.
+            \item Überprüfen Sie Ihre Ergebnisse hinsichtlich der Plausibilität von Einheiten und Vorzeichen.
+        \end{itemize}}
+    \end{problem}
+
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item Das Gesamtsystem schwebt im Wasser, d.h. es existiert ein Kräftegleichgewicht zwischen Auftriebs- und Gewichtkraft:
+        \begin{equation}\label{eq:1}
+            F_A = G.
+        \end{equation}
+        Es gilt
+        \[
+            F_A = \rho_w\parentheses*{V_U + V_0}g
+        \]
+        und
+        \[
+            G = mg.
+        \]
+        Setzen wir dies in \eqref{eq:1} ein, so erhalten wir
+        \[
+            V_0 = \frac{m}{\rho_w} - V_U.
+        \]
+        \item Wir verwenden hier das ideale Gasgesetz
+        \[
+            pV = mRT.
+        \]
+        Aus der Aufgabenstellung geht hervor, dass die Masse und Temperatur der Luft im Ballon während der Tauchfahrt konstant bleiben.
+        Außerdem ist die ideale Gaskonstante \(R\) für ein gleichbleibendes Gas, welches in diesem Fall Luft ist, ebenfalls konstant.
+        Damit folgt
+        \[
+            pV = \text{konst.}
+        \]
+        Folglich gilt
+        \begin{equation}\label{eq:2}
+            p_0 V_0 = p_1 V_1 \iff V_1 = \frac{p_0}{p_1}V_0.
+        \end{equation}
+        Da das System in beiden Zuständen statisch sein muss, entsprechen die Drücke den Außendrücken in den entsprechenden Tiefen, d.h.
+        \[
+            p_0 = p_a \quad \text{und} \quad p_1 = p_a + \rho_w gH.
+        \]
+        Einsetzen des Ausdrucks für \(V_0\) aus Aufgabenteil a) und den Formeln für die Drücke \(p_0\) und \(p_1\) in \eqref{eq:2} liefert schlussendlich
+        \[
+            V_1 = \frac{p_a}{p_a + \rho_w gH}\parentheses*{\frac{m}{\rho_w} - V_U}.
+        \]
+        \item Damit der Ballon wieder steigt, muss Luft in den Ballon gepumpt werden, die die zusätzlich auf das Gesamtsystem wirkende Kraft ausgleicht. d.h. das Volumen der Luft in dem Ballon ändert sich um
+        \begin{equation}\label{eq:3}
+            \Delta V = V_0 - V_1 = \parentheses*{\frac{m}{\rho_w} - V_U}\parentheses*{1 - \frac{p_a}{p_a + \rho_w gH}}
+        \end{equation}
+        und die Masse der Luft folglich um
+        \begin{equation}\label{eq:4}
+            \Delta m = \Delta V \cdot \rho_L\parentheses*{z = H}.
+        \end{equation}
+        Zur Bestimmung der Dichte der Luft in der Tiefe \(H\) verwenden wir wieder das ideale Gasgesetz, welches die Beziehung
+        \[
+            pV = mRT \iff p = \rho RT \iff \frac{p}{\rho} = RT = \text{konst.}
+        \]
+        liefert, da, wie in Aufgabenteil b) schon festgestellt wurde, die ideale Gaskonstante und die Temperatur der Luft konstant sind.
+        Wir können also nun einfach unsere beiden Zustände wieder einsetzen und erhalten nach Umformen
+        \begin{equation}\label{eq:5}
+            \rho_L\parentheses*{z = H} = \frac{p_1}{p_0}\rho_L\parentheses*{z = 0}.
+        \end{equation}
+        Einsetzen von \eqref{eq:3} und \eqref{eq:5} in Gleichung \eqref{eq:4} ergibt den finalen Ausdruck
+        \[
+            \Delta m = \parentheses*{m - V_U \rho_w}\frac{gH}{p_a}\rho_L\parentheses*{z = 0}.
+        \]
+    \end{enumerate}
+
+
+    \section*{Aufgabe 2}
+
+    \begin{problem}
+        Der Wasserspiegel eines Obersees soll mithilfe einer Pumpe reguliert werden.
+        Bei andauerender Trockenheit kann über eine Pumpe Wasser (Volumenstrom \(\dot{V}\)) dem Untersee entnommen werden.
+        Dieses strömt dabei durch drei Rohrelemente der Länge \(L_1\) und Durchmesser \(D_1\).
+        Der Rohrreibungsbeiwert in den Rohren ist jeweils \(\lambda\).
+        \begin{enumerate}
+            \item Bestimmen Sie die erforderliche Pumpenleistung.
+            \item Berechnen Sie den maximalen Volumenstrom, der sich fördern lässt, so dass der Dampfdruck \(p_D\) an keiner Stelle unterschritten wird.
+            \item Um ein Überlaufen des Sees bei längeren Regenperioden zu verhindern, kann überschüssiges Wasser über eine Rohrleitung mit dem Durchmesser \(D_2\) abgeführt werden.
+            Nach welcher Zeit \(\Delta T\) erreicht das ausströmende Wasser die Hälfte der stationären Endgeschwindigkeit, wenn die Klappe am Ende der Leitung plötzlich geöffnet wird?
+        \end{enumerate}
+        Gegeben: \(\dot{V}, \lambda, H, h, g, p_a, p_D, \rho_W, L_1, L_2, L_3, D_1, D_2\)
+
+        \emph{Hinweis:
+        \begin{itemize}
+            \item
+            \[
+                \int\frac{\d x}{a^2 - x^2} = \frac{1}{2a}\ln\parentheses*{\frac{a + x}{a - x}}
+            \]
+            \item Es entstehen keine Verluste durch Querschnittsänderungen in den Rohrleitungen.
+            \item Überprüfen Sei Ihre Ergebnisse hinsichtlich der Plausibilität von Einheiten und Vorzeichen.
+        \end{itemize}}
+    \end{problem}
+
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item Für die Leistung der Pumpe gilt
+        \begin{equation}\label{eq:6}
+            P = \dot{V}\Delta p,
+        \end{equation}
+        wobei in diesem Fall \(\Delta p = p_2 - p_1\).
+        Wenden wir die Bernoulli-Gleichung von \(0\) nach \(1\) an so ergibt sich
+        \[
+            p_a = p_1 - \frac{1}{2}\rho_W v_1^2\parentheses*{1 + 2\lambda\frac{L_1}{D_1}} - \rho_W gL_1
+        \]
+        Bernoulli von \(2\) nach \(3\) liefert
+        \[
+            p_2 + \frac{1}{2}\rho_W v_2^2 = p_3 + \frac{1}{2}\rho_W v_3^2\parentheses*{1 + \lambda\frac{L_1}{D_1}}.
+        \]
+        Durch das hydrostatische Grundgesetz wissen wir, dass
+        \[
+            p_3 = p_a + \rho_W gh.
+        \]
+        Die Kontinuitätsgleichung liefert nun zusätzlich noch, dass die Geschwindigkeiten im Rohr konstant sind, d.h. es gilt
+        \[
+            v_1 = v_2 = v_3 = v.
+        \]
+        Formen wir die beiden Bernoulli-Gleichungen nun nach den Drücken vor und nach der Pumpe um (\(p_1\) und \(p_2\)), so erhalten wir, unter Verwendung der vorherigen beiden Ergebnisse, für die Druckänderung in der Pumpe den Ausdruck
+        \begin{equation}\label{eq:7}
+            \Delta p = \rho_W g\parentheses*{h + L_1} + \frac{1}{2}\rho_W v^2\parentheses*{1 + 3\lambda\frac{L_1}{D_1}}.
+        \end{equation}
+        Mit \(v = 4\frac{\dot{V}}{\pi D_1^2}\) und \eqref{eq:7} in \eqref{eq:6} ergibt sich für die Pumpenleistung
+        \[
+            P = \dot{V}\parentheses*{\rho_W g\parentheses*{h + L_1} + 8\rho_W \parentheses*{\frac{\dot{V}}{\pi D_1^2}}^2 \parentheses*{1 + 3\lambda\frac{L_1}{D_1}}}.
+        \]
+        \item Der minimale Druck liegt direkt vor der Pumpe vor, d.h. \(p_{\text{min}} = p_1\).
+        Dieser soll nun größer als der Dampfdruck sein, d.h. es muss gelten (mit Bernoulli von \(0\) nach \(1\) aus Aufgabenteil a))
+        \[
+            p_1 = p_a + \frac{1}{2}\rho_W v^2\parentheses*{1 + 2\lambda\frac{L_1}{D_1}} - \rho_W gL_1 \stackrel{!}{>} p_D \iff v < \sqrt{\frac{2 \cdot \parentheses*{p_a - p_D - \rho_W gL_1}}{\rho_W \parentheses*{1 + 2\lambda\frac{L_1}{D_1}}}}.
+        \]
+        Damit folgt dann für den maximalen Volumenstrom
+        \[
+            \dot{V}_{\text{max}} < \frac{\pi}{4}D_1^2 v = \frac{\pi}{4}D_1^2\sqrt{\frac{2 \cdot \parentheses*{p_a - p_D - \rho_W gL_1}}{\rho_W \parentheses*{1 + 2\lambda\frac{L_1}{D_1}}}}.
+        \]
+        \item Es liegt instationäres Ausströmen vor.
+        Die Bernoulli-Gleichung von \(4\) nach \(6\) ergibt sich also zu
+        \begin{equation}\label{eq:8}
+            p_a + \rho_W gH = p_6 + \frac{1}{2}\rho_W v_6^2 + \rho_W \int_4^6 \frac{\partial v}{\partial t}\d s + \Delta p_V,
+        \end{equation}
+        mit \(p_6\parentheses*{t \ge 0} = p_a\) und
+        \[
+            \Delta p_V = \frac{1}{2}\rho_W v_5^2 \lambda\frac{L_2}{D_2} + \frac{1}{2}\rho_W v_6^2 \lambda\frac{L_3}{2D_2}.
+        \]
+        Die Kontinuitätsgleichung liefert zudem
+        \[
+            \frac{\pi}{4}D_2^2 v_5 = \frac{\pi}{4}\parentheses*{2D_2}^2 v_6 \iff v_5 = 4v_6,
+        \]
+        wodurch sich der Druckverluststerm vereinfachen lässt zu
+        \[
+            \Delta p_V = \frac{1}{2}\rho_W v_6^2 \lambda\parentheses*{\frac{L_3}{2D_2} + \frac{16L_2}{D_2}}
+        \]
+        Setzen wir dies in \eqref{eq:8} ein und nehmen zunächst einmal stationäres Ausströmen an, so ergibt sich
+        \[
+            v_{6, \text{stat}} = \sqrt{\frac{2gH}{1 + \frac{\lambda}{D_2}\parentheses*{\frac{L_3}{2} + 16L_2}}}.
+        \]
+        Für den instationären Fall gilt nun
+        \begin{equation}\label{eq:9}
+            p_a + \rho_W gH = p_a + \frac{\rho_W}{2}v_6^2 \parentheses*{1 + \frac{\lambda}{D_2}\parentheses*{L_3}{2} + 16L_2} + \rho_W \parentheses*{\int_{L_2}\frac{\partial v_5}{\partial t}\d s_5 + \int_{L_3}\frac{\partial v_6}{\partial t}\d s_6}.
+        \end{equation}
+        Sei der Übersicht halber \(K := \parentheses*{1 + \frac{\lambda}{D_2}\parentheses*{L_3}{2} + 16L_2}\), dann vereinfacht sich \eqref{eq:9} zu
+        \[
+            \rho_W gH = \frac{\rho_W}{2}v_6^2 K + \rho_W \frac{\d v_6}{\d t}\parentheses*{\parentheses*{\frac{2D_2}{D_2}}^2 L_2 + L_3} \iff v_{6, \text{stat}}^2 = \frac{2gH}{K} = v_6^2 + \frac{2}{K}\frac{\d v_6}{\d t}\parentheses*{4L_2 + L_3}.
+        \]
+        Daraus folgt dann
+        \[
+            \int_{\Delta T}\d t = \frac{2}{K}\parentheses*{4L_2 + L_3}\int_0^{\frac{1}{2}v_{6, \text{stat}}}\frac{\d v}{v_{6, \text{stat}}^2 - v^2}.
+        \]
+        Mit dem Integrationshinweis folgt daraus
+        \[
+            \Delta T = \frac{4L_2 + L_3}{Kv_{6, \text{stat}}}\ln\parentheses*{\brackets*{\frac{v_{6, \text{stat}} + v}{v_{6, \text{stat}}}}_0^{\frac{1}{2}v_{6, \text{stat}}}} = \frac{\parentheses*{4L_2 + L_3}\ln\parentheses*{3}}{\sqrt{2gH\parentheses*{1 + \frac{\lambda}{D_2}\parentheses*{\frac{L_3}{2} + 16L_2}}}}.
+        \]
+    \end{enumerate}
+
+
+    \section*{Aufgabe 3}
+
+    \begin{problem}
+        Bei einem kreisförmigen Luftkissenfahrzeug der Masse \(m\) wird von einem Gebläse mit dem Durchmesser \(d\) und der Leistung \(P\) aus der Umgebung Luft der Dichte \(\rho\) angesaugt.
+        Die Luft wird aus einem Ringspalt der Breite \(b\) und dem Durchmesser \(D\) unter dem Winkel \(\alpha\) mit der Geschwindigkeit \(v\) radial nach innen geblasen.
+        Der aus dem Spalt austretende, rund herum geschlossene Luftvorhang hält dabei im Raum unter dem Fahrzeug einen konstanten Druck \(p_i\) aufrecht, der größer als der Umgebungsdruck ist.
+        Hierdurch wird der Luftstrahl in die Horizontale nach außen umgelenkt.
+        Dabei schwebt das Fahrzeug stationär in einer Höhe \(h\) über dem Boden.
+        Die Strömung ist inkompressibel.
+        Es treten weder Verluste im Inneren des Luftkissenfahrzeugs, noch bei der Umlenkung des Luftstrahls auf.
+        \begin{enumerate}
+            \item Bestimmen Sie die Strahlgeschwindigkeit \(v\) und den Überdruck \(p_i - p_a\).
+            \item Bestimmen Sie die Gebläseleistung \(P\).
+            \item Bestimmen Sie den optimalen Winkel \(\alpha_{\text{opt}}\), vei dem die Leistung minimal wird.
+        \end{enumerate}
+        Gegeben: \(g, m, D, \rho, b, \alpha, h\)
+
+        \emph{Hinweis:
+        \begin{itemize}
+            \item \(D \gg b\)
+            \item Vernachlässigen Sie die Gewichtskraft der Luft.
+            \item Der Druck der Umgebungsluft kann über die Höhe des Luftkissenfahrzeugs als konstant angenommen werden.
+            \item Überprüfen Sie Ihre Ergebnisse hinsichtlich der Plausibilität von Einheiten und Vorzeichen.
+        \end{itemize}}
+    \end{problem}
+
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item
+        \item
+        \item
+    \end{enumerate}
+
+
+    \section*{Aufgabe 4}
+
+    \begin{problem}
+        In einem Gerinne der Breite \(B\) steht ein Wassersprung.
+        \begin{enumerate}
+            \item Skizzieren Sie den Verlauf der Energiehöhe als Funktion von \(x\) im Bereich \(x_1 \le x \le x_2\).
+            \item Die Spiegelhöhe \(z_2\) hinter dem Wassersprung beträgt \(z_2 = \frac{z_1}{2}\parentheses*{\sqrt{1 + 8Fr_1^2} - 1}\).
+            Leiten Sie diesen Zusammenhang her.
+            (Die Froude-Zahl \(Fr_1\) ist mit den Einströmgrößen in Zustand \(1\) zu bilden.)
+            \item Bestimmen Sie den Energiehöhenverlust \(\Delta H_{12}\) über den Wassersprung als Funktion der Spiegelhöhen \(z_1\), \(z_2\) und der Froude-Zahl \(Fr_1\) im Zustand \(1\).
+        \end{enumerate}
+        \emph{Hinweis: Überprüfen Sie Ihre Ergebnisse hinsichtlich der Plausibilität von Einheiten und Vorzeichen.}
+    \end{problem}
+
+    \subsection*{Lösung}
+
+
+    \section*{Aufgabe 5}
+
+    \begin{problem}
+        In einem mit Öl gefüllten vertikalen Spalt der Breite \(2B\) wird eine Platte der Tiefe \(T\) (senkrecht zur Zeichenebene), der Länge \(L\) und vernachlässigbarer Dicke mit konstanter Geschwindigkeit \(v_P\) so eingeführt, dass sie stets in der Mitte des Spaltes bleibt.
+        Durch die Schleppwirkung der Platte wird in deren Nähe Öl abwärts transportiert.
+        Aufgrund der Massenerhaltung muss im restlichen Teil des Spaltes eine entsprechende Menge Öl entgegengesetzt strömen, so dass sich das in der Skizze dargestellte Geschwindigkeitsprofil \(v\parentheses*{x}\) einstellt.
+        Für \(B \ll L\) kann die Strömung als ausgebildet betrachtet werden.
+
+        Berechnen Sie unter Voraussetzung einer ausgebildeten, laminaren Strömung eines Newtonschen Fluids
+        \begin{enumerate}
+            \item den Verlauf des Geschwindigkeitsprofils \(v\parentheses*{x}\) als Funktion des Druckgradienten \(\frac{\partial p}{\partial y}\),
+            \item den Druckgradienten \(\frac{\partial p}{\partial y}\), der sich im Spalt zwischen Platte und Wans einstellt,
+            \item die Reibkraft \(\vec{F}_R\), die das Öl auf die Platte ausübt.
+        \end{enumerate}
+
+        Gegeben: \(\rho, \eta, B, v_P, T, L, g, B \ll L\)        
+
+        \emph{Hinweis: Überprüfen Sie Ihre Ergebnisse hinsichtlich der Plausibilität von Einheiten und Vorzeichen.}
+    \end{problem}
+
+    \subsection*{Lösung}
+
+
+    \section*{Aufgabe 6}
+
+    \begin{problem}
+        \begin{enumerate}
+            \item Skizzieren Sie ein laminares und ein turbulentes Rohrströmungsprofil und erläutern Sie die Unterschiede.
+            \item Erläutern Sie den Begriff der zähen Unterschicht.
+            \item In welchem Bereich ist das logarithmische Wandgesetz gültig?
+        \end{enumerate}
+    \end{problem}
+
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item Das turbulente Geschwindigkeitsprofil ist völliger als das laminare Geschwindigkeitsprofil, da der Impulsaustausch in radialer Richtung größer ist.
+        \item Die zähe Unterschicht \(y_t\) ist eine sehr dünne, wandnahe Schicht, in der die laminaren Schubspannungen über die turbulenten Schubspannungen dominieren und die Geschwindigkeitskomponente in Strömungsrichtung linear mit dem Wandabstand ansteigt.
+        \item Das logarithmische Wandgesetz gilt erst ab einem gewissen Abstand von der Wand außerhalb der zähen Unterschicht \(y_t\).
+        Daraus ergibt sich die Bedingung, dass \(y > y_t\) sein muss.
+    \end{enumerate}
+\end{document}

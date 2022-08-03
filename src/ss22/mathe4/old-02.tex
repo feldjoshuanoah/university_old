@@ -1,0 +1,294 @@
+\documentclass{exercise}
+
+\institute{Applied and Computational Mathematics}
+\title{Altklausur 2}
+\author{Joshua Feld, 406718}
+\course{Mathematische Grundlagen IV}
+\professor{Torrilhon \& Berkels}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \section*{Aufgabe 1}
+
+    \begin{problem}
+        \begin{enumerate}
+            \item Klassifizieren Sie die PDEs
+            \begin{enumerate}
+                \item \(\partial_t u + \Delta u + u^2 = x\),
+                \item \(\partial_t u - u\partial_x u = x^2\),
+                \item \(\partial_t u - \partial_x u = x^2\),
+                \item \(\partial_{tt}u - \Delta u = 0\).
+            \end{enumerate}
+            \item Lösen Sie mit der Methode der Charakteristiken das folgende Anfangswertproblem: \(\Omega = \R^+ \times \R, a > 0, \Gamma\parentheses*{r} = \parentheses*{0, r}\) für \(r \in \R\) und \(u_0\parentheses*{r} = r^3\)
+            \begin{align*}
+                \partial_t u\parentheses*{t, x} + a\partial_x u\parentheses*{t, x} &= u\parentheses*{t, x}, \quad \text{in }\Omega,\\
+                u\parentheses*{\Gamma\parentheses*{x}} &= u_0\parentheses*{r}, \quad \text{auf }\partial\Omega.
+            \end{align*}
+        \end{enumerate}
+    \end{problem}
+
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item
+        \begin{enumerate}
+            \item
+            \item
+            \item
+            \item
+        \end{enumerate}
+        \item
+    \end{enumerate}
+
+
+    \section*{Aufgabe 2}
+
+    \begin{problem}
+        \begin{enumerate}
+            \item Zeigen Sie, dass
+            \[
+                \phi_{j, k}\parentheses*{x, y} = \cos\parentheses*{j\pi x}\sin\parentheses*{k\pi y}, \quad j = 0, 1, \ldots, k = 1, 2, \ldots
+            \]
+            die Eigenfunktionen des Laplaceoperators auf \(\Omega = \brackets*{0, 1}^2\) sind.
+            Wie lauten die Eigenwerte?
+            \item Entwickeln Sie die Funktion
+            \[
+                f\parentheses*{x, y} = \frac{1}{2}\parentheses*{\sin\parentheses*{4\pi y} - \cos\parentheses*{4\pi x}\sin\parentheses*{10\pi y}}
+            \]
+            in den Eigenfunktionen \(\phi_{j, k}\).
+            \item Geben Sie die Lösung des Anfangsrandwertproblems
+            \begin{align*}
+                \partial_t u\parentheses*{t, x, y} &= \Delta u\parentheses*{t, x, y} + f\parentheses*{x, y}, \quad \text{in }\Omega,\\
+                u\parentheses*{t, x, y} &= 0, \quad y \in \braces*{0, 1}, x \in \parentheses*{0, 1},\\
+                \partial_t u\parentheses*{t, x, y} &= 0, \quad x \in \braces*{0, 1}, y \in \parentheses*{0, 1},\\
+                u\parentheses*{t, x, y} &= 0, \quad \text{für }t = 0
+            \end{align*}
+            an.
+        \end{enumerate}
+    \end{problem}
+
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item
+        \item
+        \item
+    \end{enumerate}
+
+
+    \section*{Aufgabe 3}
+
+    \begin{problem}
+        \begin{enumerate}
+            \item Bestimmen Sie die distributionelle Ableitung der folgenden Distribution:
+            \[
+                T_f \phi := \parentheses*{f, \phi}, \quad \phi \in \mathcal{D}\parentheses*{\R},
+            \]
+            wobei
+            \[
+                f: \R \to \R, x \mapsto \begin{cases}
+                    0, & \text{falls }\absolute*{x} \ge 1,\\
+                    0, & \text{falls }x = 0,\\
+                    x + 1, & \text{falls }0 < x < 1,\\
+                    x - 1, & \text{falls }-1 < x < 0.
+                \end{cases}
+            \]
+            \item Zeigen Sie, dass partielle Ableitungen von Distributionen vertauscht werden können, analog zu klassischen Funktionen:
+            \[
+                \angles*{\frac{\partial}{\partial x_i}\frac{\partial}{\partial x_j}T, \varphi} = \angles*{\frac{\partial}{\partial x_j}\frac{\partial}{\partial x_i}T, \varphi} \quad \forall T \in \mathcal{D}'\parentheses*{\R^n}, \varphi \in \mathcal{D}\parentheses*{\R^n}.
+            \]
+            \item Finden Sie eine Lösung \(U\) der Gleichung
+            \[
+                -\Delta U = \frac{\partial}{\partial x_1}\delta, \quad \text{in }\mathcal{D}'\parentheses*{\R^3},
+            \]
+            wobei \(\delta\) die Dirac-Distribution bedeutet.
+        \end{enumerate}
+    \end{problem}
+
+
+    \section*{Aufgabe 4}
+
+    \begin{problem}
+        \begin{enumerate}
+            \item Sei \(f \in L^1\parentheses*{\R^n}\) und \(c \in \R^n\).
+            Zeigen Sie, dass
+            \[
+                \mathcal{F}\parentheses*{f\parentheses*{x + c}}\parentheses*{\zeta} = e^{i\angles*{\zeta, c}}\mathcal{F}\parentheses*{f}\parentheses*{\zeta} \quad \forall\zeta \in \R^n
+            \]
+            gilt, wobei \(\mathcal{F}\) die Fourier-Transformation bedeutet.
+            \item Seien \(f, g \in S\).
+            Zeigen Sie, dass
+            \[
+                \mathcal{F}\parentheses*{f * g} = \mathcal{F}\parentheses*{f} \cdot F\parentheses*{g},
+            \]
+            wobei \(f * g\) die Faltung von \(f\) und \(g\) bedeutet und \(S\) der Schwartzsche Raum ist.
+            \item Berechnen Sie die Fourier-Transformation der Dirac-Distribution.
+        \end{enumerate}
+    \end{problem}
+
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item
+        \item
+        \item
+    \end{enumerate}
+
+
+    \section*{Aufgabe 5}
+
+    \begin{problem}
+        Wir betrachten das Randwertproblem
+        \begin{align}
+            -\varepsilon u''\parentheses*{x} + u\parentheses*{x} &= x^4, \quad \text{für }x \in \parentheses*{0, 1},\label{eq:1}\\
+            u\parentheses*{0} = u\parentheses*{1} &= 0,\nonumber
+        \end{align}
+        für \(\varepsilon \ne 0\) und diskretisieren das Gebiet im Inneren mit einem äquidistanten Gitter mit \(N \in \N\) Gitterpunkten \(x_n\):
+        \[
+            x_n = nh, \quad h = \frac{1}{N + 1}, \quad n = 1, \ldots, N.
+        \]
+        Zur Approximation der Lösung des Randwertproblems nutzen wir die Methode der finiten Differenzen, im Speziellen:
+        \[
+            u''\parentheses*{x_n} \approx \frac{u\parentheses*{x_n + h} - 2u\parentheses*{x_n} + u\parentheses*{x_n - h}}{h^2}
+        \]
+        für \(1 \le n \le N\).
+        \begin{enumerate}
+            \item Geben Sie das resultierende lineare Gleichungssystem \(A_h u_h = b_h\) an.
+            \item Seien \(\lambda_{\text{min}}\parentheses*{A_h}\) und \(\lambda_{\text{max}}\parentheses*{A_h}\) der kleinste bzw. größte Eigenwert der Matrix \(A_h\) aus Teil a).
+            Zeigen Sie, dass
+            \[
+                \min\parentheses*{1, 1 + \frac{4\varepsilon}{h^2}} < \lambda_{\text{min}}\parentheses*{A_h}, \quad \lambda_{\text{max}}\parentheses*{A_h} < \max\parentheses*{1, 1 + \frac{4\varepsilon}{h^2}}
+            \]
+            gilt.
+            \item Zeigen Sie, dass für \(\varepsilon > 0\) die Matrix \(A_h\) für beliebiges \(N\) invertierbar ist.
+            \item Was können Sie über die Invertierbarkeit der Matrix \(A_h\) und die Lösung des Randwertproblems \eqref{eq:1} sagen, wenn \(\varepsilon = 0\)?
+        \end{enumerate}
+
+        \emph{Hinweis:
+        \begin{itemize}
+            \item Die Eigenwerte der \(N \times N\) Tridiagonalmatrix
+            \[
+                \begin{pmatrix}
+                    0 & 1 & 0 & \cdots & 0\\
+                    1 & 0 & 1 & \ddots & \vdots\\
+                    0 & 1 & \ddots & \ddots & 0\\
+                    \vdots & \ddots & \ddots & \ddots & 1\\
+                    0 & \cdots & 0 & 1 & 0
+                \end{pmatrix}
+            \]
+            lauten
+            \[
+                \lambda_n = 2\cos\parentheses*{\frac{n\pi}{N + 1}}, \quad n = 1, \ldots, N.
+            \]
+            \item Sei \(\alpha \in \R\) und \(A = \alpha I + B\), wobei \(I \in \R^{N \times N}\) die Einheitsmatrix und \(B \in \R^{N \times N}\) eine beliebige andere Matrix ist.
+            Dann gilt für das Spektrum \(\sigma\parentheses*{A}\) von \(A\):
+            \[
+                \lambda \in \sigma\parentheses*{B} \iff \parentheses*{\alpha + \lambda} \in \sigma\parentheses*{A}.
+            \]
+            \item Denken Sie an den Zusammenhang zwischen der Determinante einer Matrix und dem Produkt ihrer Eigenwerte.
+        \end{itemize}}
+    \end{problem}
+
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item 
+        \item 
+        \item 
+        \item 
+    \end{enumerate}
+
+
+    \section*{Aufgabe 6}
+
+    \begin{problem}
+        Gegeben sei das lineare Gleichungssystem \(Ax = b\) mit
+        \[
+            A = \begin{pmatrix}
+                8 & 1 & 1\\
+                2 & 7 & 1\\
+                1 & -1 & 5
+            \end{pmatrix}, \quad b = \begin{pmatrix}
+                20\\
+                26\\
+                4
+            \end{pmatrix},
+        \]
+        samt Lösung \(x^* = \parentheses*{2, 3, 1}^T\).
+        \begin{enumerate}
+            \item Begründen Sie, warum das Jacobi-Verfahren gegen die Lösung des linearen Gleichungssystems konvergiert für jeden beliebigen Startwert.
+            \item Führen Sie einen Schritt des Jacobi-Verfahrens durch.
+            Nutzen Sie den Startwert \(x_0 = \parentheses*{1, 2, 1}^T\).
+            \item Wie viele Schritte sind höchstens für das Jacobi-Verfahren notwendig, um ausgehend von \(x_0 = \parentheses*{1, 2, 1}^T\) den Fehler im Startwert in der \(\infty\)-Norm um den Faktor \(R = 10^3\) zu reduzieren?
+            \item Wie viele Schritte erwarten Sie sind notwendig in Teil c), falls man anstatt des Jacobi-Verfahrens das Gauß-Seidel Verfahren verwendet?
+            Begründen Sie Ihre Antwort.
+            Es sind keine Rechnungen nötig.
+        \end{enumerate}
+        \emph{Hinweis:
+        \begin{itemize}
+            \item Sie können in Teil c) die Näherung \(\frac{3}{7} \approx \frac{1}{2}\) verwenden.
+            \item Sei \(M = \parentheses*{m_{i, j}}_{\substack{i = 1, \ldots, m,\\j = 1, \ldots, n}} \in \R^{m \times n}\), dann gilt
+            \[
+                \norm*{M}_\infty = \max_{1 \le i \le m}\sum_{j = 1}^n \absolute*{m_{i, j}}.
+            \]
+        \end{itemize}}
+    \end{problem}
+
+
+    \section*{Aufgabe 7}
+
+    \begin{problem}
+        Bestimmen Sie zu den Daten
+        \begin{center}
+            \begin{tabular}{lcccc}
+                \toprule
+                \(x_k\) & \(0\) & \(\frac{\pi}{2}\) & \(\pi\) & \(\frac{3}{2}\pi\)\\
+                \midrule
+                \(f\parentheses*{x_k}\) & \(3\) & \(0\) & \(-1\) & \(0\)\\
+            \end{tabular}
+        \end{center}
+        ein trigonometrisches Polynom der Form
+        \[
+            T_4\parentheses*{f; x} = \sum_{j = 0}^{n - 1}d_j\parentheses*{f}e^{ijx},
+        \]
+        das die Daten interpoliert, also die Bedingung
+        \[
+            T_4\parentheses*{f; x_k} = f\parentheses*{x_k}
+        \]
+        für \(k = 0, \ldots, 3\) erfüllt.
+    \end{problem}
+
+    \subsection*{Lösung}
+
+
+    \section*{Aufgabe 8}
+
+    \begin{problem}
+        Gegeben sei die folgende Differentialgleichung
+        \[
+            u''\parentheses*{x} - u'\parentheses*{x} + u\parentheses*{x} = 2x - 1 - x^2,
+        \]
+        für \(x \in \parentheses*{0, 1}\) mit den gemischten Randbedingungen
+        \[
+            u\parentheses*{1} = 0, \quad u'\parentheses*{0} = 0.
+        \]
+        Diskretisieren Sie das Randwertproblem mittels den finiten Differenzen:
+        \begin{align*}
+            u'\parentheses*{x} &\approx \frac{u\parentheses*{x + h} - u\parentheses*{x - h}}{2h},\\
+            u''\parentheses*{x} &\approx \frac{u\parentheses*{x + h} - 2u\parentheses*{x} + u\parentheses*{x - h}}{h^2},
+        \end{align*}
+        auf einem gleichmäßigen Gitter mit Schrittweite \(h = \frac{1}{N}\) und Gitterpunkten \(x_n = nh, n = 0, \ldots, N\).
+        Approximieren Sie die Ableitung am linken Randpunkt mithilfe eines zusätzlichen (fiktiven) Punktes außerhalb des Gebiets, den Sie hinterher wieder geeignet entfernen.
+        \begin{enumerate}
+            \item Geben Sie das resultierende lineare Gleichungssystem \(A_h y_h = b_h\) an.
+            \item Die exakte Lösung des Randwertproblems lautet \(u\parentheses*{x} = 1 - x^2\).
+            Bestimmen Sie den Konsistenzfehler der finiten Differenz Methode bzgl. der \(\infty\)-Norm.
+        \end{enumerate}
+    \end{problem}
+
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item
+        \item
+    \end{enumerate}
+\end{document}

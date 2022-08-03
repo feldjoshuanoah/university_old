@@ -1,0 +1,242 @@
+\documentclass{exercise}
+
+\institute{Applied and Computational Mathematics}
+\title{Altklausur 1}
+\author{Joshua Feld, 406718}
+\course{Mathematische Grundlagen IV}
+\professor{Torrilhon \& Berkels}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \section*{Aufgabe 1}
+
+    \begin{problem}
+        Gegeben sei die Gleichung
+        \begin{align*}
+            u_x\parentheses*{x, y} + 2yu_y\parentheses*{x, y} &= y, \quad x \in \R^+, y \in \R,\\
+            u\parentheses*{0, y} &= y, \quad y \in \R.
+        \end{align*}
+        \begin{enumerate}
+            \item Bestimmen Sie die Charakteristiken der Gleichung.
+            \item Bestimmen Sie die Lösung der Gleichung.
+            \begin{enumerate}
+                \item Formulieren Sie dazu zunächst die Differentialgleichung, die die Lösung entlang der Charakteristiken erfüllt.
+                \item Lösen Sie anschließend diese Differentialgleichung.
+            \end{enumerate}
+            \item Überprüfen Sie, ob die in b) bestimmte Lösung die Gleichung erfüllt.
+        \end{enumerate}
+    \end{problem}
+
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item
+        \item
+        \begin{enumerate}
+            \item
+            \item
+        \end{enumerate}
+        \item
+    \end{enumerate}
+
+
+    \section*{Aufgabe 2}
+
+    \begin{problem}
+        \begin{enumerate}
+            \item Bestimmen Sie die distributionelle Ableitung der folgenden Distribution:
+            \[
+                \angles*{T_f, \varphi} = \int_\R f\parentheses*{x}\varphi\parentheses*{x}\d x \quad \forall\varphi \in \mathcal{D}\parentheses*{\R},
+            \]
+            mit
+            \[
+                f: \R \to \R, x \mapsto \begin{cases}
+                    x^2, & \text{falls }\absolute*{x} \ge 1,\\
+                    0, & \text{sonst}.
+                \end{cases}
+            \]
+            \item Zeigen Sie, dass partielle Ableitungen von Distributionen vertauscht werden können, analog zu klassischen Funktionen:
+            \[
+                \angles*{\frac{\partial}{\partial x_i}\frac{\partial}{\partial x_j}T, \varphi} = \angles*{\frac{\partial}{\partial x_j}\frac{\partial}{\partial x_i}T, \varphi} \quad \forall T \in \mathcal{D}'\parentheses*{\R^n}, \varphi \in \mathcal{D}\parentheses*{\R^n}.
+            \]
+            \item Zeigen Sie, dass \(T_H' = \delta\), wobei
+            \[
+                H: \R \to \R, x \mapsto \begin{cases}
+                    1, & \text{falls }x > 0,\\
+                    0, & \text{falls }x \le 0
+                \end{cases}
+            \]
+            die Heaviside-Funktion und \(\delta\) die Dirac-Distribution sind.
+        \end{enumerate}
+    \end{problem}
+
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item
+        \item
+        \item
+    \end{enumerate}
+
+
+    \section*{Aufgabe 3}
+
+    \begin{problem}
+        Bestimmen Sie die Fouriertransformierten folgender Funktionen:
+        \begin{enumerate}
+            \item \(f\parentheses*{x} = e^{-\frac{x^2}{2}}\),
+            \item \(f\parentheses*{x} = H\parentheses*{1 - x^2}\).
+            Dabei ist \(H\) die Heaviside-Funktion
+            \[
+                H: \R \to \R, x \mapsto \begin{cases}
+                    1, & \text{falls }x > 0,\\
+                    0, & \text{falls }x \le 0.
+                \end{cases}
+            \]
+        \end{enumerate}
+        \emph{Hinweis: \(\int_\R e^{-\frac{x^2}{2}}\d x = \sqrt{2\pi}\).}
+    \end{problem}
+
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item
+        \item
+    \end{enumerate}
+
+
+    \section*{Aufgabe 4}
+
+    \begin{problem}
+        Gegeben sei die Funktionenfolge
+        \[
+            f_k\parentheses*{x} = \sqrt{x^2 + \frac{1}{k}} \quad \text{für} \quad x \in \Omega = \parentheses*{-1, 1}, k = 1, 2, \ldots
+        \]
+        \begin{enumerate}
+            \item Zeigen Sie, dass \(f_k \in C^1\parentheses*{\Omega}\) für alle \(k = 1, 2, \ldots\) gilt und bestimmen Sie die \(\infty\)-Norm
+            \[
+                \norm*{f_k}_\infty = \sup_{x \in \Omega}\absolute*{f_k\parentheses*{x}}.
+            \]
+            \item Zeigen Sie, dass \(\parentheses*{f_k}_{k \in \N}\) bezüglich dieser Norm eine Cauchyfolge ist.
+            \item Zeigen Sie, dass der Grenzwert nicht in \(\parentheses*{C^1, \norm*{\cdot}_\infty}\) liegt.
+            \item Folgern Sie, dass \(\parentheses*{C^1, \norm*{\cdot}_\infty}\) kein Banachraum ist.
+        \end{enumerate}
+    \end{problem}
+
+    \subsection*{Lösung}
+
+
+    \section*{Aufgabe 5}
+
+    \begin{problem}
+        Bestimmen Sie zu den Daten
+        \begin{center}
+            \begin{tabular}{lcccc}
+                \toprule
+                \(k\) & \(0\) & \(1\) & \(2\) & \(3\)\\
+                \midrule
+                \(x_k\) & \(0\) & \(\frac{\pi}{2}\) & \(\pi\) & \(\frac{3}{2}\pi\)\\
+                \(f\parentheses*{x_k}\) & \(3\) & \(1\) & \(2\) & \(3\)\\
+            \end{tabular}
+        \end{center}
+        ein trigonometrisches Polynom der Form
+        \[
+            T_4\parentheses*{f; x} = \sum_{j = 0}^{n - 1}d_j\parentheses*{f}e^{ijx},
+        \]
+        das die Daten interpoliert, also die Bedingung
+        \[
+            T_4\parentheses*{f; x_k} = f\parentheses*{x_k}
+        \]
+        für \(k = 0, \ldots, 3\) erfüllt.
+    \end{problem}
+
+    \subsection*{Lösung}
+
+
+    \section*{Aufgabe 6}
+
+    \begin{problem}
+        Gegeben ist das Konvektions-Diffusionsproblem: Gesucht ist \(u \in C^2\parentheses*{0, 1}\) mit
+        \begin{align*}
+            -u''\parentheses*{x} + 10u'\parentheses*{x} + u\parentheses*{x} &= f\parentheses*{x}, \quad \text{für }x \in \parentheses*{0, 1},\\
+            u\parentheses*{0} = u\parentheses*{1} &= 0.
+        \end{align*}
+        Dieses Problem soll mithilfe einer finite Differenzen Methode auf einem regelmäßigen Gitter der Schrittweite \(h\) und den Gitterpunkten \(0 = x_0 < x_1 < \cdots < x_n = 1\) approximiert und in ein lineares Gleichungssystem der Form \(A_h u_h = b_h\) überführt werden.
+        Dazu sollen die Differenzenquotienten
+        \begin{align*}
+            u'\parentheses*{x_i} &\approx \frac{u\parentheses*{x_{i + 1}} - u\parentheses*{x_{i - 1}}}{2h},\\
+            u''\parentheses*{x_i} &\approx \frac{u\parentheses*{x_{i + 1}} - 2u\parentheses*{x_i} + u\parentheses*{x_{i - 1}}}{h^2}
+        \end{align*}
+        benutzt werden.
+        \begin{enumerate}
+            \item Bestimmen Sie \(A_h\) und \(b_h\).
+            \item Geben Sie eine Bedingung an, unter der \(A_h\) diagonaldominant ist.
+            \item Wie müsste das Problem diskretisiert werden, um ohne Zusatzbedingung eine diagonaldominante Matrix \(A_h\) zu erhalten?
+            Wie sähe die Matrix aus?
+        \end{enumerate}
+    \end{problem}
+
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item
+        \item
+        \item
+    \end{enumerate}
+
+
+    \section*{Aufgabe 7}
+
+    \begin{problem}
+        \begin{enumerate}
+            \item Bestimmen Sie die Koeffizienten \(a\), \(b\) und \(c\), so dass die finite Differenz
+            \[
+                af\parentheses*{x} + bf\parentheses*{x + h} + cf\parentheses*{x + 2h} \approx f'\parentheses*{x}
+            \]
+            die erste Ableitung von \(f\) an der Stelle \(x\) mit möglichst hoher Ordnung approximiert.
+            Bestimmen Sie die Konsistenzordnung.
+            \item Gegeben sei folgende Approximation von \(f''\parentheses*{x}\) für ausreichend glattes \(f\):
+            \[
+                \frac{2}{h_1 + h_2}\parentheses*{\frac{f\parentheses*{x + h_2} - f\parentheses*{x}}{h_2} - \frac{f\parentheses*{x} - f\parentheses*{x - h_1}}{h_1}}.
+            \]
+            Bestimmen Sie die Konsistenzordnung.
+        \end{enumerate}
+    \end{problem}
+
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item
+        \item
+    \end{enumerate}
+
+
+    \section*{Aufgabe 8}
+
+    \begin{problem}
+        Gegeben seien die beiden Matrizen
+        \[
+            A = \begin{pmatrix}
+                1 & 0 & 1\\
+                0 & 2 & 0\\
+                1 & 0 & 2
+            \end{pmatrix}, \quad B = \begin{pmatrix}
+                1 & -1\\
+                -1 & 2
+            \end{pmatrix}.
+        \]
+        \begin{enumerate}
+            \item Führen Sie zwei Schritte des konjugierten Gradientenverfahrens (CG) zur Lösung des Gleichungssystems \(Ax = b\) mit rechter Seite \(b = \parentheses*{2, 1, 0}^T\) und dem Startvektor \(x_0 = \parentheses*{0, 0, 0}^T\) durch, d.h. berechnen Sie \(x_2\).
+            \item Bestimmen Sie die Iterationsmatrix \(T\) des Gauß-Seidel-Verfahrens für die Matrix \(B\).
+            \item Konvergiert das Gauß-Seidel-Verfahren für die Matrix \(B\) für beliebige Startvektoren?
+            Erklären Sie Ihre Antwort mithilfe von Aufgabenteil b).
+            \item Wie viele Schritte des Gauß-Seidel-Verfahrens sind bei der Matrix \(B\) nötig, um den Startfehler garantiert um den Faktor \(R = 1024\) zu reduzieren?
+            D.h. geben Sie ein möglichst kleines \(k\) an, so dass für beliebige Startvektoren \(x_0\) gilt:
+            \[
+                \norm*{x_k - x}_\infty < \frac{1}{1024}\norm*{x_0 - x}_\infty.
+            \]
+            \emph{Hinweis: Betrachten Sie die quadrierte Iterationsmatrix \(T^2\), die zwei Schritten des Gauß-Seidel-Verfahrens entspricht.}
+        \end{enumerate}
+    \end{problem}
+
+    \subsection*{Lösung}
+\end{document}

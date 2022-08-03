@@ -1,0 +1,240 @@
+\documentclass{exercise}
+
+\institute{Applied and Computational Mathematics}
+\title{Altklausur 3}
+\author{Joshua Feld, 406718}
+\course{Mathematische Grundlagen IV}
+\professor{Torrilhon \& Berkels}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \section*{Aufgabe 1}
+    
+    \begin{problem}
+        Sei \(\Omega = \R^+ \times \R\).
+        Sei \(u_0\parentheses*{x} = 1 - x\) und \(\Gamma\parentheses*{r} = \parentheses*{0, r}, r \in \R\).
+        Berechnen Sie die Lösung des Anfangswertproblems
+        \begin{align*}
+            \partial_t u - u\partial_x u &= 0, \quad \text{auf }\Omega,\\
+            u\parentheses*{\Gamma\parentheses*{r}} &= u_0\parentheses*{r}, \quad r \in \R
+        \end{align*}
+        und überprüfen Sie explizit, ob die Anfangsbedingung sowie die PDE erfüllt ist.
+    \end{problem}
+    
+    \subsection*{Lösung}
+
+
+    \section*{Aufgabe 2}
+    
+    \begin{problem}
+        \begin{enumerate}
+            \item Zeigen Sie, dass
+            \[
+                \phi_{j, k}\parentheses*{x, y} = 2\sin\parentheses*{j\pi x}\sin\parentheses*{k\pi y}, \quad j, k = 1, 2, \ldots
+            \]
+            die Eigenfunktionen des Laplaceoperators auf \(\Omega = \brackets*{0, 1}^2\) mit Nullrandbedingungen sind.
+            Wie lauten die Eigenwerte?
+            \item Entwickeln Sie die Funktion
+            \[
+                f\parentheses*{x, y} = x\parentheses*{1 - x}y\parentheses*{1 - y}
+            \]
+            in den Eigenfunktionen \(\phi_{j, k}\).
+            \item Geben Sie die Lösung des Anfangsrandwertproblems
+            \begin{align*}
+                \partial_t u &= \Delta u + f, \quad \text{in }\Omega,\\
+                u &= 0, \quad \text{auf }\partial\Omega,\\
+                u &= 0, \quad \text{bei }t = 0
+            \end{align*}
+            an.
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item
+        \item
+        \item
+    \end{enumerate}
+
+
+    \section*{Aufgabe 3}
+    
+    \begin{problem}
+        \begin{enumerate}
+            \item Bestimmen Sie die distributionelle Ableitung der folgenden Distribution:
+            \[
+                T_f \phi := \angles*{f, \phi},
+            \]
+            wobei
+            \[
+                f: \R \to \R, x \mapsto \begin{cases}
+                    0, & \text{falls }x < 0,\\
+                    1 + x + x^2, & \text{falls }x \ge 0.
+                \end{cases}
+            \]
+            Dabei ist \(\phi \in \mathcal{D}'\parentheses*{\R}\).
+            \item Zeigen Sie: Eine Fundamentallösung der Differentialgleichung
+            \[
+                -\frac{\d^2}{\d x^2}u\parentheses*{x} = f\parentheses*{x}, \quad x \in \R
+            \]
+            ist
+            \[
+                G\parentheses*{x} = -\frac{1}{2}\absolute*{x},
+            \]
+            d.h. es gilt im distributionellen Sinne
+            \[
+                -\frac{\d^2}{\d x^2}G = \delta.
+            \]
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item
+        \item
+    \end{enumerate}
+
+
+    \section*{Aufgabe 4}
+    
+    \begin{problem}
+        \begin{enumerate}
+            \item Seien \(X, Y\) zwei normierte Vektorräume und \(T: X \to Y\) eine lineare Abbildung.
+            Geben Sie die Definition eines linearen Operators an und beweisen Sie, dass
+            \[
+                T\text{ beschränkt} \iff T\text{ stetig}.
+            \]
+            \item Gegeben sei die wesentlich beschränkte Funktion \(V: \R \to \R, V \in L^\infty\parentheses*{\R}\).
+            Betrachten Sie den Multiplikationsoperator
+            \[
+                T: L^2\parentheses*{\R} \to L^2\parentheses*{\R}, f \mapsto Vf,
+            \]
+            wobei \(Vf\) eine Multiplikation im Lebesgue-Sinne mit \(\parentheses*{Vf}\parentheses*{x} = V\parentheses*{x} \cdot f\parentheses*{x}\) a.e. darstellt.
+            Zeigen Sie
+            \begin{enumerate}
+                \item \(T\) ist selbstadjungiert,
+                \item \(T\) ist stetig.
+            \end{enumerate}
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+
+
+    \section*{Aufgabe 5}
+    
+    \begin{problem}
+        Bestimmen Sie zu den Daten
+        \begin{center}
+            \begin{tabular}{lcccc}
+                \toprule
+                \(x_k\) & \(0\) & \(\frac{\pi}{2}\) & \(\pi\) & \(\frac{3}{2}\pi\)\\
+                \midrule
+                \(f\parentheses*{x_k}\) & \(6\) & \(2 + 2i\) & \(2\) & \(2 - 2i\)\\
+            \end{tabular}
+        \end{center}
+        ein trigonometrisches Polynom der Form
+        \[
+            T_4\parentheses*{f; x} = \sum_{j = 0}^{n - 1}d_j\parentheses*{f}e^{ijx},
+        \]
+        das die Daten interpoliert, also die Bedingung
+        \[
+            T_4\parentheses*{f; x_k} = f\parentheses*{x_k}
+        \]
+        für \(k = 0, \ldots, 3\) erfüllt.
+    \end{problem}
+    
+    \subsection*{Lösung}
+
+
+    \section*{Aufgabe 6}
+
+    \begin{problem}
+        Gegeben ist das Konvektions-Diffusionsproblem: Gesucht ist \(u \in C^2\parentheses*{0, 1}\) mit
+        \begin{align*}
+            -\frac{1}{\pi^2}u''\parentheses*{x} + u'\parentheses*{x} &= f\parentheses*{x}, \quad \text{für }x \in \parentheses*{0, 1},\\
+            u\parentheses*{0} = u\parentheses*{1} &= 0.
+        \end{align*}
+        Dieses Problem soll mithilfe einer finite Differenzen Methode auf einem regelmäßigen Gitter der Schrittweite \(h\) und den Gitterpunkten \(0 = x_0 < x_1 < \cdots < x_n = 1\) approximiert und in ein lineares Gleichungssystem der Form \(A_h u_h = b_h\) überführt werden.
+        Dazu sollen die Differenzenquotienten
+        \begin{align*}
+            u'\parentheses*{x_i} &\approx \frac{u\parentheses*{x_{i + 1}} - u\parentheses*{x_i}}{h},\\
+            u''\parentheses*{x_i} &\approx \frac{u\parentheses*{x_{i + 1}} - 2u\parentheses*{x_i} + u\parentheses*{x_{i - 1}}}{h^2}
+        \end{align*}
+        benutzt werden.
+        \begin{enumerate}
+            \item Bestimmen Sie \(A_h\) und \(b_h\).
+            \item Geben Sie eine Bedingung an, unter der \(A_h\) diagonaldominant ist.
+            \item Wie müsste das Problem diskretisiert werden, um ohne Zusatzbedingung eine diagonaldominante Matrix \(A_h\) zu erhalten?
+            Wie sähe die Matrix aus?
+        \end{enumerate}
+    \end{problem}
+
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item
+        \item
+        \item
+    \end{enumerate}
+
+
+    \section*{Aufgabe 7}
+    
+    \begin{problem}
+        Gegeben sei das lineare Gleichungssystem \(Ax = b\) mit
+        \[
+            A = \begin{pmatrix}
+                2 & -1 & 1\\
+                -1 & 2 & -1\\
+                1 & -1 & 2
+            \end{pmatrix}, \quad b = \begin{pmatrix}
+                4\\
+                -1\\
+                7
+            \end{pmatrix}.
+        \]
+        Das lineare Gleichungssystem hat die Lösung \(x = \parentheses*{1, 2, 4}^T\).
+        \begin{enumerate}
+            \item Führen Sie jeweils einen Schritt des Jacobi- und des Gauß-Seidel-Verfahrens mit dem Startvektor \(x^0 = \parentheses*{1, 1, 1}^T\) durch.
+            \item Gegeben sei nun die Richardson-Methode
+            \[
+                x^{k + 1} = x^k + \omega\parentheses*{b - Ax^k}
+            \]
+            für das Gleichungssystem \(Ax = b\).
+            \begin{enumerate}
+                \item Für welche Werte \(\omega\) konvergiert die Methode?
+                \item Wie lautet der optimale Wert für \(\omega\), sodass das Verfahren unabhängig vom Startvektor \(x^0\) am schnellsten konvergiert?
+            \end{enumerate}
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+
+
+    \section*{Aufgabe 8}
+    
+    \begin{problem}
+        \begin{enumerate}
+            \item Gegeben sei folgende Approximation von \(f''\parentheses*{x}\) für ausreichend glattes \(f\):
+            \[
+                \frac{2}{h_1 + h_2}\parentheses*{\frac{f\parentheses*{x + h_2} - f\parentheses*{x}}{h_2} - \frac{f\parentheses*{x} - f\parentheses*{x - h_1}}{h_1}}.
+            \]
+            Bestimmen Sie die Ordnung dieser finiten Differenz als Approximation von \(f''\).
+            \item Die erste Ableitung einer Funktion \(u\) an der Stelle \(\xi\) soll mithilfe einer finiten Differenz, die die Funktionsauswertungen von \(u\) an den Stellen \(\xi\), \(\xi + h_1\) und \(\xi + h_1 + h_2\) benutzt, approximiert werden, d.h.
+            \[
+                u'\parentheses*{\xi} = au\parentheses*{\xi} + bu\parentheses*{\xi + h_1} + cu\parentheses*{\xi + h_1 + h_2} + R\parentheses*{u, h},
+            \]
+            wobei \(h = \max\parentheses*{h_1, h_2}\) und \(R\parentheses*{u, h} = \mathcal{O}\parentheses*{h^p}\) der Fehler der finiten Differenz ist.
+            Bestimmen Sie \(a, b, c\) so, dass \(p\) maximal wird.
+            Wie groß ist dieses?
+
+            \emph{Hinweis: Entwickeln Sie \(u\) un die Stelle \(\xi\).}
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+\end{document}
