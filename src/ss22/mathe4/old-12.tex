@@ -1,0 +1,555 @@
+\documentclass{exercise}
+
+\institute{Applied and Computational Mathematics}
+\title{Altklausur 12}
+\author{Joshua Feld, 406718}
+\course{Mathematische Grundlagen IV}
+\professor{Torrilhon \& Berkels}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \section*{Aufgabe 1}
+    
+    \begin{problem}
+        \begin{enumerate}
+            \item Zeigen Sie, dass
+            \begin{align*}
+                \partial_t u + \partial_x u + 2\partial_x v &= 0,\\
+                \partial_t v + \alpha\partial_x u - \partial_x v &= 0
+            \end{align*}
+            genau dann ein hyperbolisches System ist, wenn \(\alpha > -\frac{1}{2}\).
+            \item Lösen Sie das zugehörige Anfangswertproblem für \(\alpha = \frac{3}{2}\) mit dem Anfangsbedingungen
+            \[
+                u_0\parentheses*{x} = x, \quad v_0\parentheses*{x} = x^2.
+            \]
+            \item Welche Bedeutung haben die Eigenwerte der Jacobi-Matrix des hyperbolischen Systems in der Lösung?
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item
+        \item
+        \item
+    \end{enumerate}
+
+
+    \section*{Aufgabe 2}
+    
+    \begin{problem}
+        Lösen Sie das Randwertproblem
+        \begin{align*}
+            \Delta u\parentheses*{x, y} &= 0, \quad \text{in }\Omega = \parentheses*{0, 1}^2,\\
+            u\parentheses*{0, y} &= 0, \quad y \in \parentheses*{0, 1},\\
+            u_x\parentheses*{1, y} &= \sin\parentheses*{2\pi y}, \quad y \in \parentheses*{0, 1},\\
+            u_y\parentheses*{x, 0} &= 0, \quad x \in \parentheses*{0, 1},\\
+            u_y\parentheses*{x, 1} &= 0, \quad x \in \parentheses*{0, 1}.
+        \end{align*}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    Wir lösen dieses Randwertproblem mit dem Separationsansatz:
+    \[
+        u\parentheses*{x, y} = X\parentheses*{x} \cdot Y\parentheses*{y}, \quad X, Y \ne 0.
+    \]
+    Einsetzen in die DGL liefert
+    \[
+        Y\parentheses*{y}X''\parentheses*{x} + X\parentheses*{x}Y''\parentheses*{y} = 0 \iff \underbrace{\frac{X''\parentheses*{x}}{X\parentheses*{x}}}_{\text{nur abh. von }x} + \underbrace{\frac{Y''\parentheses*{y}}{Y\parentheses*{y}}}_{\text{nur abh. von }y} = 0.
+    \]
+    Diese Gleichung kann nur erfüllt werden, wenn
+    \begin{align*}
+        \frac{X''}{X} = \lambda^2 &\iff X''\parentheses*{x} - \lambda^2 X\parentheses*{x} = 0, \quad \lambda \in \R^+,\\
+        \frac{Y''}{Y} = -\lambda^2 &\iff Y''\parentheses*{y} + \lambda^2 Y\parentheses*{y} = 0, \quad \lambda \in \R^+.\\
+    \end{align*}
+    Die Lösungen der ODEs sind somit
+    \begin{align*}
+        \chi_1\parentheses*{t} = t^2 - \lambda^2 = 0 \implies t_{1, 2} = \pm\lambda &\implies X\parentheses*{x} = \tilde{C}_1 e^{\lambda x} + \tilde{C}_2 e^{-\lambda x} = C_1 \sinh\parentheses*{\lambda x} + C_2 \cosh\parentheses*{\lambda x},\\
+        \chi_2\parentheses*{t} = t^2 + \lambda^2 = 0 \implies t_{1, 2} = \pm i\lambda &\implies Y\parentheses*{y} = \tilde{C}_3 e^{i\lambda y} + \tilde{C}_4 e^{-i\lambda y} = C_3 \sin\parentheses*{\lambda y} + C_4 \cos\parentheses*{\lambda y}.
+    \end{align*}
+    Um die Konstanten \(C_i, i \in \braces*{1, \ldots, 4}\) zu bestimmen, betrachten wir nun die zusätzlich gegebenen Randbedingungen, wobei wir mit der ersten Bedingung (\(u\parentheses*{0, y} = 0, y \in \parentheses*{0, 1}\)) starten:
+    \[
+        u\parentheses*{0, y} = X\parentheses*{0} \cdot Y\parentheses*{y} = \parentheses*{C_1 \sinh\parentheses*{0} + C_2 \cosh\parentheses*{0}}Y\parentheses*{y} = C_2 Y\parentheses*{y} = 0 \xRightarrow{Y \ne 0} C_2 = 0.
+    \]
+    Insbesondere gilt somit auch \(C_1 \ne 0\), weil \(X \ne 0\).
+    Als nächstes betrachten wir
+    \[
+        u_y\parentheses*{x, 0} = X\parentheses*{x} \cdot \partial_y Y\parentheses*{0} = C_1 \sin\parentheses*{\lambda x}\parentheses*{C_3 \lambda\cos\parentheses*{0} - C_4 \lambda\sin\parentheses*{0}} = C_1\sinh\parentheses*{\lambda x}C_3 \lambda = 0 \xRightarrow{C_1, \lambda \ne 0} C_3 = 0
+    \]
+    und auch hier folgt direkt \(C_4 \ne 0\), weil \(Y \ne 0\).
+    Die folgende Randbedingung liefert
+    \[
+        u_y\parentheses*{x, 1} = X\parentheses*{x}\partial_y Y\parentheses*{1} = C_1 \sinh\parentheses*{\lambda x}\parentheses*{-C_4 \sin\parentheses*{\lambda}} = 0 \xRightarrow{C_1, C_4 \ne 0, \lambda > 0} \lambda_n = n\pi, \quad n \in \N.
+    \]
+    Die zweite Bedingung liefert nun
+    \[
+        u_x\parentheses*{1, y} = \partial_x X\parentheses*{1} \cdot Y\parentheses*{y} = C_1 n\pi\cosh\parentheses*{n\pi} \cdot C_4 \cos\parentheses*{n\pi y} = \cos\parentheses*{2\pi y} \implies n = 2, C_1 = \frac{1}{2\pi\cosh\parentheses*{2\pi}}, C_4 = 1.
+    \]
+    Insgesamt ergibt sich somit als eindeutige Lösung
+    \[
+        u\parentheses*{x, y} = \frac{1}{2\pi\cosh\parentheses*{2\pi}}\sinh\parentheses*{2\pi x}\cos\parentheses*{2\pi y}.
+    \]
+
+
+    \section*{Aufgabe 3}
+    
+    \begin{problem}
+        Gegeben ist das Problem
+        \begin{align*}
+            \partial_t u\parentheses*{x, t} &= \partial_{xx}u\parentheses*{x, t} - u\parentheses*{x, t} + \sin\parentheses*{\pi x}, \quad x \in \parentheses*{0, 1}, t > 0,\\
+            u\parentheses*{0, t} &= 0, \quad t > 0,\\
+            u_x\parentheses*{1, t} &= 0, \quad t > 0,\\
+            u\parentheses*{x, 0} &= a, \quad x \in \parentheses*{0, 1}
+        \end{align*}
+        mit einer konstanten Anfangsbedingung \(a \in \R\).
+        \begin{enumerate}
+            \item Berechnen Sie die zugehörigen Eigenwerte und die normierten Eigenfunktionen.
+            \item Entwickeln Sie die Anfangsbedingung und den Quellterm in Eigenfunktionen.
+            \item Berechnen Sie die Lösung des Problems mit dem Eigenfunktionen-Ansatz.
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item Wir lösen die folgende Gleichung, um die Eigenvektoren und -werte zu finden:
+        \begin{align*}
+            \varphi''\parentheses*{x} + \lambda\varphi\parentheses*{x} &= 0, \quad x \in \parentheses*{0, 1},\\
+            \varphi\parentheses*{0} = \varphi_x\parentheses*{1} =& 0.
+        \end{align*}
+        \[
+            \implies \varphi\parentheses*{x} = C_1 \sin\parentheses*{\sqrt{\lambda}x} + C_2 \cos\parentheses*{\sqrt{\lambda}x}.
+        \]
+        Mit den Randbedingungen für \(\varphi\) erhält man
+        \begin{align*}
+            0 = \varphi\parentheses*{0} = C_2 &\implies C_2 = 0,\\
+            0 = \varphi_x\parentheses*{1} = C_1 \sqrt{\lambda}\cos\parentheses*{\sqrt{\lambda}} &\implies \lambda_k = \parentheses*{\frac{\parentheses*{2k + 1}\pi}{2}}^2, \quad k \in \N
+        \end{align*}
+        \[
+            \implies \varphi_k\parentheses*{x} = C_1\sin\parentheses*{\frac{\parentheses*{2k + 1}\pi}{2}x}, \quad k \in \N.
+        \]
+        Die Konstante \(C_1\) erhalten wir aus der Normalisierung von \(\varphi_k\parentheses*{x}\):
+        \[
+            1 \stackrel{!}{=} \int_0^1 \varphi_k\parentheses*{x}^2 \d x = C_1^2 \int_0^1 \sin^2\parentheses*{\frac{\parentheses*{2k + 1}\pi}{2}x}\d x = \frac{1}{2}C_1^2 \implies C_1 = \sqrt{2}.
+        \]
+        Die Eigenfunktionen lauten somit
+        \[
+            \varphi_k\parentheses*{x} = \sqrt{2}\sin\parentheses*{\sqrt{\lambda_k}x} \quad \text{und} \quad \sqrt{\lambda_k} = \frac{\parentheses*{2k + 1}\pi}{2}, \quad k \in \N.
+        \]
+        \item Wir betrachten eine konstante Funktion \(a\parentheses*{x, t} = a\):
+        \[
+            a = \sum_{k = 1}^\infty \beta_k \varphi_k\parentheses*{x} = \sum_{k = 1}^\infty \beta_k \sqrt{2}\sin\parentheses*{\frac{\parentheses*{2k + 1}\pi}{2}x}.
+        \]
+        Die Expansionskoeffizienten sind dann
+        \[
+            \beta_k = \int_0^1 a\sqrt{2}\sin\parentheses*{\frac{\parentheses*{2k + 1}\pi}{2}x}\d x = \frac{2\sqrt{2}a}{\pi\parentheses*{2k + 1}}, \quad k \in \N.
+        \]
+        Die Spektralzerlegung für \(\sin\parentheses*{\pi x}\) ergibt sich somit zu
+        \[
+            \sin\parentheses*{\pi x} = \sum_{k = 1}^\infty \gamma_k \sqrt{2}\sin\parentheses*{\frac{\parentheses*{2k + 1}\pi}{2}x}
+        \]
+        mit
+        \[
+            \gamma_k = \int_0^1 \sin\parentheses*{\pi x}\sqrt{2}\sin\parentheses*{\frac{\parentheses*{2k + 1}\pi}{2}x}\d x = -\frac{4\sqrt{2}\parentheses*{-1}^k}{\parentheses*{4k^2 + 4k - 3}\pi}.
+        \]
+        \item Wir betrachten nun den Ansatz
+        \[
+            u\parentheses*{x, t} = \sum_{k = 1}^\infty \alpha_k\parentheses*{t}\varphi_k\parentheses*{t}.
+        \]
+        Setzen wir nun alle Expansionen aus den vorherigen Teilaufgaben ein, so erhalten wir
+        \begin{align*}
+            \parentheses*{\sum_{k = 1}^\infty \alpha_k\parentheses*{t}\varphi_k\parentheses*{x}}_t &= \parentheses*{\sum_{k = 1}^\infty \alpha_k\parentheses*{t}\varphi_k\parentheses*{x}}_{xx} - \sum_{k = 1}^\infty \alpha_k\parentheses*{t}\varphi_k\parentheses*{x} + \sum_{k = 1}^{\infty}\gamma_k \varphi_k\parentheses*{x}\\
+            \iff \sum_{k = 1}^\infty \alpha_k'\parentheses*{t}\varphi_k\parentheses*{x} &= -\sum_{k = 1}^\infty \alpha_k\parentheses*{t}\lambda_k \varphi_k\parentheses*{x} - \sum_{k = 1}^\infty \alpha_k\parentheses*{t}\varphi_k\parentheses*{x} + \sum_{k = 1}^\infty \gamma_k \varphi_k\parentheses*{x}\\
+            \iff 0 &= \sum_{k = 1}^\infty \parentheses*{\alpha_k'\parentheses*{t} + \parentheses*{\lambda_k + 1}\alpha_k\parentheses*{t} - \gamma_k}\varphi_k\parentheses*{x}.
+        \end{align*}
+        Da die \(\varphi_k\parentheses*{x}\) linear unabhängig sind, ergibt sich der Ausdruck
+        \[
+            \alpha_k'\parentheses*{t} = -\parentheses*{\lambda_k + 1}\alpha_k\parentheses*{t} + \gamma_k,
+        \]
+        welcher die folgende Lösung hat:
+        \[
+            \alpha_k\parentheses*{t} = \frac{\gamma_k}{\lambda_k + 1} + C_k e^{-\parentheses*{\lambda_k + 1}t}.
+        \]
+        Die Konstante \(C_k\) können wir bestimmen, indem wir die Anfangsbedingung verwenden
+        \begin{align*}
+            u\parentheses*{x, 0} = \sum_{k = 1}^\infty \alpha_k\parentheses*{0}\sqrt{2}\sin\parentheses*{\frac{\parentheses*{2k + 1}\pi}{2}\pi x} \stackrel{!}{=} a &\implies \alpha_k\parentheses*{0} = C_k + \frac{\gamma_k}{\lambda_k + 1} = \beta_k\\
+            &\implies C_k = \beta_k - \frac{\gamma_k}{\lambda_k + 1}.
+        \end{align*}
+        Unter Verwendung der zuvor bestimmten Ausdrücke fü \(\beta_k\), \(\gamma_k\) und \(\lambda_k\) erhalten wir schlussendlich
+        \[
+            C_k = \frac{2\sqrt{2}a}{\pi\parentheses*{2k + 1}} + \frac{16\sqrt{2}\parentheses*{-1}^k}{\parentheses*{4k^2 + 4k - 3}\pi\parentheses*{4k^2 \pi^2 + 4k\pi + 4 + \pi^2}}.
+        \]
+        Die finale Lösung \(u\parentheses*{x, t}\) ergibt sich dann zu
+        \[
+            u\parentheses*{x, t} = \sum_{k = 1}^\infty \parentheses*{\beta_k e^{-\parentheses*{\lambda_k + 1}t} + \frac{\gamma_k}{\lambda_k + 1}\parentheses*{1 - e^{-\parentheses*{\lambda_k + 1}t}}}\varphi_k.
+        \]
+    \end{enumerate}
+
+
+    \section*{Aufgabe 4}
+    
+    \begin{problem}
+        \begin{enumerate}
+            \item Berechnen Sie die erste und zweite Ableitung der Distribution
+            \[
+                T_f \phi = \int_\R f\parentheses*{x}\phi\parentheses*{x}\d x,
+            \]
+            mit
+            \[
+                f\parentheses*{x} = \begin{cases}
+                    0, & \text{falls }x \in \R^-,\\
+                    1 - e^{-x}, & \text{falls }x \in \R^+.
+                \end{cases}
+            \]
+            \item Zeigen Sie, dass \(G\parentheses*{x} = H\parentheses*{x}\parentheses*{1 - e^{-x}}\) mit der Heaviside-Funktion
+            \[
+                H\parentheses*{x} = \begin{cases}
+                    0, & \text{falls }x \in \R^-,\\
+                    1, & \text{falls }x \in \R^+
+                \end{cases}
+            \]
+            die Fundamentallösung des Differentialoperators
+            \[
+                \frac{\d^2}{\d x^2} + \frac{\d}{\d x}
+            \]
+            ist.
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item
+        \item Es gilt
+        \[
+            \frac{\d}{\d x}G\parentheses*{x} = \underbrace{\delta\parentheses*{x}\parentheses*{1 - e^{-x}}}_{= \delta\parentheses*{x} = 0} + H\parentheses*{x}e^{-x} = H\parentheses*{x}e^{-x}
+        \]
+        und
+        \[
+            \frac{\d^2}{\d x^2}G\parentheses*{x} = \underbrace{\delta\parentheses*{x}e^{-x}}_{= \delta\parentheses*{x}} - H\parentheses*{x}e^{-x} = \delta\parentheses*{x} - H\parentheses*{x}e^{-x}.
+        \]
+        Offensichtlich ist also
+        \[
+            \frac{\d^2}{\d x^2}G\parentheses*{x} + \frac{\d}{\d x}G\parentheses*{x} = \delta\parentheses*{x} - H\parentheses*{x}e^{-x} + H\parentheses*{x}e^{-x} = \delta\parentheses*{x},
+        \]
+        womit \(G\) die Fundamentallösung des gegebenen Differentialoperators ist.
+    \end{enumerate}
+
+
+    \section*{Aufgabe 5}
+    
+    \begin{problem}
+        Gesucht ist \(u \in C^2\parentheses*{\parentheses*{0, 1}}\) mit
+        \begin{align*}
+            -u''\parentheses*{x} + u\parentheses*{x} &= f\parentheses*{x}, \quad x \in \parentheses*{0, 1},\\
+            u\parentheses*{0} = u\parentheses*{1} &= 0.
+        \end{align*}
+        Die Gleichung soll mithilfe einer finite Differenzen Methode auf einem regelmäßigen Gitter mit den Gitterpunkten \(0 = x_0 < \cdots < x_n = 1\) approximiert und in ein lineares Gleichungssystem \(Au = b\) überführt werden.
+        \begin{enumerate}
+            \item Bestimmen Sie die Matrix \(A\).
+            \item Geben Sie Schranken für die Eigenwerte von \(A\) an.
+
+            \emph{Hinweis: Geschgorin-Kreise.}
+            \item Geben Sie Schranken für die \(L_2\)-Norm von \(A\) und \(A^{-1}\) an.
+            \item Geben Sie Schranken für die Konditionszahl von \(A\) an.
+            \item Bestimmen Sie die \(L_\infty\)-Norm von \(A\).
+            \item Bestimmen Sie die \(L_1\)-Norm von \(A\).
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item Die Schrittweite der finiten Differenzenmethode ist \(h = \frac{1}{n}\) und die Gitterpunkte liegen bei \(x_i = ih, i = 0, \ldots, n\).
+        Aufgrund der Randbedingungen gilt \(u\parentheses*{x_0} = u\parentheses*{x_n} = 0\).
+        Zur Approximation der zweiten Ableitung verwenden wir die Differenzenformel
+        \[
+            -u''\parentheses*{x_i} \approx \frac{-u\parentheses*{x_{i - 1}} + 2u\parentheses*{x_i} - u\parentheses*{x_{i + 1}}}{h^2}.
+        \]
+        Wir erhalten die Gleichungen
+        \begin{align*}
+            \frac{1}{h^2}\parentheses*{2u\parentheses*{x_1} - u\parentheses*{x_2}} + u\parentheses*{x_1} &= f\parentheses*{x_1},\\
+            \frac{1}{h^2}\parentheses*{-u\parentheses*{x_{i - 1}} + 2u\parentheses*{x_i} - u\parentheses*{x_{i + 1}}} + u\parentheses*{x_i} &= f\parentheses*{x_i}, \quad i = 2, \ldots, n - 2,\\
+            \frac{1}{h^2}\parentheses*{-u\parentheses*{x_{n - 2}} + 2u\parentheses*{x_{n - 1}}} + u\parentheses*{x_{n - 1}} &= f\parentheses*{x_{n - 1}},
+        \end{align*}
+        bzw.
+        \[
+            Au = b,
+        \]
+        wobei
+        \[
+            A = \frac{1}{h^2}\begin{pmatrix}
+                2 + h^2 & -1 & 0 & \cdots & 0\\
+                -1 & 2 + h^2 & -1 & \ddots & \vdots\\
+                0 & \ddots & \ddots & \ddots & 0\\
+                \vdots & \ddots & \ddots & \ddots & -1\\
+                0 & \cdots & 0 & -1 & 2 + h^2
+            \end{pmatrix}_{\parentheses*{n - 1} \times \parentheses*{n - 1}}, \quad u = \begin{pmatrix}
+                u\parentheses*{x_1}\\
+                \vdots\\
+                u\parentheses*{x_{n - 1}}
+            \end{pmatrix}, \quad b = \begin{pmatrix}
+                f\parentheses*{x_1}\\
+                \vdots\\
+                f\parentheses*{x_{n - 1}}
+            \end{pmatrix}.
+        \]
+        \item Die Gerschgorin-Kreise \(K_i\) sind definiert als
+        \[
+            K_i = \braces*{z \in \C : \absolute*{z - a_{ii}} \le \sum_{\substack{j = 1\\j \ne i}}^n \absolute*{a_{ij}}},
+        \]
+        d.h.
+        \begin{align*}
+            K_{n - 1} = K_1 &= \braces*{z \in \C : \absolute*{z - \parentheses*{1 + \frac{2}{h^2}}} \le \frac{1}{h^2}},\\
+            K_j &= \braces*{z \in \C : \absolute*{z - \parentheses*{1 + \frac{2}{h^2}}} \le \frac{2}{h^2}}, \quad j = 2, \ldots, n - 2.
+        \end{align*}
+        Da \(A\) symmetrisch ist, sind die Eigenwerte reell, also gilt für das Spektrum
+        \[
+            \sigma\parentheses*{A} \subset \bigcup_{i = 1}^{n - 1}K_i = \brackets*{1, 1 + \frac{4}{h^2}}.
+        \]
+        Also \(\lambda_{\text{min}} \ge 1, \lambda_{\text{max}} \le 1 + \frac{4}{h^2}\).
+        \item Es gilt
+        \[
+            \norm*{A}_{L_2} = \sqrt{\lambda_{\text{max}}\parentheses*{A^T A}}.
+        \]
+        Da \(A\) symmetrisch ist, ist \(\lambda_{\text{max}}\parentheses*{A^T A} = \lambda_{\text{max}}\parentheses*{A}^2\) und somit folgt
+        \[
+            \norm*{A}_{L_2} = \sqrt{\lambda_{\text{max}}\parentheses*{A}^2} \le 1 + \frac{4}{h^2}.
+        \]
+        Für die inverse Matrix \(A^{-1}\) folgt analog
+        \[
+            \norm*{A^{-1}}_{L_2} = \sqrt{\lambda_{\text{max}}\parentheses*{A^{-T}A^{-1}}} = \sqrt{\lambda_{\text{max}}\parentheses*{A^{-1}}^2} = \absolute*{\lambda_{\text{max}}\parentheses*{A^{-1}}} = \frac{1}{\lambda_{\text{min}}\parentheses*{A}} \le 1.
+        \]
+        \item
+        \[
+            \kappa\parentheses*{A} = \frac{\lambda_{\text{max}}\parentheses*{A}}{\lambda_{\text{min}}\parentheses*{A}} \le 1 + \frac{4}{h^2}.
+        \]
+        \item Die \(L_\infty\)-Norm einer Matrix ist die maximale Zeilensumme, d.h.
+        \[
+            \norm*{A}_{L_\infty} = \max_{i = 1, \ldots, n - 1}\sum_{j = 1}^{n - 1}\absolute*{a_{ij}} = 1 + \frac{2}{h^2} + \frac{1}{h^2} + \frac{1}{h^2} = 1 + \frac{4}{h^2}.
+        \]
+        \item Die \(L_1\)-Norm einer Matrix ist die maximale Spaltensumme, d.h.
+        \[
+            \norm*{A}_{L_1} = \max_{i = 1, \ldots, n - 1}\sum_{j = 1}^{n - 1}\absolute*{a_{ji}} = 1 + \frac{2}{h^2} + \frac{1}{h^2} + \frac{1}{h^2} = 1 + \frac{4}{h^2}.
+        \]
+    \end{enumerate}
+
+
+    \section*{Aufgabe 6}
+    
+    \begin{problem}
+        \begin{enumerate}
+            \item Gegeben sei folgende Approximation von \(f''\parentheses*{x}\) für ausreichend glattes \(f\):
+            \[
+                \frac{2}{h_1 + h_2}\parentheses*{\frac{f\parentheses*{x + h_2} - f\parentheses*{x}}{h_2} - \frac{f\parentheses*{x} - f\parentheses*{x - h_1}}{h_1}}.
+            \]
+            Bestimmen Sie die Approximationsordnung.
+            \item Die erste Ableitung einer Funktion \(u\) an der Stelle \(\xi\) soll mithilfe einer Differenzenformel, die die Funktionsauswertungen von \(u\) an den Stellen \(\xi\), \(\xi + h_1\) und \(\xi + h_1 + h_2\) benutzt, approximiert werden, d.h.
+            \[
+                u'\parentheses*{\xi} = au\parentheses*{\xi} + bu\parentheses*{\xi + h_1} + cu\parentheses*{\xi + h_1 + h_2} + R\parentheses*{u, h},
+            \]
+            wobei \(h = \max\parentheses*{h_1, h_2}\) und \(R\parentheses*{u, h} = \mathcal{O}\parentheses*{h^p}\) der Fehler der Differenzenformel ist.
+            Bestimmen Sie \(a, b, c\) so, dass \(p\) maximal wird.
+            Wie groß ist dieses?
+
+            \emph{Hinweis: Entwickeln Sie \(u\) um die Stelle \(\xi\).}
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item
+        \item Gesucht sind \(a\), \(b\) und \(c\) so, dass \(p\) maximal in
+        \[
+        u'\parentheses*{\xi} = au\parentheses*{\xi} + bu\parentheses*{\xi + h_1} + cu\parentheses*{\xi + h_1 + h_2} + \mathcal{O}\parentheses*{h^p}
+        \]
+        ist.
+        Dazu entwickeln wir die Funktion \(u\) um \(\xi\) und wir erhalten
+        \begin{align*}
+            u\parentheses*{\xi + h_1} &= u\parentheses*{\xi} + h_1 u'\parentheses*{\xi} + \frac{h_1^2}{2}u''\parentheses*{\xi} + \frac{h_1^3}{6}u'''\parentheses*{\xi} + \mathcal{O}\parentheses*{h_1^4}\\
+            u\parentheses*{\xi + h_1 + h_2} &= u\parentheses*{\xi} + \parentheses*{h_1 + h_2}u'\parentheses*{\xi} + \frac{\parentheses*{h_1 + h_2}^2}{2}u''\parentheses*{\xi} + \frac{\parentheses*{h_1 + h_2}^3}{6}u'''\parentheses*{\xi} + \mathcal{O}\parentheses*{\parentheses*{h_1 + h_2}^4}.
+        \end{align*}
+        Mit der Differenzenformel erhält man also
+        \begin{align*}
+            au&\parentheses*{\xi} + bu\parentheses*{\xi + h_1} + cu\parentheses*{\xi + h_1 + h_2}\\
+            =\, &\parentheses*{a + b + c}u\parentheses*{\xi} + \parentheses*{bh_1 + c\parentheses*{h_1 + h_2}}u'\parentheses*{\xi} + \frac{1}{2}\parentheses*{bh_1^2 + c\parentheses*{h_1 + h_2}^2}u''\parentheses*{\xi}\\
+            &+\frac{1}{6}\parentheses*{bh_1^3 + c\parentheses*{h_1 + h_2}^3}u'''\parentheses*{\xi} + \mathcal{O}\parentheses*{h_1^4} + \mathcal{O}\parentheses*{\parentheses*{h_1 + h_2}^4}.
+        \end{align*}
+        Um eine möglichst hohe Konsistenz zu erzielen muss also
+        \begin{align}
+            a + b + c &= 0,\label{eq:1}\\
+            bh_1 + c\parentheses*{h_1 + h_2} &= 1,\label{eq:2}\\
+            \frac{1}{2}\parentheses*{bh_1^2 + c\parentheses*{h_1 + h_2}^2} &= 0\label{eq:3}
+        \end{align}
+        sein.
+        Zieht man vom \(h_1\)-fachen von \eqref{eq:2} das zweifache von \eqref{eq:3} ab, ergibt sich
+        \[
+            c\parentheses*{h_1\parentheses*{h_1 + h_2} - \parentheses*{h_1 + h_2}^2} = h_1,
+        \]
+        woraus
+        \[
+            c = -\frac{h_1}{h_2\parentheses*{h_1 + h_2}}
+        \]
+        folgt.
+        Einsetzen in \eqref{eq:3} ergibt jetzt
+        \[
+            b = \frac{1}{h_1} - c\frac{h_1 + h_2}{h_1} = \frac{1}{h_1} + \frac{1}{h-2} = \frac{h_1 + h_2}{h_1 h_2}.
+        \]
+        Aus \eqref{eq:1} folgt schließlich
+        \begin{align*}
+            a &= -b - c\\
+            &= -\frac{h_1 + h_2}{h_1 h_2} - \frac{h_1}{h_2\parentheses*{h_1 + h_2}}\\
+            &= \frac{-h_1^2 - 2h_1 h_2 - h_2^2 + h_1^2}{h_1 h_2\parentheses*{h_1 + h_2}}\\
+            &= -\frac{h_2 + 2h_1}{h_1\parentheses*{h_1 + h_2}}.
+        \end{align*}
+        Für die Koeffizienten des Terms mit \(u'''\parentheses*{\xi}\) erhält man schließlich
+        \begin{align*}
+            \frac{1}{6}\parentheses*{bh_1^3 + c\parentheses*{h_1 + h_2}^3} &= \frac{1}{6}\parentheses*{\frac{\parentheses*{h_1 + h_2}h_1^2}{h_2} - \frac{h_1\parentheses*{h_1 + h_2}^2}{h_2}}\\
+            &= \frac{1}{6}\frac{-h_1^2 h_2 - h_2^2 h_1}{h_2}\\
+            &= -\frac{1}{6}\parentheses*{h_1^2 + h_1 h_2}\\
+            &= \mathcal{O}\parentheses*{h^2}.
+        \end{align*}
+        Es ergibt sich also insgesamt die Differenzenformel
+        \[
+            u'\parentheses*{\xi} = -\frac{h_2 + 2h_1}{h_1\parentheses*{h_1 + h_2}}u\parentheses*{\xi} + \frac{h_1 + h_2}{h_1 h_2}u\parentheses*{\xi + h_1} - \frac{h_1}{h_2\parentheses*{h_1 + h_2}}u\parentheses*{\xi + h_1 + h_2} + \mathcal{O}\parentheses*{h^2}.
+        \]
+    \end{enumerate}
+
+
+    \section*{Aufgabe 7}
+    
+    \begin{problem}
+        Bestimmen Sie zu den Daten
+        \begin{center}
+            \begin{tabular}{lcccc}
+                \toprule
+                \(x_k\) & \(0\) & \(\frac{\pi}{2}\) & \(\pi\) & \(\frac{3}{2}\pi\)\\
+                \midrule
+                \(f\parentheses*{x_k}\) & \(6\) & \(2 + 2i\) & \(2\) & \(2 - 2i\)\\
+                \bottomrule
+            \end{tabular}
+        \end{center}
+        ein trigonometrisches Polynom der Form
+        \[
+            T_4\parentheses*{f; x} = \sum_{j = 0}^{n - 1}d_j\parentheses*{f}e^{ijx},
+        \]
+        das die Daten interpoliert, also die Bedingung
+        \[
+            T_4\parentheses*{f; x_k} = f\parentheses*{x_k}
+        \]
+        für \(k = 0, \ldots, 3\) erfüllt.
+    \end{problem}
+    
+    \subsection*{Lösung}
+    Ein trigonometrisches Polynom ist gegeben durch
+    \[
+        T_4\parentheses*{f; x} = \sum_{j = 0}^3 d_j\parentheses*{f}e^{ijx},
+    \]
+    mit
+    \[
+        d_j\parentheses*{f} = \frac{1}{4}\sum_{k = 0}^3 f\parentheses*{x_k}e^{-ijx_k} \quad \text{und} \quad e^{-\frac{h\pi i}{2}} = \parentheses*{-i}^n.
+    \]
+    Es gilt
+    \begin{align*}
+        d_0 &= \frac{1}{4}\sum_{k = 0}^3 f\parentheses*{x_k} = \frac{1}{4}\parentheses*{6 + \parentheses*{2 + 2i} + 2 + \parentheses*{2 - 2i}} = 3,\\
+        d_1 &= \frac{1}{4}\sum_{k = 0}^3 f\parentheses*{x_k}e^{-ix_k} = \frac{1}{4}\parentheses*{6 + \parentheses*{2 - 2i} + \parentheses*{-2} + \parentheses*{2 + 2i}} = 2,\\
+        d_2 &= \frac{1}{4}\sum_{k = 0}^3 f\parentheses*{x_k}e^{-2ix_k} = \frac{1}{4}\parentheses*{6 + \parentheses*{-2 - 2i} + 2 + \parentheses*{-2 + 2i}} = 1,\\
+        d_3 &= \frac{1}{4}\sum_{k = 0}^3 f\parentheses*{x_k}e^{-3ix_k} = \frac{1}{4}\parentheses*{6 + \parentheses*{-2 + 2i} + \parentheses*{-2} + \parentheses*{-2 - 2i}} = 0.
+    \end{align*}
+    Damit gilt
+    \[
+        T_4\parentheses*{f; x} = 3 + 2e^{ix} + e^{2ix} = 3 + 2\parentheses*{\cos\parentheses*{x} + i\sin\parentheses*{x}} + \cos\parentheses*{2x} + i\sin\parentheses*{2x},
+    \]
+    da nach dem Moivreschen Satz \(e^{ix} = \cos\parentheses*{x} + i\sin\parentheses*{x}\) gilt.
+
+
+    \section*{Aufgabe 8}
+    
+    \begin{problem}
+        \begin{enumerate}
+            \item Sei \(A \in \R^{n \times n}\) eine symmetrisch positiv definite Matrix und \(D := \diag\parentheses*{A}\).
+            Zeigen Sie: Es existiert ein \(c_0 > 0\) so, dass \(2c_0 D - A\) symmetrisch positiv definit ist.
+            \item Wir betrachten das Richardson-Verfahren für ein Gleichungssystem \(Ax = b\):
+            \[
+                x^{k + 1} = x^k + \omega\parentheses*{b - Ax^k}.
+            \]
+            Gegeben sei die symmetrische Matrix
+            \[
+                A = \begin{pmatrix}
+                    2 & -1 & 1\\
+                    -1 & 2 & -1\\
+                    1 & -1 & 2
+                \end{pmatrix}, \quad b = \begin{pmatrix}
+                    4\\
+                    -1\\
+                    7
+                \end{pmatrix}.
+            \]
+            \begin{enumerate}
+                \item Für welche Werte \(\omega\) konvergiert die Methode?
+                \item Bestimmen Sie den optimalen Wert für \(\omega\).
+            \end{enumerate}
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item Wenn \(A\) symmetrisch positiv definit ist, sind die Diagonaleinträge von \(A\) strikt positiv, denn würde es ein \(A_{ii} \le 0\) geben, so wäre \(e_i^T Ae_i = a_ii \absolute*{e_i}^2 \le 0\).
+        Folglich ist auch \(D\) symmetrisch positiv definit.
+        \(2c_0 D - A\) ist symmetrisch.
+        Es gilt für alle \(v \ne 0\)
+        \[
+            0 < \min_i A_{ii} \le \frac{v^T Dv}{v^T v} \le \max_i A_{ii}
+        \]
+        und
+        \[
+            0 < \lambda_{\text{min}}\parentheses*{A} \le \frac{v^T Av}{v^T v} \le \lambda_{\text{max}}\parentheses*{A}.
+        \]
+        Somit ist
+        \[
+            \frac{1}{v^T v}v^T \parentheses*{2c_0 D - A}v = 2c_0 \frac{v^T Dv}{v^T v} - \frac{v^T Av}{v^T v} \ge 2c_0 \min_i A_{ii} - \lambda_{\text{max}}\parentheses*{A}.
+        \]
+        Damit \(2c_0 D - A\) symmetrisch positiv definit ist, muss \(2c_0 \min_i A_{ii} - \lambda_{\text{max}} > 0\), d.h. \(c_0 > \frac{\lambda_{\text{max}}}{2\min_i A_{ii}}\) sein.
+        \item
+        \begin{enumerate}
+            \item Die Iterationsmatrix der Methode ist \(G_\omega = I - CA = I - \omega A\).
+            Wir berechnen zunächst die Eigenwerte von \(A\):
+            \begin{align*}
+                \det\parentheses*{\lambda I - A} &= \det\begin{pmatrix}
+                    \lambda - 2 & 1 & -1\\
+                    1 & \lambda - 2 & 1\\
+                    -1 & 1 & \lambda - 2
+                \end{pmatrix}\\
+                &= \parentheses*{\lambda - 2}\parentheses*{\lambda - 2}\parentheses*{\lambda - 2} - 1 - 1 - \parentheses*{\lambda - 2} - \parentheses*{\lambda - 2} - \parentheses*{\lambda - 2}\\
+                &= \lambda^3 - 6\lambda^2 + 9\lambda - 4.
+            \end{align*}
+            Die Eigenwerte von \(A\) sind somit \(\lambda_1 = 1, \lambda_2 = 1, \lambda_3 = 4\).
+            Da für einen Eigenvektor \(v_i\) zum Eigenwert \(\lambda_i\) von \(A\) gilt
+            \[
+                \parentheses*{I - \omega A}v_i = v_i - \omega\lambda_i v_i = \parentheses*{1 - \lambda_i}v_i,
+            \]
+            sind die Eigenwerte der Iterationsmatrix \(1 - \omega\lambda_i, i = 1, 2, 3\).
+            Damit konvergiert das Richardson-Verfahren, wenn \(\absolute*{1 - \omega\lambda_i} < 1\) gilt bzw. \(0 < \omega < \frac{1}{2}\).
+            \item Die Reduktionsrate in jedem Schritt ist durch den Spektralradius gegeben
+            \[
+                \rho\parentheses*{G_\omega} = \min\braces*{\absolute*{1 - \lambda_i}}.
+            \]
+            Das optimale \(\omega\) minimiert also den Spektralradius.
+            Es gilt
+            \[
+                \absolute*{1 - \omega\lambda_1} = \absolute*{1 - \omega\lambda_2} = \absolute*{1 - \omega} = 1 - \omega.
+            \]
+            und
+            \[
+                \absolute*{1 - \omega\lambda_3} = \absolute*{1 - 4\omega} = \begin{cases}
+                    1 - 4\omega, & \text{falls }0 < \omega \le \frac{1}{4},\\
+                    -1 + 4\omega, & \text{falls }\frac{1}{4} < \omega < \frac{1}{2}.
+                \end{cases}
+            \]
+            Somit wird das Minimum auf dem Intervall \(\parentheses*{\frac{1}{4}, \frac{1}{2}}\) angenommen und das optimale \(\omega^*\) erfüllt
+            \[
+                1 - \omega^* = 4\omega^* - 1 \implies \omega^* = \frac{2}{5} = 0,4.
+            \]
+        \end{enumerate}
+    \end{enumerate}
+\end{document}

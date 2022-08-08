@@ -10,4 +10,403 @@
 
 \begin{document}
     \maketitle
+
+
+    \section*{Aufgabe 1}
+    
+    \begin{problem}
+        Bestimmen Sie die Lösung des folgenden Cauchy-Problems für die eindimensionale Wellengleichung
+        \begin{align*}
+            u_{tt} - u_{xx} &= 0, \quad t > 0, x \in \R,\\
+            u\parentheses*{0, x} &= xe^x, \quad x \in \R,\\
+            u_t\parentheses*{0, x} &= -x^2, \quad x \in \R.
+        \end{align*}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    Aus der Vorlesung wissen wir, dass die Lösung der gegebenen eindimensionalen Wellengleichung durch die d'Alembertsche Formel gegeben ist:
+    \[
+        u\parentheses*{t, x} = \frac{1}{2}\parentheses*{g\parentheses*{x + t} + g\parentheses*{x - t}} + \frac{1}{2}\int_{x - t}^{x + t}h\parentheses*{y}\d y
+    \]
+    mit den Anfangswert-Funktionen
+    \[
+        g\parentheses*{x} = xe^x \quad \text{und} \quad h\parentheses*{x} = -x^2.
+    \]
+    Damit lautet die Lösung
+    \begin{align*}
+        u\parentheses*{t, x} &= \frac{1}{2}\parentheses*{\parentheses*{x + t}e^{x + t} + \parentheses*{x - t}e^{x - t}} + \frac{1}{2}\int_{x - t}^{x + t}-y^2 \d y\\
+        &= \frac{1}{2}\parentheses*{\parentheses*{x + t}e^{x + t} + \parentheses*{x - t}e^{x - t}} + \frac{1}{2} \cdot \left.\parentheses*{-\frac{1}{3}y^3}\right|_{x - t}^{x + t}\\
+        &= \frac{1}{2}\parentheses*{\parentheses*{x + t}e^{x + t} + \parentheses*{x - t}e^{x - t}} + \frac{1}{6}\parentheses*{x - t}^3 - \frac{1}{6}\parentheses*{x + t}^3\\
+        &= \frac{1}{2}\parentheses*{xe^x \cosh\parentheses*{t} + te^x \sinh\parentheses*{t}} - tx^2 - \frac{1}{3}t^3
+    \end{align*}
+
+
+    \section*{Aufgabe 2}
+    
+    \begin{problem}
+        Wir betrachten Polarkoordinaten \(\parentheses*{r, \varphi}\) mit
+        \[
+            x = r\cos\varphi, \quad y = r\sin\varphi, \quad r > 0, \varphi \in \left[0, 2\pi\right).
+        \]
+        Sei \(u\) eine harmonische Funktion in Polarkoordinaten, d.h. \(u = u\parentheses*{r, \varphi}\), in der Kreisscheibe
+        \[
+            B = \braces*{\parentheses*{r, \varphi} : r < 2}
+        \]
+        mit \(u\parentheses*{2, \varphi} = 3\sin\varphi + 1\).
+        \begin{enumerate}
+            \item Bestimmen Sie \(u\parentheses*{0, 0}\).
+            \item Bestimmen Sie \(\max_{\parentheses*{r, \varphi} \in \bar{B}}u\parentheses*{r, \varphi}\). 
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item Wir benutzen die Mittelwerteigenschaft:
+        \begin{align*}
+            u\parentheses*{0, 0} &= \frac{1}{\omega_n r^{n - 1}}\int_{\partial B_r\parentheses*{0}}u\parentheses*{2, \varphi}\d\varphi, \quad r = 2, n = 2\\
+            &= \frac{1}{2\pi \cdot 2}\int_{\partial B_2\parentheses*{0}}\parentheses*{3\sin\varphi + 1}\d\varphi\\
+            &= \frac{1}{4\pi}\parentheses*{0 + 2\pi} = \frac{1}{2}.
+        \end{align*}
+        \item Wir benutzen das Maximumprinzip:
+        \[
+            \max_{\parentheses*{r, \varphi} \in \bar{B}}u\parentheses*{r, \varphi} = \max_{\parentheses*{r, \varphi} \in \partial B}u\parentheses*{r, \varphi} = \max_{\varphi \in \left[0, 2\pi\right)}u\parentheses*{2, \varphi} = \max_{\varphi \in \left[0, 2\pi\right)}3\sin\varphi + 1 = 4.
+        \]
+    \end{enumerate}
+
+
+    \section*{Aufgabe 3}
+    
+    \begin{problem}
+        Zeigen Sie: Eine Fundamentallösung der Differentialgleichung
+        \[
+            -\frac{\d^2}{\d x^2}u\parentheses*{x} = f\parentheses*{x}, \quad x \in \R
+        \]
+        ist
+        \[
+            G\parentheses*{x} = -\frac{1}{2}\absolute*{x},
+        \]
+        d.h. es gilt im distributionellen Sinne
+        \[
+            -\frac{\d^2}{\d x^2}G = \delta.
+        \]
+    \end{problem}
+    
+    \subsection*{Lösung}
+    Eine Fundamentallösung \(G\) des  Laplace-operators in einer Raumdimension muss
+    \[
+        \phi\parentheses*{0} = \int_\R G\parentheses*{x}\Delta\phi\parentheses*{x}\d x \quad \forall\phi \in C_0^\infty\parentheses*{\R}
+    \]
+    erfüllen.
+    Sei also \(\phi \in C_0^\infty\parentheses*{\R}\).
+    Wir berechnen
+    \begin{align*}
+        \frac{1}{2}\int_{-\infty}^\infty \absolute*{x}\phi''\parentheses*{x}\d x &= -\frac{1}{2}\int_{-\infty}^0 x\phi''\parentheses*{x}\d x + \frac{1}{2}\int_0^\infty x\phi''\parentheses*{x}\d x\\
+        &= \int_0^\infty x\phi''\parentheses*{x}\d x\\
+        &= \left.x\phi'\parentheses*{x}\right|_0^\infty - \int_0^\infty \phi'\parentheses*{x}\d x\\
+        &= \left.-\phi\parentheses*{x}\right|_0^\infty = \phi\parentheses*{0},
+    \end{align*}
+    wobei ausgenutzt wurde, dass \(\supp\parentheses*{\phi} \subset \brackets*{-R, R}\) für ein \(R \in \R\).
+
+
+    \section*{Aufgabe 4}
+    
+    \begin{problem}
+        Wir betrachten die Folge periodischer Funktionen \(\parentheses*{u_n}_{n \in \N}\)
+        \[
+            u_n\parentheses*{x} := e^{inx},
+        \]
+        sowie die drei Operatoren
+        \begin{align*}
+            \parentheses*{Iu}\parentheses*{x} &:= u\parentheses*{x}, \quad \text{(Identität)},\\
+            \parentheses*{Du}\parentheses*{x} &:= \frac{\d}{\d x}u\parentheses*{x}, \quad \text{(Ableitung)},\\
+            \parentheses*{Su}\parentheses*{x} &:= \int_0^x u\parentheses*{s}\d s, \quad \text{Stammfunktion}.
+        \end{align*}
+        \begin{enumerate}
+            \item Untersuchen Sie, ob die Folgen \(\parentheses*{Iu_n}_{n \in \N}\), \(\parentheses*{Iu_n}_{n \in \N}\) und \(\parentheses*{Iu_n}_{n \in \N}\) in \(L^2\parentheses*{\brackets*{0, 2\pi}}\)
+            \begin{enumerate}
+                \item beschränkt oder unbeschränkt,
+                \item konvergent oder divergent
+            \end{enumerate}
+            sind.
+            \item Sind die Operatoren \(I\) und \(D\) beschränkt und/oder kompakt im \(L^2\)-Sinne?
+            Verwenden Sie Ihre Ergebnisse aus Aufgabenteil a).
+            \item (Dies ist eine Zusatzfrage, die nicht bewertet wird.)
+            Stellen Sie eine allgemeine Vermutung über die Beschränktheit und Kompaktheit von \(S\) im \(L^2\)-Sinne auf.
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+
+
+    \section*{Aufgabe 5}
+    
+    \begin{problem}
+        Bestimmen Sie zu den Daten
+        \begin{center}
+            \begin{tabular}{lcccc}
+                \toprule
+                \(x_k\) & \(0\) & \(\frac{\pi}{2}\) & \(\pi\) & \(\frac{3}{2}\pi\)\\
+                \midrule
+                \(f\parentheses*{x_k}\) & \(2\) & \(0\) & \(2\) & \(0\)\\
+                \bottomrule
+            \end{tabular}
+        \end{center}
+        ein komplexes trigonometrisches Polynom der Form
+        \[
+            T_4\parentheses*{f; x} = \sum_{j = 0}^{n - 1}d_j\parentheses*{f}e^{ijx},
+        \]
+        das die Daten interpoliert, also die Bedingung
+        \[
+            T_4\parentheses*{f; x_k} = f\parentheses*{x_k}
+        \]
+        für \(k = 0, \ldots, 3\) erfüllt.
+    \end{problem}
+    
+    \subsection*{Lösung}
+    Ein trigonometrisches Polynom ist gegeben durch
+    \[
+        T_4\parentheses*{f; x} = \sum_{j = 0}^3 d_j\parentheses*{f}e^{ijx},
+    \]
+    mit
+    \[
+        d_j\parentheses*{f} = \frac{1}{4}\sum_{k = 0}^3 f\parentheses*{x_k}e^{-ijx_k} \quad \text{und} \quad e^{-\frac{h\pi i}{2}} = \parentheses*{-i}^n.
+    \]
+    Es gilt
+    \begin{align*}
+        d_0 &= \frac{1}{4}\sum_{k = 0}^3 f\parentheses*{x_k} = \frac{1}{4}\parentheses*{2 + 0 + 2 + 0} = 1,\\
+        d_1 &= \frac{1}{4}\sum_{k = 0}^3 f\parentheses*{x_k}e^{-ix_k} = \frac{1}{4}\parentheses*{2 + 0 + 2i + 0} = \frac{1}{2} + \frac{1}{2}i,\\
+        d_2 &= \frac{1}{4}\sum_{k = 0}^3 f\parentheses*{x_k}e^{-2ix_k} = \frac{1}{4}\parentheses*{2 + 0 + \parentheses*{-2} + 0} = 0,\\
+        d_3 &= \frac{1}{4}\sum_{k = 0}^3 f\parentheses*{x_k}e^{-3ix_k} = \frac{1}{4}\parentheses*{2 + 0 + \parentheses*{-2i} + 0} = \frac{1}{2} - \frac{1}{2}i.
+    \end{align*}
+    Damit gilt
+    \begin{align*}
+        T_4\parentheses*{f; x} &= \frac{1}{2}\parentheses*{2 + \parentheses*{1 + i}e^{ix} + \parentheses*{1 - i}e^{3ix}}\\
+        &= \frac{1}{2}\parentheses*{2 + \cos\parentheses*{x} + \cos\parentheses*{3x} - \sin\parentheses*{x} + \sin\parentheses*{3x} + i\parentheses*{\cos\parentheses*{x} - \cos\parentheses*{3x} + \sin\parentheses*{x} + \sin\parentheses*{3x}}}
+    \end{align*}
+    da nach dem Moivreschen Satz \(e^{ix} = \cos\parentheses*{x} + i\sin\parentheses*{x}\) gilt.
+
+
+    \section*{Aufgabe 6}
+    
+    \begin{problem}
+        Gesucht ist eine finite Differenzen Formel für die erste Ableitung \(u'\parentheses*{x_i}\) basierend auf den Werten von \(u\) bei \(x_{i - 1}\), \(x_i\) und \(x_{i + 2}\) eines äquidistanten Gitters mit Gitterweite \(\Delta x\)
+        \[
+            u'\parentheses*{x_i} = \underbrace{\alpha u_{i - 1} + \beta u_i + \gamma u_{i + 2}}_{=: \delta_i\brackets*{u}} + \mathcal{O}\parentheses*{\Delta x^p}.
+        \]
+        \begin{enumerate}
+            \item Bestimmen Sie \(\alpha\), \(\beta\) und \(\gamma\) so, dass die Konsistenzordnung \(p\) größtmöglich ist und geben Sie \(p\) an.
+            \item Zeigen Sie, dass für eine Funktion \(u \in C^3\parentheses*{I}\) mit \(I \subset \R\) eine Fehlerabschätzung der Form
+            \[
+                \absolute*{u'\parentheses*{x_i} - \delta_i\brackets*{u}} \le C\norm*{u'''}_{\infty, I}\Delta x^2
+            \]
+            gilt und geben Sie einen sinnvollen Wert für \(C\) an.
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item
+        \item
+    \end{enumerate}
+
+
+    \section*{Aufgabe 7}
+    
+    \begin{problem}
+        Das Helmholtz-Problem: Gesucht ist \(u \in C^2\parentheses*{\parentheses*{0, 1}}\) so, dass
+        \begin{align*}
+            -u''\parentheses*{x} + u\parentheses*{x} &= f\parentheses*{x}, \quad x \in \parentheses*{0, 1},\\
+            u\parentheses*{0} = u\parentheses*{1} &= 0,
+        \end{align*}
+        soll mithilfe einer zentralen finite Differenzen Methode auf einem regelmäßigen Gitter mit den Gitterpunkten \(0 = x_0 < \cdots < x_n = 1\) approximiert und in ein lineares Gleichungssystem \(Au = b\) überführt werden.
+        \begin{enumerate}
+            \item Bstimmen Sie die Matrix \(A\).
+            \item Geben Sie Schranken für
+            \begin{enumerate}
+                \item die Eigenwerte von \(A\),
+
+                \emph{Hinweis: Gerschgorin-Kreise.}
+                \item die \(L_2\)-Norm von \(A\) und von \(A^{-1}\) und
+                \item die Konditionszahl von \(A\) an.
+            \end{enumerate}
+            \item Bestimmen Sie die
+            \begin{enumerate}
+                \item \(L_\infty\)-Norm von \(A\) und
+                \item \(L_1\)-Norm von \(A\).
+            \end{enumerate}
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item Die Schrittweite der finiten Differenzenmethode ist \(h = \frac{1}{n}\) und die Gitterpunkte liegen bei \(x_i = ih, i = 0, \ldots, n\).
+        Aufgrund der Randbedingungen gilt \(u\parentheses*{x_0} = u\parentheses*{x_n} = 0\).
+        Zur Approximation der zweiten Ableitung verwenden wir die Differenzenformel
+        \[
+            -u''\parentheses*{x_i} \approx \frac{-u\parentheses*{x_{i - 1}} + 2u\parentheses*{x_i} - u\parentheses*{x_{i + 1}}}{h^2}.
+        \]
+        Wir erhalten die Gleichungen
+        \begin{align*}
+            \frac{1}{h^2}\parentheses*{2u\parentheses*{x_1} - u\parentheses*{x_2}} + u\parentheses*{x_1} &= f\parentheses*{x_1},\\
+            \frac{1}{h^2}\parentheses*{-u\parentheses*{x_{i - 1}} + 2u\parentheses*{x_i} - u\parentheses*{x_{i + 1}}} + u\parentheses*{x_i} &= f\parentheses*{x_i}, \quad i = 2, \ldots, n - 2,\\
+            \frac{1}{h^2}\parentheses*{-u\parentheses*{x_{n - 2}} + 2u\parentheses*{x_{n - 1}}} + u\parentheses*{x_{n - 1}} &= f\parentheses*{x_{n - 1}},
+        \end{align*}
+        bzw.
+        \[
+            Au = b,
+        \]
+        wobei
+        \[
+            A = \frac{1}{h^2}\begin{pmatrix}
+                2 + h^2 & -1 & 0 & \cdots & 0\\
+                -1 & 2 + h^2 & -1 & \ddots & \vdots\\
+                0 & \ddots & \ddots & \ddots & 0\\
+                \vdots & \ddots & \ddots & \ddots & -1\\
+                0 & \cdots & 0 & -1 & 2 + h^2
+            \end{pmatrix}_{\parentheses*{n - 1} \times \parentheses*{n - 1}}, \quad u = \begin{pmatrix}
+                u\parentheses*{x_1}\\
+                \vdots\\
+                u\parentheses*{x_{n - 1}}
+            \end{pmatrix}, \quad b = \begin{pmatrix}
+                f\parentheses*{x_1}\\
+                \vdots\\
+                f\parentheses*{x_{n - 1}}
+            \end{pmatrix}.
+        \]
+        \item
+        \begin{enumerate}
+            \item Die Gerschgorin-Kreise \(K_i\) sind definiert als
+            \[
+                K_i = \braces*{z \in \C : \absolute*{z - a_{ii}} \le \sum_{\substack{j = 1\\j \ne i}}^n \absolute*{a_{ij}}},
+            \]
+            d.h.
+            \begin{align*}
+                K_{n - 1} = K_1 &= \braces*{z \in \C : \absolute*{z - \parentheses*{1 + \frac{2}{h^2}}} \le \frac{1}{h^2}},\\
+                K_j &= \braces*{z \in \C : \absolute*{z - \parentheses*{1 + \frac{2}{h^2}}} \le \frac{2}{h^2}}, \quad j = 2, \ldots, n - 2.
+            \end{align*}
+            Da \(A\) symmetrisch ist, sind die Eigenwerte reell, also gilt für das Spektrum
+            \[
+                \sigma\parentheses*{A} \subset \bigcup_{i = 1}^{n - 1}K_i = \brackets*{1, 1 + \frac{4}{h^2}}.
+            \]
+            Also \(\lambda_{\text{min}} \ge 1, \lambda_{\text{max}} \le 1 + \frac{4}{h^2}\).
+            \item Es gilt
+            \[
+                \norm*{A}_{L_2} = \sqrt{\lambda_{\text{max}}\parentheses*{A^T A}}.
+            \]
+            Da \(A\) symmetrisch ist, ist \(\lambda_{\text{max}}\parentheses*{A^T A} = \lambda_{\text{max}}\parentheses*{A}^2\) und somit folgt
+            \[
+                \norm*{A}_{L_2} = \sqrt{\lambda_{\text{max}}\parentheses*{A}^2} \le 1 + \frac{4}{h^2}.
+            \]
+            Für die inverse Matrix \(A^{-1}\) folgt analog
+            \[
+                \norm*{A^{-1}}_{L_2} = \sqrt{\lambda_{\text{max}}\parentheses*{A^{-T}A^{-1}}} = \sqrt{\lambda_{\text{max}}\parentheses*{A^{-1}}^2} = \absolute*{\lambda_{\text{max}}\parentheses*{A^{-1}}} = \frac{1}{\lambda_{\text{min}}\parentheses*{A}} \le 1.
+            \]
+            \item
+            \[
+                \kappa\parentheses*{A} = \frac{\lambda_{\text{max}}\parentheses*{A}}{\lambda_{\text{min}}\parentheses*{A}} \le 1 + \frac{4}{h^2}.
+            \]
+        \end{enumerate}
+        \item
+        \begin{enumerate}
+            \item Die \(L_\infty\)-Norm einer Matrix ist die maximale Zeilensumme, d.h.
+            \[
+                \norm*{A}_{L_\infty} = \max_{i = 1, \ldots, n - 1}\sum_{j = 1}^{n - 1}\absolute*{a_{ij}} = 1 + \frac{2}{h^2} + \frac{1}{h^2} + \frac{1}{h^2} = 1 + \frac{4}{h^2}.
+            \]
+            \item Die \(L_1\)-Norm einer Matrix ist die maximale Spaltensumme, d.h.
+            \[
+                \norm*{A}_{L_1} = \max_{i = 1, \ldots, n - 1}\sum_{j = 1}^{n - 1}\absolute*{a_{ji}} = 1 + \frac{2}{h^2} + \frac{1}{h^2} + \frac{1}{h^2} = 1 + \frac{4}{h^2}.
+            \]
+        \end{enumerate}
+    \end{enumerate}
+
+
+    \section*{Aufgabe 8}
+    
+    \begin{problem}
+        Gegeben sei das lineare Gleichungssystem \(Ax = b\) mit
+        \[
+            A = \begin{pmatrix}
+                4 & -1 & 0\\
+                -1 & 4 & 1\\
+                0 & 1 & 4
+            \end{pmatrix}, \quad b = \begin{pmatrix}
+                0\\
+                -4\\
+                -3
+            \end{pmatrix}.
+        \]
+        mit Lösung \(x = \parentheses*{-\frac{13}{56}, -\frac{13}{16}, -\frac{29}{56}}^T\).
+        \begin{enumerate}
+            \item Konvergieren das Jacobi- und Gauß-Seidel-Verfahren für jeden Startvektor \(x^0 \in \R^3\)?
+            \item Führen Sie einen Schritt des Jacobi-Verfahrens durch.
+            Verwenden Sie als Startvektor \(x^0 = \parentheses*{1, 0, 0}^T\).
+            \item Zeigen Sie, dass die Voraussetzungen zur Anwendung des CG-Verfahrens gegeben sind und führen Sie einen Schritt mit dem CG-Verfahren durch.
+            Verwenden Sie als Startvektor \(x^0 = \parentheses*{0, -1, -1}^T\).
+            \item Welches Ergebnis erhält man nach drei Schritten mit dem CG-Verfahren?
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item Da die Matrix \(A\) irreduzibel und (strikt) diagonaldominant ist, konvergieren sowohl das Jacobi- als auch das Gauß-Seidel-Verfahren.
+        \item \(A\) lässt sich zerlegen in \(D - L - U\) mit \(A = D - L - U\) wie folgt
+        \[
+            D = \begin{pmatrix}
+                4 & 0 & 0\\
+                0 & 4 & 0\\
+                0 & 0 & 4
+            \end{pmatrix}, \quad L = \begin{pmatrix}
+                0 & 0 & 0\\
+                -1 & 0 & 0\\
+                0 & 1 & 0
+            \end{pmatrix}, \quad U = \begin{pmatrix}
+                0 & -1 & 0\\
+                0 & 0 & 1\\
+                0 & 0 & 0
+            \end{pmatrix}.
+        \]
+        Das Residuum für den Startvektor \(x^0\) beträgt \(r^0 = Ax^0 - b = \parentheses*{0, 3, 3}^T\).
+        Wir können nun berechnen:
+        \[
+            x^1 = x^0 - D^{-1}\parentheses*{Ax^0 - b} = x^0 - D^{-1}r^0 = \begin{pmatrix}
+                1\\
+                0\\
+                0
+            \end{pmatrix} - \begin{pmatrix}
+                \frac{1}{4} & 0 & 0\\
+                0 & \frac{1}{4} & 0\\
+                0 & 0 & \frac{1}{4}
+            \end{pmatrix}\begin{pmatrix}
+                0\\
+                3\\
+                3
+            \end{pmatrix} = \begin{pmatrix}
+                1\\
+                -\frac{3}{4}\\
+                -\frac{3}{4}
+            \end{pmatrix}.
+        \]
+        \item Da die Matrix \(A\) symmetrisch  ist und positiv definit ist (die Hauptminoren \(15, 16, 15\) sind positiv), ist das CG-Verfahren wohldefiniert und konvergiert.
+        Die Startwerte für das CG-Verfahrens sind \(x_0 = \begin{pmatrix}
+            0\\
+            -1\\
+            -1
+        \end{pmatrix}\) und \(d_0 = r_0 = b - Ax_0 = \begin{pmatrix}
+            -1\\
+            1\\
+            2
+        \end{pmatrix}\).
+        Für den ersten Schritt erhalten wir somit
+        \[
+            \alpha_0 = \frac{r_0^T r_0}{d_0^T Ad_0} = \frac{1}{5}, \quad x_1 = x_0 + \alpha_0 d_0 = \begin{pmatrix}
+                -\frac{1}{5}\\
+                -\frac{4}{5}\\
+                -\frac{3}{5}
+            \end{pmatrix}.
+        \]
+        \item Da das CG-Verfahren endlich ist und für ein lineares Gleichungssystem der Dimension \(n\) spätestens nach \(n\) Schritten (bis auf Rundungsfehler) die exakte Lösung liefert, erhält man nach drei Schritten
+        \[
+            x^3 = \parentheses*{-\frac{13}{56}, -\frac{13}{16}, -\frac{29}{56}}^T.
+        \]
+    \end{enumerate}
 \end{document}

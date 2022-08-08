@@ -1,0 +1,87 @@
+\documentclass{exercise}
+
+\institute{Applied and Computational Mathematics}
+\title{Altklausur 16}
+\author{Joshua Feld, 406718}
+\course{Mathematische Grundlagen IV}
+\professor{Torrilhon \& Berkels}
+\semester{Sommersemester 2022}
+\program{CES (Bachelor)}
+
+\begin{document}
+    \maketitle
+
+
+    \section*{Aufgabe 1}
+    
+    \begin{problem}
+        Gegeben sei die Gleichung
+        \begin{align*}
+            u_x\parentheses*{x, y} + 2yu_y\parentheses*{x, y} &= y, \quad x \in \R^+, y \in \R,\\
+            u\parentheses*{0, y} &= y, \quad y \in \R.
+        \end{align*}
+        \begin{enumerate}
+            \item Bestimmen Sie die Charakteristiken der Gleichung.
+            \item Bestimmen Sie die Lösung der Gleichung.
+            \begin{enumerate}
+                \item Formulieren Sie dazu zunächst die Differentialgleichung, die die Lösung entlang der Charakteristiken erfüllt.
+                \item Lösen Sie anschließend diese Differentialgleichung.
+            \end{enumerate}
+            \item Überprüfen Sie, ob die in b) bestimmte Lösung dei Gleichung erfüllt.
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item Gesucht ist eine Charakteristik \(\gamma\parentheses*{s} = \parentheses*{\gamma_1\parentheses*{s}, \gamma_2\parentheses*{s}}^T\).
+        Die Transportgleichung lässt sich als System schreiben mit
+        \[
+            \begin{pmatrix}
+                \gamma_1' & \gamma_2'\\
+                1 & 2y
+            \end{pmatrix}\begin{pmatrix}
+                u_x\\
+                u_y
+            \end{pmatrix} = \begin{pmatrix}
+                \frac{\partial u}{\partial s}\\
+                y
+            \end{pmatrix}.
+        \]
+        Es handelt sich um eine Charakteristik, wenn
+        \[
+            \det\begin{pmatrix}
+                \gamma_1' & \gamma_2'\\
+                1 & 2y
+            \end{pmatrix} = 2y\gamma_1' - \gamma_2' = 0
+        \]
+        gilt.
+        Somit folgt für den charakteristischen Weg die DGL
+        \[
+            \begin{pmatrix}
+                \gamma_1'\parentheses*{s}\\
+                \gamma_2'\parentheses*{s}
+            \end{pmatrix} = \begin{pmatrix}
+                1\\
+                2y
+            \end{pmatrix} \quad \text{mit} \quad \begin{pmatrix}
+                \gamma_1\parentheses*{0}\\
+                \gamma_2\parentheses*{0}
+            \end{pmatrix} = \begin{pmatrix}
+                0\\
+                y_0
+            \end{pmatrix}.
+        \]
+        Als Lösung erhält man
+        \[
+            \gamma_1\parentheses*{s} = s + \alpha_1 \quad \text{und} \quad \gamma_2\parentheses*{s} = \alpha_2 e^{2s}.
+        \]
+        Aus den Anfangsbedingungen lassen sich die Konstanten bestimmen zu
+        \[
+            0 = \gamma_1\parentheses*{0} = \alpha_1 \implies \gamma_1\parentheses*{s} = s,
+        \]
+        sowie
+        \[
+            y_0 = \gamma_2\parentheses*{0} = \alpha_2 \implies \gamma_2\parentheses*{s} = y_0 e^{2s}.
+        \]
+    \end{enumerate}
+\end{document}

@@ -10,4 +10,360 @@
 
 \begin{document}
     \maketitle
+
+
+    \section*{Aufgabe 1}
+    
+    \begin{problem}
+        Entscheiden Sie, ob folgende Differentialgleichungen zweiter Ordnung \emph{elliptisch}, \emph{hyperbolisch} oder \emph{parabolisch} sind.
+        Begründen Sie Ihre Antwort.
+        \begin{enumerate}
+            \item \(\parentheses*{c_0^2 - u_x^2}u_{xx} - 2u_x u_y u_{xy} + \parentheses*{c_0^2 - u_y^2}u_{yy} = 0, c_0 \in \R, c_0 > 0\),
+            \item \(yu_{xx} + u_{yy} = 0\),
+            \item \(u_{xx} + 4u_{yy} + 9u_{zz} - 4u_{xy} + 3u_x = u\).
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item Aus der Vorlesung wissen wir: Die partielle Differentialgleichung zweiter Ordnung
+        \[
+            au_{xx} + 2bu_{xy} + cu_{yy} = d
+        \]
+        heißt
+        \begin{itemize}
+            \item elliptisch, falls \(b^2 - ac < 0\),
+            \item parabolisch, falls \(b^2 - ac = 0\),
+            \item hyperbolisch, falls \(b^2 - ac > 0\).
+        \end{itemize}
+        Für die linearisierte Potentialgleichung ergibt sich
+        \[
+            a = c_0^2 - u_x^2, \quad b = u_x u_y, \quad c = c_0^2 - u_y^2, \quad d = 0.
+        \]
+        Daraus folgt
+        \begin{align*}
+            b^2 - ac &= u_x^2 u_y^2 - \parentheses*{c_0^2 - u_x^2}\parentheses*{c_0^2 - u_y^2}\\
+            &= u_x^2 u_y^2 - \parentheses*{c_0^4 - c_0^2 u_y^2 - c_0^2 u_x^2 + u_x^2 u_y^2}\\
+            &= -c_0^4 + c_0^2 u_y^2 + c_0^2 u_x^2\\
+            &= \underbrace{c_0^4}_{> 0}\parentheses*{\frac{u_y^2 + u_x^2}{c_0^2} - 1}.
+        \end{align*}
+        Also hängt der Typ der Gleichung vom Term \(\frac{u_y^2 + u_x^2}{c_0^2} - 1 = M^2 - 1\) ab.
+        Die Gleichung ist für \(M < 1\) elliptisch, \(M = 1\) parabolisch und \(M > 1\) hyperbolisch.
+        \item Wie in Teilaufgabe a) betrachten wir auch hier wieder die Koeffizienten der Gleichung
+        \[
+            au_{xx} + 2bu_{xy} + cu_{yy} = d.
+        \]
+        Hier sind
+        \[
+            a = y, \quad b = 0, \quad c = 1, \quad d = 0.
+        \]
+        Daraus folgt
+        \[
+            b^2 -ac = 0 - y \cdot 1 = -y.
+        \]
+        Also hängt der Typ der Gleichung vom Term \(-y\) ab.
+        Die Gleichung ist für \(y > 0\) elliptisch, \(y = 0\) parabolisch und \(y < 0\) hyperbolisch.
+        \item Wir bestimmen nun den Typen der Gleichung über die Eigenwerte.
+        Hier ist die Matrix
+        \[
+            A = \begin{pmatrix}
+                1 & -2 & 0\\
+                -2 & 4 & 0\\
+                0 & 0 & 9
+            \end{pmatrix}.
+        \]
+        Das charakteristische Polynom ist
+        \begin{align*}
+            \chi_A\parentheses*{\lambda} &= \begin{vmatrix}
+                1 - \lambda & -2 & 0\\
+                -2 & 4 - \lambda & 0\\
+                0 & 0 & 9 - \lambda
+            \end{vmatrix}\\
+            &= \parentheses*{1 - \lambda}\parentheses*{4 - \lambda}\parentheses*{9 - \lambda} - \parentheses*{-2} \cdot \parentheses*{-2} \cdot \parentheses*{\lambda - 9}\\
+            &= \parentheses*{1 - \lambda}\parentheses*{4 - \lambda}\parentheses*{9 - \lambda} - 4 \cdot \parentheses*{9 - \lambda}\\
+            &= \parentheses*{\parentheses*{1 - \lambda}\parentheses*{4 - \lambda} - 4}\parentheses*{9 - \lambda}.
+        \end{align*}
+        Ein Eigenwert ist offensichtlich \(\lambda_1 = 9\).
+        Die übrigen zwei Eigenwerte bestimmen wir wie folgt:
+        \begin{align*}
+            \parentheses*{1 - \lambda}\parentheses*{4 - \lambda} - 4 &= 0\\
+            \iff 4 - \lambda - 4\lambda + \lambda^2 - 4 &= 0\\
+            \iff \lambda^2 - 5\lambda &= 0\\
+            \iff \lambda\parentheses*{\lambda - 5} &= 0.
+        \end{align*}
+        Somit sind die übrigen Eigenwerte \(\lambda_2 = 0\) und \(\lambda_3 = 5\).
+        Wir haben zwei positive Eigenwerte und ein Eigenwert ist \(0\).
+        Somit ist die Gleichung parabolisch.
+    \end{enumerate}
+
+
+    \section*{Aufgabe 2}
+    
+    \begin{problem}
+        
+    \end{problem}
+    
+    \subsection*{Lösung}
+
+
+    \section*{Aufgabe 3}
+    
+    \begin{problem}
+        Es sei \(\Omega = \parentheses*{0, L} \subset \R\).
+        Bestimmen Sie die Lösung \(u: \R^+ \times \bar{\Omega} \to \R\) der Diffusionsgleichung
+        \begin{equation}\label{eq:1}
+            \frac{\partial u}{\partial t} = \alpha\frac{\partial^2 u}{\partial x^2}, \quad \alpha \in \R
+        \end{equation}
+        so, dass \(u\) die homogenen Randbedingungen
+        \begin{equation}\label{eq:2}
+            \frac{\partial u}{\partial x}\parentheses*{t, 0} = \frac{\partial u}{\partial x}\parentheses*{t, L} = 0
+        \end{equation}
+        und die Anfangsbedingung
+        \begin{equation}\label{eq:3}
+            u\parentheses*{0, x} = u_0\parentheses*{x} = 3 + \cos\parentheses*{\frac{2\pi}{L}x}
+        \end{equation}
+        erfüllt.
+        Gehen Sie bei der Bestimmung der Lösung \(u\) wie folgt vor:
+        \begin{enumerate}
+            \item Verwenden Sie den Separationsansatz \(u\parentheses*{t, x} = T\parentheses*{t}X\parentheses*{x}\) und bestimmen Sie alle Lösungen \(X_n\parentheses*{x}\), die sich aus Gleichung \eqref{eq:1} zusammen mit den Randbedingungen \eqref{eq:2} ergeben.
+            \item Bestimmen Sie die zu \(X_n\parentheses*{x}\) gehörigen \(T_n\parentheses*{t}\).
+            \item Bestimmen Sie die Koeffizienten \(A_n\) der allgemeinen Lösung
+            \[
+                u\parentheses*{t, x} = \sum_{n = 0}^\infty A_n T_n\parentheses*{t}X_n\parentheses*{x}
+            \]
+            so, dass \(u\parentheses*{t, x}\) die Anfangswertbedingung \eqref{eq:3} erfüllt.
+            \item Wie würde man die Koeffizienten \(A_n\) bestimmen, wenn die Anfangsbedingung \(u_0 \in C\parentheses*{\brackets*{0, L}}\) beliebig ist?
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    \begin{enumerate}
+        \item Setzt man \(u\parentheses*{t, x} = T\parentheses*{t}X\parentheses*{x}\) in die Differentialgleichung ein, erhält man
+        \[
+            T'\parentheses*{t}X\parentheses*{x} = \alpha T\parentheses*{t}X''\parentheses*{x}
+        \]
+        und für \(T\parentheses*{t}X\parentheses*{x} \ne 0\)
+        \[
+            \frac{1}{\alpha}\frac{T'\parentheses*{t}}{T\parentheses*{t}} = \frac{X''\parentheses*{x}}{X\parentheses*{x}} = K, \quad K \in \R.
+        \]
+        \begin{itemize}
+            \item 1. Möglichkeit: \(K > 0\), also \(K = c^2, c > 0\)
+            \[
+                X''\parentheses*{x} = c^2 X\parentheses*{x}
+            \]
+            mit der Lösung
+            \[
+                X\parentheses*{x} = ae^{cx} + be^{-cx} \quad \text{bzw.} \quad X'\parentheses*{x} = cae^{cx} - cbe^{-cx}.
+            \]
+            Aus den Randbedingungen
+            \begin{align*}
+                \frac{\partial u}{\partial x}\parentheses*{t, 0} &= T\parentheses*{t}X'\parentheses*{0} = 0,\\
+                \frac{\partial u}{\partial x}\parentheses*{t, L} &= T\parentheses*{t}X'\parentheses*{L} = 0
+            \end{align*}
+            folgt sofort \(a = b = 0\), also \(X\parentheses*{x} = 0\).
+            \item 2. Möglichkeit: \(K = 0\) und somit \(X'' = 0\) bzw. \(X\parentheses*{x} = ax + b\).
+            Mit
+            \[
+                \frac{\partial u}{\partial x}\parentheses*{t, x} = T\parentheses*{t} \cdot a
+            \]
+            folgt, dass \(a\) Null sein muss, um die Randbedingungen zu erfüllen.
+            D.h. \(X_0\parentheses*{x} = b_0, b_0 \in \R\) ist eine mögliche Lösung.
+            \item 3. Möglichkeit: \(K < 0\) bzw. \(K = -c^2, c > 0\).
+            D.h. \(X''\parentheses*{x} = -c^2 X\parentheses*{x}\).
+            Die Lösung ist nun \(X\parentheses*{x} = a\sin\parentheses*{cx} + b\cos\parentheses*{cx}\) bzw. \(X'\parentheses*{x} = c\parentheses*{a\cos\parentheses*{cx} - b\sin\parentheses*{cx}}\).
+            Die Bedingung
+            \[
+                \frac{\partial u}{\partial x}\parentheses*{t, 0} = T\parentheses*{t}X'\parentheses*{0} = T\parentheses*{t} \cdot \parentheses*{a\cos\parentheses*{0} - b\sin\parentheses*{0}} = 0
+            \]
+            liefert nun \(a = 0\).
+            Mit
+            \[
+                \frac{\partial u}{\partial x}\parentheses*{t, L} = -T\parentheses*{t} \cdot cb\sin\parentheses*{cL} = 0
+            \]
+            folgt, dass \(c = n\frac{\pi}{L}, n \in \N\) sein muss und wir erhalten weitere Lösungen
+            \[
+                X_n\parentheses*{x} = b_n \cos\parentheses*{n\frac{\pi}{L}x}, \quad b_n \in \R.
+            \]
+        \end{itemize}
+        \item Nun bestimmen wir die zu \(X_n\parentheses*{x}\) gehörigen \(T_n\parentheses*{t}\).
+        \begin{itemize}
+            \item 1. Fall: Lösung zu \(X_0\parentheses*{x}\), also \(K = 0\)
+            \[
+                \implies T_0'\parentheses*{t}\text{ oder }T_0\parentheses*{t} = T_0\parentheses*{0}.
+            \]
+            \item 2. Fall: Lösung zu \(X_n\parentheses*{x}\), d.h. \(K = -n^2 \frac{\pi^2}{L^2}\).
+            \(T_n\parentheses*{t}\) muss also die Gleichung
+            \[
+                T_n'\parentheses*{t} = -\alpha n^2 \frac{\pi^2}{L^2}T\parentheses*{t}
+            \]
+            erfüllen und wir erhalten \(T_n\parentheses*{0}\exp\parentheses*{-\alpha n^2 \frac{\pi^2}{L^2}t}\).
+        \end{itemize}
+        Dies lässt sich jetzt zur allgemeinen Lösung zusammenfassen:
+        \[
+            u\parentheses*{t, x} = \sum_{n = 0}^\infty T_n\parentheses*{t}X_n\parentheses*{x} = A_0 + \sum_{n = 1}^\infty A_n \exp\parentheses*{-\alpha n^2 \frac{\pi^2}{L^2}t}\cos\parentheses*{n\frac{\pi}{L}x},
+        \]
+        wobei \(A_i := b_i T_i\parentheses*{0}\).
+        \item
+        \[
+            u\parentheses*{0, x} = A_0 + \sum_{n = 1}^\infty A_n \cos\parentheses*{n\frac{\pi}{L}x}.
+        \]
+        Vergleicht man dies mit der Anfangsbedingung, folgt sofort \(A_0 = 3\), \(A_2 = 1\) und \(A_i = 0\) für \(i \ne 0, 2\).
+        Die Lösung des Problems ist also
+        \[
+            u\parentheses*{t, x} = 3 + \exp\parentheses*{-\alpha\frac{4\pi^2}{L^2}t}\cos\parentheses*{\frac{2\pi}{L}x}.
+        \]
+        \item Wenn \(u_0\parentheses*{x}\) beliebig ist, so sind die \(A_i\) die Koeffizienten einer Kosinus-Reihe.
+        Wegen der Orthogonalität
+        \[
+            \int_0^L \cos\parentheses*{n\frac{\pi}{L}x}\cos\parentheses*{i\frac{\pi}{L}x}\d x = \delta_{ni}\frac{L}{2}, \quad n, i \ge 1
+        \]
+        lassen sich die Koeffizienten \(A_i\) berechnen durch
+        \begin{align*}
+            \int_0^L u_0\parentheses*{x}\d x = \int_0^L u\parentheses*{0, x}\d x = A_0 L,\\
+            \int_0^L u_0\parentheses*{x}\cos\parentheses*{i\frac{\pi}{L}x}\d x = \int_0^L u\parentheses*{0, x}\cos\parentheses*{i\frac{\pi}{L}x}\d x = A_i\frac{L}{2}.
+        \end{align*}
+    \end{enumerate}
+
+
+    \section*{Aufgabe 4}
+    
+    \begin{problem}
+        Bestimmen Sie die distributionelle Ableitung der folgenden Distributionen.
+        \begin{enumerate}
+            \item \(T_f \phi := \parentheses*{f, \phi}\), wobei \(f\parentheses*{x} := \begin{cases}
+                0, & \text{falls }x < 0,\\
+                1 + x, & \text{falls }x \ge 0,
+            \end{cases}\)
+            \item \(T_g \phi := -\phi\parentheses*{-1} + 2\phi\parentheses*{0} - \phi\parentheses*{1}\).
+        \end{enumerate}
+        Dabei ist \(\phi \in \mathcal{D}\parentheses*{\R}\).
+        Identifizieren Sie die distributionelle Ableitung formal mit einer Funktion der Form \(h: \R \to \R\).
+    \end{problem}
+    
+    \subsection*{Lösung}
+
+
+    \section*{Aufgabe 5}
+    
+    \begin{problem}
+        Zeigen Sie, dass für \(a \in \R\)
+        \[
+            E\parentheses*{x} := e^{-ax}H\parentheses*{x}, \quad x \in \R
+        \]
+        eine Fundamentallösung für den Differentialoperator \(L\) mit \(Lu := \frac{\d}{\d x}u + au\) ist.
+        \(H\) bezeichnet die Heaviside-Funktion
+        \[
+            H\parentheses*{x} := \begin{cases}
+                1, & \text{falls }x > 0,\\
+                0, & \text{falls }x \le 0.
+            \end{cases}
+        \]
+    \end{problem}
+    
+    \subsection*{Lösung}
+    Es gilt \(\frac{\d}{\d x}E\parentheses*{x} = -ae^{-ax}H\parentheses*{x} + e^{-ax}\delta\parentheses*{x}\).
+    Außerdem gilt
+    \[
+        \frac{\d}{\d x}E\parentheses*{x} + aE\parentheses*{x} = -ae^{-ax}H\parentheses*{x} + e^{-ax}\delta\parentheses*{x} + ae^{-ax}H\parentheses*{x} = e^{-ax}\delta\parentheses*{x} = e^{-a \cdot 0}\delta\parentheses*{x} = \delta\parentheses*{x}.
+    \]
+
+
+    \section*{Aufgabe 6}
+    
+    \begin{problem}
+        Bestimmen Sie die Fouriertransformierten folgender Funktionen:
+        \begin{enumerate}
+            \item \(f\parentheses*{x} = e^{-\frac{x^2}{2}}\),
+            \item \(f\parentheses*{x} = H\parentheses*{1 - \absolute*{x}}\).
+            Dabei ist
+            \[
+                H\parentheses*{x} = \begin{cases}
+                    1, & \text{falls }x > 0,\\
+                    0, & \text{sonst}
+                \end{cases}
+            \]
+            die Heaviside-Funktion.
+        \end{enumerate}
+    \end{problem}
+    
+    \subsection*{Lösung}
+    Die Fouriertransformierte einer Funktion \(f \in L^1\parentheses*{\R}\) ist definiert durch
+    \[
+        \mathcal{F}\parentheses*{f}\parentheses*{\xi} = \hat{f}\parentheses*{\xi} = \int_\R f\parentheses*{x}e^{-ix\xi}\d x.
+    \]
+    \begin{enumerate}
+        \item Für die Funktion \(f\parentheses*{x} = e^{-\frac{x^2}{2}}\) gilt:
+        \[
+            \frac{\d}{\d\xi}\hat{f}\parentheses*{\xi} = -i\mathcal{F}\parentheses*{xf\parentheses*{x}}\parentheses*{\xi} = -i\mathcal{F}\parentheses*{xe^{-\frac{x^2}{2}}}\parentheses*{\xi} = i\mathcal{F}\parentheses*{\frac{\d}{\d x}e^{-\frac{x^2}{2}}}\parentheses*{\xi} = i \cdot i\xi\mathcal{F}\parentheses*{e^{-\frac{x^2}{2}}}\parentheses*{\xi}
+        \]
+        \[
+            \implies \frac{\d}{\d\xi}\hat{f}\parentheses*{\xi} = -\xi\hat{f}\parentheses*{\xi} \implies \hat{f}\parentheses*{\xi} * \hat{f}\parentheses*{0}e^{-\frac{x^2}{2}}.
+        \]
+        Dabei ist
+        \[
+            \hat{f}\parentheses*{0} = \int_\R e^{-\frac{x^2}{2}}\d x = \sqrt{2}\int_\R e^{-t^2}\d t = \sqrt{2\pi}.
+        \]
+        \item Wir bemerken zunächst:
+        \[
+            f\parentheses*{x} = H\parentheses*{1 - \absolute*{x}} = \begin{cases}
+                1, & \text{falls }-1 < x < 1,\\
+                0, & \text{sonst}
+            \end{cases}
+        \]
+        \begin{align*}
+            \implies \hat{f}\parentheses*{\xi} &= \int_{-\infty}^\infty e^{-i\xi x}H\parentheses*{1 - \absolute*{x}}\d x\\
+            &= \int_{-1}^1 e^{-i\xi x}\d x\\
+            &= \int_{-1}^1 \cos\parentheses*{\xi x} - i\sin\parentheses*{\xi x}\d x\\
+            &= 2\int_0^1 \cos\parentheses*{\xi x}\d x\\
+            &= 2\brackets*{\frac{\sin\parentheses*{\xi x}}{\xi}}_0^1 = 2\frac{\sin\parentheses*{\xi}}{\xi}.
+        \end{align*}
+    \end{enumerate}
+
+
+    \section*{Aufgabe 7}
+    
+    \begin{problem}
+        Bestimmen Sie zu den Daten
+        \begin{center}
+            \begin{tabular}{lcccc}
+                \toprule
+                \(x_k\) & \(0\) & \(\frac{\pi}{2}\) & \(\pi\) & \(\frac{3}{2}\pi\)\\
+                \midrule
+                \(f\parentheses*{x_k}\) & \(2\) & \(0\) & \(-2\) & \(0\)\\
+                \bottomrule
+            \end{tabular}
+        \end{center}
+        ein komplexes trigonometrisches Polynom der Form
+        \[
+            T_4\parentheses*{f; x} = \sum_{j = 0}^{n - 1}d_j\parentheses*{f}e^{ijx},
+        \]
+        das die Daten interpoliert, also die Bedingung
+        \[
+            T_4\parentheses*{f; x_k} = f\parentheses*{x_k}
+        \]
+        für \(k = 0, \ldots, 3\) erfüllt.
+    \end{problem}
+    
+    \subsection*{Lösung}
+    Ein trigonometrisches Polynom ist gegeben durch
+    \[
+        T_4\parentheses*{f; x} = \sum_{j = 0}^3 d_j\parentheses*{f}e^{ijx},
+    \]
+    mit
+    \[
+        d_j\parentheses*{f} = \frac{1}{4}\sum_{k = 0}^3 f\parentheses*{x_k}e^{-ijx_k} \quad \text{und} \quad e^{-\frac{h\pi i}{2}} = \parentheses*{-i}^n.
+    \]
+    Es gilt
+    \begin{align*}
+        d_0 &= \frac{1}{4}\sum_{k = 0}^3 f\parentheses*{x_k} = \frac{1}{4}\parentheses*{2 + 0 + 2 + 0} = 1,\\
+        d_1 &= \frac{1}{4}\sum_{k = 0}^3 f\parentheses*{x_k}e^{-ix_k} = \frac{1}{4}\parentheses*{2 + 0 + 2i + 0} = \frac{1}{2} + \frac{1}{2}i,\\
+        d_2 &= \frac{1}{4}\sum_{k = 0}^3 f\parentheses*{x_k}e^{ -2ix_k} = \frac{1}{4}\parentheses*{2 + 0 + \parentheses*{-2} + 0} = 0,\\
+        d_3 &= \frac{1}{4}\sum_{k = 0}^3 f\parentheses*{x_k}e^{-3ix_k} = \frac{1}{4}\parentheses*{2 + 0 + \parentheses*{-2i} + 0} = \frac{1}{2} - \frac{1}{2}i.
+    \end{align*}
+    Damit gilt
+    \begin{align*}
+        T_4\parentheses*{f; x} &= \frac{1}{2}\parentheses*{2 + \parentheses*{1 + i}e^{ix} + \parentheses*{1 - i}e^{3ix}}\\
+        &= \frac{1}{2}\parentheses*{2 + \cos\parentheses*{x} + \cos\parentheses*{3x} - \sin\parentheses*{x} + \sin\parentheses*{3x} + i\parentheses*{\cos\parentheses*{x} - \cos\parentheses*{3x} + \sin\parentheses*{x} + \sin\parentheses*{3x}}}
+    \end{align*}
+    da nach dem Moivreschen Satz \(e^{ix} = \cos\parentheses*{x} + i\sin\parentheses*{x}\) gilt.
 \end{document}
